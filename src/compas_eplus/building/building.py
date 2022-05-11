@@ -15,17 +15,16 @@ from ast import literal_eval
 
 from compas.utilities import geometric_key
 
-# from compas_eplus.read_write import write_idf
-# from compas_eplus.read_write import read_mean_zone_temperatures
-# from compas_eplus.datastructures.material import Material
-# from compas_eplus.datastructures.material import MaterialNoMass
-# from compas_eplus.datastructures.material import WindowMaterialGas
-# from compas_eplus.datastructures.material import WindowMaterialGlazing
-# from compas_eplus.datastructures.construction import Construction
-# from compas_eplus.datastructures.zone import Zone
-# from compas_eplus.datastructures.window import Window
-# from compas_eplus.datastructures.shading import Shading
-# from compas_eplus.datastructures.construction import Construction
+from compas_eplus.read_write import write_idf
+from compas_eplus.read_write import read_mean_zone_temperatures
+from compas_eplus.building.material import Material
+from compas_eplus.building.material import MaterialNoMass
+from compas_eplus.building.material import WindowMaterialGas
+from compas_eplus.building.material import WindowMaterialGlazing
+from compas_eplus.building.construction import Construction
+from compas_eplus.building.zone import Zone
+from compas_eplus.building.window import Window
+from compas_eplus.building.shading import Shading
 
 
 # TODO: Delete previous results
