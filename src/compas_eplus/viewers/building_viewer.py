@@ -12,12 +12,38 @@ import plotly.express as px
 from compas.datastructures import Mesh
 
 class BuildingViewer(object):
+    """
+    Viewer object for Building objects. Can show zone geometries, windows, 
+    shading devicesconstruction layers.
+
+    Parameters
+    ----------
+    building: object
+        The building object to be displayed
+    data: list
+        Plotly data containing plot objects (i.e. Meshes)
+    layout: dict
+        PLotly layout data
+
+    """
     def __init__(self, building):
         self.building = building
         self.data = []
         self.layout = None
 
     def make_layout(self):
+        """
+        Adds the layout data to the viewer object.
+
+        Parameters
+        ----------
+        None
+
+        Returns
+        -------
+        None
+        
+        """
         name = self.building.name
         title = '{0}'.format(name)
         layout = go.Layout(title=title,
@@ -43,6 +69,18 @@ class BuildingViewer(object):
         self.layout = layout
 
     def show(self):
+        """
+        Displays the buiilding in a browser window.
+
+        Parameters
+        ----------
+        None
+
+        Returns
+        -------
+        None
+        
+        """
         self.make_layout()
         self.add_zones()
         self.add_windows()
@@ -52,18 +90,67 @@ class BuildingViewer(object):
         fig.show()
 
     def add_zones(self):
+        """
+        Adds zone meshes data to the viewer object.
+
+        Parameters
+        ----------
+        None
+
+        Returns
+        -------
+        None
+        
+        """
         for zk in self.building.zones:
                 self.add_zone_mesh(zk)
 
     def add_windows(self):
+        """
+        Adds window data to the viewer object.
+
+        Parameters
+        ----------
+        None
+
+        Returns
+        -------
+        None
+        
+        """
         for wk in self.building.windows:
             self.add_window_mesh(wk)
 
     def add_shadings(self):
+        """
+        Adds shading data to the viewer object.
+
+        Parameters
+        ----------
+        None
+
+        Returns
+        -------
+        None
+        
+        """
         for sk in self.building.shadings:
             self.add_shading_mesh(sk)
 
     def add_shading_mesh(self, key):
+        """
+        Adds shading mesh data to the viewer object.
+
+        Parameters
+        ----------
+        key: int
+            The shading key to be added
+
+        Returns
+        -------
+        None
+        
+        """
         mesh = self.building.shadings[key].mesh
         vertices, faces = mesh.to_vertices_and_faces()
         edges = [[mesh.vertex_coordinates(u), mesh.vertex_coordinates(v)] for u,v in mesh.edges()]
@@ -126,6 +213,19 @@ class BuildingViewer(object):
         self.data.extend(faces)
 
     def add_window_mesh(self, key):
+        """
+        Adds window mesh data to the viewer object.
+
+        Parameters
+        ----------
+        key: int
+            The window key to be added
+
+        Returns
+        -------
+        None
+        
+        """
         vertices = self.building.windows[key].nodes
         faces = [[0, 1, 2, 3]]
         mesh = Mesh.from_vertices_and_faces(vertices, faces)
@@ -206,6 +306,19 @@ class BuildingViewer(object):
         self.data.extend(faces)
 
     def add_zone_mesh(self, key):
+        """
+        Adds zone mesh data to the viewer object.
+
+        Parameters
+        ----------
+        key: int
+            The zone key to be added
+
+        Returns
+        -------
+        None
+        
+        """
         mesh = self.building.zones[key].surfaces
         vertices, faces = mesh.to_vertices_and_faces()
         edges = [[mesh.vertex_coordinates(u), mesh.vertex_coordinates(v)] for u,v in mesh.edges()]
