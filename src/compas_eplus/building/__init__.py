@@ -10,6 +10,5 @@ from .building import *
 from .construction import *
 from .material import *
 from .shading import *
+from .window import *
 # from .zone import *
-# from .window import *
-# from .shading import *

@@ -21,8 +21,9 @@ from compas_eplus.building.material import MaterialNoMass
 from compas_eplus.building.material import WindowMaterialGas
 from compas_eplus.building.material import WindowMaterialGlazing
 from compas_eplus.building.shading import Shading
-from compas_eplus.building.zone import Zone
 from compas_eplus.building.window import Window
+from compas_eplus.building.zone import Zone
+
 
 
 from compas_eplus.read_write import write_idf
