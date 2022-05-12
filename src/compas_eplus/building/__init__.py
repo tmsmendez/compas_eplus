@@ -7,8 +7,8 @@ __email__ = "tmendeze@uw.edu"
 __version__ = "0.1.0"
 
 from .building import *
+from .construction import *
+from .material import *
 # from .zone import *
 # from .window import *
-# from .material import *
-from .construction import *
 # from .shading import *
