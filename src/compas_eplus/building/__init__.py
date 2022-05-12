@@ -9,6 +9,7 @@ __version__ = "0.1.0"
 from .building import *
 from .construction import *
 from .material import *
+from .shading import *
 # from .zone import *
 # from .window import *
 # from .shading import *
