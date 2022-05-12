@@ -7,4 +7,4 @@ __email__ = "tmendeze@uw.edu"
 __version__ = "0.1.0"
 
 from .read import *
-# from .write import *
+from .write import *
