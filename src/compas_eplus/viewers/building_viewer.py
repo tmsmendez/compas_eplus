@@ -11,6 +11,9 @@ import plotly.express as px
 
 from compas.datastructures import Mesh
 
+
+#TODO: be forgiving about non existing data
+
 class BuildingViewer(object):
     """
     Viewer object for Building objects. Can show zone geometries, windows, 

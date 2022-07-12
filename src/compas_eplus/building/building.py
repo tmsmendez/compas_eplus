@@ -13,7 +13,7 @@ import subprocess
 
 from ast import literal_eval
 
-from compas.utilities import geometric_key
+from math import sin
 
 from compas_eplus.building.construction import Construction
 from compas_eplus.building.material import Material
@@ -26,6 +26,17 @@ from compas_eplus.building.zone import Zone
 
 from compas_eplus.read_write import write_idf
 from compas_eplus.read_write import read_mean_zone_temperatures
+
+from compas_eplus.utilities import make_box_from_quad
+
+from compas.geometry import subtract_vectors
+from compas.geometry import cross_vectors
+from compas.geometry import intersection_line_line_xy
+from compas.geometry import add_vectors
+from compas.geometry import normalize_vector
+from compas.geometry import scale_vector
+
+from compas.utilities import geometric_key
 
 # TODO: Delete previous results
 
@@ -196,8 +207,57 @@ class Building(object):
         return building
 
     @classmethod
-    def from_quad(cls, path, wea, quad, num_zones=5):
-        pass
+    def from_quad(cls, path, wea, quad, zone_depth, height):
+        b = cls(path, wea)
+        
+        if type(zone_depth) == list:
+            zd = zone_depth
+        else:
+            zd = [zone_depth, zone_depth, zone_depth, zone_depth]
+
+        quad_ = []
+        for i in range(4):
+            if i == 3:
+                k = 0
+            else:
+                k = i + 1
+            v1 = normalize_vector(subtract_vectors(quad[k], quad[i]))
+            v2 = normalize_vector(subtract_vectors(quad[i - 1], quad[i]))
+            v1_ = scale_vector(cross_vectors(v1, [0,0,-1]), zd[i])
+            v2_ = scale_vector(cross_vectors(v2, [0,0,1]), zd[i-1])
+            l1 = [add_vectors(quad[i], v1_), add_vectors(quad[k], v1_)]
+            l2 = [add_vectors(quad[i], v2_), add_vectors(quad[i - 1], v2_)]
+
+            xpt = intersection_line_line_xy(l1, l2)
+            quad_.append(xpt)
+
+        for i in range(4):
+            if i == 3:
+                k = 0
+            else:
+                k = i + 1
+            pts = [quad[i], quad[k], quad_[k], quad_[i]]
+            mesh = make_box_from_quad(pts, height)
+            z = Zone.from_mesh(mesh, 'zone_{}'.format(i))
+            b.add_zone(z)
+
+        mesh = make_box_from_quad(quad_, height)
+        z = Zone.from_mesh(mesh, 'zone_4')
+        b.add_zone(z)
+
+        filepath = os.path.join(compas_eplus.DATA, 'materials', 'material_library_simple.json')
+        with open(filepath, 'r') as fp:
+            lib = json.load(fp)
+        b.add_materials_from_lib(lib)
+
+        filepath = os.path.join(compas_eplus.DATA, 'constructions', 'construction_library_simple.json')
+        with open(filepath, 'r') as fp:
+            lib = json.load(fp)
+        b.add_constructions_from_lib(lib)
+
+
+        return b
+
 
     def to_json(self, filepath):
         """
@@ -463,14 +523,4 @@ class Building(object):
 
 
 if __name__ == '__main__':
-    for i in range(50): print('')
-
-    path = compas_eplus.TEMP
-    wea = compas_eplus.SEATTLE
-
-    quad = [[0,0,0],
-            [10,0,0],
-            [10,10,0],
-            [0,10,0],
-            ]
-    b = Building.from_quad(path, wea, quad, num_zones=5)
+    pass
