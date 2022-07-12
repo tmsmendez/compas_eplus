@@ -195,6 +195,10 @@ class Building(object):
         building.data = data
         return building
 
+    @classmethod
+    def from_quad(cls, path, wea, quad, num_zones=5):
+        pass
+
     def to_json(self, filepath):
         """
         Serialize the data representation of the building to a JSON file
@@ -459,5 +463,14 @@ class Building(object):
 
 
 if __name__ == '__main__':
+    for i in range(50): print('')
 
-    pass
+    path = compas_eplus.TEMP
+    wea = compas_eplus.SEATTLE
+
+    quad = [[0,0,0],
+            [10,0,0],
+            [10,10,0],
+            [0,10,0],
+            ]
+    b = Building.from_quad(path, wea, quad, num_zones=5)
