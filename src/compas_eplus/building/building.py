@@ -244,18 +244,6 @@ class Building(object):
         mesh = make_box_from_quad(quad_, height)
         z = Zone.from_mesh(mesh, 'zone_4')
         b.add_zone(z)
-
-        filepath = os.path.join(compas_eplus.DATA, 'materials', 'material_library_simple.json')
-        with open(filepath, 'r') as fp:
-            lib = json.load(fp)
-        b.add_materials_from_lib(lib)
-
-        filepath = os.path.join(compas_eplus.DATA, 'constructions', 'construction_library_simple.json')
-        with open(filepath, 'r') as fp:
-            lib = json.load(fp)
-        b.add_constructions_from_lib(lib)
-
-
         return b
 
 
