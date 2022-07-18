@@ -10,6 +10,8 @@ import json
 from compas.datastructures import Mesh
 
 
+#TODO: enforce zone surface order rules?
+
 class Zone(object):
     """
     Zone datastructure for energy+ analysis. 

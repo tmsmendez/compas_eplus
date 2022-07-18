@@ -8,6 +8,7 @@ __version__ = "0.1.0"
 
 import json
 
+# TODO: Add thicknesses, redo how layers are stored to do so
 
 class Construction(object):
     """

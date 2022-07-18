@@ -8,6 +8,7 @@ __version__ = "0.1.0"
 
 import json
 
+# Remove thicknesses from materials, window material gas, window material glazing
 
 class Material(object):
     """
@@ -21,8 +22,6 @@ class Material(object):
         The name for the construction instance
     roughness: str
         Material roughness
-    thickness: float
-        Material thickness (m)
     conductivity: float
         Material conductivity (W/m-K)
     density:cfloat
@@ -41,7 +40,6 @@ class Material(object):
         self.__type__                   = 'Material'
         self.name                       = 'Material'
         self.roughness                  = None
-        self.thickness                  = None
         self.conductivity               = None
         self.density                    = None
         self.specific_heat              = None
@@ -72,7 +70,6 @@ class Material(object):
         data = {'__type__':             self.__type__,
                 'name':                 self.name,
                 'roughness':            self.roughness,
-                'thickness':            self.thickness,
                 'conductivity':         self.conductivity,
                 'density':              self.density,
                 'specific_heat':        self.specific_heat,
@@ -87,7 +84,6 @@ class Material(object):
         self.__type__            = data.get('__type__') or {}
         self.name                = data.get('name') or {}
         self.roughness           = data.get('roughness') or {}
-        self.thickness           = data.get('thickness') or {}
         self.conductivity        = data.get('conductivity') or {}
         self.density             = data.get('density') or {}
         self.specific_heat       = data.get('specific_heat') or {}
@@ -265,15 +261,12 @@ class WindowMaterialGas(object):
         Material name     
     gas_type : str
         Material gas_type 
-    thickness: float
-        Material thickness (m)
 
     """
     def __init__(self):
         self.__type__          = 'WindowMaterialGas'
         self.name              = 'WindowMaterialGas'                   
         self.gas_type          = None
-        self.thickness         = None
     
 
     def to_json(self, filepath):
@@ -298,7 +291,6 @@ class WindowMaterialGas(object):
         data = {'__type__'     : self.__type__,
                 'name'         : self.name,
                 'gas_type'     : self.gas_type,
-                'thickness'    : self.thickness,
                 }
         return data
     
@@ -307,7 +299,6 @@ class WindowMaterialGas(object):
         self.__type__       = data.get('__type__') or {}
         self.name           = data.get('name') or {}
         self.gas_type       = data.get('gas_type') or {}
-        self.thickness      = data.get('thickness') or {}
 
     @classmethod
     def from_data(cls, data):
@@ -398,7 +389,6 @@ class WindowMaterialGlazing(object):
         self.name                                       = 'WindowMaterialGlazing'
         self.optical_data_type                          = None
         self.win_glass_spectral_data_name               = None
-        self.thickness                                  = None
         self.solar_transmittance                        = None
         self.front_solar_reflectance                    = None
         self.back_solar_reflectance                     = None
@@ -436,7 +426,6 @@ class WindowMaterialGlazing(object):
                 'name'                                      : self.name,                                   
                 'optical_data_type'                         : self.optical_data_type,                     
                 'win_glass_spectral_data_name'              : self.win_glass_spectral_data_name,
-                'thickness'                                 : self.thickness,          
                 'solar_transmittance'                       : self.solar_transmittance,                  
                 'front_solar_reflectance'                   : self.front_solar_reflectance,                
                 'back_solar_reflectance'                    : self.back_solar_reflectance,                 
@@ -458,7 +447,6 @@ class WindowMaterialGlazing(object):
         self.name                                    = data.get('name') or {}
         self.optical_data_type                       = data.get('optical_data_type') or {}
         self.win_glass_spectral_data_name            = data.get('win_glass_spectral_data_name') or ''
-        self.thickness                               = data.get('thickness') or {}
         self.solar_transmittance                     = data.get('solar_transmittance') or {}
         self.front_solar_reflectance                 = data.get('front_solar_reflectance') or {}
         self.back_solar_reflectance                  = data.get('back_solar_reflectance') or {}

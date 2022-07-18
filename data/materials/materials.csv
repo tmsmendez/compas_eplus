@@ -1,0 +1,20 @@
+﻿Name,Type,Roughness,Conductivity,Density,Specific Heat,Thermal Absorptance,Solar Absorptance,Visible Absorptance,Thermal resistance,Gas Type,Optical Data Type,Win Glass Spectral Data Name,Solar Transmittance,Front Solar Reflectance,Back Solar Reflectance,Visible transmittance,Front visible reflectance,Back visible reflectance,Infrared transmittance,Front infrared hemispherical emissivity,Back infrared hemispherical emissivity,Dirt correction factor,Solar diffusing
+,,,(W/m-K),(kg/m3),(J/kg-K),%,%,%,(m2-K/W),,,,,,,,,,,,,,
+ExtFraming,Material,MediumRough,1.802,2255,750,0.9,0.7,0.7,,,,,,,,,,,,,,,
+Generic 25mm Insulation,Material,MediumRough,0.03,43,1210,0.9,0.7,0.7,,,,,,,,,,,,,,,
+Generic 25mm Wood,Material,MediumSmooth,0.15,608,1630,0.9,0.5,0.5,,,,,,,,,,,,,,,
+Generic 50mm Insulation,Material,MediumRough,0.03,43,1210,0.9,0.7,0.7,,,,,,,,,,,,,,,
+Generic Acoustic Tile,Material,MediumSmooth,0.06,368,590,0.9,0.2,0.2,,,,,,,,,,,,,,,
+Generic Gypsum Board,Material,MediumSmooth,0.16,800,1090,0.9,0.5,0.5,,,,,,,,,,,,,,,
+Generic LW Concrete,Material,MediumRough,0.53,1280,840,0.9,0.8,0.8,,,,,,,,,,,,,,,
+Generic Painted Metal,Material,Smooth,45,7690,410,0.9,0.5,0.5,,,,,,,,,,,,,,,
+Generic Roof Membrane,Material,MediumRough,0.16,1120,1460,0.9,0.65,0.65,,,,,,,,,,,,,,,
+Generic Wall Air Gap,Material,Smooth,0.667,1.28,1000,0.9,0.7,0.7,,,,,,,,,,,,,,,
+Material 1,Material,Smooth,0.1,0.1,100,0.9,0.65,0.65,,,,,,,,,,,,,,,
+Material 2,Material,Smooth,0.1,0.1,100,0.9,0.8,0.8,,,,,,,,,,,,,,,
+C5 - 4 IN HW CONCRETE,Material,MediumRough,1.729577,2242.585,836.8,0.9,0.65,0.65,,,,,,,,,,,,,,,
+R13LAYER,MaterialNoMass,Rough,,,,0.9,0.75,0.75,2.290965,,,,,,,,,,,,,,
+R31LAYER,MaterialNoMass,Rough,,,,0.9,0.75,0.75,5.456,,,,,,,,,,,,,,
+Generic Window Air Gap,WindowMaterialGas,,,,,,,,,Air,,,,,,,,,,,,,
+Generic Low-e Glass,WindowMaterialGlazing,,1,,,,,,,,SpectralAverage,,0.45,0.36,0.36,0.71,0.21,0.21,,0.84,0.047,1,No
+Generic Clear Glass,WindowMaterialGlazing,,1,,,,,,,,SpectralAverage,,0.77,0.07,0.07,0.88,0.08,0.08,,0.84,0.84,1,No

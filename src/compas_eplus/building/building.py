@@ -39,6 +39,7 @@ from compas.geometry import scale_vector
 from compas.utilities import geometric_key
 
 # TODO: Delete previous results
+# TODO: Code clever way to assign constructions to surfaces, i.e. zone/building rules
 
 class Building(object):
     """
@@ -246,7 +247,6 @@ class Building(object):
         b.add_zone(z)
         return b
 
-
     def to_json(self, filepath):
         """
         Serialize the data representation of the building to a JSON file
@@ -343,20 +343,24 @@ class Building(object):
 
         self.materials[len(self.materials)] = material
 
-    def add_materials_from_lib(self, lib):
+    def add_materials_from_json(self, filepath):
         """
-        Adds material objects to the building datastructure from a library dictionary.
+        Adds material objects to the building datastructure from a json file.
 
         Parameters
         ----------
-        lib: dict
-            Dictionary containing data for all materials to be added
+        filepath: string
+            Path to the json file  containing data for all materials to be added
         
         Returns
         -------
         None
         
         """
+
+        with open(filepath, 'r') as fp:
+            lib = json.load(fp)
+
         mat_dict = {'Material': Material,
                     'MaterialNoMass': MaterialNoMass,
                     'WindowMaterialGlazing': WindowMaterialGlazing,
@@ -366,6 +370,83 @@ class Building(object):
         for mk in lib:
             t = lib[mk]['__type__']
             mat = mat_dict[t].from_data(lib[mk])
+            self.add_material(mat)
+
+    def add_materials_from_csv(self, filepath):
+        """
+        Adds material objects to the building datastructure from a csv file.
+
+        Parameters
+        ----------
+        filepath: string
+            Path to the csv file  containing data for all materials to be added
+        
+        Returns
+        -------
+        None
+        
+        """
+        fh = open(filepath, 'r')
+        lines = fh.readlines()[2:]
+
+        data = {}
+        for line in lines:
+            line = line.split(',')
+            name    = line[0]
+            type_   = line[1]
+            if type_ == 'Material':
+                data[name] = {'__type__'              : type_,
+                              'name'                  : name,
+                              'roughness'             : line[2],
+                              'conductivity'          : line[3],
+                              'density'               : line[4],
+                              'specific_heat'         : line[5],
+                              'thermal_absorptance'   : line[6],
+                              'solar_absorptance'     : line[7],
+                              'visible_absorptance'   : line[8]}
+
+            elif type_ == 'MaterialNoMass':
+                data[name] = {'__type__'            : type_,
+                              'name'                : name,
+                              'roughness'           : line[2],
+                              'thermal_resistance'  : line[9],
+                              'thermal_absorptance' : line[6],
+                              'solar_absorptance'   : line[7],
+                              'visible_absorptance' : line[8]}
+
+            elif type_ == 'WindowMaterialGas':
+
+                data[name] = {'__type__'            : type_,
+                              'name'                : name,
+                              'gas_type'            : line[10]}
+
+            elif type_ == 'WindowMaterialGlazing':
+                data[name] = {'__type__'                                : type_,
+                              'name'                                    : name,
+                              'optical_data_type'                       : line[11],
+                              'win_glass_spectral_data_name'            : line[12],
+                              'solar_transmittance'                     : line[13],
+                              'front_solar_reflectance'                 : line[14],
+                              'back_solar_reflectance'                  : line[15],
+                              'visible_transmittance'                   : line[16],
+                              'front_visible_reflectance'               : line[17],
+                              'back_visible_reflectance'                : line[18],
+                              'infrared_transmittance'                  : line[19],
+                              'front_infrared_hemispherical_emissivity' : line[20],
+                              'back_infrared_hemispherical_emissivity'  : line[21],
+                              'conductivity'                            : line[3],
+                              'dirt_correction_factor'                  : line[22],
+                              'solar_diffusing'                         : line[23]}
+
+        mat_dict = {'Material': Material,
+                    'MaterialNoMass': MaterialNoMass,
+                    'WindowMaterialGlazing': WindowMaterialGlazing,
+                    'WindowMaterialGas': WindowMaterialGas, 
+                    }
+
+        for mk in data:
+            t = data[mk]['__type__']
+            mat = mat_dict[t].from_data(data[mk])
             self.add_material(mat)
 
     def add_constructions_from_lib(self, lib):
