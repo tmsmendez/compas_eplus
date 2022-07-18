@@ -5,6 +5,7 @@ import compas_eplus
 from compas_eplus.viewers import BuildingViewer
 
 from compas_eplus.building import Building
+from compas_eplus.building import Window
 
 for i in range(50): print('')
 
@@ -16,8 +17,14 @@ quad = [[0,0,0],
         [30,10,0],
         [0,10,0],
         ]
-zone_depth = [3., 6, 3, 6]
+zone_depth = [3., 3, 3, 3]
 b = Building.from_quad(path, wea, quad, zone_depth, height=3)
+
+
+zone = b.zones[0]
+w2 = Window.from_wall_and_wwr(zone, 2, .6, 'Generic Double Pane')
+b.add_window(w2)
+
 
 filepath = os.path.join(compas_eplus.DATA, 'materials', 'material_library_simple.json')
 with open(filepath, 'r') as fp:
@@ -31,3 +38,10 @@ b.add_constructions_from_lib(lib)
 
 v = BuildingViewer(b)
 v.show()
+
+b.write_idf()
+b.analyze(exe='/Applications/EnergyPlus-9-6-0/energyplus')
+# b.analyze(exe='/Applications/EnergyPlus/energyplus')
+for i in range(50): print('')
+b.load_results()
+b.plot_mean_zone_temperatures(plot_type='scatter')
