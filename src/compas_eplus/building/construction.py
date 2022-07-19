@@ -7,8 +7,8 @@ __email__ = "tmendeze@uw.edu"
 __version__ = "0.1.0"
 
 import json
+from ast import literal_eval
 
-# TODO: Add thicknesses, redo how layers are stored to do so
 
 class Construction(object):
     """
@@ -18,13 +18,13 @@ class Construction(object):
     ----------
     name: str, optional
         The name for the construction instance
-    layers: list, str
-        The names of the material layers that make up the construction
+    layers: dict
+        Dicitionary containing a name and thickness for each of the layersthat make up the construction
     
     """
     def __init__(self):
-        self.name           = 'Construction'                   
-        self.layers         = []
+        self.name           = 'Construction'
+        self.layers         = {}
 
     def to_json(self, filepath):
         """
@@ -53,7 +53,10 @@ class Construction(object):
     @data.setter
     def data(self, data):
         self.name   = data.get('name') or {}
-        self.layers = data.get('layers') or {}
+        layers = data.get('layers') or {}
+
+        for lk in layers:
+            self.layers[literal_eval(lk)] = layers[lk]
 
     @classmethod
     def from_data(cls, data):
@@ -96,3 +99,24 @@ class Construction(object):
         construction = cls()
         construction.data = data
         return construction
+
+if __name__ == '__main__':
+    import compas_eplus
+    import os
+
+    for i in range(50): print('')
+
+    c = Construction()
+
+    name = 'Tomas Double Pane'
+    lay1 = {'name': 'Generic Low-e Glass', 'thickness':.006}
+    lay2 = {'name': 'Generic Window Air Gap', 'thickness':.0127}
+    lay3 = {'name': 'Generic Clear Glass', 'thickness':.006}
+    layers = [lay1, lay2, lay3]
+    c.layers = {i: lay for i, lay in enumerate(layers)}
+
+    c.to_json(os.path.join(compas_eplus.DATA, 'constructions', 'tomas_double_glazing.json'))
+
+    c2 = Construction.from_json(os.path.join(compas_eplus.DATA, 'constructions', 'tomas_double_glazing.json'))
+
+    print(c2.layers)

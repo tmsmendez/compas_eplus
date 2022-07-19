@@ -8,7 +8,6 @@ __version__ = "0.1.0"
 
 import json
 
-# Remove thicknesses from materials, window material gas, window material glazing
 
 class Material(object):
     """
