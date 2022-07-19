@@ -40,6 +40,9 @@ from compas.utilities import geometric_key
 
 # TODO: Delete previous results
 # TODO: Code clever way to assign constructions to surfaces, i.e. zone/building rules
+# TODO: Add materials from constructions and library
+# TODO: take thicknesses from construction to write IDF
+# TODO: add materials from json/csv functions should not exist, only from constructions?
 
 class Building(object):
     """
