@@ -6,6 +6,7 @@ __license__ = "MIT License"
 __email__ = "tmendeze@uw.edu"
 __version__ = "0.1.0"
 
+import plotly
 import plotly.graph_objects as go
 import plotly.express as px
 
@@ -357,7 +358,7 @@ class BuildingViewer(object):
         z = [v[2] for v in vertices]
 
         # colorscales = ['sunset', 'viridis', 'amp']
-        import plotly
+
         colorscales = dir(plotly.colors.sequential)[::2]
         attrs = ['name', 'surface_type', 'outside_boundary_condition', 'construction']
         text = []
@@ -365,8 +366,11 @@ class BuildingViewer(object):
         for fk in mesh.faces():
             faceatts = mesh.face_attributes(fk)
             ck = mesh.face_attribute(fk, 'construction')
-            con = self.building.constructions[self.building.construction_key_dict[ck]]
-            layers = con.layers
+            if ck:
+                con = self.building.constructions[self.building.construction_key_dict[ck]]
+                layers = con.layers
+            else:
+                layers = []
             string = 'zone: {}<br>'.format(zname)
             for att in attrs:
                 string += '{}: {}<br>'.format(att, faceatts[att])
@@ -406,9 +410,4 @@ if __name__ == '__main__':
     import compas_eplus
     from compas_eplus.building import Building
 
-    for i in range(50): print('')
-
-    b = Building.from_json(os.path.join(compas_eplus.DATA, 'buildings', '1zone_building.json'))
-
-    v = BuildingViewer(b)
-    v.show()
+    pass

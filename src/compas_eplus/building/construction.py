@@ -114,9 +114,3 @@ if __name__ == '__main__':
     lay3 = {'name': 'Generic Clear Glass', 'thickness':.006}
     layers = [lay1, lay2, lay3]
     c.layers = {i: lay for i, lay in enumerate(layers)}
-
-    c.to_json(os.path.join(compas_eplus.DATA, 'constructions', 'tomas_double_glazing.json'))
-
-    c2 = Construction.from_json(os.path.join(compas_eplus.DATA, 'constructions', 'tomas_double_glazing.json'))
-
-    print(c2.layers)

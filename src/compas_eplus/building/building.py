@@ -308,7 +308,6 @@ class Building(object):
                 zk_ = self.srf_cpt_dict[gk]['zone']
                 fk_ = self.srf_cpt_dict[gk]['surface']
                 self.zones[zk_].surfaces.face_attribute(fk_,'outside_boundary_condition', 'Adiabatic')  
-                self.zones
             else:
                 self.srf_cpt_dict[gk] = {'zone': zk, 'surface': fk}
 
