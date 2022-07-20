@@ -24,7 +24,7 @@ from compas_eplus.building.shading import Shading
 from compas_eplus.building.window import Window
 from compas_eplus.building.zone import Zone
 
-from compas_eplus.read_write import write_idf
+from compas_eplus.read_write import write_idf_from_building
 from compas_eplus.read_write import read_mean_zone_temperatures
 
 from compas_eplus.utilities import make_box_from_quad
@@ -39,10 +39,7 @@ from compas.geometry import scale_vector
 from compas.utilities import geometric_key
 
 # TODO: Delete previous results
-# TODO: Code clever way to assign constructions to surfaces, i.e. zone/building rules
-# TODO: Add materials from constructions and library
-# TODO: take thicknesses from construction to write IDF
-# TODO: add materials from json/csv functions should not exist, only from constructions?
+
 
 class Building(object):
     """
@@ -74,13 +71,16 @@ class Building(object):
         Dictionary containing all constriction objects
     shadings: dict
         Dictionary containing all shading vdevice objects
+    layers: dict
+        Dictionary containing all layers with different materials and thicknesses
     mean_air_temperatures: dict
         Dictionaty containing all MAT results per zone
     construction_key_dict: dict
         Dictionary mapping construction names to construction keys
     srf_cpt_dict: dict
         Dictionary mapping all surface center points geometric keys to zones and surface keys
-    
+    material_key_dict: dict
+        Dictionary mapping material names to material keys
     """
     def __init__(self, path, weather):
         self.name = 'Building'
@@ -97,10 +97,12 @@ class Building(object):
         self.materials = {}
         self.constructions = {}
         self.shadings = {}
+        self.layers = {}
 
         self.mean_air_temperatures = {}
         self.construction_key_dict = {}
         self.srf_cpt_dict = {}
+        self.material_key_dict = {}
 
     @property
     def data(self):
@@ -138,8 +140,10 @@ class Building(object):
                 'materials' : materials,
                 'constructions' : constructions,
                 'shadings': shadings,
+                'layers': self.layers,
                 'construction_key_dict': self.construction_key_dict, 
                 'mean_air_temperatures' : self.mean_air_temperatures,
+                'material_key_dict': self.material_key_dict,
                 }
         return data
     
@@ -158,8 +162,10 @@ class Building(object):
         materials                  = data.get('materials') or {}
         constructions              = data.get('constructions') or {}
         shadings                   = data.get('shadings') or {}
+        self.layers                = data.get('layers') or {}
         self.construction_key_dict = data.get('construction_key_dict') or {}
         self.mean_air_temperatures = data.get('mean_air_temperatures') or {}
+        self.material_key_dict     = data.get('material_key_dict') or {}
 
         for zk in zones:
             self.zones[zk] = Zone.from_data(zones[zk])
@@ -281,7 +287,9 @@ class Building(object):
         None
         
         """
-        write_idf(self)
+
+        self.make_layers_dict()
+        # write_idf_from_building(self)
 
     def add_zone(self, zone):
         """
@@ -342,8 +350,9 @@ class Building(object):
         None
         
         """
-
-        self.materials[len(self.materials)] = material
+        mk = len(self.materials)
+        self.materials[mk] = material
+        self.material_key_dict[material.name] = mk
 
     def add_materials_from_json(self, filepath):
         """
@@ -601,7 +610,24 @@ class Building(object):
             for sk in sks:
                 name = mesh.face_attribute(sk, 'name')
                 mesh.face_attribute(sk, 'construction', rules[name])
-                
+
+    def make_layers_dict(self):
+        """
+        """
+
+        for ck in self.constructions:
+            lkeys = self.constructions[ck].layers.keys()
+            for lk in lkeys:
+                name = self.constructions[ck].layers[lk]['name']
+                thick = self.constructions[ck].layers[lk]['thickness']
+                name_ = '{} {}mm'.format(name, int(thick*1000))
+                mat = self.materials[self.material_key_dict[name]]
+                self.layers[name_] = {'name': name_, 'material': mat}
 
 if __name__ == '__main__':
-    pass
+
+    for i in range(50): print('')
+    b = Building.from_json(os.path.join(compas_eplus.DATA, 'buildings', '5_zone.json'))
+    
+    b.write_idf()
+    print(b.layers)

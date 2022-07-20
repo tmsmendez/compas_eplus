@@ -6,8 +6,11 @@ __license__ = "MIT License"
 __email__ = "tmendeze@uw.edu"
 __version__ = "0.1.0"
 
+# TODO: take thicknesses from construction to write IDF
+# TODO: modify write_constructions, needs to update material names to include thicknesses
+# TODO: modify write_materials, needs to update thicknesses/names 
 
-def write_idf(building):
+def write_idf_from_building(building):
     """
     Writes the .idf file from the building data.
 
@@ -208,6 +211,7 @@ def write_materials(building):
     None
 
     """
+    
     for mk in building.materials:
         mat = building.materials[mk]
         if mat.__type__ == 'Material':

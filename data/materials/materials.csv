@@ -1,9 +1,8 @@
 ﻿Name,Type,Roughness,Conductivity,Density,Specific Heat,Thermal Absorptance,Solar Absorptance,Visible Absorptance,Thermal resistance,Gas Type,Optical Data Type,Win Glass Spectral Data Name,Solar Transmittance,Front Solar Reflectance,Back Solar Reflectance,Visible transmittance,Front visible reflectance,Back visible reflectance,Infrared transmittance,Front infrared hemispherical emissivity,Back infrared hemispherical emissivity,Dirt correction factor,Solar diffusing
 ,,,(W/m-K),(kg/m3),(J/kg-K),%,%,%,(m2-K/W),,,,,,,,,,,,,,
 ExtFraming,Material,MediumRough,1.802,2255,750,0.9,0.7,0.7,,,,,,,,,,,,,,,
-Generic 25mm Insulation,Material,MediumRough,0.03,43,1210,0.9,0.7,0.7,,,,,,,,,,,,,,,
-Generic 25mm Wood,Material,MediumSmooth,0.15,608,1630,0.9,0.5,0.5,,,,,,,,,,,,,,,
-Generic 50mm Insulation,Material,MediumRough,0.03,43,1210,0.9,0.7,0.7,,,,,,,,,,,,,,,
+Generic Insulation,Material,MediumRough,0.03,43,1210,0.9,0.7,0.7,,,,,,,,,,,,,,,
+Generic Wood,Material,MediumSmooth,0.15,608,1630,0.9,0.5,0.5,,,,,,,,,,,,,,,
 Generic Acoustic Tile,Material,MediumSmooth,0.06,368,590,0.9,0.2,0.2,,,,,,,,,,,,,,,
 Generic Gypsum Board,Material,MediumSmooth,0.16,800,1090,0.9,0.5,0.5,,,,,,,,,,,,,,,
 Generic LW Concrete,Material,MediumRough,0.53,1280,840,0.9,0.8,0.8,,,,,,,,,,,,,,,
