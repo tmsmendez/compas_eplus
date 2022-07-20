@@ -370,7 +370,7 @@ class BuildingViewer(object):
             ck = mesh.face_attribute(fk, 'construction')
             if ck:
                 con = self.building.constructions[self.building.construction_key_dict[ck]]
-                layers = layers = [con.layers[lk]['name'] for lk in con.layers] 
+                layers = [con.layers[lk]['name'] for lk in con.layers] 
             else:
                 layers = []
             string = 'zone: {}<br>'.format(zname)

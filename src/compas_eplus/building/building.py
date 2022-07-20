@@ -39,6 +39,7 @@ from compas.geometry import scale_vector
 from compas.utilities import geometric_key
 
 # TODO: Delete previous results
+# The fact that the building object contains a set of un used materials is not great
 
 
 class Building(object):
@@ -289,7 +290,7 @@ class Building(object):
         """
 
         self.make_layers_dict()
-        # write_idf_from_building(self)
+        write_idf_from_building(self)
 
     def add_zone(self, zone):
         """
@@ -613,16 +614,27 @@ class Building(object):
 
     def make_layers_dict(self):
         """
-        """
+        Makes a dictionary containing all unique layers, with names, materials and
+        thicknesses.
+        
+        Parameters
+        ----------
+        None
 
+        Returns
+        -------
+        None
+        
+        """
         for ck in self.constructions:
             lkeys = self.constructions[ck].layers.keys()
             for lk in lkeys:
                 name = self.constructions[ck].layers[lk]['name']
                 thick = self.constructions[ck].layers[lk]['thickness']
-                name_ = '{} {}mm'.format(name, int(thick*1000))
-                mat = self.materials[self.material_key_dict[name]]
-                self.layers[name_] = {'name': name_, 'material': mat}
+                lname = '{} {}mm'.format(name, round(thick*1000, 1))
+                self.layers[len(self.layers)] = {'layer_name': lname,
+                                                 'material_name': name,
+                                                 'thickness': thick}
 
 if __name__ == '__main__':
 
@@ -630,4 +642,3 @@ if __name__ == '__main__':
     b = Building.from_json(os.path.join(compas_eplus.DATA, 'buildings', '5_zone.json'))
     
     b.write_idf()
-    print(b.layers)

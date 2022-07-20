@@ -8,7 +8,6 @@ __version__ = "0.1.0"
 
 # TODO: take thicknesses from construction to write IDF
 # TODO: modify write_constructions, needs to update material names to include thicknesses
-# TODO: modify write_materials, needs to update thicknesses/names 
 
 def write_idf_from_building(building):
     """
@@ -32,10 +31,9 @@ def write_idf_from_building(building):
     write_run_period(building)
     write_zones(building)
     write_windows(building)
-    write_materials(building)
+    write_layers(building)
     write_constructions(building)
     write_shadings(building)
-    # write_window_materials(building)
     write_output_items(building)
 
 def write_pre(building):
@@ -197,9 +195,9 @@ def write_zone(building, zone):
     fh.write('\n')
     fh.close()
 
-def write_materials(building):
+def write_layers(building):
     """
-    Writes all materials to the .idf file from the building data.
+    Writes all layers to the .idf file from the building data.
 
     Parameters
     ----------
@@ -212,18 +210,22 @@ def write_materials(building):
 
     """
     
-    for mk in building.materials:
+    for lk in building.layers:
+        lay_name = building.layers[lk]['layer_name']
+        mat_name = building.layers[lk]['material_name']
+        mk = building.material_key_dict[mat_name]
         mat = building.materials[mk]
+        thick = building.layers[lk]['thickness']
         if mat.__type__ == 'Material':
-            write_material(building, mat)
+            write_material(building, mat, thick, lay_name)
         elif mat.__type__ == 'MaterialNoMass':
             write_materials_nomass(building, mat)
         elif mat.__type__ == 'WindowMaterialGlazing':
-            write_material_glazing(building, mat)
+            write_material_glazing(building, mat, thick, lay_name)
         elif mat.__type__ == 'WindowMaterialGas':
-            write_material_gas(building, mat)
+            write_material_gas(building, mat, thick, lay_name)
 
-def write_material_glazing(building, mat):
+def write_material_glazing(building, mat, thickness, layer_name):
     """
     Writes a glazing material to the .idf file from the building data.
 
@@ -233,6 +235,10 @@ def write_material_glazing(building, mat):
         The building datastructure containing the data to be used
     mat: object
         The material object to be written
+    thickness: float
+        The thickness of the material layer
+    layer_name: str
+        The name of the material layer, including the thickness modifier
     
     Returns
     -------
@@ -242,10 +248,10 @@ def write_material_glazing(building, mat):
     fh = open(building.idf_filepath, 'a')
     fh.write('\n')
     fh.write('WindowMaterial:Glazing,\n')
-    fh.write(f'  {mat.name                                   },         !- Name\n')
+    fh.write(f'  {layer_name                                 },         !- Name\n')
     fh.write(f'  {mat.optical_data_type                      },         !- Optical Data Type\n')
     fh.write(f'  {mat.win_glass_spectral_data_name           },         !- Window Glass Spectral Data Set Name\n')
-    fh.write(f'  {mat.thickness                              },         !- Thickness (m)\n')
+    fh.write(f'  {thickness                                  },         !- Thickness (m)\n')
     fh.write(f'  {mat.solar_transmittance                    },         !- Solar Transmittance at Normal Incidence\n')
     fh.write(f'  {mat.front_solar_reflectance                },         !- Front Side Solar Reflectance at Normal Incidence\n')
     fh.write(f'  {mat.back_solar_reflectance                 },         !- Back Side Solar Reflectance at Normal Incidence\n')
@@ -261,7 +267,7 @@ def write_material_glazing(building, mat):
     fh.write('\n')
     fh.close()
 
-def write_material_gas(building, mat):
+def write_material_gas(building, mat, thickness, layer_name):
     """
     Writes a gas material to the .idf file from the building data.
 
@@ -271,7 +277,10 @@ def write_material_gas(building, mat):
         The building datastructure containing the data to be used
     mat: object
         The material object to be written
-    
+    thickness: float
+        The thickness of the material layer
+    layer_name: str
+        The name of the material layer, including the thickness modifier
     Returns
     -------
     None
@@ -280,9 +289,9 @@ def write_material_gas(building, mat):
     fh = open(building.idf_filepath, 'a')
     fh.write('\n')
     fh.write('WindowMaterial:Gas,\n')
-    fh.write(f'  {mat.name      },         !- Name\n')
+    fh.write(f'  {layer_name      },         !- Name\n')
     fh.write(f'  {mat.gas_type },         !- Gas Type\n')
-    fh.write(f'  {mat.thickness};         !- Thickness (m)\n')
+    fh.write(f'  {thickness};         !- Thickness (m)\n')
     fh.write('\n')
     fh.close()
 
@@ -315,7 +324,7 @@ def write_materials_nomass(building, mat):
     fh.write('\n')
     fh.close()
 
-def write_material(building, mat):
+def write_material(building, mat, thickness, layer_name):
     """
     Writes a material to the .idf file from the building data.
 
@@ -325,6 +334,10 @@ def write_material(building, mat):
         The building datastructure containing the data to be used
     mat: object
         The material object to be written
+    thickness: float
+        The thickness of the material layer
+    layer_name: str
+        The name of the material layer, including the thickness modifier
     
     Returns
     -------
@@ -334,9 +347,9 @@ def write_material(building, mat):
     fh = open(building.idf_filepath, 'a')
     fh.write('\n')
     fh.write('Material,\n')
-    fh.write('  {},     !- Name\n'.format(mat.name))
+    fh.write('  {},     !- Name\n'.format(layer_name))
     fh.write('  {},     !- Roughness\n'.format(mat.roughness))
-    fh.write('  {},     !- Thickness (m)\n'.format(mat.thickness))
+    fh.write('  {},     !- Thickness (m)\n'.format(thickness))
     fh.write('  {},     !- Conductivity (W/m-K)\n'.format(mat.conductivity))
     fh.write('  {},     !- Density (kg/m3)\n'.format(mat.density))
     fh.write('  {},     !- Specific Heat (J/kg-K)\n'.format(mat.specific_heat))    
@@ -533,7 +546,8 @@ def write_constructions(building):
     fh.write('\n')
     for ck in building.constructions:
         name = building.constructions[ck].name
-        layers = building.constructions[ck].layers
+        layers = [building.constructions[ck].layers[lk]['name'] for lk in building.constructions[ck].layers] 
+        print('##### this function is not finished#######')
         fh.write('Construction,\n')
         fh.write('{},\t\t\t\t\t!- Name\n'.format(name))
         for i, layer in enumerate(layers):
