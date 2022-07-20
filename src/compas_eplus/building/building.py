@@ -592,6 +592,16 @@ class Building(object):
         fig.update_xaxes(dtick="M1",tickformat="%b", ticklabelmode="period")
         fig.show()
 
+    def assign_constructions_from_rules(self, rules):
+        """
+        """
+        for zk in self.zones:
+            mesh = self.zones[zk].surfaces
+            sks = mesh.faces()
+            for sk in sks:
+                name = mesh.face_attribute(sk, 'name')
+                mesh.face_attribute(sk, 'construction', rules[name])
+                
 
 if __name__ == '__main__':
     pass

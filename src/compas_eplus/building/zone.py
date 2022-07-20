@@ -10,9 +10,6 @@ import json
 from compas.datastructures import Mesh
 
 
-# TODO: enforce zone surface order rules?
-# TODO: when a zone is added, no materials or constructions should be added yet
-# TODO: be sure assign_zone_surface method is not needed 
 
 class Zone(object):
     """
@@ -74,7 +71,7 @@ class Zone(object):
 
         """
         self.surfaces = ZoneSurfaces.from_data(mesh.data)
-        # self.surfaces.assign_zone_surface_attributes()
+        self.surfaces.assign_zone_surface_attributes()
 
     @classmethod
     def from_data(cls, data):
@@ -163,7 +160,7 @@ class ZoneSurfaces(Mesh):
     def __str__(self):
         return 'compas_energyplus Zone Surfaces - {}'.format(self.name)
 
-    # def assign_zone_surface_attributes(self):
+    def assign_zone_surface_attributes(self):
     #     """
     #     Assigns basic and pre-defined surface attributes based on mesh face order. 
 
@@ -177,18 +174,7 @@ class ZoneSurfaces(Mesh):
         
     #     """
 
-    #     self.face_attribute(0, 'name', 'floor')
-    #     self.face_attribute(0, 'surface_type', 'Floor')
-    #     self.face_attribute(0, 'construction', 'FLOOR')
-    #     self.face_attribute(0, 'outside_boundary_condition', 'Adiabatic')
-
-    #     self.face_attribute(1, 'name', 'ceiling')
-    #     self.face_attribute(1, 'surface_type', 'Ceiling')
-    #     self.face_attribute(1, 'construction', 'ROOF31')
-    #     self.face_attribute(1, 'outside_boundary_condition', 'Adiabatic')
-
-    #     self.faces_attribute('name', 'wall', [2, 3, 4, 5])
-    #     self.faces_attribute('surface_type', 'Wall', [2, 3, 4, 5])
-    #     self.faces_attribute('construction', 'R13WALL', [2, 3, 4, 5])
-    #     self.faces_attribute('outside_boundary_condition', 'Outdoors', [2, 3, 4, 5])
+        self.face_attribute(0, 'name', 'floor')
+        self.face_attribute(1, 'name', 'ceiling')
+        self.faces_attribute('name', 'wall', range(2, self.number_of_faces()))
 

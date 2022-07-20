@@ -37,7 +37,7 @@ class Window(object):
         self.construction = None
     
     @classmethod
-    def from_wall_and_wwr(cls, zone, wall_key, wwr, construction):
+    def from_wall_and_wwr(cls, zone, wall_key, wwr, construction=None):
         """
         Creates a window instance from a wall and window-to-wall ratio.
 
