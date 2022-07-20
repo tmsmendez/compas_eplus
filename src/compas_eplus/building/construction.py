@@ -107,7 +107,8 @@ if __name__ == '__main__':
     for i in range(50): print('')
 
     c = Construction()
-    c.name = 'Generic Double Pane'
-    c.layers = {0: {'name': 'Generic Low-e Glass', 'thickness':.006},
-                1: {'name': 'Generic Window Air Gap', 'thickness':.0127},
-                2: {'name': 'Generic Clear Glass', 'thickness':.006}}
+    name = 'Tomas Double Pane'
+    layers = {0: {'name': 'Generic Low-e Glass', 'thickness':.006},
+              1: {'name': 'Generic Window Air Gap', 'thickness':.0127},
+              2: {'name': 'Generic Clear Glass', 'thickness':.006}}
+    c.layers = layers

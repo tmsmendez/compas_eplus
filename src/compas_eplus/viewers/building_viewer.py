@@ -12,7 +12,6 @@ import plotly.express as px
 
 from compas.datastructures import Mesh
 
-# TODO: fix wall construction layers not showing up
 
 class BuildingViewer(object):
     """
@@ -273,6 +272,8 @@ class BuildingViewer(object):
             if ck in self.building.construction_key_dict:
                 con = self.building.constructions[self.building.construction_key_dict[ck]]
                 layers = [con.layers[lk]['name'] for lk in con.layers] 
+                # thick = con.layers[lk]['thickness']
+                # layers = ['{} {}mm'.format(lay, round(thick*1000, 1)) for lay in layers]
             else:
                 layers = []
 
@@ -371,6 +372,8 @@ class BuildingViewer(object):
             if ck:
                 con = self.building.constructions[self.building.construction_key_dict[ck]]
                 layers = [con.layers[lk]['name'] for lk in con.layers] 
+                thick = [con.layers[lk]['thickness'] for lk in con.layers]
+                layers = ['{} {}mm'.format(lay, round(thick[tk]*1000, 1)) for tk, lay in enumerate(layers)]
             else:
                 layers = []
             string = 'zone: {}<br>'.format(zname)

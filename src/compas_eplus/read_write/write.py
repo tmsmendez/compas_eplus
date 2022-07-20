@@ -6,8 +6,9 @@ __license__ = "MIT License"
 __email__ = "tmendeze@uw.edu"
 __version__ = "0.1.0"
 
-# TODO: take thicknesses from construction to write IDF
-# TODO: modify write_constructions, needs to update material names to include thicknesses
+
+# TODO: the write_construction should eventually use saved layer names, not make up new ones
+
 
 def write_idf_from_building(building):
     """
@@ -547,7 +548,7 @@ def write_constructions(building):
     for ck in building.constructions:
         name = building.constructions[ck].name
         layers = [building.constructions[ck].layers[lk]['name'] for lk in building.constructions[ck].layers] 
-        print('##### this function is not finished#######')
+        thicks = [building.constructions[ck].layers[lk]['thickness'] for lk in building.constructions[ck].layers] 
         fh.write('Construction,\n')
         fh.write('{},\t\t\t\t\t!- Name\n'.format(name))
         for i, layer in enumerate(layers):
@@ -555,7 +556,8 @@ def write_constructions(building):
                 sep = ';'
             else:
                 sep = ','
-            fh.write('{}{}\t\t\t\t\t!- Layer {}\n'.format(layer, sep, i))
+            lname = '{} {}mm'.format(name, round(thicks[i]*1000, 1))
+            fh.write('{}{}\t\t\t\t\t!- Layer {}\n'.format(lname, sep, i))
         fh.write('\n')
     fh.write('\n')
     fh.close()
