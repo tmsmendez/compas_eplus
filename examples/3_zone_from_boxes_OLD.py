@@ -12,6 +12,23 @@ from compas_eplus.building import Shading
 
 from compas_eplus.viewers import BuildingViewer
 
+
+###################################################
+
+
+###################################################
+
+###################################################
+
+#TODO: IS there something useful in this example???
+
+###################################################
+
+###################################################
+
+###################################################
+
+
 data = compas_eplus.DATA
 
 path = os.path.join(compas_eplus.TEMP)

@@ -154,7 +154,7 @@ class ZoneSurfaces(Mesh):
         self.default_face_attributes.update({'name': None,
                                              'construction':None,
                                              'surface_type': None,
-                                             'outside_boundary_condition': None,
+                                             'outside_boundary_condition': 'Outdoors',
                                              })
     
     def __str__(self):
@@ -175,6 +175,11 @@ class ZoneSurfaces(Mesh):
     #     """
 
         self.face_attribute(0, 'name', 'floor')
+        self.face_attribute(0, 'surface_type', 'Floor')
+
         self.face_attribute(1, 'name', 'ceiling')
+        self.face_attribute(1, 'surface_type', 'Roof')
+
         self.faces_attribute('name', 'wall', range(2, self.number_of_faces()))
+        self.faces_attribute('surface_type', 'Wall', range(2, self.number_of_faces()))
 

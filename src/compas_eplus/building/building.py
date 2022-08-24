@@ -10,6 +10,7 @@ import os
 import json
 import compas_eplus
 import subprocess
+import shutil
 
 from ast import literal_eval
 
@@ -26,6 +27,7 @@ from compas_eplus.building.zone import Zone
 
 from compas_eplus.read_write import write_idf_from_building
 from compas_eplus.read_write import read_mean_zone_temperatures
+from compas_eplus.read_write import read_error_file
 
 from compas_eplus.utilities import make_box_from_quad
 
@@ -38,9 +40,9 @@ from compas.geometry import scale_vector
 
 from compas.utilities import geometric_key
 
-# TODO: Delete previous results
-# The fact that the building object contains a set of un used materials is not great
 
+# TODO: write functions should work in ironpython, use old format statement
+# TODO: detect when there were no errors
 
 class Building(object):
     """
@@ -513,7 +515,7 @@ class Building(object):
         """
         self.shadings[len(self.shadings)] = shading
 
-    def analyze(self, exe=None):
+    def analyze(self, exe=None, delete=True):
         """
         Runs Energy+ analysis on the .idf file created by the building datastructure.
 
@@ -527,10 +529,22 @@ class Building(object):
         None
         
         """
+
+
+
+
+
         idf = self.idf_filepath
         if not exe:
             exe = 'energyplus'
         out = os.path.join(compas_eplus.TEMP, 'eplus_output')
+
+        if delete:
+            try:
+                self.delete_result_files(out)
+            except:
+                pass
+
         print(exe, '-w', self.weather,'--output-directory', out, idf)
         subprocess.call([exe, '-w', self.weather,'--output-directory', out, idf])
 
@@ -549,9 +563,14 @@ class Building(object):
         
         """
         filepath = os.path.join(self.path, 'eplus_output', 'eplusout.eso')
-        temps, times = read_mean_zone_temperatures(self, filepath)
-        self.mean_air_temperatures = temps
-        self.result_times = times
+        error_filepath = os.path.join(self.path, 'eplus_output', 'eplusout.err')
+        read_error_file(error_filepath, print_error=True)
+        try:
+            temps, times = read_mean_zone_temperatures(self, filepath)
+            self.mean_air_temperatures = temps
+            self.result_times = times
+        except:
+            raise NameError('Energy+ returned the above error message')
 
     def plot_mean_zone_temperatures(self, plot_type='scatter'):
         """
@@ -632,9 +651,21 @@ class Building(object):
                 name = self.constructions[ck].layers[lk]['name']
                 thick = self.constructions[ck].layers[lk]['thickness']
                 lname = '{} {}mm'.format(name, round(thick*1000, 1))
-                self.layers[len(self.layers)] = {'layer_name': lname,
+                self.layers[lname] = {'layer_name': lname,
                                                  'material_name': name,
                                                  'thickness': thick}
+
+    def delete_result_files(self, out_path):
+        """ Deletes energy+ result files.
+
+        Parameters:
+            out_path (str): Path to the energy+ output folder.
+
+        Returns:
+            None
+        """
+        shutil.rmtree(out_path)
+
 
 if __name__ == '__main__':
 

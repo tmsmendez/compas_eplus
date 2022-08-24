@@ -7,6 +7,10 @@ __email__ = "tmendeze@uw.edu"
 __version__ = "0.1.0"
 
 
+__all__ = ['read_mean_zone_temperatures',
+           'read_error_file',
+          ]
+
 def read_mean_zone_temperatures(building, filepath):
     """
     Reads mean zone air temperatures from an Energy+ result file. 
@@ -54,3 +58,20 @@ def read_mean_zone_temperatures(building, filepath):
     mean_air_temperatures = temps
     result_times = times
     return mean_air_temperatures, result_times
+
+def read_error_file(filepath, print_error=True):
+    fh = open(filepath, 'r')
+    lines = fh.readlines()
+    fh.close()
+    if print_error:
+        print('#'*100)
+        print('#'*100)
+        print('Energy plus returned the following error(s) or warning(s)')
+        print('#'*100)
+        print('#'*100)
+        print('')
+        print('')
+        for line in lines:
+            print(line)
+            # print('')
+    return lines

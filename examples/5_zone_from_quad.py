@@ -24,6 +24,12 @@ b = Building.from_quad(path, wea, quad, zone_depth, height=3)
 
 zone = b.zones[0]
 w = Window.from_wall_and_wwr(zone, 2, .6)
+w.construction = 'double_glazing'
+b.add_window(w)
+
+zone = b.zones[1]
+w = Window.from_wall_and_wwr(zone, 2, .4)
+w.construction = 'double_glazing'
 b.add_window(w)
 
 c = Construction()
@@ -42,22 +48,44 @@ c.layers = {0: {'name': 'Generic Low-e Glass', 'thickness':.006},
             2: {'name': 'Generic Clear Glass', 'thickness':.006}}
 b.add_construction(c)
 
+# these should be updated ------------------------------------------------------
+c = Construction()
+c.name = 'cieling'
+c.layers = {0: {'name': 'Generic Painted Metal', 'thickness':.003},
+            1: {'name': 'Generic Wall Air Gap', 'thickness':.03},
+            2: {'name': 'Generic Insulation', 'thickness':.006},
+            3: {'name': 'Generic Gypsum Board', 'thickness':.012},
+            }
+b.add_construction(c)
+
+c = Construction()
+c.name = 'floor'
+c.layers = {0: {'name': 'Generic Painted Metal', 'thickness':.003},
+            1: {'name': 'Generic Wall Air Gap', 'thickness':.03},
+            2: {'name': 'Generic Insulation', 'thickness':.006},
+            3: {'name': 'Generic Gypsum Board', 'thickness':.012},
+            }
+b.add_construction(c)
+# ------------------------------------------------------------------------------
+
 filepath = os.path.join(compas_eplus.DATA, 'materials', 'materials.csv')
 b.add_materials_from_csv(filepath)
 
-rules = {'wall': 'ext_wall', 'window': 'double_glazing', 'floor': None, 'ceiling': None}
+rules = {'wall': 'ext_wall', 'window': 'double_glazing', 'floor': 'floor', 'ceiling': 'cieling'}
 b.assign_constructions_from_rules(rules)
 
 
-v = BuildingViewer(b)
-v.show()
+# v = BuildingViewer(b)
+# v.show()
 
-# b.write_idf()
+
+
+b.write_idf()
 # b.analyze(exe='/Applications/EnergyPlus-9-6-0/energyplus')
-# # b.analyze(exe='/Applications/EnergyPlus/energyplus')
-# for i in range(50): print('')
-# b.load_results()
-# b.plot_mean_zone_temperatures(plot_type='scatter')
+b.analyze(exe='/Applications/EnergyPlus/energyplus')
+for i in range(50): print('')
+b.load_results()
+b.plot_mean_zone_temperatures(plot_type='scatter')
 
-b.to_json(os.path.join(compas_eplus.DATA, 'buildings', '5_zone.json'))
+# # b.to_json(os.path.join(compas_eplus.DATA, 'buildings', '5_zone.json'))
 

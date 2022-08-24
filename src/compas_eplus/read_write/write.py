@@ -8,7 +8,7 @@ __version__ = "0.1.0"
 
 
 # TODO: the write_construction should eventually use saved layer names, not make up new ones
-
+# TODO: write functions should work in ironpython, use old format statement
 
 def write_idf_from_building(building):
     """
@@ -556,7 +556,7 @@ def write_constructions(building):
                 sep = ';'
             else:
                 sep = ','
-            lname = '{} {}mm'.format(name, round(thicks[i]*1000, 1))
+            lname = '{} {}mm'.format(layer, round(thicks[i]*1000, 1))
             fh.write('{}{}\t\t\t\t\t!- Layer {}\n'.format(lname, sep, i))
         fh.write('\n')
     fh.write('\n')

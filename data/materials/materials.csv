@@ -15,5 +15,5 @@ C5 - 4 IN HW CONCRETE,Material,MediumRough,1.729577,2242.585,836.8,0.9,0.65,0.65
 R13LAYER,MaterialNoMass,Rough,,,,0.9,0.75,0.75,2.290965,,,,,,,,,,,,,,
 R31LAYER,MaterialNoMass,Rough,,,,0.9,0.75,0.75,5.456,,,,,,,,,,,,,,
 Generic Window Air Gap,WindowMaterialGas,,,,,,,,,Air,,,,,,,,,,,,,
-Generic Low-e Glass,WindowMaterialGlazing,,1,,,,,,,,SpectralAverage,,0.45,0.36,0.36,0.71,0.21,0.21,,0.84,0.047,1,No
-Generic Clear Glass,WindowMaterialGlazing,,1,,,,,,,,SpectralAverage,,0.77,0.07,0.07,0.88,0.08,0.08,,0.84,0.84,1,No
+Generic Low-e Glass,WindowMaterialGlazing,,1,,,,,,,,SpectralAverage,,0.45,0.36,0.36,0.71,0.21,0.21,,0.84,0.047,1,No,
+Generic Clear Glass,WindowMaterialGlazing,,1,,,,,,,,SpectralAverage,,0.77,0.07,0.07,0.88,0.08,0.08,,0.84,0.84,1,No,
