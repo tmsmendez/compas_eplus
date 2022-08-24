@@ -42,7 +42,6 @@ from compas.utilities import geometric_key
 
 
 # TODO: write functions should work in ironpython, use old format statement
-# TODO: detect when there were no errors
 
 class Building(object):
     """
