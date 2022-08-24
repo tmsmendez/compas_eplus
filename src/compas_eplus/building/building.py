@@ -41,7 +41,6 @@ from compas.geometry import scale_vector
 from compas.utilities import geometric_key
 
 
-# TODO: write functions should work in ironpython, use old format statement
 
 class Building(object):
     """
