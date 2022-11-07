@@ -90,6 +90,7 @@ class Building(object):
         self.weather = weather
 
         self.ep_version = '9.6'
+        self.infiltration_rate = .0003 # [m3/s]
         self.num_timesteps = 1
         self.terrain = 'City'
         self.solar_distribution = 'FullExteriorWithReflections'

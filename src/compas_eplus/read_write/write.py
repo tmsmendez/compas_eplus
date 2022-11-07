@@ -31,7 +31,6 @@ def write_idf_from_building(building):
     write_global_vars(building)
     write_run_period(building)
     write_zones(building)
-
     write_windows(building)
     write_layers(building)
     write_constructions(building)
@@ -40,6 +39,9 @@ def write_idf_from_building(building):
     write_schedules(building)
     write_schedule_type_limits(building)
     write_internal_gains(building)
+    write_infiltration_rates(building)
+    write_thermostats(building)
+    # write_hvac(building)
     write_output_items(building)
 
 def write_pre(building):
@@ -206,7 +208,7 @@ def write_zone(building, zone):
     fh.write('  0,\t\t\t\t\t !- X Origin (m)\n')
     fh.write('  0,\t\t\t\t\t !- Y Origin (m)\n')
     fh.write('  0,\t\t\t\t\t !- Z Origin (m)\n')
-    fh.write('  ,\t\t\t\t\t !- Type\n')
+    fh.write('  1,\t\t\t\t\t !- Type\n')
     fh.write('  1,\t\t\t\t\t !- Multiplier\n')
     fh.write('  ,\t\t\t\t\t !- Ceiling Height (m)\n')
     fh.write('  ,\t\t\t\t\t !- Volume (m3)\n')
@@ -501,55 +503,6 @@ def write_windows(building):
     fh.write('\n')
     fh.close()
 
-def write_zone_thermo_schedule(building, zone):
-    """
-    Writes a zone thermostat schedule to the .idf file from the building data.
-    THIS FUNCTION IS NOT YET OPERATIONAL, CURRENTLY HARDCODED. 
-
-    Parameters
-    ----------
-    building: object
-        The building datastructure containing the data to be used
-    zone: object
-        The zone object to be written
-    
-    Returns
-    -------
-    None
-
-    """
-    fh = open(building.idf_filepath, 'a')
-    fh.write('\n')
-    fh.write('ZoneControl:Thermostat,\n')
-    fh.write('  {} Thermostat,         !- Name\n'.format(zone.name))
-    fh.write('  {},                    !- Zone or ZoneList Name\n'.format(zone.name))
-    fh.write('  {} Thermostat Schedule, !- Control Type Schedule Name\n'.format(zone.name))
-    fh.write('  ThermostatSetpoint:DualSetpoint,        !- Control 1 Object Type\n')
-    fh.write('  Thermostat Setpoint Dual Setpoint 1,    !- Control 1 Name\n')
-    fh.write('  ,                                       !- Control 2 Object Type\n')
-    fh.write('  ,                                       !- Control 2 Name\n')
-    fh.write('  ,                                       !- Control 3 Object Type\n')
-    fh.write('  ,                                       !- Control 3 Name\n')
-    fh.write('  ,                                       !- Control 4 Object Type\n')
-    fh.write('  ,                                       !- Control 4 Name\n')
-    fh.write('  0;                                      !- Temperature Difference Between Cutout And Setpoint (deltaC)\n')
-    fh.write('\n')
-    fh.write('Schedule:Compact,\n')
-    fh.write('  {} Thermostat Schedule, !- Name\n'.format(zone.name))
-    fh.write('  {} Thermostat Schedule Type Limits, !- Schedule Type Limits Name\n'.format(zone.name))
-    fh.write('  Through: 12/31,                         !- Field 1\n')
-    fh.write('  For: AllDays,                           !- Field 2\n')
-    fh.write('  Until: 24:00,                           !- Field 3\n')
-    fh.write('  4;                                      !- Field 4\n')
-    fh.write('\n')
-    fh.write('ScheduleTypeLimits,\n')
-    fh.write('  {} Thermostat Schedule Type Limits, !- Name\n'.format(zone.name))
-    fh.write('  0,                                      !- Lower Limit Value (BasedOnField A3)\n')
-    fh.write('  4,                                      !- Upper Limit Value (BasedOnField A3)\n')
-    fh.write('  DISCRETE;                               !- Numeric Type\n')
-    fh.write('\n')
-    fh.close()
-
 def write_constructions(building):
     """
     Writes all constructions to the .idf file from the building data.
@@ -763,6 +716,56 @@ def write_schedules(building):
     fh.write('  Until: 24:00,0.0;        !- Field 3\n')
     fh.write('  \n')
 
+    fh.write('Schedule:Compact,\n')
+    fh.write('  Htg-SetP-Sch,            !- Name\n')
+    fh.write('  Temperature,             !- Schedule Type Limits Name\n')
+    fh.write('  Through: 12/31,          !- Field 1\n')
+    fh.write('  For: SummerDesignDay,    !- Field 2\n')
+    fh.write('  Until: 24:00,16.7,       !- Field 3\n')
+    fh.write('  For: WinterDesignDay,    !- Field 5\n')
+    fh.write('  Until: 24:00,22.2,       !- Field 6\n')
+    fh.write('  For: WeekDays,           !- Field 8\n')
+    fh.write('  Until: 6:00,16.7,        !- Field 9\n')
+    fh.write('  Until: 20:00,22.2,       !- Field 11\n')
+    fh.write('  Until: 24:00,16.7,       !- Field 13\n')
+    fh.write('  For: WeekEnds Holiday,   !- Field 15\n')
+    fh.write('  Until: 24:00,16.7,       !- Field 16\n')
+    fh.write('  For: AllOtherDays,       !- Field 18\n')
+    fh.write('  Until: 24:00,16.7;       !- Field 19\n')
+    fh.write('  \n')
+
+    fh.write('Schedule:Compact,\n')
+    fh.write('  Clg-SetP-Sch,            !- Name\n')
+    fh.write('  Temperature,             !- Schedule Type Limits Name\n')
+    fh.write('  Through: 12/31,          !- Field 1\n')
+    fh.write('  For: SummerDesignDay,    !- Field 2\n')
+    fh.write('  Until: 24:00,23.9,       !- Field 3\n')
+    fh.write('  For: WinterDesignDay,    !- Field 5\n')
+    fh.write('  Until: 24:00,29.4,       !- Field 6\n')
+    fh.write('  For: WeekDays,           !- Field 8\n')
+    fh.write('  Until: 6:00,29.4,        !- Field 9\n')
+    fh.write('  Until: 20:00,23.9,       !- Field 11\n')
+    fh.write('  Until: 24:00,29.4,       !- Field 13\n')
+    fh.write('  For: WeekEnds Holiday,   !- Field 15\n')
+    fh.write('  Until: 24:00,29.4,       !- Field 16\n')
+    fh.write('  For: AllOtherDays,       !- Field 18\n')
+    fh.write('  Until: 24:00,29.4;       !- Field 19\n')
+    fh.write('\n')
+
+    fh.write('Schedule:Compact,\n')
+    fh.write('  Zone Control Type Sched, !- Name\n')
+    fh.write('  Control Type,            !- Schedule Type Limits Name\n')
+    fh.write('  Through: 12/31,          !- Field 1\n')
+    fh.write('  For: SummerDesignDay,    !- Field 2\n')
+    fh.write('  Until: 24:00,2,          !- Field 3\n')
+    fh.write('  For: WinterDesignDay,    !- Field 5\n')
+    fh.write('  Until: 24:00,1,          !- Field 6\n')
+    fh.write('  For: AllOtherDays,       !- Field 8\n')
+    fh.write('  Until: 24:00,4;          !- Field 9\n')
+    fh.write('  \n')
+    fh.write('  \n')
+    fh.close()
+
 def write_schedule_type_limits(building):
     fh = open(building.idf_filepath, 'a')
 
@@ -850,6 +853,112 @@ def write_internal_gains(building):
     fh.write('  0,                       !- Fraction Latent\n')
     fh.write('  0.3,                     !- Fraction Radiant\n')
     fh.write('  0;                       !- Fraction Lost\n')
+    fh.write('  \n')
+    fh.write('  \n')
+    fh.close()
+
+def write_infiltration_rates(building):
+    fh = open(building.idf_filepath, 'a')
+    fh.write('  ZoneInfiltration:DesignFlowRate,\n')
+    fh.write('    All zones Infil 1,       !- Name\n')
+    fh.write('    All zones list,          !- Zone or ZoneList Name\n')
+    fh.write('    INFIL-SCH,               !- Schedule Name\n')
+    fh.write('    flow/zone,               !- Design Flow Rate Calculation Method\n')
+    fh.write('    {},                      !- Design Flow Rate [m3/s]\n'.format(building.infiltration_rate))
+    fh.write('    ,                        !- Flow per Zone Floor Area [m3/s-m2]\n')
+    fh.write('    ,                        !- Flow per Exterior Surface Area [m3/s-m2]\n')
+    fh.write('    ,                        !- Air Changes per Hour [1/hr]\n')
+    fh.write('    0,                       !- Constant Term Coefficient\n')
+    fh.write('    0,                       !- Temperature Term Coefficient\n')
+    fh.write('    0.2237,                  !- Velocity Term Coefficient\n')
+    fh.write('    0;                       !- Velocity Squared Term Coefficient\n')
+    fh.write('  \n')
+    fh.write('  \n')
+    fh.close()
+
+def write_thermostats(building):
+    fh = open(building.idf_filepath, 'a')
+    fh.write('ZoneControl:Thermostat,\n')
+    fh.write('  All zones Control,                  !- Name\n')
+    fh.write('  All zones list,                     !- Zone or ZoneList Name\n')
+    fh.write('  Zone Control Type Sched,            !- Control Type Schedule Name\n')
+    fh.write('  ThermostatSetpoint:SingleCooling,   !- Control 1 Object Type\n')
+    fh.write('  CoolingSetPoint,                    !- Control 1 Name\n')
+    fh.write('  ThermostatSetpoint:SingleHeating,   !- Control 2 Object Type\n')
+    fh.write('  HeatingSetpoint,                    !- Control 2 Name\n')
+    fh.write('  ThermostatSetpoint:DualSetpoint,    !- Control 3 Object Type\n')
+    fh.write('  DualSetPoint;                       !- Control 3 Name\n')
+    fh.write('  \n')
+    
+    fh.write('ThermostatSetpoint:SingleHeating,\n')
+    fh.write('  HeatingSetpoint,         !- Name\n')
+    fh.write('  Htg-SetP-Sch;            !- Setpoint Temperature Schedule Name\n')
+    fh.write('  \n')
+
+    fh.write('ThermostatSetpoint:SingleCooling,\n')
+    fh.write('  CoolingSetpoint,         !- Name\n')
+    fh.write('  Clg-SetP-Sch;            !- Setpoint Temperature Schedule Name\n')
+    fh.write('  \n')
+
+    fh.write('ThermostatSetpoint:DualSetpoint,\n')
+    fh.write('  DualSetPoint,            !- Name\n')
+    fh.write('  Htg-SetP-Sch,            !- Heating Setpoint Temperature Schedule Name\n')
+    fh.write('  Clg-SetP-Sch;            !- Cooling Setpoint Temperature Schedule Name\n')
+    
+    fh.write('  \n')
+    fh.write('  \n')
+    fh.close()
+
+def write_hvac(building):
+    fh = open(building.idf_filepath, 'a')
+    fh.write('ZoneHVAC:IdealLoadsAirSystem,\n')
+    fh.write('  Zone1 Ideal Loads System,           !- Name\n')
+    fh.write('  AlwaysOn,                           !- Availability Schedule Name\n')
+    fh.write('  Zone1 Ideal Loads Supply Node,      !- Zone Supply Air Node Name \n')
+    fh.write('  Zone1 Ideal Loads Return Node,      ! Zone Exhaust Air Node Name\n')
+    fh.write('  50,                                 !- Maximum Heating Supply Air Temperature [C]\n')
+    fh.write('  13,                                 !- Minimum Cooling Supply Air Temperature [C]\n')
+    fh.write('  0.0156,                             !- Maximum Heating Supply Air Humidity Ratio [kgWater/kgDryAir]\n')
+    fh.write('  0.0077,                             !- Minimum Cooling Supply Air Humidity Ratio [kgWater/kgDryAir]\n')
+    fh.write('  NoLimit,                            !- Heating Limit\n')
+    fh.write('  ,                                   !- Maximum Heating Air Flow Rate [m3/s]\n')
+    fh.write('  ,                                   !- Maximum Sensible Heating Capacity [W]\n')
+    fh.write('  NoLimit,                            !- Cooling Limit\n')
+    fh.write('  ,                                   !- Maximum Cooling Air Flow Rate [m3/s]\n')
+    fh.write('  ,                                   !- Maximum Total Cooling Capacity [W]\n')
+    fh.write('  ,                                   !- Heating Availability Schedule Name\n')
+    fh.write('  ,                                   !- Cooling Availability Schedule Name\n')
+    fh.write('  ConstantSensibleHeatRatio,          !- Dehumidification Control Type\n')
+    fh.write('  0.7,                                !- Cooling Sensible Heat Ratio\n')
+    fh.write('  None,                               !- Humidification Control Type\n')
+    fh.write('  Office OA Specification,            !- Design Specification Outdoor Air Object Name\n')
+    fh.write('  Zone1 Ideal Loads OA Inlet Node,    !- Outdoor Air Inlet Node Name\n')
+    fh.write('  None,                               !- Demand Controlled Ventilation Type\n')
+    fh.write('  NoEconomizer,                       !- Outdoor Air Economizer Type\n')
+    fh.write('  Enthalpy,                           !- Heat Recovery Type\n')
+    fh.write('  0.70,                               !- Sensible Heat Recovery Effectiveness\n')
+    fh.write('  0.65;                               !- Latent Heat Recovery Effectiveness\n')
+    fh.write('  \n')
+
+    fh.write('ZoneHVAC:EquipmentList,\n')
+    fh.write('  Zone1Equipment,               !- Name\n')
+    fh.write('  SequentialLoad,               !- Load Distribution Scheme\n')
+    fh.write('  ZoneHVAC:AirDistributionUnit, !- Zone Equipment 1 Object Type\n')
+    fh.write('  Zone1TermReheat,              !- Zone Equipment 1 Name\n')
+    fh.write('  1,                            !- Zone Equipment 1 Cooling Sequence\n')
+    fh.write('  1,                            !- Zone Equipment 1 Heating or No-Load Sequence\n')
+    fh.write('  ,                             !- Zone Equipment 1 Sequential Cooling Fraction Schedule Name\n')
+    fh.write('  ;                             !- Zone Equipment 1 Sequential Heating Fraction Schedule Name\n')
+    fh.write('  \n')
+
+    fh.write('ZoneHVAC:EquipmentConnections,\n')
+    fh.write('  SPACE3-1,             !- Zone Name\n')
+    fh.write('  SPACE3-1 Eq,          !- List Name: Zone Equipment\n')
+    fh.write('  SPACE3-1 In Nodes,    !- List Name: Zone Air Inlet Nodes\n')
+    fh.write('  ,                     !- List Name: Zone Air Exhaust Nodes\n')
+    fh.write('  SPACE3-1 Node,        !- Zone Air Node Name\n')
+    fh.write('  SPACE3-1 Out Node;    !- Zone Return Air Node or NodeList Name\n')
+
     fh.write('  \n')
     fh.write('  \n')
     fh.close()
