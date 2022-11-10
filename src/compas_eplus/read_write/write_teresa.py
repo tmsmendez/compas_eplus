@@ -13,6 +13,7 @@ __version__ = "0.1.0"
 def write_idf_from_building(building):
     """
     Writes the .idf file from the building data.
+
     Parameters
     ----------
     building: object
@@ -21,6 +22,7 @@ def write_idf_from_building(building):
     Returns
     -------
     None
+
     """
     fh = open(building.idf_filepath, 'w')
     fh.close()
@@ -45,6 +47,7 @@ def write_idf_from_building(building):
 def write_pre(building):
     """
     Writes the preamble to the .idf file from the building data.
+
     Parameters
     ----------
     building: object
@@ -53,6 +56,7 @@ def write_pre(building):
     Returns
     -------
     None
+
     """
     fh = open(building.idf_filepath, 'a')
     fh.write('\n') 
@@ -67,6 +71,7 @@ def write_pre(building):
 def write_building(building):
     """
     Writes the building basic data to the .idf file from the building datastructure.
+
     Parameters
     ----------
     building: object
@@ -75,6 +80,7 @@ def write_building(building):
     Returns
     -------
     None
+
     """
     fh = open(building.idf_filepath, 'a')
     fh.write('Building,\n')
@@ -92,6 +98,7 @@ def write_building(building):
 def write_global_vars(building):
     """
     Writes the global variables to the .idf file from the building data.
+
     Parameters
     ----------
     building: object
@@ -100,6 +107,7 @@ def write_global_vars(building):
     Returns
     -------
     None
+
     """
     fh = open(building.idf_filepath, 'a')
     fh.write('\n') 
@@ -113,6 +121,7 @@ def write_global_vars(building):
 def write_run_period(building):
     """
     Writes the run period  to the .idf file from the building data.
+
     Parameters
     ----------
     building: object
@@ -121,6 +130,7 @@ def write_run_period(building):
     Returns
     -------
     None
+
     """
     fh = open(building.idf_filepath, 'a')
     fh.write('  RunPeriod,\n')
@@ -143,6 +153,7 @@ def write_run_period(building):
 def write_zones(building):
     """
     Writes all zones to the .idf file from the building data.
+
     Parameters
     ----------
     building: object
@@ -151,6 +162,7 @@ def write_zones(building):
     Returns
     -------
     None
+
     """
     for zkey in building.zones:
         zone = building.zones[zkey]
@@ -176,6 +188,7 @@ def write_zone_list(building):
 def write_zone(building, zone):
     """
     Writes a single zone to the .idf file from the building data.
+
     Parameters
     ----------
     building: object
@@ -186,6 +199,7 @@ def write_zone(building, zone):
     Returns
     -------
     None
+
     """
     fh = open(building.idf_filepath, 'a')
     fh.write('Zone,\n')
@@ -208,6 +222,7 @@ def write_zone(building, zone):
 def write_layers(building):
     """
     Writes all layers to the .idf file from the building data.
+
     Parameters
     ----------
     building: object
@@ -216,6 +231,7 @@ def write_layers(building):
     Returns
     -------
     None
+
     """
     
     for lk in building.layers:
@@ -236,6 +252,7 @@ def write_layers(building):
 def write_material_glazing(building, mat, thickness, layer_name):
     """
     Writes a glazing material to the .idf file from the building data.
+
     Parameters
     ----------
     building: object
@@ -250,6 +267,7 @@ def write_material_glazing(building, mat, thickness, layer_name):
     Returns
     -------
     None
+
     """
     fh = open(building.idf_filepath, 'a')
     fh.write('\n')
@@ -276,6 +294,7 @@ def write_material_glazing(building, mat, thickness, layer_name):
 def write_material_gas(building, mat, thickness, layer_name):
     """
     Writes a gas material to the .idf file from the building data.
+
     Parameters
     ----------
     building: object
@@ -289,6 +308,7 @@ def write_material_gas(building, mat, thickness, layer_name):
     Returns
     -------
     None
+
     """
     fh = open(building.idf_filepath, 'a')
     fh.write('\n')
@@ -302,6 +322,7 @@ def write_material_gas(building, mat, thickness, layer_name):
 def write_materials_nomass(building, mat):
     """
     Writes a no mass material to the .idf file from the building data.
+
     Parameters
     ----------
     building: object
@@ -312,6 +333,7 @@ def write_materials_nomass(building, mat):
     Returns
     -------
     None
+
     """
     fh = open(building.idf_filepath, 'a')
     fh.write('\n')
@@ -329,6 +351,7 @@ def write_materials_nomass(building, mat):
 def write_material(building, mat, thickness, layer_name):
     """
     Writes a material to the .idf file from the building data.
+
     Parameters
     ----------
     building: object
@@ -343,6 +366,7 @@ def write_material(building, mat, thickness, layer_name):
     Returns
     -------
     None
+
     """
     fh = open(building.idf_filepath, 'a')
     fh.write('\n')
@@ -363,6 +387,7 @@ def write_material(building, mat, thickness, layer_name):
 def write_zone_surfaces(building, zone):
     """
     Writes all zone surfaces to the .idf file from the building data.
+
     Parameters
     ----------
     building: object
@@ -373,6 +398,7 @@ def write_zone_surfaces(building, zone):
     Returns
     -------
     None
+
     """
     fh = open(building.idf_filepath, 'a')
     for fk in zone.surfaces.faces():
@@ -382,6 +408,7 @@ def write_zone_surfaces(building, zone):
 def write_building_surface(building, zone, fk):
     """
     Writes a building surface to the .idf file from the building data.
+
     Parameters
     ----------
     building: object
@@ -394,6 +421,7 @@ def write_building_surface(building, zone, fk):
     Returns
     -------
     None
+
     """
     st = zone.surfaces.face_attribute(fk, 'surface_type')
     ct = zone.surfaces.face_attribute(fk, 'construction')
@@ -436,6 +464,7 @@ def write_building_surface(building, zone, fk):
 def write_windows(building):
     """
     Writes all windows  to the .idf file from the building data.
+
     Parameters
     ----------
     building: object
@@ -444,6 +473,7 @@ def write_windows(building):
     Returns
     -------
     None
+
     """
     fh = open(building.idf_filepath, 'a')
     for wk in building.windows:
@@ -476,6 +506,7 @@ def write_windows(building):
 def write_constructions(building):
     """
     Writes all constructions to the .idf file from the building data.
+
     Parameters
     ----------
     building: object
@@ -484,6 +515,7 @@ def write_constructions(building):
     Returns
     -------
     None
+
     """
     fh = open(building.idf_filepath, 'a')
     fh.write('\n')
@@ -507,6 +539,7 @@ def write_constructions(building):
 def write_output_items(building):
     """
     Writes the output items to the .idf file from the building data.
+
     Parameters
     ----------
     building: object
@@ -515,6 +548,7 @@ def write_output_items(building):
     Returns
     -------
     None
+
     """
     fh = open(building.idf_filepath, 'a')
     fh.write('Output:Variable,*,Zone Mean Air Temperature,timestep;\n')
@@ -530,6 +564,7 @@ def write_output_items(building):
 def write_shadings(building):
     """
     Writes all shading devices to the .idf file from the building data.
+
     Parameters
     ----------
     building: object
@@ -538,6 +573,7 @@ def write_shadings(building):
     Returns
     -------
     None
+
     """
     for sk in building.shadings:
         write_shading(building, building.shadings[sk])
@@ -545,6 +581,7 @@ def write_shadings(building):
 def write_shading(building, shading):
     """
     Writes a single shading device to the .idf file from the building data.
+
     Parameters
     ----------
     building: object
@@ -555,6 +592,7 @@ def write_shading(building, shading):
     Returns
     -------
     None
+
     """
     fh = open(building.idf_filepath, 'a')
     fh.write('\n')
@@ -714,16 +752,24 @@ def write_schedules(building):
     fh.write('  Until: 24:00,29.4;       !- Field 19\n')
     fh.write('\n')
 
+    # fh.write('Schedule:Compact,\n')
+    # fh.write('  Zone Control Type Sched, !- Name\n')
+    # fh.write('  Control Type,            !- Schedule Type Limits Name\n')
+    # fh.write('  Through: 12/31,          !- Field 1\n')
+    # fh.write('  For: SummerDesignDay,    !- Field 2\n')
+    # fh.write('  Until: 24:00,2,          !- Field 3\n')
+    # fh.write('  For: WinterDesignDay,    !- Field 5\n')
+    # fh.write('  Until: 24:00,1,          !- Field 6\n')
+    # fh.write('  For: AllOtherDays,       !- Field 8\n')
+    # fh.write('  Until: 24:00,4;          !- Field 9\n')
+
     fh.write('Schedule:Compact,\n')
-    fh.write('  Zone Control Type Sched, !- Name\n')
-    fh.write('  Control Type,            !- Schedule Type Limits Name\n')
-    fh.write('  Through: 12/31,          !- Field 1\n')
-    fh.write('  For: SummerDesignDay,    !- Field 2\n')
-    fh.write('  Until: 24:00,2,          !- Field 3\n')
-    fh.write('  For: WinterDesignDay,    !- Field 5\n')
-    fh.write('  Until: 24:00,1,          !- Field 6\n')
-    fh.write('  For: AllOtherDays,       !- Field 8\n')
-    fh.write('  Until: 24:00,4;          !- Field 9\n')
+    fh.write('  Zone Control Type Sched,    !- Name\n')
+    fh.write('  Control Type,               !- Schedule Type Limits Name\n')
+    fh.write('  Through: 12/31,             !- Field 1\n')
+    fh.write('  For: AllDays,               !- Field 2\n')
+    fh.write('  Until: 24:00,               !- Field 3\n')
+    fh.write('  4;                          !- Field 4\n')
     fh.write('  \n')
     fh.write('  \n')
     fh.close()
@@ -844,23 +890,29 @@ def write_thermostats(building):
     fh.write('  All zones Control,                  !- Name\n')
     fh.write('  all_zones_list,                     !- Zone or ZoneList Name\n')
     fh.write('  Zone Control Type Sched,            !- Control Type Schedule Name\n')
-    fh.write('  ThermostatSetpoint:SingleCooling,   !- Control 1 Object Type\n')
-    fh.write('  CoolingSetPoint,                    !- Control 1 Name\n')
-    fh.write('  ThermostatSetpoint:SingleHeating,   !- Control 2 Object Type\n')
-    fh.write('  HeatingSetpoint,                    !- Control 2 Name\n')
+    # fh.write('  ThermostatSetpoint:SingleCooling,   !- Control 1 Object Type\n')
+    # fh.write('  CoolingSetPoint,                    !- Control 1 Name\n')
+    # fh.write('  ThermostatSetpoint:SingleHeating,   !- Control 2 Object Type\n')
+    # fh.write('  HeatingSetpoint,                    !- Control 2 Name\n')
     fh.write('  ThermostatSetpoint:DualSetpoint,    !- Control 3 Object Type\n')
-    fh.write('  DualSetPoint;                       !- Control 3 Name\n')
+    fh.write('  DualSetPoint,                       !- Control 3 Name\n')
+    fh.write(',  \n')
+    fh.write(',  \n')
+    fh.write(',  \n')
+    fh.write(',  \n')
+    fh.write(',  \n')
+    fh.write('0;  \n')
     fh.write('  \n')
     
-    fh.write('ThermostatSetpoint:SingleHeating,\n')
-    fh.write('  HeatingSetpoint,         !- Name\n')
-    fh.write('  Htg-SetP-Sch;            !- Setpoint Temperature Schedule Name\n')
-    fh.write('  \n')
+    # fh.write('ThermostatSetpoint:SingleHeating,\n')
+    # fh.write('  HeatingSetpoint,         !- Name\n')
+    # fh.write('  Htg-SetP-Sch;            !- Setpoint Temperature Schedule Name\n')
+    # fh.write('  \n')
 
-    fh.write('ThermostatSetpoint:SingleCooling,\n')
-    fh.write('  CoolingSetpoint,         !- Name\n')
-    fh.write('  Clg-SetP-Sch;            !- Setpoint Temperature Schedule Name\n')
-    fh.write('  \n')
+    # fh.write('ThermostatSetpoint:SingleCooling,\n')
+    # fh.write('  CoolingSetpoint,         !- Name\n')
+    # fh.write('  Clg-SetP-Sch;            !- Setpoint Temperature Schedule Name\n')
+    # fh.write('  \n')
 
     fh.write('ThermostatSetpoint:DualSetpoint,\n')
     fh.write('  DualSetPoint,            !- Name\n')
@@ -873,6 +925,25 @@ def write_thermostats(building):
 
 def write_hvac(building):
 
+    fh = open(building.idf_filepath, 'a')
+    fh.write('SizingPeriod:WeatherFileConditionType,\n')
+    fh.write('  Extreme Summer Weather Period for Design,  !- Name\n')
+    fh.write('  SummerExtreme,                             !- Period Selection\n')
+    fh.write('  SummerDesignDay,                           !- Day Type\n')
+    fh.write('  No,                          !- Use Weather File Daylight Saving Period\n')
+    fh.write('  No;                          !- Use Weather File Rain and Snow Indicators\n')
+    fh.write('\n')
+    fh.write('SizingPeriod:WeatherFileConditionType,\n')
+    fh.write('  Extreme Winter Weather Period for Design,  !- Name\n')
+    fh.write('  WinterExtreme,                             !- Period Selection\n')
+    fh.write('  WinterDesignDay,                           !- Day Type\n')
+    fh.write('  No,                          !- Use Weather File Daylight Saving Period\n')
+    fh.write('  No;                          !- Use Weather File Rain and Snow Indicators\n')
+    fh.write('\n')
+    fh.close()
+
+
+
     for zkey in building.zones:
         zone = building.zones[zkey]
         zname = zone.name
@@ -880,34 +951,71 @@ def write_hvac(building):
         fh = open(building.idf_filepath, 'a')
         fh.write('ZoneHVAC:IdealLoadsAirSystem,\n')
         fh.write('  {} Ideal Loads System,              !- Name\n'.format(zname))
-        fh.write('  OCCUPY-1,                           !- Availability Schedule Name\n')
-        fh.write('  {} Ideal Loads Supply Node,         !- Zone Supply Air Node Name \n'.format(zname))
-        fh.write('  {} Ideal Loads Return Node,         !- Zone Exhaust Air Node Name\n'.format(zname))
+        fh.write('  ,                                   !- Availability Schedule Name\n')
+        fh.write('  {}_inlet_nodelist,                  !- Zone Supply Air Node Name \n'.format(zname))
+        fh.write('  {}_ex_nodelist,                     !- Zone Exhaust Air Node Name\n'.format(zname))
         fh.write('  ,                                   !- System Inlet Air Node Name\n')
         fh.write('  50,                                 !- Maximum Heating Supply Air Temperature [C]\n')
         fh.write('  13,                                 !- Minimum Cooling Supply Air Temperature [C]\n')
         fh.write('  0.0156,                             !- Maximum Heating Supply Air Humidity Ratio [kgWater/kgDryAir]\n')
         fh.write('  0.0077,                             !- Minimum Cooling Supply Air Humidity Ratio [kgWater/kgDryAir]\n')
-        fh.write('  NoLimit,                            !- Heating Limit\n')
+        fh.write('  LimitCapacity,                      !- Heating Limit\n')
         fh.write('  ,                                   !- Maximum Heating Air Flow Rate [m3/s]\n')
-        fh.write('  ,                                   !- Maximum Sensible Heating Capacity [W]\n')
-        fh.write('  NoLimit,                            !- Cooling Limit\n')
-        fh.write('  ,                                   !- Maximum Cooling Air Flow Rate [m3/s]\n')
-        fh.write('  ,                                   !- Maximum Total Cooling Capacity [W]\n')
+        fh.write('  Autosize,                           !- Maximum Sensible Heating Capacity [W]\n')
+        fh.write('  LimitFlowRateAndCapacity,              !- Cooling Limit\n')
+        fh.write('  Autosize,                                   !- Maximum Cooling Air Flow Rate [m3/s]\n')
+        fh.write('  Autosize,                                   !- Maximum Total Cooling Capacity [W]\n')
         fh.write('  ,                                   !- Heating Availability Schedule Name\n')
         fh.write('  ,                                   !- Cooling Availability Schedule Name\n')
         fh.write('  None,                               !- Dehumidification Control Type\n')
-        fh.write('  0.7,                                !- Cooling Sensible Heat Ratio\n')
-        fh.write('  None,                               !- Humidification Control Type\n')
-        fh.write('  ,                                   !- Design Specification Outdoor Air Object Name\n')
-        # fh.write('  {} Ideal Loads OA Inlet Node,       !- Outdoor Air Inlet Node Name\n'.format(zname))
+        fh.write('  ,                                !- Cooling Sensible Heat Ratio\n')
+        fh.write('  ,                               !- Humidification Control Type\n')
+        fh.write('  2019::MediumOffice::OpenOffice_Ventilation{},    !- Design Specification Outdoor Air Object Name\n'.format(zname))
         fh.write('  ,                                   !- Outdoor Air Inlet Node Name\n'.format(zname))
         fh.write('  None,                               !- Demand Controlled Ventilation Type\n')
-        fh.write('  NoEconomizer,                       !- Outdoor Air Economizer Type\n')
-        fh.write('  Enthalpy,                           !- Heat Recovery Type\n')
-        fh.write('  0.70,                               !- Sensible Heat Recovery Effectiveness\n')
-        fh.write('  0.65;                               !- Latent Heat Recovery Effectiveness\n')
+        fh.write('  DifferentialDryBulb,                !- Outdoor Air Economizer Type\n')
+        fh.write('  ,                           !- Heat Recovery Type\n')
+        fh.write('  0,                               !- Sensible Heat Recovery Effectiveness\n')
+        fh.write('  0;                               !- Latent Heat Recovery Effectiveness\n')
         fh.write('  \n')
+
+        fh.write('DesignSpecification:OutdoorAir,\n')
+        fh.write('  2019::MediumOffice::OpenOffice_Ventilation{}, !- Name\n'.format(zname))
+        fh.write('  Sum,                                    !- Outdoor Air Method\n')
+        fh.write('  0.002359735,                            !- Outdoor Air Flow per Person {m3/s-person}\n')
+        fh.write('  0.0003048,                              !- Outdoor Air Flow per Zone Floor Area {m3/s-m2}\n')
+        fh.write('  0,                                      !- Outdoor Air Flow per Zone {m3/s}\n')
+        fh.write('  0;                                      !- Outdoor Air Flow Air Changes per Hour {1/hr}\n')
+        fh.write('  \n')
+
+
+        fh.write('Sizing:Zone,\n')
+        fh.write('  {},                        !- Zone or ZoneList Name\n'.format(zname))
+        fh.write('  SupplyAirTemperature,                   !- Zone Cooling Design Supply Air Temperature Input Method\n')
+        fh.write('  14,                                     !- Zone Cooling Design Supply Air Temperature {C}\n')
+        fh.write('  11.11,                                  !- Zone Cooling Design Supply Air Temperature Difference {deltaC}\n')
+        fh.write('  SupplyAirTemperature,                   !- Zone Heating Design Supply Air Temperature Input Method\n')
+        fh.write('  40,                                     !- Zone Heating Design Supply Air Temperature {C}\n')
+        fh.write('  11.11,                                  !- Zone Heating Design Supply Air Temperature Difference {deltaC}\n')
+        fh.write('  0.0085,                                 !- Zone Cooling Design Supply Air Humidity Ratio {kgWater/kgDryAir}\n')
+        fh.write('  0.008,                                  !- Zone Heating Design Supply Air Humidity Ratio {kgWater/kgDryAir}\n')
+        fh.write('  2019::MediumOffice::OpenOffice_Ventilation{}, !- Design Specification Outdoor Air Object Name\n'.format(zname))
+        fh.write('  ,                                       !- Zone Heating Sizing Factor\n')
+        fh.write('  ,                                       !- Zone Cooling Sizing Factor\n')
+        fh.write('  DesignDay,                              !- Cooling Design Air Flow Method\n')
+        fh.write('  0,                                      !- Cooling Design Air Flow Rate {m3/s}\n')
+        fh.write('  0.000762,                               !- Cooling Minimum Air Flow per Zone Floor Area {m3/s-m2}\n')
+        fh.write('  0,                                      !- Cooling Minimum Air Flow {m3/s}\n')
+        fh.write('  0,                                      !- Cooling Minimum Air Flow Fraction\n')
+        fh.write('  DesignDay,                              !- Heating Design Air Flow Method\n')
+        fh.write('  0,                                      !- Heating Design Air Flow Rate {m3/s}\n')
+        fh.write('  0.002032,                               !- Heating Maximum Air Flow per Zone Floor Area {m3/s-m2}\n')
+        fh.write('  0.1415762,                              !- Heating Maximum Air Flow {m3/s}\n')
+        fh.write('  0.3,                                    !- Heating Maximum Air Flow Fraction\n')
+        fh.write('  ,                                       !- Design Specification Zone Air Distribution Object Name\n')
+        fh.write('  No;                                     !- Account for Dedicated Outdoor Air System\n')
+        fh.write('  \n')
+
 
         fh.write('ZoneHVAC:EquipmentList,\n')
         fh.write('  {}Equipment,                    !- Name\n'.format(zname))
@@ -920,16 +1028,29 @@ def write_hvac(building):
         fh.write('  ;                               !- Zone Equipment 1 Sequential Heating Fraction Schedule Name\n')
         fh.write('  \n')
 
+
+        fh.write('NodeList,\n')
+        fh.write('  {}_inlet_nodelist,        !- Name\n'.format(zname))
+        fh.write('  inlet_node_{};            !- Node Name 1\n'.format(zname))
+        fh.write('  \n')
+
+        fh.write('NodeList,\n')
+        fh.write('  {}_ex_nodelist,        !- Name\n'.format(zname))
+        fh.write('  ex_node_{};            !- Node Name 1\n'.format(zname))
+        fh.write('  \n')
+
+
         fh.write('ZoneHVAC:EquipmentConnections,\n')
         fh.write('  {},                             !- Zone Name\n'.format(zname))
         fh.write('  {}Equipment,                    !- List Name: Zone Equipment\n'.format(zname))
-        fh.write('  {} Ideal Loads Supply Node,     !- List Name: Zone Air Inlet Nodes\n'.format(zname))
-        fh.write('  {} Ideal Loads Return Node,     !- List Name: Zone Air Exhaust Nodes\n'.format(zname))
-        fh.write('  {}AirNode                       !- Zone Air Node Name\n'.format(zname))
-        fh.write('  ;                               !- Zone Return Air Node or NodeList Name\n')
+        fh.write('  {}_inlet_nodelist,              !- List Name: Zone Air Inlet Nodes\n'.format(zname))
+        fh.write('  {}_ex_nodelist,                 !- List Name: Zone Air Exhaust Nodes\n'.format(zname))
+        fh.write('  {}_air_node,                    !- Zone Air Node Name\n'.format(zname))
+        fh.write('  {}_return_air_node;             !- Zone Return Air Node or NodeList Name\n'.format(zname))
         fh.write('  \n')
         fh.write('  \n')
         fh.close()
+
 
 if __name__ == '__main__':
     pass

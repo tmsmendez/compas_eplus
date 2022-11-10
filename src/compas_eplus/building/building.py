@@ -91,7 +91,7 @@ class Building(object):
 
         self.ep_version = '9.6'
         self.infiltration_rate = .0003 # [m3/s]
-        self.num_timesteps = 1
+        self.num_timesteps = 4
         self.terrain = 'City'
         self.solar_distribution = 'FullExteriorWithReflections'
         self.zones = {}
