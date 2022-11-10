@@ -22,9 +22,7 @@ quad = [[0, 0, 0],
         [width, depth, 0],
         [0, depth, 0]]
 
-
-zone_depth = [3., 3., 3., 3.]
-b = Building.from_quad(path, wea, quad, zone_depth, height=height)
+b = Building.from_quad_2zone(path, wea, quad, height=height)
 
 
 zone = b.zones[0]
@@ -34,16 +32,6 @@ b.add_window(w)
 
 zone = b.zones[1]
 w = Window.from_wall_and_wwr(zone, 2, .4)
-w.construction = 'double_glazing'
-b.add_window(w)
-
-zone = b.zones[2]
-w = Window.from_wall_and_wwr(zone, 2, .2)
-w.construction = 'double_glazing'
-b.add_window(w)
-
-zone = b.zones[3]
-w = Window.from_wall_and_wwr(zone, 2, .1)
 w.construction = 'double_glazing'
 b.add_window(w)
 
@@ -90,12 +78,12 @@ rules = {'wall': 'ext_wall', 'window': 'double_glazing', 'floor': 'floor', 'ceil
 b.assign_constructions_from_rules(rules)
 
 
-# v = BuildingViewer(b)
-# v.show()
+v = BuildingViewer(b)
+v.show()
 
 b.write_idf()
-b.analyze(exe='/Applications/EnergyPlus-9-6-0/energyplus')
-# b.analyze(exe='/Applications/EnergyPlus/energyplus')
+# b.analyze(exe='/Applications/EnergyPlus-9-6-0/energyplus')
+b.analyze(exe='/Applications/EnergyPlus/energyplus')
 for i in range(50): print('')
 b.load_results()
 b.plot_mean_zone_temperatures(plot_type='scatter')

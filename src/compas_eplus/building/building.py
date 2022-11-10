@@ -37,6 +37,7 @@ from compas.geometry import intersection_line_line_xy
 from compas.geometry import add_vectors
 from compas.geometry import normalize_vector
 from compas.geometry import scale_vector
+from compas.geometry import midpoint_point_point
 
 from compas.utilities import geometric_key
 
@@ -219,7 +220,7 @@ class Building(object):
         return building
 
     @classmethod
-    def from_quad(cls, path, wea, quad, zone_depth, height):
+    def from_quad_5zone(cls, path, wea, quad, zone_depth, height):
         b = cls(path, wea)
         
         if type(zone_depth) == list:
@@ -257,6 +258,22 @@ class Building(object):
         z = Zone.from_mesh(mesh, 'zone_4')
         b.add_zone(z)
         return b
+
+    @classmethod
+    def from_quad_2zone(cls, path, wea, quad, height):
+        building = cls(path, wea)
+
+        a, b, c, d = quad
+        e = midpoint_point_point(a, b)
+        f = midpoint_point_point(d, c)
+
+        quads = [[a, e, f, d], [e, b, c, f]]
+
+        for i, quad in enumerate(quads):
+            mesh = make_box_from_quad(quad, height)
+            z = Zone.from_mesh(mesh, 'zone_{}'.format(i))
+            building.add_zone(z)
+        return building
 
     def to_json(self, filepath):
         """
