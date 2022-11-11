@@ -84,8 +84,8 @@ class Building(object):
     material_key_dict: dict
         Dictionary mapping material names to material keys
     """
-    def __init__(self, path, weather):
-        self.name = 'Building'
+    def __init__(self, path, weather, name='Building'):
+        self.name = name
         self.path = path
         self.idf_filepath = os.path.join(path, f'{self.name}.idf')
         self.weather = weather

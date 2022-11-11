@@ -87,6 +87,6 @@ b.analyze(exe='/Applications/EnergyPlus/energyplus')
 for i in range(50): print('')
 b.load_results()
 b.plot_mean_zone_temperatures(plot_type='scatter')
-b.to_json(os.path.join(compas_eplus.DATA, 'buildings', '5_zone.json'))
+b.to_json(os.path.join(compas_eplus.DATA, 'buildings', '2_zone.json'))
 
 

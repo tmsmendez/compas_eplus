@@ -35,6 +35,9 @@ def write_idf_from_building(building):
     write_layers(building)
     write_constructions(building)
     write_shadings(building)
+
+    write_separator(building)
+
     write_simulation_control(building)
     write_schedules(building)
     write_schedule_type_limits(building)
@@ -43,6 +46,23 @@ def write_idf_from_building(building):
     write_thermostats(building)
     write_hvac(building)
     write_output_items(building)
+
+def write_separator(building):
+    fh = open(building.idf_filepath, 'a')
+    fh.write('\n') 
+    fh.write('\n') 
+    fh.write('\n') 
+    fh.write('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n')
+    fh.write('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n')
+    fh.write('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n')
+    fh.write('!         From here on this is new code\n')
+    fh.write('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n')
+    fh.write('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n')
+    fh.write('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n')
+    fh.write('\n') 
+    fh.write('\n') 
+    fh.write('\n') 
+    fh.close()
 
 def write_pre(building):
     """
