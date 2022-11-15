@@ -37,6 +37,7 @@ def write_idf_from_building(building):
     write_separator(building)
 
     write_simulation_control(building)
+    write_schedule(building, {})
     write_schedules(building)
     write_schedule_type_limits(building)
     write_internal_gains(building)
@@ -628,45 +629,74 @@ def write_simulation_control(building):
     fh.write('  \n')
     fh.write('  \n')
     fh.close()
-    
+
+def write_schedule(building, schedule):
+    if schedule.alldays:
+        pass
+    else:
+        wd = schedule.weekdays
+        wdks = sorted(wd.keys())
+
+        wed = schedule.weekends
+        wedks = sorted(wed.keys())
+
+    fh = open(building.idf_filepath, 'a')
+    fh.write('Schedule:Compact,\n')
+    fh.write('  {},                !- Name\n'.format(schedule.name))
+    fh.write('  {},                !- Schedule Type Limits Name\n'.format(schedule.type_limits))
+    fh.write('  Through: 12/31,    !- Field 1\n')
+    fh.write('  For: WeekDays SummerDesignDay CustomDay1 CustomDay2, !- Field 2\n')
+    for h in wdks:
+        fh.write('  Until: {}:00,{},         !- Field n \n'.format(h, wd[h]))
+
+    fh.write('  For: Weekends WinterDesignDay Holiday, !- Field n \n')
+    for h in wedks:
+        fh.write('  Until: {}:00,{},         !- Field n \n'.format(h, wed[h]))
+    fh.write('  ;\n')
+    fh.write('  \n')
+    fh.write('  \n')
+    fh.close()
+
+
+
 def write_schedules(building):
     fh = open(building.idf_filepath, 'a')
 
-    if building.program == 'Office':
-        fh.write('Schedule:Compact,\n')
-        fh.write('  OCCUPY-1,                !- Name\n')
-        fh.write('  Fraction,                !- Schedule Type Limits Name\n')
-        fh.write('  Through: 12/31,          !- Field 1\n')
-        fh.write('  For: WeekDays SummerDesignDay CustomDay1 CustomDay2, !- Field 2\n')
-        fh.write('  Until: 8:00,0.0,         !- Field 3\n')
-        fh.write('  Until: 11:00,1.00,       !- Field 5\n')
-        fh.write('  Until: 12:00,0.80,       !- Field 7\n')
-        fh.write('  Until: 13:00,0.40,       !- Field 9\n')
-        fh.write('  Until: 14:00,0.80,       !- Field 11\n')
-        fh.write('  Until: 18:00,1.00,       !- Field 13\n')
-        fh.write('  Until: 19:00,0.50,       !- Field 15\n')
-        fh.write('  Until: 24:00,0.0,        !- Field 17\n')
-        fh.write('  For: Weekends WinterDesignDay Holiday, !- Field 19\n')
-        fh.write('  Until: 24:00,0.3;        !- Field 20\n')
-        fh.write('  \n')
+    # if building.program == 'Office':
+    #     fh.write('Schedule:Compact,\n')
+    #     fh.write('  OCCUPY-1,                !- Name\n')
+    #     fh.write('  Fraction,                !- Schedule Type Limits Name\n')
+    #     fh.write('  Through: 12/31,          !- Field 1\n')
+    #     fh.write('  For: WeekDays SummerDesignDay CustomDay1 CustomDay2, !- Field 2\n')
+    #     fh.write('  Until: 8:00,0.0,         !- Field 3\n')
+    #     fh.write('  Until: 11:00,1.00,       !- Field 5\n')
+    #     fh.write('  Until: 12:00,0.80,       !- Field 7\n')
+    #     fh.write('  Until: 13:00,0.40,       !- Field 9\n')
+    #     fh.write('  Until: 14:00,0.80,       !- Field 11\n')
+    #     fh.write('  Until: 18:00,1.00,       !- Field 13\n')
+    #     fh.write('  Until: 19:00,0.50,       !- Field 15\n')
+    #     fh.write('  Until: 24:00,0.0,        !- Field 17\n')
+    #     fh.write('  For: Weekends WinterDesignDay Holiday, !- Field 19\n')
+    #     fh.write('  Until: 24:00,0.3;        !- Field 20\n')
+    #     fh.write('  \n')
 
-    elif building.program == 'Residential':
-        fh.write('Schedule:Compact,\n')
-        fh.write('  OCCUPY-1,                !- Name\n')
-        fh.write('  Fraction,                !- Schedule Type Limits Name\n')
-        fh.write('  Through: 12/31,          !- Field 1\n')
-        fh.write('  For: WeekDays SummerDesignDay CustomDay1 CustomDay2, !- Field 2\n')
-        fh.write('  Until: 8:00,0.0,         !- Field 3\n')
-        fh.write('  Until: 11:00,1.00,       !- Field 5\n')
-        fh.write('  Until: 12:00,0.80,       !- Field 7\n')
-        fh.write('  Until: 13:00,0.40,       !- Field 9\n')
-        fh.write('  Until: 14:00,0.80,       !- Field 11\n')
-        fh.write('  Until: 18:00,1.00,       !- Field 13\n')
-        fh.write('  Until: 19:00,0.50,       !- Field 15\n')
-        fh.write('  Until: 24:00,0.0,        !- Field 17\n')
-        fh.write('  For: Weekends WinterDesignDay Holiday, !- Field 19\n')
-        fh.write('  Until: 24:00,0.0;        !- Field 20\n')
-        fh.write('  \n')
+    # elif building.program == 'Residential':
+    #     fh.write('Schedule:Compact,\n')
+    #     fh.write('  OCCUPY-1,                !- Name\n')
+    #     fh.write('  Fraction,                !- Schedule Type Limits Name\n')
+    #     fh.write('  Through: 12/31,          !- Field 1\n')
+    #     fh.write('  For: WeekDays SummerDesignDay CustomDay1 CustomDay2, !- Field 2\n')
+    #     fh.write('  Until: 8:00,0.0,         !- Field 3\n')
+    #     fh.write('  Until: 11:00,1.00,       !- Field 5\n')
+    #     fh.write('  Until: 12:00,0.80,       !- Field 7\n')
+    #     fh.write('  Until: 13:00,0.40,       !- Field 9\n')
+    #     fh.write('  Until: 14:00,0.80,       !- Field 11\n')
+    #     fh.write('  Until: 18:00,1.00,       !- Field 13\n')
+    #     fh.write('  Until: 19:00,0.50,       !- Field 15\n')
+    #     fh.write('  Until: 24:00,0.0,        !- Field 17\n')
+    #     fh.write('  For: Weekends WinterDesignDay Holiday, !- Field 19\n')
+    #     fh.write('  Until: 24:00,0.0;        !- Field 20\n')
+    #     fh.write('  \n')
 
 
 

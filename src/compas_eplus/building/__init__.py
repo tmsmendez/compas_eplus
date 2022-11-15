@@ -12,3 +12,4 @@ from .material import *
 from .shading import *
 from .window import *
 from .zone import *
+from .schedule import *
