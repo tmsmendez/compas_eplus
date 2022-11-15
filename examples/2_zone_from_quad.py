@@ -78,8 +78,8 @@ rules = {'wall': 'ext_wall', 'window': 'double_glazing', 'floor': 'floor', 'ceil
 b.assign_constructions_from_rules(rules)
 
 
-v = BuildingViewer(b)
-v.show()
+# v = BuildingViewer(b)
+# v.show()
 
 b.write_idf()
 # b.analyze(exe='/Applications/EnergyPlus-9-6-0/energyplus')

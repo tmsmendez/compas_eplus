@@ -42,6 +42,21 @@ from compas.geometry import midpoint_point_point
 from compas.utilities import geometric_key
 
 
+# TODO: Add .ddy file info to the weather/location information written into the input file
+# TODO: Add actual schedules for office and residential (from DOE?)
+# TODO: Finish by program schedule writer
+# TODO: parametrize compact schedules in smarter function, read schedule data from library
+# TODO: Parametrize heating and cooling setpoints
+# TODO: Parametrize lights, equipment and activity schedules
+# TODO: Parametrize internal gains people per m2
+# TODO: Look into Lights object for best model and parametrize 
+# TODO: Look into Equipment object for best model and parametrize 
+# TODO: Infiltration rate object needs checking
+# TODO: look into ideal airloads values, need parametrizing?
+
+# TODO: Zone sizing needs to be added
+
+
 
 class Building(object):
     """
@@ -84,13 +99,14 @@ class Building(object):
     material_key_dict: dict
         Dictionary mapping material names to material keys
     """
-    def __init__(self, path, weather, name='Building'):
+    def __init__(self, path, weather, name='Building', program='Office'):
         self.name = name
         self.path = path
         self.idf_filepath = os.path.join(path, f'{self.name}.idf')
         self.weather = weather
+        self.program = program
 
-        self.ep_version = '9.6'
+        self.ep_version = '22.2.0'
         self.infiltration_rate = .0003 # [m3/s]
         self.num_timesteps = 4
         self.terrain = 'City'

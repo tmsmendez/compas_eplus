@@ -39,13 +39,13 @@ def write_idf_from_building(building):
     write_separator(building)
 
     write_simulation_control(building)
-    write_schedules(building)
-    write_schedule_type_limits(building)
-    write_internal_gains(building)
-    write_infiltration_rates(building)
-    write_thermostats(building)
-    write_hvac(building)
-    write_output_items(building)
+    # write_schedules(building)
+    # write_schedule_type_limits(building)
+    # write_internal_gains(building)
+    # write_infiltration_rates(building)
+    # write_thermostats(building)
+    # write_hvac(building)
+    # write_output_items(building)
 
 def write_separator(building):
     fh = open(building.idf_filepath, 'a')
