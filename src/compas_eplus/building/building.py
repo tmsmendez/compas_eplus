@@ -17,13 +17,25 @@ from ast import literal_eval
 from math import sin
 
 from compas_eplus.building.construction import Construction
+
 from compas_eplus.building.material import Material
 from compas_eplus.building.material import MaterialNoMass
 from compas_eplus.building.material import WindowMaterialGas
 from compas_eplus.building.material import WindowMaterialGlazing
+
 from compas_eplus.building.shading import Shading
+
 from compas_eplus.building.window import Window
+
 from compas_eplus.building.zone import Zone
+
+from compas_eplus.building.schedule import OfficeOccupancySchedule
+from compas_eplus.building.schedule import OfficeLightsSchedule
+from compas_eplus.building.schedule import OfficeEquipmentSchedule
+from compas_eplus.building.schedule import OfficeActivitySchedule
+from compas_eplus.building.schedule import OfficeControlTypeSchedule
+from compas_eplus.building.schedule import OfficeHeatingSchedule
+from compas_eplus.building.schedule import OfficeCoolingSchedule
 
 from compas_eplus.read_write import write_idf_from_building
 from compas_eplus.read_write import read_mean_zone_temperatures
@@ -43,17 +55,12 @@ from compas.utilities import geometric_key
 
 
 # TODO: Add .ddy file info to the weather/location information written into the input file
-# TODO: Add actual schedules for office and residential (from DOE?)
 # TODO: Finish by program schedule writer
 # TODO: parametrize compact schedules in smarter function, read schedule data from library
 # TODO: Parametrize heating and cooling setpoints
 # TODO: Parametrize lights, equipment and activity schedules
 # TODO: Parametrize internal gains people per m2
-# TODO: Look into Lights object for best model and parametrize 
-# TODO: Look into Equipment object for best model and parametrize 
-# TODO: Infiltration rate object needs checking
 # TODO: look into ideal airloads values, need parametrizing?
-
 # TODO: Zone sizing needs to be added
 
 
@@ -99,7 +106,7 @@ class Building(object):
     material_key_dict: dict
         Dictionary mapping material names to material keys
     """
-    def __init__(self, path, weather, name='Building', program='Office'):
+    def __init__(self, path, weather, name='Building', program='office'):
         self.name = name
         self.path = path
         self.idf_filepath = os.path.join(path, f'{self.name}.idf')
@@ -117,11 +124,19 @@ class Building(object):
         self.constructions = {}
         self.shadings = {}
         self.layers = {}
+        self.schedules = {}
 
         self.mean_air_temperatures = {}
         self.construction_key_dict = {}
         self.srf_cpt_dict = {}
         self.material_key_dict = {}
+
+        # these are not yet in json file - - - 
+        self.people_area = {'office': .056, 'small_office': .056, 'mid_office': .056, 'mid_apartment': .028}
+        self.lights_area = {'office': 6.57, 'small_office': 6.57, 'mid_office': 6.57, 'mid_apartment': 6.46}
+        self.lights_fraction = {'office': .7, 'mid_apartment': .6}
+        self.equipment_area = {'office': 10.333, 'mid_apartment': 6.67}
+
 
     @property
     def data(self):
@@ -324,7 +339,20 @@ class Building(object):
         """
 
         self.make_layers_dict()
+        self.get_schedules()
         write_idf_from_building(self)
+
+    def get_schedules(self):
+        if self.program == 'office':
+            self.schedules['occupancy'] = OfficeOccupancySchedule('{}_occupancy'.format(self.name))
+            self.schedules['lights'] = OfficeLightsSchedule('{}_lights'.format(self.name))
+            self.schedules['equipment'] = OfficeEquipmentSchedule('{}_equipment'.format(self.name))
+            self.schedules['activity'] = OfficeActivitySchedule('{}_activity'.format(self.name))
+            self.schedules['control_type'] = OfficeControlTypeSchedule('{}_control_type'.format(self.name))
+            self.schedules['heating'] = OfficeHeatingSchedule('{}_heating'.format(self.name))
+            self.schedules['heating'] = OfficeCoolingSchedule('{}_heating'.format(self.name))
+        else:
+            raise('This Building program is not yet implemented')
 
     def add_zone(self, zone):
         """

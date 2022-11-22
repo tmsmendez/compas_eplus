@@ -81,12 +81,13 @@ b.assign_constructions_from_rules(rules)
 # v = BuildingViewer(b)
 # v.show()
 
+
 b.write_idf()
 # b.analyze(exe='/Applications/EnergyPlus-9-6-0/energyplus')
 b.analyze(exe='/Applications/EnergyPlus/energyplus')
 for i in range(50): print('')
-b.load_results()
-b.plot_mean_zone_temperatures(plot_type='scatter')
-b.to_json(os.path.join(compas_eplus.DATA, 'buildings', '2_zone.json'))
+# b.load_results()
+# b.plot_mean_zone_temperatures(plot_type='scatter')
+# b.to_json(os.path.join(compas_eplus.DATA, 'buildings', '2_zone.json'))
 
 

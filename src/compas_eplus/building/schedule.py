@@ -28,6 +28,8 @@ class Schedule(object):
         self.weekday                = {}
         self.weekend                = {}
         self.alldays                = {}
+        self.summer_design_day      = {}
+        self.winter_design_day      = {}
 
 
 class OfficeOccupancySchedule(Schedule):
@@ -36,7 +38,6 @@ class OfficeOccupancySchedule(Schedule):
         self.type_limits =  'Fraction'
         self.weekdays =  {8: 0., 11:1., 12: .8, 13: .4, 14: .8, 18: 1., 19: .5, 24: 0.}
         self.weekends = {24: .3}
-        self.alldays = {}
 
 
 class OfficeLightsSchedule(Schedule):
@@ -45,7 +46,6 @@ class OfficeLightsSchedule(Schedule):
         self.type_limits =  'Fraction'
         self.weekdays =  {8: 0., 11:1., 12: .8, 13: .4, 14: .8, 18: 1., 19: .5, 24: 0.}
         self.weekends = {24: .3}
-
 
 
 class OfficeEquipmentSchedule(Schedule):
@@ -59,5 +59,34 @@ class OfficeEquipmentSchedule(Schedule):
 class OfficeActivitySchedule(Schedule):
     def __init__(self, name):
         Schedule.__init__(self, name=name)
-        self.type_limits =  'Fraction'
-        self.alldays = {24, 120}
+        self.type_limits =  'Any number'
+        self.alldays = {24: 120}
+
+
+class OfficeControlTypeSchedule(Schedule):
+    def __init__(self, name):
+        Schedule.__init__(self, name=name)
+        self.type_limits =  'Control Type'
+        self.alldays = {24: 4}
+
+
+class OfficeHeatingSchedule(Schedule):
+    def __init__(self, name):
+        Schedule.__init__(self, name=name)
+        self.type_limits =  'Temperature'
+        self.weekdays = {6: 16.7, 20: 22.2, 24: 16.7}
+        self.weekends = {24: 16.7}
+        self.alldays = {24: 16.7}
+        self.summer_design_day = {24: 16.7}
+        self.winter_design_day = {24: 22.2}
+
+
+class OfficeCoolingSchedule(Schedule):
+    def __init__(self, name):
+        Schedule.__init__(self, name=name)
+        self.type_limits =  'Temperature'
+        self.weekdays = {6: 29.4, 20: 23.9, 24: 29.4}
+        self.weekends = {24: 29.4}
+        self.alldays = {24: 29.4}
+        self.summer_design_day = {24: 23.9}
+        self.winter_design_day = {24: 29.4}

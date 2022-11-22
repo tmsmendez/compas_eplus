@@ -37,7 +37,6 @@ def write_idf_from_building(building):
     write_separator(building)
 
     write_simulation_control(building)
-    write_schedule(building, {})
     write_schedules(building)
     write_schedule_type_limits(building)
     write_internal_gains(building)
@@ -547,6 +546,44 @@ def write_output_items(building):
     fh.write('Output:Table:SummaryReports,\n')
     fh.write('    AllSummary;              !- Report 1 Name\n')
     fh.write('\n')
+
+    fh.write('Output:Variable,\n')
+    fh.write('  ,                                       !- Key Value\n')
+    fh.write('  Zone Ideal Loads Supply Air Total Cooling Energy, !- Variable Name\n')
+    fh.write('  Hourly;                                 !- Reporting Frequency\n')
+    fh.write('\n')
+
+    fh.write('Output:Variable,\n')
+    fh.write('  ,                                       !- Key Value\n')
+    fh.write('  Zone Ideal Loads Supply Air Total Heating Energy, !- Variable Name\n')
+    fh.write('  Hourly;                                 !- Reporting Frequency\n')
+    fh.write('\n')
+
+    fh.write('Output:Variable,\n')
+    fh.write('  ,                                       !- Key Value\n')
+    fh.write('  Zone Lights Electricity Energy,         !- Variable Name\n')
+    fh.write('  Hourly;                                 !- Reporting Frequency\n')
+    fh.write('\n')
+
+    # fh.write('Output:Variable,\n')
+    # fh.write('  ,                                       !- Key Value\n')
+    # fh.write('  Water Use Equipment Heating Energy,     !- Variable Name\n')
+    # fh.write('  Hourly;                                 !- Reporting Frequency\n')
+    # fh.write('\n')
+
+    fh.write('Output:Variable,\n')
+    fh.write('  ,                                       !- Key Value\n')
+    fh.write('  Zone Electric Equipment Electricity Energy, !- Variable Name\n')
+    fh.write('  Hourly;                                 !- Report\n')
+    fh.write('\n')
+
+    # fh.write('Output:Variable,\n')
+    # fh.write('  ,                                       !- Key Value\n')
+    # fh.write('  Water Heater Electricity Energy,        !- Variable Name\n')
+    # fh.write('  Hourly;                                 !- Reporting Frequency\n')
+    fh.write('\n')
+    fh.write('\n')
+
     fh.close()
 
 def write_shadings(building):
@@ -619,10 +656,10 @@ def write_simulation_control(building):
     # this version is from Teresa's E+ class
 
     fh.write('SimulationControl,\n')
-    fh.write('  No,      !- Do Zone Sizing Calculation\n')
+    fh.write('  No,       !- Do Zone Sizing Calculation\n')
     fh.write('  No,       !- Do System Sizing Calculation\n')
     fh.write('  No,       !- Do Plant Sizing Calculation\n')
-    fh.write('  No,      !- Run Simulation for Sizing Periods\n')
+    fh.write('  No,       !- Run Simulation for Sizing Periods\n')
     fh.write('  Yes,      !- Run Simulation for Weather File Run Periods\n')
     fh.write('  No,       !- Do HVAC Sizing Simulation for Sizing Periods\n')
     fh.write('  1;        !- Maximum Number of HVAC Sizing Simulation Passes\n')
@@ -632,7 +669,22 @@ def write_simulation_control(building):
 
 def write_schedule(building, schedule):
     if schedule.alldays:
-        pass
+        add = schedule.alldays
+        addks = sorted(add.keys())
+
+        fh = open(building.idf_filepath, 'a')
+        fh.write('Schedule:Compact,\n')
+        fh.write('  {},                !- Name\n'.format(schedule.name))
+        fh.write('  {},                !- Schedule Type Limits Name\n'.format(schedule.type_limits))
+        fh.write('  Through: 12/31,          !- Field 1\n')
+        fh.write('  For: AllDays,            !- Field 2\n')
+        for h in addks:
+            fh.write('  Until: {}:00,{},         !- Field n \n'.format(h, add[h]))
+        fh.write('  ;\n')
+        fh.write('  \n')
+        fh.write('  \n')
+        fh.close()
+
     else:
         wd = schedule.weekdays
         wdks = sorted(wd.keys())
@@ -640,115 +692,39 @@ def write_schedule(building, schedule):
         wed = schedule.weekends
         wedks = sorted(wed.keys())
 
-    fh = open(building.idf_filepath, 'a')
-    fh.write('Schedule:Compact,\n')
-    fh.write('  {},                !- Name\n'.format(schedule.name))
-    fh.write('  {},                !- Schedule Type Limits Name\n'.format(schedule.type_limits))
-    fh.write('  Through: 12/31,    !- Field 1\n')
-    fh.write('  For: WeekDays SummerDesignDay CustomDay1 CustomDay2, !- Field 2\n')
-    for h in wdks:
-        fh.write('  Until: {}:00,{},         !- Field n \n'.format(h, wd[h]))
-
-    fh.write('  For: Weekends WinterDesignDay Holiday, !- Field n \n')
-    for h in wedks:
-        fh.write('  Until: {}:00,{},         !- Field n \n'.format(h, wed[h]))
-    fh.write('  ;\n')
-    fh.write('  \n')
-    fh.write('  \n')
-    fh.close()
+        if schedule.summer_design_day:
+            sddd = schedule.summer_design_day
+            sdddls = sorted(sddd.keys())
 
 
+        fh = open(building.idf_filepath, 'a')
+        fh.write('Schedule:Compact,\n')
+        fh.write('  {},                !- Name\n'.format(schedule.name))
+        fh.write('  {},                !- Schedule Type Limits Name\n'.format(schedule.type_limits))
+        fh.write('  Through: 12/31,    !- Field 1\n')
+        fh.write('  For: WeekDays SummerDesignDay CustomDay1 CustomDay2, !- Field 2\n')
+        for h in wdks:
+            fh.write('  Until: {}:00,{},         !- Field n \n'.format(h, wd[h]))
+
+        fh.write('  For: Weekends WinterDesignDay Holiday, !- Field n \n')
+        for h in wedks:
+            fh.write('  Until: {}:00,{},         !- Field n \n'.format(h, wed[h]))
+        fh.write('  ;\n')
+        fh.write('  \n')
+        fh.write('  \n')
+        fh.close()
 
 def write_schedules(building):
+
+    for sk in building.schedules:
+        write_schedule(building, building.schedules[sk])
+
     fh = open(building.idf_filepath, 'a')
-
-    # if building.program == 'Office':
-    #     fh.write('Schedule:Compact,\n')
-    #     fh.write('  OCCUPY-1,                !- Name\n')
-    #     fh.write('  Fraction,                !- Schedule Type Limits Name\n')
-    #     fh.write('  Through: 12/31,          !- Field 1\n')
-    #     fh.write('  For: WeekDays SummerDesignDay CustomDay1 CustomDay2, !- Field 2\n')
-    #     fh.write('  Until: 8:00,0.0,         !- Field 3\n')
-    #     fh.write('  Until: 11:00,1.00,       !- Field 5\n')
-    #     fh.write('  Until: 12:00,0.80,       !- Field 7\n')
-    #     fh.write('  Until: 13:00,0.40,       !- Field 9\n')
-    #     fh.write('  Until: 14:00,0.80,       !- Field 11\n')
-    #     fh.write('  Until: 18:00,1.00,       !- Field 13\n')
-    #     fh.write('  Until: 19:00,0.50,       !- Field 15\n')
-    #     fh.write('  Until: 24:00,0.0,        !- Field 17\n')
-    #     fh.write('  For: Weekends WinterDesignDay Holiday, !- Field 19\n')
-    #     fh.write('  Until: 24:00,0.3;        !- Field 20\n')
-    #     fh.write('  \n')
-
-    # elif building.program == 'Residential':
-    #     fh.write('Schedule:Compact,\n')
-    #     fh.write('  OCCUPY-1,                !- Name\n')
-    #     fh.write('  Fraction,                !- Schedule Type Limits Name\n')
-    #     fh.write('  Through: 12/31,          !- Field 1\n')
-    #     fh.write('  For: WeekDays SummerDesignDay CustomDay1 CustomDay2, !- Field 2\n')
-    #     fh.write('  Until: 8:00,0.0,         !- Field 3\n')
-    #     fh.write('  Until: 11:00,1.00,       !- Field 5\n')
-    #     fh.write('  Until: 12:00,0.80,       !- Field 7\n')
-    #     fh.write('  Until: 13:00,0.40,       !- Field 9\n')
-    #     fh.write('  Until: 14:00,0.80,       !- Field 11\n')
-    #     fh.write('  Until: 18:00,1.00,       !- Field 13\n')
-    #     fh.write('  Until: 19:00,0.50,       !- Field 15\n')
-    #     fh.write('  Until: 24:00,0.0,        !- Field 17\n')
-    #     fh.write('  For: Weekends WinterDesignDay Holiday, !- Field 19\n')
-    #     fh.write('  Until: 24:00,0.0;        !- Field 20\n')
-    #     fh.write('  \n')
-
-
-
-    fh.write('Schedule:Compact,\n')
-    fh.write('  LIGHTS-1,                !- Name\n')
-    fh.write('  Fraction,                !- Schedule Type Limits Name\n')
-    fh.write('  Through: 12/31,          !- Field 1\n')
-    fh.write('  For: WeekDays SummerDesignDay CustomDay1 CustomDay2, !- Field 2\n')
-    fh.write('  Until: 8:00,0.05,        !- Field 3\n')
-    fh.write('  Until: 9:00,0.9,         !- Field 5\n')
-    fh.write('  Until: 10:00,0.95,       !- Field 7\n')
-    fh.write('  Until: 11:00,1.00,       !- Field 9\n')
-    fh.write('  Until: 12:00,0.95,       !- Field 11\n')
-    fh.write('  Until: 13:00,0.8,        !- Field 13\n')
-    fh.write('  Until: 14:00,0.9,        !- Field 15\n')
-    fh.write('  Until: 18:00,1.00,       !- Field 17\n')
-    fh.write('  Until: 19:00,0.60,       !- Field 19\n')
-    fh.write('  Until: 21:00,0.20,       !- Field 21\n')
-    fh.write('  Until: 24:00,0.05,       !- Field 23\n')
-    fh.write('  For: Weekends WinterDesignDay Holiday, !- Field 25\n')
-    fh.write('  Until: 24:00,0.05;       !- Field 26\n')
-    fh.write('  \n')
-
-    fh.write('Schedule:Compact,\n')
-    fh.write('  EQUIP-1,                 !- Name\n')
-    fh.write('  Fraction,                !- Schedule Type Limits Name\n')
-    fh.write('  Through: 12/31,          !- Field 1\n')
-    fh.write('  For: WeekDays SummerDesignDay CustomDay1 CustomDay2, !- Field 2\n')
-    fh.write('  Until: 8:00,0.02,        !- Field 3\n')
-    fh.write('  Until: 9:00,0.4,         !- Field 5\n')
-    fh.write('  Until: 14:00,0.9,        !- Field 7\n')
-    fh.write('  Until: 15:00,0.8,        !- Field 9\n')
-    fh.write('  Until: 16:00,0.7,        !- Field 11\n')
-    fh.write('  Until: 18:00,0.5,        !- Field 13\n')
-    fh.write('  Until: 20:00,0.3,        !- Field 15\n')
-    fh.write('  Until: 24:00,0.02,       !- Field 17\n')
-    fh.write('  For: Weekends WinterDesignDay Holiday, !- Field 19\n')
-    fh.write('  Until: 24:00,0.2;        !- Field 20\n')
-    fh.write('  \n')
 
     fh.write('Schedule:Constant,\n')
     fh.write('    Always On,               !- Name\n')
     fh.write('    Any Number,              !- Schedule Type Limits Name\n')
     fh.write('    1;                       !- Hourly Value\n')
-    fh.write('  \n')
-
-    fh.write('Schedule:Compact,\n')
-    fh.write('  ActSchd,                 !- Name\n')
-    fh.write('  Any Number,              !- Schedule Type Limits Name\n')
-    fh.write('  Through: 12/31,          !- Field 1\n')
-    fh.write('  For: AllDays,            !- Field 2\n')
-    fh.write('  Until: 24:00, 120;       !- Field 3\n')
     fh.write('  \n')
 
     fh.write('Schedule:Compact,\n')
@@ -787,18 +763,6 @@ def write_schedules(building):
     fh.write('  Until: 24:00,29.4;       !- Field 19\n')
     fh.write('\n')
 
-    fh.write('Schedule:Compact,\n')
-    fh.write('  Zone Control Type Sched, !- Name\n')
-    fh.write('  Control Type,            !- Schedule Type Limits Name\n')
-    fh.write('  Through: 12/31,          !- Field 1\n')
-    # fh.write('  For: SummerDesignDay,    !- Field 2\n')
-    # fh.write('  Until: 24:00,2,          !- Field 3\n')
-    # fh.write('  For: WinterDesignDay,    !- Field 5\n')
-    # fh.write('  Until: 24:00,1,          !- Field 6\n')
-    fh.write('  For: AllDays,       !- Field 8\n')
-    fh.write('  Until: 24:00,4;          !- Field 9\n')
-    fh.write('  \n')
-    fh.write('  \n')
     fh.close()
 
 def write_schedule_type_limits(building):
@@ -850,35 +814,35 @@ def write_schedule_type_limits(building):
 
 def write_internal_gains(building):
 
+    ppl_area = building.people_area[building.program]
+    lgt_area = building.lights_area[building.program]
+    lgt_frac = building.lights_fraction[building.program]
+    eqp_area = building.equipment_area[building.program]
+
     fh = open(building.idf_filepath, 'a')
     fh.write('People,\n')
     fh.write('  All zones People,        !- Name\n')
     fh.write('  all_zones_list,          !- Zone or ZoneList Name\n')
-    fh.write('  OCCUPY-1,                !- Number of People Schedule Name\n')
+    fh.write('  {}_occupancy,            !- Number of People Schedule Name\n'.format(building.name))
     fh.write('  people/area,             !- Number of People Calculation Method\n')
     fh.write('  ,                        !- Number of People\n')
-    # TODO: This number needs to be parameterized per building program
-    fh.write('  .5,                      !- People per Zone Floor Area {person/m2}\n')
-    
-    fh.write('  ,                        !- Zone Floor Area per Person {m2/person}\n')
+    fh.write('  {},                      !- People per Zone Floor Area [person/m2]\n'.format(ppl_area))
+    fh.write('  ,                        !- Zone Floor Area per Person [m2/person]\n')
     fh.write('  0.3,                     !- Fraction Radiant\n')
     fh.write('  ,                        !- Sensible Heat Fraction\n')
-    fh.write('  ActSchd;                 !- Activity Level Schedule Name\n')
+    fh.write('  {}_activity;             !- Activity Level Schedule Name\n'.format(building.name))
     fh.write('  \n')
 
     fh.write('Lights,\n')
     fh.write('  All zones Lights,        !- Name\n')
     fh.write('  all_zones_list,          !- Zone or ZoneList Name\n')
-    fh.write('  LIGHTS-1,                !- Schedule Name\n')
+    fh.write('  {}_lights,                !- Schedule Name\n'.format(building.name))
     fh.write('  Watts/Area,              !- Design Level Calculation Method\n')
     fh.write('  ,                        !- Lighting Level [W]\n')
-    # TODO: This number needs to be parameterized per building program
-    fh.write('  10,                      !- Watts per Zone Floor Area [W/m2]\n')
+    fh.write('  {},                      !- Watts per Zone Floor Area [W/m2]\n'.format(lgt_area))
     fh.write('  ,                        !- Watts per Person {W/person}\n')
     fh.write('  0,                       !- Return Air Fraction\n')
-    # TODO: Look into this
-    fh.write('  0.59,                    !- Fraction Radiant\n')
-    # TODO: Look into this
+    fh.write('  {},                    !- Fraction Radiant\n'.format(lgt_frac))
     fh.write('  0.2,                     !- Fraction Visible\n')
     fh.write('  0,                       !- Fraction Replaceable\n')
     fh.write('  GeneralLights;           !- End-Use Subcategory\n')
@@ -887,17 +851,13 @@ def write_internal_gains(building):
     fh.write('ElectricEquipment,\n')
     fh.write('  All zones ElecEq,        !- Name\n')
     fh.write('  all_zones_list,          !- Zone or ZoneList Name\n')
-    fh.write('  EQUIP-1,                 !- Schedule Name\n')
+    fh.write('  {}_equipment,                 !- Schedule Name\n'.format(building.name))
     fh.write('  Watts/Area,              !- Design Level Calculation Method\n')
     fh.write('  ,                        !- Design Level [W]\n')
-    # TODO: This number needs to be parameterized per building program
-    fh.write('  8,                       !- Watts per Zone Floor Area [W/m2]\n')
+    fh.write('  {},                       !- Watts per Zone Floor Area [W/m2]\n'.format(eqp_area))
     fh.write('  ,                        !- Watts per Person {W/person}\n')
-    # TODO: Look into this
     fh.write('  0,                       !- Fraction Latent\n')
-    # TODO: Look into this
-    fh.write('  0.3,                     !- Fraction Radiant\n')
-    # TODO: Look into this
+    fh.write('  0.5,                     !- Fraction Radiant\n')
     fh.write('  0;                       !- Fraction Lost\n')
     fh.write('  \n')
     fh.write('  \n')
@@ -916,8 +876,7 @@ def write_infiltration_rates(building):
     fh.write('    ,                        !- Air Changes per Hour [1/hr]\n')
     fh.write('    0,                       !- Constant Term Coefficient\n')
     fh.write('    0,                       !- Temperature Term Coefficient\n')
-    # TODO: Look into this
-    fh.write('    0.2237,                        !- Velocity Term Coefficient\n')
+    fh.write('    0,                  !- Velocity Term Coefficient\n')
     fh.write('    0;                       !- Velocity Squared Term Coefficient\n')
     fh.write('  \n')
     fh.write('  \n')
@@ -928,7 +887,7 @@ def write_thermostats(building):
     fh.write('ZoneControl:Thermostat,\n')
     fh.write('  All zones Control,                  !- Name\n')
     fh.write('  all_zones_list,                     !- Zone or ZoneList Name\n')
-    fh.write('  Zone Control Type Sched,            !- Control Type Schedule Name\n')
+    fh.write('  {}_control_type,            !- Control Type Schedule Name\n'.format(building.name))
     # fh.write('  ThermostatSetpoint:SingleCooling,   !- Control 1 Object Type\n')
     # fh.write('  CoolingSetPoint,                    !- Control 1 Name\n')
     # fh.write('  ThermostatSetpoint:SingleHeating,   !- Control 2 Object Type\n')
