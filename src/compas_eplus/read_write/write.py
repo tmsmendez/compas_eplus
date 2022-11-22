@@ -525,67 +525,6 @@ def write_constructions(building):
     fh.write('\n')
     fh.close()
 
-def write_output_items(building):
-    """
-    Writes the output items to the .idf file from the building data.
-    Parameters
-    ----------
-    building: object
-        The building datastructure containing the data to be used
-    
-    Returns
-    -------
-    None
-    """
-    fh = open(building.idf_filepath, 'a')
-    fh.write('Output:Variable,*,Zone Mean Air Temperature,timestep;\n')
-    fh.write('\n')
-    fh.write('OutputControl:Table:Style,\n')
-    fh.write('    CommaAndHTML;                    !- Column Separator\n')
-    fh.write('\n')
-    fh.write('Output:Table:SummaryReports,\n')
-    fh.write('    AllSummary;              !- Report 1 Name\n')
-    fh.write('\n')
-
-    fh.write('Output:Variable,\n')
-    fh.write('  ,                                       !- Key Value\n')
-    fh.write('  Zone Ideal Loads Supply Air Total Cooling Energy, !- Variable Name\n')
-    fh.write('  Hourly;                                 !- Reporting Frequency\n')
-    fh.write('\n')
-
-    fh.write('Output:Variable,\n')
-    fh.write('  ,                                       !- Key Value\n')
-    fh.write('  Zone Ideal Loads Supply Air Total Heating Energy, !- Variable Name\n')
-    fh.write('  Hourly;                                 !- Reporting Frequency\n')
-    fh.write('\n')
-
-    fh.write('Output:Variable,\n')
-    fh.write('  ,                                       !- Key Value\n')
-    fh.write('  Zone Lights Electricity Energy,         !- Variable Name\n')
-    fh.write('  Hourly;                                 !- Reporting Frequency\n')
-    fh.write('\n')
-
-    # fh.write('Output:Variable,\n')
-    # fh.write('  ,                                       !- Key Value\n')
-    # fh.write('  Water Use Equipment Heating Energy,     !- Variable Name\n')
-    # fh.write('  Hourly;                                 !- Reporting Frequency\n')
-    # fh.write('\n')
-
-    fh.write('Output:Variable,\n')
-    fh.write('  ,                                       !- Key Value\n')
-    fh.write('  Zone Electric Equipment Electricity Energy, !- Variable Name\n')
-    fh.write('  Hourly;                                 !- Report\n')
-    fh.write('\n')
-
-    # fh.write('Output:Variable,\n')
-    # fh.write('  ,                                       !- Key Value\n')
-    # fh.write('  Water Heater Electricity Energy,        !- Variable Name\n')
-    # fh.write('  Hourly;                                 !- Reporting Frequency\n')
-    fh.write('\n')
-    fh.write('\n')
-
-    fh.close()
-
 def write_shadings(building):
     """
     Writes all shading devices to the .idf file from the building data.
@@ -979,6 +918,67 @@ def write_hvac(building):
         fh.write('  \n')
         fh.write('  \n')
         fh.close()
+
+def write_output_items(building):
+    """
+    Writes the output items to the .idf file from the building data.
+    Parameters
+    ----------
+    building: object
+        The building datastructure containing the data to be used
+    
+    Returns
+    -------
+    None
+    """
+    fh = open(building.idf_filepath, 'a')
+    fh.write('Output:Variable,*,Zone Mean Air Temperature,timestep;\n')
+    fh.write('\n')
+    fh.write('OutputControl:Table:Style,\n')
+    fh.write('    CommaAndHTML;                    !- Column Separator\n')
+    fh.write('\n')
+    fh.write('Output:Table:SummaryReports,\n')
+    fh.write('    AllSummary;              !- Report 1 Name\n')
+    fh.write('\n')
+
+    fh.write('Output:Variable,\n')
+    fh.write('  ,                                       !- Key Value\n')
+    fh.write('  Zone Ideal Loads Supply Air Total Cooling Energy, !- Variable Name\n')
+    fh.write('  Hourly;                                 !- Reporting Frequency\n')
+    fh.write('\n')
+
+    fh.write('Output:Variable,\n')
+    fh.write('  ,                                       !- Key Value\n')
+    fh.write('  Zone Ideal Loads Supply Air Total Heating Energy, !- Variable Name\n')
+    fh.write('  Hourly;                                 !- Reporting Frequency\n')
+    fh.write('\n')
+
+    fh.write('Output:Variable,\n')
+    fh.write('  ,                                       !- Key Value\n')
+    fh.write('  Zone Lights Electricity Energy,         !- Variable Name\n')
+    fh.write('  Hourly;                                 !- Reporting Frequency\n')
+    fh.write('\n')
+
+    # fh.write('Output:Variable,\n')
+    # fh.write('  ,                                       !- Key Value\n')
+    # fh.write('  Water Use Equipment Heating Energy,     !- Variable Name\n')
+    # fh.write('  Hourly;                                 !- Reporting Frequency\n')
+    # fh.write('\n')
+
+    fh.write('Output:Variable,\n')
+    fh.write('  ,                                       !- Key Value\n')
+    fh.write('  Zone Electric Equipment Electricity Energy, !- Variable Name\n')
+    fh.write('  Hourly;                                 !- Report\n')
+    fh.write('\n')
+
+    # fh.write('Output:Variable,\n')
+    # fh.write('  ,                                       !- Key Value\n')
+    # fh.write('  Water Heater Electricity Energy,        !- Variable Name\n')
+    # fh.write('  Hourly;                                 !- Reporting Frequency\n')
+    fh.write('\n')
+    fh.write('\n')
+
+    fh.close()
 
 if __name__ == '__main__':
     pass
