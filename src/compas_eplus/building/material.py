@@ -501,5 +501,110 @@ class WindowMaterialGlazing(object):
         return material
 
 
+class WindowMaterialGlazingSimple(object):
+    """
+    Datastructure containing a MaterialNoMass for Energy+ analysis
+
+    Parameters
+    ----------
+    __type__: str
+        Material __type__
+    name: str, optional
+        Material name
+    u_factor: float
+        Material U-Factor (W/m2-K)
+    solar_heat_gain_coefficient: float
+        Material Solar Heat Gain Coefficient (%)
+    visible_transmittance : float
+        Material visible_transmittance (%)
+
+
+    """
+
+    def __init__(self):
+        self.__type__                                   = 'WindowMaterialGlazingSimple'
+        self.name                                       = 'WindowMaterialGlazingSimple'
+        self.u_factor                                   = None
+        self.solar_heat_gain_coefficient                = None
+        self.visible_transmittance                      = None
+
+
+    def to_json(self, filepath):
+        """
+        Serialize the data representation of the material to a JSON file
+
+        Parameters
+        ----------
+        filepath: str
+            Path for the JSON file to be created
+        
+        Returns
+        -------
+        None
+
+        """
+        with open(filepath, 'w+') as fp:
+            json.dump(self.data, fp)
+
+    @property
+    def data(self):
+        data = {'__type__                   ' : self.__type__,
+                'name                       ' : self.name,
+                'u_factor                   ' : self.u_factor,
+                'solar_heat_gain_coefficient' : self.solar_heat_gain_coefficient,
+                'visible_transmittance      ' : self.visible_transmittance,
+                }
+        return data
+    
+    @data.setter
+    def data(self, data):
+        self.__type__                               = data.get('__type__') or {}
+        self.name                                   = data.get('name') or {}
+        self.u_factor                               = data.get('u_factor') or {}
+        self.solar_heat_gain_coefficient            = data.get('solar_heat_gain_coefficient') or {}
+        self.visible_transmittance                  = data.get('visible_transmittance') or {}
+
+    @classmethod
+    def from_data(cls, data):
+        """
+        Create a new instance of the material datastructure from a data dictionary
+
+        Parameters
+        ----------
+        data: dict
+            Data dictionary
+        
+        Returns
+        -------
+            Material
+                The instance of the material datastructure
+        
+        """
+        material = cls()
+        material.data = data
+        return material
+
+    @classmethod
+    def from_json(cls, filepath):
+        """
+        Create a new instance of the material datastructure from a JSON file
+
+        Parameters
+        ----------
+        filepath: str
+            Path to the JSON file
+        
+        Returns
+        -------
+            Material
+                The instance of the material datastructure
+        """
+        with open(filepath, 'r') as fp:
+            data = json.load(fp)
+        material = cls()
+        material.data = data
+        return material
+
+
 if __name__ == '__main__':
     pass

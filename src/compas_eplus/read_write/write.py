@@ -253,6 +253,19 @@ def write_layers(building):
             write_material_glazing(building, mat, thick, lay_name)
         elif mat.__type__ == 'WindowMaterialGas':
             write_material_gas(building, mat, thick, lay_name)
+        elif mat.__type__ == 'WindowMaterialGlazingSimple':
+            write_materials_glazing_simple(building, mat)
+
+def write_materials_glazing_simple(building, mat):
+    fh = open(building.idf_filepath, 'a')
+    fh.write('\n')
+    fh.write('WindowMaterial:SimpleGlazingSystem,\n')
+    fh.write('  {},             !- Name\n'.format(mat.name))
+    fh.write('  {},             !- U-Factor (W/m2-K)\n'.format(mat.u_factor))
+    fh.write('  {},             !- Solar Heat Gain Coefficient\n'.format(mat.solar_heat_gain_coefficient))
+    fh.write('  {};             !- Visible Transmittance\n'.format(mat.visible_transmittance))
+    fh.write('\n')
+    fh.close()
 
 def write_material_glazing(building, mat, thickness, layer_name):
     """
@@ -433,6 +446,7 @@ def write_building_surface(building, zone, fk):
     fh.write('\n')
     fh.write('BuildingSurface:Detailed,\n')
     fh.write('  {}_{},                    !- Name\n'.format(zone.name, fk))
+    # fh.write('  {},                    !- Name\n'.format(zone.name))
     fh.write('  {},                       !- Surface Type\n'.format(st))
     fh.write('  {},                       !- Construction Name\n'.format(ct))
     fh.write('  {},                       !- Zone Name\n'.format(zone.name))
@@ -474,22 +488,22 @@ def write_windows(building):
 
         fh.write('\n')
         fh.write('FenestrationSurface:Detailed,\n')
-        fh.write('{},                       !- Name\n'.format(win.name))
-        fh.write('Window,                   !- Surface Type\n')
-        fh.write('{},                       !- Construction Name\n'.format(con))
-        fh.write('{},                       !- Building Surface Name\n'.format(bsn))
-        fh.write(',                         !- Outside Boundary Condition Object\n')
-        fh.write(',                         !- View Factor to Ground\n')
-        fh.write(',                         !- Frame and Divider Name\n')
-        fh.write(',                         !- Multiplier\n')
-        fh.write('{},                         !- Number of Vertices\n'.format(len(win.nodes)))
+        fh.write('  {},                       !- Name\n'.format(win.name))
+        fh.write('  Window,                   !- Surface Type\n')
+        fh.write('  {},                       !- Construction Name\n'.format(con))
+        fh.write('  {},                       !- Building Surface Name\n'.format(bsn))
+        fh.write('  ,                         !- Outside Boundary Condition Object\n')
+        fh.write('  ,                         !- View Factor to Ground\n')
+        fh.write('  ,                         !- Frame and Divider Name\n')
+        fh.write('  ,                         !- Multiplier\n')
+        fh.write('  {},                         !- Number of Vertices\n'.format(len(win.nodes)))
         for i, nodes in enumerate(win.nodes):
             x, y, z = nodes
             if i == len(win.nodes) - 1:
                 sep = ';'
             else:
                 sep = ','
-            fh.write('{:.3f}, {:.3f}, {:.3f}{}\t\t\t\t\t!- X,Y,Z Vertex {} (m)\n'.format(x, y, z, sep, i))
+            fh.write('  {:.3f}, {:.3f}, {:.3f}{}\t\t\t\t\t!- X,Y,Z Vertex {} (m)\n'.format(x, y, z, sep, i))
         fh.write('\n')
     fh.write('\n')
     fh.close()
@@ -519,7 +533,10 @@ def write_constructions(building):
                 sep = ';'
             else:
                 sep = ','
-            lname = '{} {}mm'.format(layer, round(thicks[i]*1000, 1))
+            if thicks[i] > 0:
+                lname = '{} {}mm'.format(layer, round(thicks[i]*1000, 1))
+            else:
+                lname = '{}'.format(layer)
             fh.write('  {}{}\t\t\t\t\t!- Layer {}\n'.format(lname, sep, i))
         fh.write('\n')
     fh.write('\n')

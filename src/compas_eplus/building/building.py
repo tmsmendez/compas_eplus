@@ -22,6 +22,7 @@ from compas_eplus.building.material import Material
 from compas_eplus.building.material import MaterialNoMass
 from compas_eplus.building.material import WindowMaterialGas
 from compas_eplus.building.material import WindowMaterialGlazing
+from compas_eplus.building.material import WindowMaterialGlazingSimple
 
 from compas_eplus.building.shading import Shading
 
@@ -66,8 +67,6 @@ from compas.datastructures import Mesh
 # TODO: Parametrize internal gains people per m2
 # TODO: look into ideal airloads values, need parametrizing?
 # TODO: Zone sizing needs to be added
-
-# TODO: Fro idf function does not use surface data, just geometry for now
 
 
 
@@ -337,8 +336,9 @@ class Building(object):
 
             for i, srf in enumerate(surfaces):
                 srf = zones[zone]['surfaces'][srf]
+                # print(srf['name'])
                 z.surfaces.face_attribute(i, 'name', srf['name'])
-                # z.surfaces.face_attribute(i, 'construction', srf['construction'])
+                z.surfaces.face_attribute(i, 'construction', srf['construction'])
                 z.surfaces.face_attribute(i, 'surface_type', srf['surface_type'])
                 z.surfaces.face_attribute(i, 'outside_boundary_condition', srf['outside_condition'])
             building.add_zone(z)
@@ -352,22 +352,27 @@ class Building(object):
             w.construction =  windows[win]['construction']
             building.add_window(w)
 
-        # materials = data['materials']
-        # cons = data['constructions']
-        # for con in cons:
-        #     name = data['constructions'][con]['name']
-        #     layers = data['constructions'][con]['layers']
-        #     layers_ = {}
-        #     for lk in layers:
-        #         lname = layers[lk]
-        #         mat = materials[lname]
+        materials = data['materials']
+        building.add_materials_from_json_dict(None, materials)
 
-
-        #     con_ = {'name': name, 'layers': layers_}
-        #     c = Construction.from_data(con_)
-        #     building.add_construction(c)
+        cons = data['constructions']
+        for con in cons:
+            name = data['constructions'][con]['name']
+            layers = data['constructions'][con]['layers']
+            layers_ = {}
+            for lk in layers:
+                lname = layers[lk]
+                mname = materials[lname]['name']
+                if 'thickness' in materials[lname]:
+                    thick = materials[lname]['thickness']
+                else:
+                    thick = 0
+                layers_[lk] = {'name': mname, 'thickness': thick}
+            con_ = {'name': name, 'layers': layers_}
+            c = Construction.from_data(con_)
+            building.add_construction(c)
+        building.make_layers_dict()
         return building
-
 
     def to_json(self, filepath):
         """
@@ -480,7 +485,7 @@ class Building(object):
         self.materials[mk] = material
         self.material_key_dict[material.name] = mk
 
-    def add_materials_from_json(self, filepath):
+    def add_materials_from_json_dict(self, filepath, lib):
         """
         Adds material objects to the building datastructure from a json file.
 
@@ -494,13 +499,14 @@ class Building(object):
         None
         
         """
-
-        with open(filepath, 'r') as fp:
-            lib = json.load(fp)
+        if filepath:
+            with open(filepath, 'r') as fp:
+                lib = json.load(fp)
 
         mat_dict = {'Material': Material,
                     'MaterialNoMass': MaterialNoMass,
                     'WindowMaterialGlazing': WindowMaterialGlazing,
+                    'WindowMaterialGlazingSimple': WindowMaterialGlazingSimple, 
                     'WindowMaterialGas': WindowMaterialGas, 
                     }
 
@@ -799,7 +805,18 @@ if __name__ == '__main__':
     file = 'teresa_example.idf'
     filepath = os.path.join(compas_eplus.DATA, 'idf_examples', file)
     path = compas_eplus.TEMP
-    b = Building.from_idf(filepath, path, 'seattle')
-    
-    v = BuildingViewer(b)
-    v.show()
+    wea = compas_eplus.SEATTLE
+    b = Building.from_idf(filepath, path, wea)
+
+    # for con in b.materials:
+    #     print(b.materials[con].thermal_absorptance)
+
+
+    # TODO: Building surface names must be determined prior to writing, while making them
+
+    b.write_idf()
+    b.analyze(exe='/Applications/EnergyPlus/energyplus')
+    b.load_results()
+
+    # v = BuildingViewer(b)
+    # v.show()

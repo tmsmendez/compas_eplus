@@ -18,6 +18,7 @@ def get_idf_data(filepath):
     find_no_mass_materials(filepath, data)
     find_gas_materials(filepath, data)
     find_glazing_materials(filepath, data)
+    find_glazing_material_simple(filepath, data)
     find_constructions(filepath, data)
     return data
 
@@ -75,11 +76,11 @@ def find_sufaces(filepath, data):
 
 
         data['zones'][zone]['surfaces'][name] = {'name': name,
-                                           'surface_type': stype,
-                                           'construction': cons,
-                                           'outside_condition': outs,
-                                           'surface_points': pts  
-                                           }
+                                                 'surface_type': stype,
+                                                 'construction': cons,
+                                                 'outside_condition': outs,
+                                                 'surface_points': pts  
+                                                 }
 
 
 def find_windows(filepath, data):
@@ -98,6 +99,7 @@ def find_windows(filepath, data):
     for i in i_lines:
         name = lines[i + 1].split(',')[0].strip()
         bs_name  = lines[i + 4].split(',')[0].strip()
+        # bs_name = bs_name.replace('.', '')
         cons = lines[i + 3].split(',')[0].strip()
         stype = lines[i + 2].split(',')[0].strip()
         pts = []
@@ -138,13 +140,14 @@ def find_materials(filepath, data):
         slea = float(lines[i + 8].split(',')[0])
         vsba = float(lines[i + 9].split(';')[0])
 
-        data['materials'][name] = {'name': name,
+        data['materials'][name] = {'__type__': 'Material',
+                                   'name': name,
                                    'roughness': rough,
                                    'thickness': thick,
                                    'conductivity': cond,
                                    'density': dens,
                                    'specific_heat': sphe,
-                                   'thermal_absoptance': thra,
+                                   'thermal_absorptance': thra,
                                    'solar_absorptance': slea,
                                    'visible_absorptance': vsba,
                                   }
@@ -170,12 +173,13 @@ def find_no_mass_materials(filepath, data):
         slra = float(lines[i + 5].split(',')[0])
         visa = float(lines[i + 6].split(';')[0])
 
-        data['materials'][name] = {'name': name,
-                                           'roughness': rough,
-                                           'thermal_resistance': thres,
-                                           'thermal_absoptance': thabs,
-                                           'solar_absorptance': slra,
-                                           'visible_absorptance': visa,
+        data['materials'][name] = {'__type__': 'MaterialNoMass',
+                                   'name': name,
+                                   'roughness': rough,
+                                   'thermal_resistance': thres,
+                                   'thermal_absorptance': thabs,
+                                   'solar_absorptance': slra,
+                                   'visible_absorptance': visa,
                                           }
 
 
@@ -196,9 +200,10 @@ def find_gas_materials(filepath, data):
         gtype = lines[i + 2].split(',')[0].strip()
         thick  = float(lines[i + 3].split(';')[0])
 
-        data['materials'][name] = {'name': name,
-                                       'gas_type': gtype,
-                                       'thickness': thick,
+        data['materials'][name] = {'__type__': 'WindowMaterialGas',
+                                   'name': name,
+                                   'gas_type': gtype,
+                                   'thickness': thick,
                                           }
 
 
@@ -231,22 +236,23 @@ def find_glazing_materials(filepath, data):
         dirt = float(lines[i + 15].split(',')[0])
         soldif = lines[i + 16].split(';')[0].strip()
 
-        data['materials'][name] = {'name': name,
-                                           'optical_data_type': odtype,
-                                           'thickness': thick,
-                                           'solar_transmittance': soltr,
-                                           'front_solar_reflectance': fref,
-                                           'back_solar_reflectance': bref,
-                                           'visible_transmittance': vtrs,
-                                           'front_visible_transmittance': fvtr,
-                                           'back_visible_transmittance': bvtr,
-                                           'infrared_transmittance': inftr,
-                                           'front_infrared_emissivity': finfhem, 
-                                           'back_infrared_emissivity': binfhem, 
-                                           'conductivity': cond,
-                                           'dirt_correction': dirt,
-                                           'solar_diffusing': soldif,
-                                          }
+        data['materials'][name] = {'__type__': 'WindowMaterialGlazing',
+                                   'name': name,
+                                   'optical_data_type': odtype,
+                                   'thickness': thick,
+                                   'solar_transmittance': soltr,
+                                   'front_solar_reflectance': fref,
+                                   'back_solar_reflectance': bref,
+                                   'visible_transmittance': vtrs,
+                                   'front_visible_reflectance': fvtr,
+                                   'back_visible_reflectance': bvtr,
+                                   'infrared_transmittance': inftr,
+                                   'front_infrared_hemispherical_emissivity': finfhem, 
+                                   'back_infrared_hemispherical_emissivity': binfhem, 
+                                   'conductivity': cond,
+                                   'dirt_correction_factor': dirt,
+                                   'solar_diffusing': soldif,
+                                    }
 
 
 def find_constructions(filepath, data):
@@ -277,6 +283,30 @@ def find_constructions(filepath, data):
         data['constructions'][name] = {'name': name, 'layers': layers}
 
 
+def find_glazing_material_simple(filepath, data):
+    fh = open(filepath, 'r')
+    lines = fh.readlines()
+    fh.close()
+
+    i_lines = []
+    for i, line in enumerate(lines):
+        line = line.split(',')
+        if line[0].lower() == 'windowmaterial:simpleglazingsystem':
+            i_lines.append(i)
+
+    for i in i_lines:
+        name = lines[i + 1].split(',')[0].strip()
+        ufac  = float(lines[i + 2].split(',')[0])
+        solh  = float(lines[i + 3].split(',')[0])
+        vist  = float(lines[i + 4].split(';')[0])
+
+        data['materials'][name] = {'__type__': 'WindowMaterialGlazingSimple',
+                                   'name':name,
+                                   'u_factor': ufac,
+                                   'solar_heat_gain_coefficient': solh,
+                                   'visible_transmittance': vist,
+                                    }
+
 
 if __name__ == '__main__':
     import os
@@ -289,4 +319,8 @@ if __name__ == '__main__':
 
     data = get_idf_data(path)
     print(data.keys())
-    print(data['constructions']['Generic Double Pane'])
+    for con in data['zones']:
+        print(con)
+        print(data['zones'][con]['surfaces'])
+        print('')
+        print('')
