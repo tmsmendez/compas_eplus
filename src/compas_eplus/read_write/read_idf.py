@@ -15,6 +15,10 @@ def get_idf_data(filepath):
     find_sufaces(filepath, data)
     find_windows(filepath, data)
     find_materials(filepath, data)
+    find_no_mass_materials(filepath, data)
+    find_gas_materials(filepath, data)
+    find_glazing_materials(filepath, data)
+    find_constructions(filepath, data)
     return data
 
 
@@ -41,6 +45,7 @@ def find_zones(filepath, data):
         data['zones'][name] = {'origin': [x, y, z],
                                'height': h,
                                'volume':v,
+                               'surfaces': {}
                                }
 
 
@@ -54,7 +59,6 @@ def find_sufaces(filepath, data):
         line = line.split(',')
         if line[0].lower() == 'buildingsurface:detailed':
             i_lines.append(i)
-    data['surfaces']  = {}
     for i in i_lines:
         name = lines[i + 1].split(',')[0].strip()
         zone  = lines[i + 4].split(',')[0].strip()
@@ -69,7 +73,7 @@ def find_sufaces(filepath, data):
             pts.append(xyz)
 
 
-        data['surfaces'][name] = {'name': name,
+        data['zones'][zone]['surfaces'][name] = {'name': name,
                                            'surface_type': stype,
                                            'construction': cons,
                                            'outside_condition': outs,
@@ -145,62 +149,133 @@ def find_materials(filepath, data):
                                   }
     
 
+def find_no_mass_materials(filepath, data):
+    fh = open(filepath, 'r')
+    lines = fh.readlines()
+    fh.close()
 
-# Material:NoMass,
-#   Typical Carpet Pad,                     !- Name
-#   VeryRough,                              !- Roughness
-#   0.2164799871521,                        !- Thermal Resistance {m2-K/W}
-#   0.9,                                    !- Thermal Absorptance
-#   0.7,                                    !- Solar Absorptance
-#   0.8;                                    !- Visible Absorptance
+    i_lines = []
+    for i, line in enumerate(lines):
+        line = line.split(',')
+        if line[0].lower() == 'material:nomass':
+            i_lines.append(i)
 
+    data['materials_no_mass'] = {}
+    for i in i_lines:
+        name = lines[i + 1].split(',')[0].strip()
+        rough = lines[i + 2].split(',')[0].strip()
+        thres  = float(lines[i + 3].split(',')[0])
+        thabs = float(lines[i + 4].split(',')[0])
+        slra = float(lines[i + 5].split(',')[0])
+        visa = float(lines[i + 6].split(';')[0])
 
-
-
-
-#   WindowMaterial:Gas,
-#   AIR 13MM,                               !- Name
-#   Air,                                    !- Gas Type
-#   0.0127;                                 !- Thickness {m}
-
-
-
-# WindowMaterial:Glazing,
-#   CLEAR 6MM,                              !- Name
-#   SpectralAverage,                        !- Optical Data Type
-#   ,                                       !- Window Glass Spectral Data Set Name
-#   0.00599999999999998,                    !- Thickness {m}
-#   0.775,                                  !- Solar Transmittance at Normal Incidence
-#   0.071,                                  !- Front Side Solar Reflectance at Normal Incidence
-#   0.071,                                  !- Back Side Solar Reflectance at Normal Incidence
-#   0.881,                                  !- Visible Transmittance at Normal Incidence
-#   0.08,                                   !- Front Side Visible Reflectance at Normal Incidence
-#   0.08,                                   !- Back Side Visible Reflectance at Normal Incidence
-#   0,                                      !- Infrared Transmittance at Normal Incidence
-#   0.84,                                   !- Front Side Infrared Hemispherical Emissivity
-#   0.84,                                   !- Back Side Infrared Hemispherical Emissivity
-#   0.899398119904063,                      !- Conductivity {W/m-K}
-#   1,                                      !- Dirt Correction Factor for Solar and Visible Transmittance
-#   No;                                     !- Solar Diffusing
+        data['materials_no_mass'][name] = {'name': name,
+                                           'roughness': rough,
+                                           'thermal_resistance': thres,
+                                           'thermal_absoptance': thabs,
+                                           'solar_absorptance': slra,
+                                           'visible_absorptance': visa,
+                                          }
 
 
-# WindowMaterial:SimpleGlazingSystem,
-#   U 0.36 SHGC 0.36 Simple Glazing,        !- Name
-#   2.04408,                                !- U-Factor {W/m2-K}
-#   0.36,                                   !- Solar Heat Gain Coefficient
-#   0.6;                                    !- Visible Transmittance
+def find_gas_materials(filepath, data):
+    fh = open(filepath, 'r')
+    lines = fh.readlines()
+    fh.close()
+
+    i_lines = []
+    for i, line in enumerate(lines):
+        line = line.split(',')
+        if line[0].lower() == 'windowmaterial:gas':
+            i_lines.append(i)
+
+    data['materials_gas'] = {}
+    for i in i_lines:
+        name = lines[i + 1].split(',')[0].strip()
+        gtype = lines[i + 2].split(',')[0].strip()
+        thick  = float(lines[i + 3].split(';')[0])
+
+        data['materials_gas'][name] = {'name': name,
+                                       'gas_type': gtype,
+                                       'thickness': thick,
+                                          }
 
 
+def find_glazing_materials(filepath, data):
+    fh = open(filepath, 'r')
+    lines = fh.readlines()
+    fh.close()
 
-# Construction,
-#   Generic Context,                        !- Name
-#   Material 2;                             !- Layer 1
+    i_lines = []
+    for i, line in enumerate(lines):
+        line = line.split(',')
+        if line[0].lower() == 'windowmaterial:glazing':
+            i_lines.append(i)
 
-# Construction,
-#   Generic Double Pane,                    !- Name
-#   Generic Low-e Glass,                    !- Layer 1
-#   Generic Window Air Gap,                 !- Layer 2
-#   Generic Clear Glass;                    !- Layer 3
+    data['materials_glazing'] = {}
+    for i in i_lines:
+        name = lines[i + 1].split(',')[0].strip()
+        odtype = lines[i + 2].split(',')[0].strip()
+        thick  = float(lines[i + 4].split(',')[0])
+        soltr = float(lines[i + 5].split(',')[0])
+        fref = float(lines[i + 6].split(',')[0])
+        bref = float(lines[i + 7].split(',')[0])
+        vtrs = float(lines[i + 8].split(',')[0])
+        fvtr = float(lines[i + 9].split(',')[0])
+        bvtr = float(lines[i + 10].split(',')[0])
+        inftr = float(lines[i + 11].split(',')[0])
+        finfhem = float(lines[i + 12].split(',')[0])
+        binfhem = float(lines[i + 13].split(',')[0])
+        cond = float(lines[i + 14].split(',')[0])
+        dirt = float(lines[i + 15].split(',')[0])
+        soldif = lines[i + 16].split(';')[0].strip()
+
+        data['materials_glazing'][name] = {'name': name,
+                                           'optical_data_type': odtype,
+                                           'thickness': thick,
+                                           'solar_transmittance': soltr,
+                                           'front_solar_reflectance': fref,
+                                           'back_solar_reflectance': bref,
+                                           'visible_transmittance': vtrs,
+                                           'front_visible_transmittance': fvtr,
+                                           'back_visible_transmittance': bvtr,
+                                           'infrared_transmittance': inftr,
+                                           'front_infrared_emissivity': finfhem, 
+                                           'back_infrared_emissivity': binfhem, 
+                                           'conductivity': cond,
+                                           'dirt_correction': dirt,
+                                           'solar_diffusing': soldif,
+                                          }
+
+
+def find_constructions(filepath, data):
+    fh = open(filepath, 'r')
+    lines = fh.readlines()
+    fh.close()
+
+    i_lines = []
+    for i, line in enumerate(lines):
+        line = line.split(',')
+        if line[0].lower() == 'construction':
+            i_lines.append(i)
+
+    data['construction'] = {}
+
+    for i in i_lines:
+        name = lines[i + 1].split(',')[0].strip()
+        layers = []
+        for j in range(100):
+            layer = lines[i + 1 + j]
+
+            if ';' in layer: 
+                layer = layer.split(';')[0].strip()
+                layers.append(layer)
+                break
+            else:
+                layer = layer.split(',')[0].strip()
+                layers.append(layer)
+        data['construction'][name] = {'name': name, 'layers': layers}
+
 
 
 if __name__ == '__main__':
@@ -213,4 +288,5 @@ if __name__ == '__main__':
     path = os.path.join(compas_eplus.DATA, 'idf_examples', file)
 
     data = get_idf_data(path)
-    print(data['surfaces'])
+    print(data.keys())
+    print(data['construction']['Generic Double Pane'])

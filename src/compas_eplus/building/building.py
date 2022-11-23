@@ -28,6 +28,7 @@ from compas_eplus.building.shading import Shading
 from compas_eplus.building.window import Window
 
 from compas_eplus.building.zone import Zone
+from compas_eplus.building.zone import ZoneSurfaces
 
 from compas_eplus.building.schedule import OfficeOccupancySchedule
 from compas_eplus.building.schedule import OfficeLightsSchedule
@@ -40,6 +41,7 @@ from compas_eplus.building.schedule import OfficeCoolingSchedule
 from compas_eplus.read_write import write_idf_from_building
 from compas_eplus.read_write import read_mean_zone_temperatures
 from compas_eplus.read_write import read_error_file
+from compas_eplus.read_write import get_idf_data
 
 from compas_eplus.utilities import make_box_from_quad
 
@@ -62,6 +64,8 @@ from compas.utilities import geometric_key
 # TODO: Parametrize internal gains people per m2
 # TODO: look into ideal airloads values, need parametrizing?
 # TODO: Zone sizing needs to be added
+
+# TODO: Fro idf function does not use surface data, just geometry for now
 
 
 
@@ -305,6 +309,26 @@ class Building(object):
             z = Zone.from_mesh(mesh, 'zone_{}'.format(i))
             building.add_zone(z)
         return building
+
+    @classmethod
+    def from_idf(cls, filepath, path, wea):
+        building = cls(path, wea)
+
+        data = get_idf_data(filepath)
+        zones = data['zones']
+        for zone in zones:
+            surfaces = zones[zone]['surfaces']
+            faces_vertices = []
+            for srf in surfaces:
+                srf = zones[zone]['surfaces'][srf]
+                face_v = srf['surface_points']
+                faces_vertices.append(face_v)
+
+            
+
+
+        return building
+
 
     def to_json(self, filepath):
         """
@@ -729,7 +753,14 @@ class Building(object):
 
 if __name__ == '__main__':
 
+    from compas_eplus.viewers import BuildingViewer
+
     for i in range(50): print('')
-    b = Building.from_json(os.path.join(compas_eplus.DATA, 'buildings', '5_zone.json'))
     
-    b.write_idf()
+    file = 'teresa_example.idf'
+    filepath = os.path.join(compas_eplus.DATA, 'idf_examples', file)
+    path = compas_eplus.TEMP
+    b = Building.from_idf(filepath, path, 'seattle')
+    
+    # v = BuildingViewer(b)
+    # v.show()
