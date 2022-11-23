@@ -42,7 +42,8 @@ def find_zones(filepath, data):
         z = float(lines[i + 4].split(',')[0].strip())
         h = float(lines[i + 8].split(',')[0].strip())
         v = float(lines[i + 9].split(',')[0].strip())
-        data['zones'][name] = {'origin': [x, y, z],
+        data['zones'][name] = {'name': name,
+                               'origin': [x, y, z],
                                'height': h,
                                'volume':v,
                                'surfaces': {}
@@ -110,7 +111,7 @@ def find_windows(filepath, data):
                                  'building_surface': bs_name,
                                  'construction': cons,
                                  'surface_type': stype,
-                                 'surface_points': pts  
+                                 'nodes': pts  
                                  }
 
 
@@ -160,7 +161,7 @@ def find_no_mass_materials(filepath, data):
         if line[0].lower() == 'material:nomass':
             i_lines.append(i)
 
-    data['materials_no_mass'] = {}
+    # data['materials_no_mass'] = {}
     for i in i_lines:
         name = lines[i + 1].split(',')[0].strip()
         rough = lines[i + 2].split(',')[0].strip()
@@ -169,7 +170,7 @@ def find_no_mass_materials(filepath, data):
         slra = float(lines[i + 5].split(',')[0])
         visa = float(lines[i + 6].split(';')[0])
 
-        data['materials_no_mass'][name] = {'name': name,
+        data['materials'][name] = {'name': name,
                                            'roughness': rough,
                                            'thermal_resistance': thres,
                                            'thermal_absoptance': thabs,
@@ -189,13 +190,13 @@ def find_gas_materials(filepath, data):
         if line[0].lower() == 'windowmaterial:gas':
             i_lines.append(i)
 
-    data['materials_gas'] = {}
+    # data['materials_gas'] = {}
     for i in i_lines:
         name = lines[i + 1].split(',')[0].strip()
         gtype = lines[i + 2].split(',')[0].strip()
         thick  = float(lines[i + 3].split(';')[0])
 
-        data['materials_gas'][name] = {'name': name,
+        data['materials'][name] = {'name': name,
                                        'gas_type': gtype,
                                        'thickness': thick,
                                           }
@@ -212,7 +213,7 @@ def find_glazing_materials(filepath, data):
         if line[0].lower() == 'windowmaterial:glazing':
             i_lines.append(i)
 
-    data['materials_glazing'] = {}
+    # data['materials_glazing'] = {}
     for i in i_lines:
         name = lines[i + 1].split(',')[0].strip()
         odtype = lines[i + 2].split(',')[0].strip()
@@ -230,7 +231,7 @@ def find_glazing_materials(filepath, data):
         dirt = float(lines[i + 15].split(',')[0])
         soldif = lines[i + 16].split(';')[0].strip()
 
-        data['materials_glazing'][name] = {'name': name,
+        data['materials'][name] = {'name': name,
                                            'optical_data_type': odtype,
                                            'thickness': thick,
                                            'solar_transmittance': soltr,
@@ -259,22 +260,21 @@ def find_constructions(filepath, data):
         if line[0].lower() == 'construction':
             i_lines.append(i)
 
-    data['construction'] = {}
+    data['constructions'] = {}
 
     for i in i_lines:
         name = lines[i + 1].split(',')[0].strip()
-        layers = []
+        layers = {}
         for j in range(100):
-            layer = lines[i + 1 + j]
-
+            layer = lines[i + 2 + j]
             if ';' in layer: 
                 layer = layer.split(';')[0].strip()
-                layers.append(layer)
+                layers[str(j)] = layer
                 break
             else:
                 layer = layer.split(',')[0].strip()
-                layers.append(layer)
-        data['construction'][name] = {'name': name, 'layers': layers}
+                layers[str(j)] = layer
+        data['constructions'][name] = {'name': name, 'layers': layers}
 
 
 
@@ -289,4 +289,4 @@ if __name__ == '__main__':
 
     data = get_idf_data(path)
     print(data.keys())
-    print(data['construction']['Generic Double Pane'])
+    print(data['constructions']['Generic Double Pane'])

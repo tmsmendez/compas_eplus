@@ -55,6 +55,8 @@ from compas.geometry import midpoint_point_point
 
 from compas.utilities import geometric_key
 
+from compas.datastructures import Mesh
+
 
 # TODO: Add .ddy file info to the weather/location information written into the input file
 # TODO: Finish by program schedule writer
@@ -140,7 +142,6 @@ class Building(object):
         self.lights_area = {'office': 6.57, 'small_office': 6.57, 'mid_office': 6.57, 'mid_apartment': 6.46}
         self.lights_fraction = {'office': .7, 'mid_apartment': .6}
         self.equipment_area = {'office': 10.333, 'mid_apartment': 6.67}
-
 
     @property
     def data(self):
@@ -317,16 +318,54 @@ class Building(object):
         data = get_idf_data(filepath)
         zones = data['zones']
         for zone in zones:
+            zname = zones[zone]['name']
             surfaces = zones[zone]['surfaces']
-            faces_vertices = []
+            vertices = []
             for srf in surfaces:
                 srf = zones[zone]['surfaces'][srf]
                 face_v = srf['surface_points']
-                faces_vertices.append(face_v)
+                vertices.extend(face_v)
+            faces = [[0,1,2,3],
+                     [4,5,6,7],
+                     [8,9,10, 11],
+                     [12, 13, 14, 15],
+                     [16,17,18,19],
+                     [20,21,22,23]
+                     ]
+            mesh = Mesh.from_vertices_and_faces(vertices, faces)
+            z = Zone.from_mesh(mesh, zname)
 
-            
+            for i, srf in enumerate(surfaces):
+                srf = zones[zone]['surfaces'][srf]
+                z.surfaces.face_attribute(i, 'name', srf['name'])
+                # z.surfaces.face_attribute(i, 'construction', srf['construction'])
+                z.surfaces.face_attribute(i, 'surface_type', srf['surface_type'])
+                z.surfaces.face_attribute(i, 'outside_boundary_condition', srf['outside_condition'])
+            building.add_zone(z)
+        
+        windows = data['windows']
+        for win in windows:
+            w = Window()
+            w.name = windows[win]['name']
+            w.nodes = windows[win]['nodes']
+            w.building_surface = windows[win]['building_surface']
+            w.construction =  windows[win]['construction']
+            building.add_window(w)
+
+        # materials = data['materials']
+        # cons = data['constructions']
+        # for con in cons:
+        #     name = data['constructions'][con]['name']
+        #     layers = data['constructions'][con]['layers']
+        #     layers_ = {}
+        #     for lk in layers:
+        #         lname = layers[lk]
+        #         mat = materials[lname]
 
 
+        #     con_ = {'name': name, 'layers': layers_}
+        #     c = Construction.from_data(con_)
+        #     building.add_construction(c)
         return building
 
 
@@ -762,5 +801,5 @@ if __name__ == '__main__':
     path = compas_eplus.TEMP
     b = Building.from_idf(filepath, path, 'seattle')
     
-    # v = BuildingViewer(b)
-    # v.show()
+    v = BuildingViewer(b)
+    v.show()
