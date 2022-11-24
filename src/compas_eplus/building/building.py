@@ -66,9 +66,9 @@ from compas.datastructures import Mesh
 # TODO: Parametrize lights, equipment and activity schedules
 # TODO: Parametrize internal gains people per m2
 # TODO: look into ideal airloads values, need parametrizing?
-# TODO: Zone sizing needs to be added
+# TODO: Does Zone sizing needs to be added?
 
-
+# TODO: read results needs to read hourly data
 
 class Building(object):
     """
