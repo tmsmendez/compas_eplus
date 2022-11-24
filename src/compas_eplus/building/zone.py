@@ -56,6 +56,7 @@ class Zone(object):
         surfaces = data.get('surfaces') or {}
         self.name               = data.get('name') or {}
         self.surfaces      = ZoneSurfaces.from_data(surfaces)
+        self.surfaces.name = self.name
 
     def add_surfaces(self, mesh):
         """
@@ -71,7 +72,7 @@ class Zone(object):
 
         """
         self.surfaces = ZoneSurfaces.from_data(mesh.data)
-        self.surfaces.assign_zone_surface_attributes()
+        self.surfaces.assign_zone_surface_attributes(self.name)
 
     @classmethod
     def from_data(cls, data):
@@ -160,7 +161,7 @@ class ZoneSurfaces(Mesh):
     def __str__(self):
         return 'compas_energyplus Zone Surfaces - {}'.format(self.name)
 
-    def assign_zone_surface_attributes(self):
+    def assign_zone_surface_attributes(self, zname):
     #     """
     #     Assigns basic and pre-defined surface attributes based on mesh face order. 
 
@@ -174,12 +175,13 @@ class ZoneSurfaces(Mesh):
         
     #     """
 
-        self.face_attribute(0, 'name', 'floor')
+        self.face_attribute(0, 'name', '{}_floor'.format(zname))
         self.face_attribute(0, 'surface_type', 'Floor')
 
-        self.face_attribute(1, 'name', 'ceiling')
+        self.face_attribute(1, 'name', '{}_ceiling'.format(zname))
         self.face_attribute(1, 'surface_type', 'Roof')
 
-        self.faces_attribute('name', 'wall', range(2, self.number_of_faces()))
-        self.faces_attribute('surface_type', 'Wall', range(2, self.number_of_faces()))
+        for i in range(2, self.number_of_faces()):
+            self.face_attribute(i, 'name', '{}_wall_{}'.format(zname, i))
+            self.face_attribute(i, 'surface_type', 'Wall')
 

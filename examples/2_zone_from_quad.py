@@ -74,7 +74,7 @@ b.add_construction(c)
 filepath = os.path.join(compas_eplus.DATA, 'materials', 'materials.csv')
 b.add_materials_from_csv(filepath)
 
-rules = {'wall': 'ext_wall', 'window': 'double_glazing', 'floor': 'floor', 'ceiling': 'cieling'}
+rules = {'Wall': 'ext_wall', 'Window': 'double_glazing', 'Floor': 'floor', 'Roof': 'cieling'}
 b.assign_constructions_from_rules(rules)
 
 
@@ -86,8 +86,8 @@ b.write_idf()
 # b.analyze(exe='/Applications/EnergyPlus-9-6-0/energyplus')
 b.analyze(exe='/Applications/EnergyPlus/energyplus')
 for i in range(50): print('')
-# b.load_results()
-# b.plot_mean_zone_temperatures(plot_type='scatter')
+b.load_results()
+b.plot_mean_zone_temperatures(plot_type='scatter')
 # b.to_json(os.path.join(compas_eplus.DATA, 'buildings', '2_zone.json'))
 
 

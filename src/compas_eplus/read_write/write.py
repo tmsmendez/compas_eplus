@@ -442,10 +442,12 @@ def write_building_surface(building, zone, fk):
 
     num_vert = len(zone.surfaces.face_vertices(fk))
 
+    sname = zone.surfaces.face_attribute(fk, 'name')
+
     fh = open(building.idf_filepath, 'a')
     fh.write('\n')
     fh.write('BuildingSurface:Detailed,\n')
-    fh.write('  {}_{},                    !- Name\n'.format(zone.name, fk))
+    fh.write('  {},                    !- Name\n'.format(sname))
     # fh.write('  {},                    !- Name\n'.format(zone.name))
     fh.write('  {},                       !- Surface Type\n'.format(st))
     fh.write('  {},                       !- Construction Name\n'.format(ct))

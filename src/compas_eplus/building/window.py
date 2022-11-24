@@ -79,7 +79,7 @@ class Window(object):
         window = cls()
         window.name = f'win_{zone.name}_{wall_key}'
         window.nodes = [p0, p1, p2, p3]
-        window.building_surface = f'{zone.name}_{wall_key}' 
+        window.building_surface = f'{zone.name}_wall_{wall_key}' 
         window.construction = construction
         return window
     

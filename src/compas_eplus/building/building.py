@@ -757,7 +757,7 @@ class Building(object):
             mesh = self.zones[zk].surfaces
             sks = mesh.faces()
             for sk in sks:
-                name = mesh.face_attribute(sk, 'name')
+                name = mesh.face_attribute(sk, 'surface_type')
                 mesh.face_attribute(sk, 'construction', rules[name])
 
     def make_layers_dict(self):
@@ -810,9 +810,6 @@ if __name__ == '__main__':
 
     # for con in b.materials:
     #     print(b.materials[con].thermal_absorptance)
-
-
-    # TODO: Building surface names must be determined prior to writing, while making them
 
     b.write_idf()
     b.analyze(exe='/Applications/EnergyPlus/energyplus')
