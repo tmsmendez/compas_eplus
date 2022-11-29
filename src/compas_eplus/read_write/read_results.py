@@ -9,7 +9,45 @@ __version__ = "0.1.0"
 
 __all__ = ['read_mean_zone_temperatures',
            'read_error_file',
+           'read_eso_preamble',
+           'read_results_file',
           ]
+
+
+def read_results_file(building, filepath):
+    pre_dict = read_eso_preamble(building, filepath)
+
+
+
+def read_eso_preamble(building, filepath):
+    fh = open(filepath, 'r')
+    lines = fh.readlines()
+    fh.close()
+
+    del lines[:7]
+
+    data = {}
+    for line in lines:
+        line = line.strip()
+        if line == 'End of Data Dictionary':
+            break
+        # print(line)
+        stuff = line.split(',')
+        key = stuff[0]
+        zone = stuff[2].split(' ')[0].lower()
+        item = stuff[3]
+        if 'Cooling' in item:
+            item = 'cooling'
+        elif 'Heating' in item:
+            item = 'heating'
+        elif 'Lights' in item:
+            item = 'lighting'
+        elif 'Temperature' in item:
+            item = 'mean_air_temperature'
+        
+        data[key] = {'zone': zone, 'item': item}
+    return data
+
 
 def read_mean_zone_temperatures(building, filepath):
     """
@@ -37,7 +75,7 @@ def read_mean_zone_temperatures(building, filepath):
     temps = {}
     times = []
     num_zones = len(building.zones)
-    num_intro = 9 + num_zones
+    num_intro = 9 + (num_zones * 2)
     del lines[:num_intro]
     del lines[-2:]
     counter = 0

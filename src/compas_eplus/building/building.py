@@ -40,7 +40,7 @@ from compas_eplus.building.schedule import OfficeHeatingSchedule
 from compas_eplus.building.schedule import OfficeCoolingSchedule
 
 from compas_eplus.read_write import write_idf_from_building
-from compas_eplus.read_write import read_mean_zone_temperatures
+from compas_eplus.read_write import read_results_file
 from compas_eplus.read_write import read_error_file
 from compas_eplus.read_write import get_idf_data
 
@@ -694,12 +694,14 @@ class Building(object):
         filepath = os.path.join(self.path, 'eplus_output', 'eplusout.eso')
         error_filepath = os.path.join(self.path, 'eplus_output', 'eplusout.err')
         read_error_file(error_filepath, print_error=True)
-        try:
-            temps, times = read_mean_zone_temperatures(self, filepath)
-            self.mean_air_temperatures = temps
-            self.result_times = times
-        except:
-            raise NameError('Energy+ returned the above error message')
+        for i in range(5): print('')
+        # try:
+        read_results_file(self, filepath)
+        # temps, times = read_mean_zone_temperatures(self, filepath)
+        # self.mean_air_temperatures = temps
+        # self.result_times = times
+        # except:
+        #     raise NameError('Energy+ returned the above error message')
 
     def plot_mean_zone_temperatures(self, plot_type='scatter'):
         """
