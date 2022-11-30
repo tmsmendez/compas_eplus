@@ -33,7 +33,9 @@ def read_eso(building, filepath, pre_dict):
     for line in lines:
         line = line.split(',')
         key = line[0]
-        if key == '2':
+        if key not in pre_dict and key != '2':
+            continue
+        elif key == '2':
             month = int(line[2])
             day = int(line[3])
             hour = int(line[5]) - 1
@@ -57,6 +59,8 @@ def read_eso_preamble(building, filepath):
     del lines[:7]
     del lines[-2:]
 
+    zones = [building.zones[zk].name for zk in building.zones]
+
     data = {}
     len_preamble = 0
     for line in lines:
@@ -69,16 +73,17 @@ def read_eso_preamble(building, filepath):
         key = stuff[0]
         zone = stuff[2].split(' ')[0].lower()
         item = stuff[3]
-        if 'Cooling' in item:
-            item = 'cooling'
-        elif 'Heating' in item:
-            item = 'heating'
-        elif 'Lights' in item:
-            item = 'lighting'
-        elif 'Temperature' in item:
-            item = 'mean_air_temperature'
-        
-        data[key] = {'zone': zone, 'item': item}
+        if zone in zones:
+            if 'Cooling' in item:
+                item = 'cooling'
+            elif 'Heating' in item:
+                item = 'heating'
+            elif 'Lights' in item:
+                item = 'lighting'
+            elif 'Temperature' in item:
+                item = 'mean_air_temperature'
+            
+            data[key] = {'zone': zone, 'item': item}
     data['len_preamble'] = len_preamble
     return data
 

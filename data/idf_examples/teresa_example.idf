@@ -211,7 +211,7 @@ Building,
   ;                                       !- Minimum Number of Warmup Days
 
 Zone,
-  2_Residential_cc56a40e,                 !- Name
+  2_Residential_232d78c4,                 !- Name
   0,                                      !- Direction of Relative North {deg}
   0,                                      !- X Origin {m}
   0,                                      !- Y Origin {m}
@@ -226,10 +226,10 @@ Zone,
   Yes;                                    !- Part of Total Floor Area
 
 BuildingSurface:Detailed,
-  2_Residential_cc56a40e..Face0,          !- Name
+  2_Residential_232d78c4..Face0,          !- Name
   Wall,                                   !- Surface Type
   Typical Insulated Wood Framed Exterior Wall-R16, !- Construction Name
-  2_Residential_cc56a40e,                 !- Zone Name
+  2_Residential_232d78c4,                 !- Zone Name
   ,                                       !- Space Name
   Outdoors,                               !- Outside Boundary Condition
   ,                                       !- Outside Boundary Condition Object
@@ -243,10 +243,10 @@ BuildingSurface:Detailed,
   12.5890309865003, 13.8793342470341, 3.04999999987174; !- X,Y,Z Vertex 4 {m}
 
 FenestrationSurface:Detailed,
-  2_Residential_cc56a40e..Face0_Glz0,     !- Name
+  2_Residential_232d78c4..Face0_Glz0,     !- Name
   Window,                                 !- Surface Type
   U 0.36 SHGC 0.36 Simple Glazing Window, !- Construction Name
-  2_Residential_cc56a40e..Face0,          !- Building Surface Name
+  2_Residential_232d78c4..Face0,          !- Building Surface Name
   ,                                       !- Outside Boundary Condition Object
   ,                                       !- View Factor to Ground
   ,                                       !- Frame and Divider Name
@@ -258,10 +258,10 @@ FenestrationSurface:Detailed,
   12.5890309865003, 9.53689674703412, 2.79999999987174; !- X,Y,Z Vertex 4 {m}
 
 FenestrationSurface:Detailed,
-  2_Residential_cc56a40e..Face0_Glz1,     !- Name
+  2_Residential_232d78c4..Face0_Glz1,     !- Name
   Window,                                 !- Surface Type
   U 0.36 SHGC 0.36 Simple Glazing Window, !- Construction Name
-  2_Residential_cc56a40e..Face0,          !- Building Surface Name
+  2_Residential_232d78c4..Face0,          !- Building Surface Name
   ,                                       !- Outside Boundary Condition Object
   ,                                       !- View Factor to Ground
   ,                                       !- Frame and Divider Name
@@ -273,10 +273,10 @@ FenestrationSurface:Detailed,
   12.5890309865003, 12.5868967470341, 2.79999999987174; !- X,Y,Z Vertex 4 {m}
 
 BuildingSurface:Detailed,
-  2_Residential_cc56a40e..Face1,          !- Name
+  2_Residential_232d78c4..Face1,          !- Name
   Wall,                                   !- Surface Type
   Typical Insulated Wood Framed Exterior Wall-R16, !- Construction Name
-  2_Residential_cc56a40e,                 !- Zone Name
+  2_Residential_232d78c4,                 !- Zone Name
   ,                                       !- Space Name
   Outdoors,                               !- Outside Boundary Condition
   ,                                       !- Outside Boundary Condition Object
@@ -290,10 +290,10 @@ BuildingSurface:Detailed,
   0.389030986500333, 7.77933424703412, 3.04999999987174; !- X,Y,Z Vertex 4 {m}
 
 FenestrationSurface:Detailed,
-  2_Residential_cc56a40e..Face1_Glz0,     !- Name
+  2_Residential_232d78c4..Face1_Glz0,     !- Name
   Window,                                 !- Surface Type
   U 0.36 SHGC 0.36 Simple Glazing Window, !- Construction Name
-  2_Residential_cc56a40e..Face1,          !- Building Surface Name
+  2_Residential_232d78c4..Face1,          !- Building Surface Name
   ,                                       !- Outside Boundary Condition Object
   ,                                       !- View Factor to Ground
   ,                                       !- Frame and Divider Name
@@ -305,10 +305,10 @@ FenestrationSurface:Detailed,
   0.389030986500333, 12.1217717470341, 2.79999999987174; !- X,Y,Z Vertex 4 {m}
 
 FenestrationSurface:Detailed,
-  2_Residential_cc56a40e..Face1_Glz1,     !- Name
+  2_Residential_232d78c4..Face1_Glz1,     !- Name
   Window,                                 !- Surface Type
   U 0.36 SHGC 0.36 Simple Glazing Window, !- Construction Name
-  2_Residential_cc56a40e..Face1,          !- Building Surface Name
+  2_Residential_232d78c4..Face1,          !- Building Surface Name
   ,                                       !- Outside Boundary Condition Object
   ,                                       !- View Factor to Ground
   ,                                       !- Frame and Divider Name
@@ -320,10 +320,10 @@ FenestrationSurface:Detailed,
   0.389030986500333, 9.07177174703412, 2.79999999987174; !- X,Y,Z Vertex 4 {m}
 
 BuildingSurface:Detailed,
-  2_Residential_cc56a40e..Face2,          !- Name
+  2_Residential_232d78c4..Face2,          !- Name
   Wall,                                   !- Surface Type
   Typical Insulated Wood Framed Exterior Wall-R16, !- Construction Name
-  2_Residential_cc56a40e,                 !- Zone Name
+  2_Residential_232d78c4,                 !- Zone Name
   ,                                       !- Space Name
   Outdoors,                               !- Outside Boundary Condition
   ,                                       !- Outside Boundary Condition Object
@@ -337,10 +337,10 @@ BuildingSurface:Detailed,
   12.5890309865003, 7.77933424703412, 3.04999999987174; !- X,Y,Z Vertex 4 {m}
 
 FenestrationSurface:Detailed,
-  2_Residential_cc56a40e..Face2_Glz0,     !- Name
+  2_Residential_232d78c4..Face2_Glz0,     !- Name
   Window,                                 !- Surface Type
   U 0.36 SHGC 0.36 Simple Glazing Window, !- Construction Name
-  2_Residential_cc56a40e..Face2,          !- Building Surface Name
+  2_Residential_232d78c4..Face2,          !- Building Surface Name
   ,                                       !- Outside Boundary Condition Object
   ,                                       !- View Factor to Ground
   ,                                       !- Frame and Divider Name
@@ -352,10 +352,10 @@ FenestrationSurface:Detailed,
   3.07684348650033, 7.77933424703412, 2.79999999987174; !- X,Y,Z Vertex 4 {m}
 
 FenestrationSurface:Detailed,
-  2_Residential_cc56a40e..Face2_Glz1,     !- Name
+  2_Residential_232d78c4..Face2_Glz1,     !- Name
   Window,                                 !- Surface Type
   U 0.36 SHGC 0.36 Simple Glazing Window, !- Construction Name
-  2_Residential_cc56a40e..Face2,          !- Building Surface Name
+  2_Residential_232d78c4..Face2,          !- Building Surface Name
   ,                                       !- Outside Boundary Condition Object
   ,                                       !- View Factor to Ground
   ,                                       !- Frame and Divider Name
@@ -367,10 +367,10 @@ FenestrationSurface:Detailed,
   6.12684348650033, 7.77933424703412, 2.79999999987174; !- X,Y,Z Vertex 4 {m}
 
 FenestrationSurface:Detailed,
-  2_Residential_cc56a40e..Face2_Glz2,     !- Name
+  2_Residential_232d78c4..Face2_Glz2,     !- Name
   Window,                                 !- Surface Type
   U 0.36 SHGC 0.36 Simple Glazing Window, !- Construction Name
-  2_Residential_cc56a40e..Face2,          !- Building Surface Name
+  2_Residential_232d78c4..Face2,          !- Building Surface Name
   ,                                       !- Outside Boundary Condition Object
   ,                                       !- View Factor to Ground
   ,                                       !- Frame and Divider Name
@@ -382,10 +382,10 @@ FenestrationSurface:Detailed,
   9.17684348650033, 7.77933424703412, 2.79999999987174; !- X,Y,Z Vertex 4 {m}
 
 FenestrationSurface:Detailed,
-  2_Residential_cc56a40e..Face2_Glz3,     !- Name
+  2_Residential_232d78c4..Face2_Glz3,     !- Name
   Window,                                 !- Surface Type
   U 0.36 SHGC 0.36 Simple Glazing Window, !- Construction Name
-  2_Residential_cc56a40e..Face2,          !- Building Surface Name
+  2_Residential_232d78c4..Face2,          !- Building Surface Name
   ,                                       !- Outside Boundary Condition Object
   ,                                       !- View Factor to Ground
   ,                                       !- Frame and Divider Name
@@ -397,13 +397,13 @@ FenestrationSurface:Detailed,
   12.2268434865003, 7.77933424703412, 2.79999999987174; !- X,Y,Z Vertex 4 {m}
 
 BuildingSurface:Detailed,
-  2_Residential_cc56a40e..Face3,          !- Name
+  2_Residential_232d78c4..Face3,          !- Name
   Wall,                                   !- Surface Type
   Generic Interior Wall,                  !- Construction Name
-  2_Residential_cc56a40e,                 !- Zone Name
+  2_Residential_232d78c4,                 !- Zone Name
   ,                                       !- Space Name
   Surface,                                !- Outside Boundary Condition
-  3_Office_8d7e84a1..Face2,               !- Outside Boundary Condition Object
+  3_Office_335e157a..Face2,               !- Outside Boundary Condition Object
   NoSun,                                  !- Sun Exposure
   NoWind,                                 !- Wind Exposure
   ,                                       !- View Factor to Ground
@@ -414,10 +414,10 @@ BuildingSurface:Detailed,
   0.389030986500333, 13.8793342470341, 3.04999999987174; !- X,Y,Z Vertex 4 {m}
 
 BuildingSurface:Detailed,
-  2_Residential_cc56a40e..Face4,          !- Name
+  2_Residential_232d78c4..Face4,          !- Name
   Floor,                                  !- Surface Type
   Typical Insulated Carpeted 8in Slab Floor-R5, !- Construction Name
-  2_Residential_cc56a40e,                 !- Zone Name
+  2_Residential_232d78c4,                 !- Zone Name
   ,                                       !- Space Name
   Ground,                                 !- Outside Boundary Condition
   ,                                       !- Outside Boundary Condition Object
@@ -431,10 +431,10 @@ BuildingSurface:Detailed,
   0.389030986500333, 13.8793342470341, -1.28257671150322e-10; !- X,Y,Z Vertex 4 {m}
 
 BuildingSurface:Detailed,
-  2_Residential_cc56a40e..Face5,          !- Name
+  2_Residential_232d78c4..Face5,          !- Name
   Roof,                                   !- Surface Type
   Typical Wood Joist Attic Floor-R48,     !- Construction Name
-  2_Residential_cc56a40e,                 !- Zone Name
+  2_Residential_232d78c4,                 !- Zone Name
   ,                                       !- Space Name
   Outdoors,                               !- Outside Boundary Condition
   ,                                       !- Outside Boundary Condition Object
@@ -448,8 +448,8 @@ BuildingSurface:Detailed,
   12.5890309865003, 13.8793342470341, 3.04999999987174; !- X,Y,Z Vertex 4 {m}
 
 Daylighting:Controls,
-  2_Residential_cc56a40e DaylightingControls, !- Name
-  2_Residential_cc56a40e,                 !- Zone or Space Name
+  2_Residential_232d78c4 DaylightingControls, !- Name
+  2_Residential_232d78c4,                 !- Zone or Space Name
   ,                                       !- Daylighting Method
   ,                                       !- Availability Schedule Name
   Continuous,                             !- Lighting Control Type
@@ -457,25 +457,25 @@ Daylighting:Controls,
   0.2,                                    !- Minimum Light Output Fraction for Continuous or ContinuousOff Dimming Control
   1,                                      !- Number of Stepped Control Steps
   1,                                      !- Probability Lighting will be Reset When Needed in Manual Stepped Control
-  2_Residential_cc56a40e_Space_Daylighting, !- Glare Calculation Daylighting Reference Point Name
+  2_Residential_232d78c4_Space_Daylighting, !- Glare Calculation Daylighting Reference Point Name
   -0,                                     !- Glare Calculation Azimuth Angle of View Direction Clockwise from Zone y-Axis {deg}
   ,                                       !- Maximum Allowable Discomfort Glare Index
   ,                                       !- DElight Gridding Resolution {m2}
-  2_Residential_cc56a40e_Space_Daylighting, !- Daylighting Reference Point Name 1
+  2_Residential_232d78c4_Space_Daylighting, !- Daylighting Reference Point Name 1
   1,                                      !- Fraction of Lights Controlled by Reference Point 1
   300;                                    !- Illuminance Setpoint at Reference Point 1 {lux}
 
 Daylighting:ReferencePoint,
-  2_Residential_cc56a40e_Space_Daylighting, !- Name
-  2_Residential_cc56a40e,                 !- Zone or Space Name
+  2_Residential_232d78c4_Space_Daylighting, !- Name
+  2_Residential_232d78c4,                 !- Zone or Space Name
   6.48903098650033,                       !- X-Coordinate of Reference Point {m}
   10.8293342470341,                       !- Y-Coordinate of Reference Point {m}
   0.799999999871742;                      !- Z-Coordinate of Reference Point {m}
 
 ZoneControl:Thermostat,
-  2_Residential_cc56a40e Thermostat,      !- Name
-  2_Residential_cc56a40e,                 !- Zone or ZoneList Name
-  2_Residential_cc56a40e Thermostat Schedule, !- Control Type Schedule Name
+  2_Residential_232d78c4 Thermostat,      !- Name
+  2_Residential_232d78c4,                 !- Zone or ZoneList Name
+  2_Residential_232d78c4 Thermostat Schedule, !- Control Type Schedule Name
   ThermostatSetpoint:DualSetpoint,        !- Control 1 Object Type
   2019::MidriseApartment::Apartment_Setpoint, !- Control 1 Name
   ,                                       !- Control 2 Object Type
@@ -487,15 +487,15 @@ ZoneControl:Thermostat,
   0;                                      !- Temperature Difference Between Cutout And Setpoint {deltaC}
 
 Schedule:Compact,
-  2_Residential_cc56a40e Thermostat Schedule, !- Name
-  2_Residential_cc56a40e Thermostat Schedule Type Limits, !- Schedule Type Limits Name
+  2_Residential_232d78c4 Thermostat Schedule, !- Name
+  2_Residential_232d78c4 Thermostat Schedule Type Limits, !- Schedule Type Limits Name
   Through: 12/31,                         !- Field 1
   For: AllDays,                           !- Field 2
   Until: 24:00,                           !- Field 3
   4;                                      !- Field 4
 
 ScheduleTypeLimits,
-  2_Residential_cc56a40e Thermostat Schedule Type Limits, !- Name
+  2_Residential_232d78c4 Thermostat Schedule Type Limits, !- Name
   0,                                      !- Lower Limit Value {BasedOnField A3}
   4,                                      !- Upper Limit Value {BasedOnField A3}
   DISCRETE;                               !- Numeric Type
@@ -603,22 +603,22 @@ Schedule:Day:Interval,
   24.4;                                   !- Value Until Time 1
 
 ZoneHVAC:EquipmentConnections,
-  2_Residential_cc56a40e,                 !- Zone Name
-  2_Residential_cc56a40e Equipment List,  !- Zone Conditioning Equipment List Name
-  2_Residential_cc56a40e Inlet Node List, !- Zone Air Inlet Node or NodeList Name
-  2_Residential_cc56a40e Exhaust Node List, !- Zone Air Exhaust Node or NodeList Name
+  2_Residential_232d78c4,                 !- Zone Name
+  2_Residential_232d78c4 Equipment List,  !- Zone Conditioning Equipment List Name
+  2_Residential_232d78c4 Inlet Node List, !- Zone Air Inlet Node or NodeList Name
+  2_Residential_232d78c4 Exhaust Node List, !- Zone Air Exhaust Node or NodeList Name
   Node 1;                                 !- Zone Air Node Name
 
 NodeList,
-  2_Residential_cc56a40e Inlet Node List, !- Name
+  2_Residential_232d78c4 Inlet Node List, !- Name
   Node 4;                                 !- Node Name 1
 
 NodeList,
-  2_Residential_cc56a40e Exhaust Node List, !- Name
+  2_Residential_232d78c4 Exhaust Node List, !- Name
   Node 3;                                 !- Node Name 1
 
 ZoneHVAC:IdealLoadsAirSystem,
-  2_Residential_cc56a40e Ideal Loads Air System, !- Name
+  2_Residential_232d78c4 Ideal Loads Air System, !- Name
   ,                                       !- Availability Schedule Name
   Node 4,                                 !- Zone Supply Air Node Name
   Node 3,                                 !- Zone Exhaust Air Node Name
@@ -655,17 +655,17 @@ DesignSpecification:OutdoorAir,
   0.35;                                   !- Outdoor Air Flow Air Changes per Hour {1/hr}
 
 ZoneHVAC:EquipmentList,
-  2_Residential_cc56a40e Equipment List,  !- Name
+  2_Residential_232d78c4 Equipment List,  !- Name
   SequentialLoad,                         !- Load Distribution Scheme
   ZoneHVAC:IdealLoadsAirSystem,           !- Zone Equipment Object Type 1
-  2_Residential_cc56a40e Ideal Loads Air System, !- Zone Equipment Name 1
+  2_Residential_232d78c4 Ideal Loads Air System, !- Zone Equipment Name 1
   1,                                      !- Zone Equipment Cooling Sequence 1
   1,                                      !- Zone Equipment Heating or No-Load Sequence 1
   ,                                       !- Zone Equipment Sequential Cooling Fraction Schedule Name 1
   ;                                       !- Zone Equipment Sequential Heating Fraction Schedule Name 1
 
 Sizing:Zone,
-  2_Residential_cc56a40e,                 !- Zone or ZoneList Name
+  2_Residential_232d78c4,                 !- Zone or ZoneList Name
   SupplyAirTemperature,                   !- Zone Cooling Design Supply Air Temperature Input Method
   14,                                     !- Zone Cooling Design Supply Air Temperature {C}
   11.11,                                  !- Zone Cooling Design Supply Air Temperature Difference {deltaC}
@@ -691,7 +691,7 @@ Sizing:Zone,
   No;                                     !- Account for Dedicated Outdoor Air System
 
 Zone,
-  3_Office_8d7e84a1,                      !- Name
+  3_Office_335e157a,                      !- Name
   0,                                      !- Direction of Relative North {deg}
   0,                                      !- X Origin {m}
   0,                                      !- Y Origin {m}
@@ -706,10 +706,10 @@ Zone,
   Yes;                                    !- Part of Total Floor Area
 
 BuildingSurface:Detailed,
-  3_Office_8d7e84a1..Face0,               !- Name
+  3_Office_335e157a..Face0,               !- Name
   Wall,                                   !- Surface Type
   Typical Insulated Wood Framed Exterior Wall-R16, !- Construction Name
-  3_Office_8d7e84a1,                      !- Zone Name
+  3_Office_335e157a,                      !- Zone Name
   ,                                       !- Space Name
   Outdoors,                               !- Outside Boundary Condition
   ,                                       !- Outside Boundary Condition Object
@@ -723,10 +723,10 @@ BuildingSurface:Detailed,
   12.5890309865003, 19.9793342470341, 3.05; !- X,Y,Z Vertex 4 {m}
 
 FenestrationSurface:Detailed,
-  3_Office_8d7e84a1..Face0_Glz0,          !- Name
+  3_Office_335e157a..Face0_Glz0,          !- Name
   Window,                                 !- Surface Type
   U 0.36 SHGC 0.36 Simple Glazing Window, !- Construction Name
-  3_Office_8d7e84a1..Face0,               !- Building Surface Name
+  3_Office_335e157a..Face0,               !- Building Surface Name
   ,                                       !- Outside Boundary Condition Object
   ,                                       !- View Factor to Ground
   ,                                       !- Frame and Divider Name
@@ -738,10 +738,10 @@ FenestrationSurface:Detailed,
   12.5890309865003, 15.6368967470341, 2.8; !- X,Y,Z Vertex 4 {m}
 
 FenestrationSurface:Detailed,
-  3_Office_8d7e84a1..Face0_Glz1,          !- Name
+  3_Office_335e157a..Face0_Glz1,          !- Name
   Window,                                 !- Surface Type
   U 0.36 SHGC 0.36 Simple Glazing Window, !- Construction Name
-  3_Office_8d7e84a1..Face0,               !- Building Surface Name
+  3_Office_335e157a..Face0,               !- Building Surface Name
   ,                                       !- Outside Boundary Condition Object
   ,                                       !- View Factor to Ground
   ,                                       !- Frame and Divider Name
@@ -753,10 +753,10 @@ FenestrationSurface:Detailed,
   12.5890309865003, 18.6868967470341, 2.8; !- X,Y,Z Vertex 4 {m}
 
 BuildingSurface:Detailed,
-  3_Office_8d7e84a1..Face1,               !- Name
+  3_Office_335e157a..Face1,               !- Name
   Wall,                                   !- Surface Type
   Typical Insulated Wood Framed Exterior Wall-R16, !- Construction Name
-  3_Office_8d7e84a1,                      !- Zone Name
+  3_Office_335e157a,                      !- Zone Name
   ,                                       !- Space Name
   Outdoors,                               !- Outside Boundary Condition
   ,                                       !- Outside Boundary Condition Object
@@ -770,10 +770,10 @@ BuildingSurface:Detailed,
   0.389030986500333, 13.8793342470341, 3.05; !- X,Y,Z Vertex 4 {m}
 
 FenestrationSurface:Detailed,
-  3_Office_8d7e84a1..Face1_Glz0,          !- Name
+  3_Office_335e157a..Face1_Glz0,          !- Name
   Window,                                 !- Surface Type
   U 0.36 SHGC 0.36 Simple Glazing Window, !- Construction Name
-  3_Office_8d7e84a1..Face1,               !- Building Surface Name
+  3_Office_335e157a..Face1,               !- Building Surface Name
   ,                                       !- Outside Boundary Condition Object
   ,                                       !- View Factor to Ground
   ,                                       !- Frame and Divider Name
@@ -785,10 +785,10 @@ FenestrationSurface:Detailed,
   0.389030986500333, 18.2217717470341, 2.8; !- X,Y,Z Vertex 4 {m}
 
 FenestrationSurface:Detailed,
-  3_Office_8d7e84a1..Face1_Glz1,          !- Name
+  3_Office_335e157a..Face1_Glz1,          !- Name
   Window,                                 !- Surface Type
   U 0.36 SHGC 0.36 Simple Glazing Window, !- Construction Name
-  3_Office_8d7e84a1..Face1,               !- Building Surface Name
+  3_Office_335e157a..Face1,               !- Building Surface Name
   ,                                       !- Outside Boundary Condition Object
   ,                                       !- View Factor to Ground
   ,                                       !- Frame and Divider Name
@@ -800,13 +800,13 @@ FenestrationSurface:Detailed,
   0.389030986500333, 15.1717717470341, 2.8; !- X,Y,Z Vertex 4 {m}
 
 BuildingSurface:Detailed,
-  3_Office_8d7e84a1..Face2,               !- Name
+  3_Office_335e157a..Face2,               !- Name
   Wall,                                   !- Surface Type
   Generic Interior Wall,                  !- Construction Name
-  3_Office_8d7e84a1,                      !- Zone Name
+  3_Office_335e157a,                      !- Zone Name
   ,                                       !- Space Name
   Surface,                                !- Outside Boundary Condition
-  2_Residential_cc56a40e..Face3,          !- Outside Boundary Condition Object
+  2_Residential_232d78c4..Face3,          !- Outside Boundary Condition Object
   NoSun,                                  !- Sun Exposure
   NoWind,                                 !- Wind Exposure
   ,                                       !- View Factor to Ground
@@ -817,10 +817,10 @@ BuildingSurface:Detailed,
   12.5890309865003, 13.8793342470341, 3.05; !- X,Y,Z Vertex 4 {m}
 
 BuildingSurface:Detailed,
-  3_Office_8d7e84a1..Face3,               !- Name
+  3_Office_335e157a..Face3,               !- Name
   Wall,                                   !- Surface Type
   Typical Insulated Wood Framed Exterior Wall-R16, !- Construction Name
-  3_Office_8d7e84a1,                      !- Zone Name
+  3_Office_335e157a,                      !- Zone Name
   ,                                       !- Space Name
   Outdoors,                               !- Outside Boundary Condition
   ,                                       !- Outside Boundary Condition Object
@@ -834,10 +834,10 @@ BuildingSurface:Detailed,
   0.389030986500333, 19.9793342470341, 3.05; !- X,Y,Z Vertex 4 {m}
 
 FenestrationSurface:Detailed,
-  3_Office_8d7e84a1..Face3_Glz0,          !- Name
+  3_Office_335e157a..Face3_Glz0,          !- Name
   Window,                                 !- Surface Type
   U 0.36 SHGC 0.36 Simple Glazing Window, !- Construction Name
-  3_Office_8d7e84a1..Face3,               !- Building Surface Name
+  3_Office_335e157a..Face3,               !- Building Surface Name
   ,                                       !- Outside Boundary Condition Object
   ,                                       !- View Factor to Ground
   ,                                       !- Frame and Divider Name
@@ -849,10 +849,10 @@ FenestrationSurface:Detailed,
   9.90121848650033, 19.9793342470341, 2.8; !- X,Y,Z Vertex 4 {m}
 
 FenestrationSurface:Detailed,
-  3_Office_8d7e84a1..Face3_Glz1,          !- Name
+  3_Office_335e157a..Face3_Glz1,          !- Name
   Window,                                 !- Surface Type
   U 0.36 SHGC 0.36 Simple Glazing Window, !- Construction Name
-  3_Office_8d7e84a1..Face3,               !- Building Surface Name
+  3_Office_335e157a..Face3,               !- Building Surface Name
   ,                                       !- Outside Boundary Condition Object
   ,                                       !- View Factor to Ground
   ,                                       !- Frame and Divider Name
@@ -864,10 +864,10 @@ FenestrationSurface:Detailed,
   6.85121848650033, 19.9793342470341, 2.8; !- X,Y,Z Vertex 4 {m}
 
 FenestrationSurface:Detailed,
-  3_Office_8d7e84a1..Face3_Glz2,          !- Name
+  3_Office_335e157a..Face3_Glz2,          !- Name
   Window,                                 !- Surface Type
   U 0.36 SHGC 0.36 Simple Glazing Window, !- Construction Name
-  3_Office_8d7e84a1..Face3,               !- Building Surface Name
+  3_Office_335e157a..Face3,               !- Building Surface Name
   ,                                       !- Outside Boundary Condition Object
   ,                                       !- View Factor to Ground
   ,                                       !- Frame and Divider Name
@@ -879,10 +879,10 @@ FenestrationSurface:Detailed,
   3.80121848650033, 19.9793342470341, 2.8; !- X,Y,Z Vertex 4 {m}
 
 FenestrationSurface:Detailed,
-  3_Office_8d7e84a1..Face3_Glz3,          !- Name
+  3_Office_335e157a..Face3_Glz3,          !- Name
   Window,                                 !- Surface Type
   U 0.36 SHGC 0.36 Simple Glazing Window, !- Construction Name
-  3_Office_8d7e84a1..Face3,               !- Building Surface Name
+  3_Office_335e157a..Face3,               !- Building Surface Name
   ,                                       !- Outside Boundary Condition Object
   ,                                       !- View Factor to Ground
   ,                                       !- Frame and Divider Name
@@ -894,10 +894,10 @@ FenestrationSurface:Detailed,
   0.751218486500334, 19.9793342470341, 2.8; !- X,Y,Z Vertex 4 {m}
 
 BuildingSurface:Detailed,
-  3_Office_8d7e84a1..Face4,               !- Name
+  3_Office_335e157a..Face4,               !- Name
   Floor,                                  !- Surface Type
   Typical Insulated Carpeted 8in Slab Floor-R5, !- Construction Name
-  3_Office_8d7e84a1,                      !- Zone Name
+  3_Office_335e157a,                      !- Zone Name
   ,                                       !- Space Name
   Ground,                                 !- Outside Boundary Condition
   ,                                       !- Outside Boundary Condition Object
@@ -911,10 +911,10 @@ BuildingSurface:Detailed,
   0.389030986500333, 19.9793342470341, 2.52290086828673e-24; !- X,Y,Z Vertex 4 {m}
 
 BuildingSurface:Detailed,
-  3_Office_8d7e84a1..Face5,               !- Name
+  3_Office_335e157a..Face5,               !- Name
   Roof,                                   !- Surface Type
   Typical Wood Joist Attic Floor-R48,     !- Construction Name
-  3_Office_8d7e84a1,                      !- Zone Name
+  3_Office_335e157a,                      !- Zone Name
   ,                                       !- Space Name
   Outdoors,                               !- Outside Boundary Condition
   ,                                       !- Outside Boundary Condition Object
@@ -928,8 +928,8 @@ BuildingSurface:Detailed,
   12.5890309865003, 19.9793342470341, 3.05; !- X,Y,Z Vertex 4 {m}
 
 Daylighting:Controls,
-  3_Office_8d7e84a1 DaylightingControls,  !- Name
-  3_Office_8d7e84a1,                      !- Zone or Space Name
+  3_Office_335e157a DaylightingControls,  !- Name
+  3_Office_335e157a,                      !- Zone or Space Name
   ,                                       !- Daylighting Method
   ,                                       !- Availability Schedule Name
   Continuous,                             !- Lighting Control Type
@@ -937,27 +937,27 @@ Daylighting:Controls,
   0.2,                                    !- Minimum Light Output Fraction for Continuous or ContinuousOff Dimming Control
   1,                                      !- Number of Stepped Control Steps
   1,                                      !- Probability Lighting will be Reset When Needed in Manual Stepped Control
-  3_Office_8d7e84a1_Space_Daylighting,    !- Glare Calculation Daylighting Reference Point Name
+  3_Office_335e157a_Space_Daylighting,    !- Glare Calculation Daylighting Reference Point Name
   -0,                                     !- Glare Calculation Azimuth Angle of View Direction Clockwise from Zone y-Axis {deg}
   ,                                       !- Maximum Allowable Discomfort Glare Index
   ,                                       !- DElight Gridding Resolution {m2}
-  3_Office_8d7e84a1_Space_Daylighting,    !- Daylighting Reference Point Name 1
+  3_Office_335e157a_Space_Daylighting,    !- Daylighting Reference Point Name 1
   1,                                      !- Fraction of Lights Controlled by Reference Point 1
   300;                                    !- Illuminance Setpoint at Reference Point 1 {lux}
 
 Daylighting:ReferencePoint,
-  3_Office_8d7e84a1_Space_Daylighting,    !- Name
-  3_Office_8d7e84a1,                      !- Zone or Space Name
+  3_Office_335e157a_Space_Daylighting,    !- Name
+  3_Office_335e157a,                      !- Zone or Space Name
   6.48903098650033,                       !- X-Coordinate of Reference Point {m}
   16.9293342470341,                       !- Y-Coordinate of Reference Point {m}
   0.8;                                    !- Z-Coordinate of Reference Point {m}
 
 ZoneControl:Thermostat,
-  3_Office_8d7e84a1 Thermostat,           !- Name
-  3_Office_8d7e84a1,                      !- Zone or ZoneList Name
-  3_Office_8d7e84a1 Thermostat Schedule,  !- Control Type Schedule Name
+  3_Office_335e157a Thermostat,           !- Name
+  3_Office_335e157a,                      !- Zone or ZoneList Name
+  3_Office_335e157a Thermostat Schedule,  !- Control Type Schedule Name
   ThermostatSetpoint:DualSetpoint,        !- Control 1 Object Type
-  2019::SmallOffice::OpenOffice_Setpoint, !- Control 1 Name
+  2019::MediumOffice::OpenOffice_Setpoint, !- Control 1 Name
   ,                                       !- Control 2 Object Type
   ,                                       !- Control 2 Name
   ,                                       !- Control 3 Object Type
@@ -967,153 +967,207 @@ ZoneControl:Thermostat,
   0;                                      !- Temperature Difference Between Cutout And Setpoint {deltaC}
 
 Schedule:Compact,
-  3_Office_8d7e84a1 Thermostat Schedule,  !- Name
-  3_Office_8d7e84a1 Thermostat Schedule Type Limits, !- Schedule Type Limits Name
+  3_Office_335e157a Thermostat Schedule,  !- Name
+  3_Office_335e157a Thermostat Schedule Type Limits, !- Schedule Type Limits Name
   Through: 12/31,                         !- Field 1
   For: AllDays,                           !- Field 2
   Until: 24:00,                           !- Field 3
   4;                                      !- Field 4
 
 ScheduleTypeLimits,
-  3_Office_8d7e84a1 Thermostat Schedule Type Limits, !- Name
+  3_Office_335e157a Thermostat Schedule Type Limits, !- Name
   0,                                      !- Lower Limit Value {BasedOnField A3}
   4,                                      !- Upper Limit Value {BasedOnField A3}
   DISCRETE;                               !- Numeric Type
 
 ThermostatSetpoint:DualSetpoint,
-  2019::SmallOffice::OpenOffice_Setpoint, !- Name
-  OfficeSmall HTGSETP_SCH_NO_OPTIMUM,     !- Heating Setpoint Temperature Schedule Name
-  OfficeSmall CLGSETP_SCH_NO_OPTIMUM;     !- Cooling Setpoint Temperature Schedule Name
+  2019::MediumOffice::OpenOffice_Setpoint, !- Name
+  OfficeMedium HTGSETP_SCH_YES_OPTIMUM,   !- Heating Setpoint Temperature Schedule Name
+  OfficeMedium CLGSETP_SCH_YES_OPTIMUM;   !- Cooling Setpoint Temperature Schedule Name
 
 Schedule:Day:Interval,
-  OfficeSmall HTGSETP_SCH_NO_OPTIMUM_Default, !- Name
+  OfficeMedium HTGSETP_SCH_YES_OPTIMUM_Default, !- Name
   Temperature,                            !- Schedule Type Limits Name
   No,                                     !- Interpolate to Timestep
   24:00,                                  !- Time 1 {hh:mm}
-  15.56;                                  !- Value Until Time 1
+  15.6;                                   !- Value Until Time 1
 
 Schedule:Day:Interval,
-  Schedule Day 2,                         !- Name
+  Schedule Day 6,                         !- Name
   Temperature,                            !- Schedule Type Limits Name
   No,                                     !- Interpolate to Timestep
-  06:00,                                  !- Time 1 {hh:mm}
-  15.56,                                  !- Value Until Time 1
-  19:00,                                  !- Time 2 {hh:mm}
-  21.11,                                  !- Value Until Time 2
-  24:00,                                  !- Time 3 {hh:mm}
-  15.56;                                  !- Value Until Time 3
+  05:00,                                  !- Time 1 {hh:mm}
+  15.6,                                   !- Value Until Time 1
+  06:00,                                  !- Time 2 {hh:mm}
+  17.8,                                   !- Value Until Time 2
+  07:00,                                  !- Time 3 {hh:mm}
+  20,                                     !- Value Until Time 3
+  22:00,                                  !- Time 4 {hh:mm}
+  21,                                     !- Value Until Time 4
+  24:00,                                  !- Time 5 {hh:mm}
+  15.6;                                   !- Value Until Time 5
+
+Schedule:Day:Interval,
+  Schedule Day 5,                         !- Name
+  Temperature,                            !- Schedule Type Limits Name
+  No,                                     !- Interpolate to Timestep
+  05:00,                                  !- Time 1 {hh:mm}
+  15.6,                                   !- Value Until Time 1
+  06:00,                                  !- Time 2 {hh:mm}
+  17.8,                                   !- Value Until Time 2
+  07:00,                                  !- Time 3 {hh:mm}
+  20,                                     !- Value Until Time 3
+  17:00,                                  !- Time 4 {hh:mm}
+  21,                                     !- Value Until Time 4
+  24:00,                                  !- Time 5 {hh:mm}
+  15.6;                                   !- Value Until Time 5
 
 Schedule:Week:Daily,
-  OfficeSmall HTGSETP_SCH_NO_OPTIMUM Week Rule - Jan1-Dec31, !- Name
-  OfficeSmall HTGSETP_SCH_NO_OPTIMUM_Default, !- Sunday Schedule:Day Name
-  Schedule Day 2,                         !- Monday Schedule:Day Name
-  Schedule Day 2,                         !- Tuesday Schedule:Day Name
-  Schedule Day 2,                         !- Wednesday Schedule:Day Name
-  Schedule Day 2,                         !- Thursday Schedule:Day Name
-  Schedule Day 2,                         !- Friday Schedule:Day Name
-  OfficeSmall HTGSETP_SCH_NO_OPTIMUM_Default, !- Saturday Schedule:Day Name
-  OfficeSmall HTGSETP_SCH_NO_OPTIMUM_Default, !- Holiday Schedule:Day Name
-  OfficeSmall HTGSETP_SCH_NO_OPTIMUM_SmrDsn 1, !- SummerDesignDay Schedule:Day Name
-  OfficeSmall HTGSETP_SCH_NO_OPTIMUM_WntrDsn 1, !- WinterDesignDay Schedule:Day Name
-  OfficeSmall HTGSETP_SCH_NO_OPTIMUM_Default, !- CustomDay1 Schedule:Day Name
-  OfficeSmall HTGSETP_SCH_NO_OPTIMUM_Default; !- CustomDay2 Schedule:Day Name
+  OfficeMedium HTGSETP_SCH_YES_OPTIMUM Week Rule - Jan1-Dec31, !- Name
+  OfficeMedium HTGSETP_SCH_YES_OPTIMUM_Default, !- Sunday Schedule:Day Name
+  Schedule Day 6,                         !- Monday Schedule:Day Name
+  Schedule Day 6,                         !- Tuesday Schedule:Day Name
+  Schedule Day 6,                         !- Wednesday Schedule:Day Name
+  Schedule Day 6,                         !- Thursday Schedule:Day Name
+  Schedule Day 6,                         !- Friday Schedule:Day Name
+  Schedule Day 5,                         !- Saturday Schedule:Day Name
+  OfficeMedium HTGSETP_SCH_YES_OPTIMUM_Default, !- Holiday Schedule:Day Name
+  OfficeMedium HTGSETP_SCH_YES_OPTIMUM_SmrDsn 1, !- SummerDesignDay Schedule:Day Name
+  OfficeMedium HTGSETP_SCH_YES_OPTIMUM_WntrDsn 1, !- WinterDesignDay Schedule:Day Name
+  OfficeMedium HTGSETP_SCH_YES_OPTIMUM_Default, !- CustomDay1 Schedule:Day Name
+  OfficeMedium HTGSETP_SCH_YES_OPTIMUM_Default; !- CustomDay2 Schedule:Day Name
 
 Schedule:Year,
-  OfficeSmall HTGSETP_SCH_NO_OPTIMUM,     !- Name
+  OfficeMedium HTGSETP_SCH_YES_OPTIMUM,   !- Name
   Temperature,                            !- Schedule Type Limits Name
-  OfficeSmall HTGSETP_SCH_NO_OPTIMUM Week Rule - Jan1-Dec31, !- Schedule:Week Name 1
+  OfficeMedium HTGSETP_SCH_YES_OPTIMUM Week Rule - Jan1-Dec31, !- Schedule:Week Name 1
   1,                                      !- Start Month 1
   1,                                      !- Start Day 1
   12,                                     !- End Month 1
   31;                                     !- End Day 1
 
 Schedule:Day:Interval,
-  OfficeSmall HTGSETP_SCH_NO_OPTIMUM_SmrDsn 1, !- Name
+  OfficeMedium HTGSETP_SCH_YES_OPTIMUM_SmrDsn 1, !- Name
   Temperature,                            !- Schedule Type Limits Name
   No,                                     !- Interpolate to Timestep
   24:00,                                  !- Time 1 {hh:mm}
-  15.56;                                  !- Value Until Time 1
+  15.6;                                   !- Value Until Time 1
 
 Schedule:Day:Interval,
-  OfficeSmall HTGSETP_SCH_NO_OPTIMUM_WntrDsn 1, !- Name
+  OfficeMedium HTGSETP_SCH_YES_OPTIMUM_WntrDsn 1, !- Name
+  Temperature,                            !- Schedule Type Limits Name
+  No,                                     !- Interpolate to Timestep
+  05:00,                                  !- Time 1 {hh:mm}
+  15.6,                                   !- Value Until Time 1
+  06:00,                                  !- Time 2 {hh:mm}
+  17.6,                                   !- Value Until Time 2
+  07:00,                                  !- Time 3 {hh:mm}
+  19.6,                                   !- Value Until Time 3
+  22:00,                                  !- Time 4 {hh:mm}
+  21,                                     !- Value Until Time 4
+  24:00,                                  !- Time 5 {hh:mm}
+  15.6;                                   !- Value Until Time 5
+
+Schedule:Day:Interval,
+  OfficeMedium CLGSETP_SCH_YES_OPTIMUM_Default, !- Name
   Temperature,                            !- Schedule Type Limits Name
   No,                                     !- Interpolate to Timestep
   24:00,                                  !- Time 1 {hh:mm}
-  21.11;                                  !- Value Until Time 1
+  26.7;                                   !- Value Until Time 1
 
 Schedule:Day:Interval,
-  OfficeSmall CLGSETP_SCH_NO_OPTIMUM_Default, !- Name
+  Schedule Day 10,                        !- Name
   Temperature,                            !- Schedule Type Limits Name
   No,                                     !- Interpolate to Timestep
-  24:00,                                  !- Time 1 {hh:mm}
-  29.44;                                  !- Value Until Time 1
+  05:00,                                  !- Time 1 {hh:mm}
+  26.7,                                   !- Value Until Time 1
+  06:00,                                  !- Time 2 {hh:mm}
+  25.6,                                   !- Value Until Time 2
+  07:00,                                  !- Time 3 {hh:mm}
+  25,                                     !- Value Until Time 3
+  22:00,                                  !- Time 4 {hh:mm}
+  24,                                     !- Value Until Time 4
+  24:00,                                  !- Time 5 {hh:mm}
+  26.7;                                   !- Value Until Time 5
 
 Schedule:Day:Interval,
-  Schedule Day 7,                         !- Name
+  Schedule Day 9,                         !- Name
   Temperature,                            !- Schedule Type Limits Name
   No,                                     !- Interpolate to Timestep
-  06:00,                                  !- Time 1 {hh:mm}
-  29.44,                                  !- Value Until Time 1
-  18:00,                                  !- Time 2 {hh:mm}
-  23.89,                                  !- Value Until Time 2
-  24:00,                                  !- Time 3 {hh:mm}
-  29.44;                                  !- Value Until Time 3
+  05:00,                                  !- Time 1 {hh:mm}
+  26.7,                                   !- Value Until Time 1
+  06:00,                                  !- Time 2 {hh:mm}
+  25.7,                                   !- Value Until Time 2
+  07:00,                                  !- Time 3 {hh:mm}
+  25,                                     !- Value Until Time 3
+  17:00,                                  !- Time 4 {hh:mm}
+  24,                                     !- Value Until Time 4
+  24:00,                                  !- Time 5 {hh:mm}
+  26.7;                                   !- Value Until Time 5
 
 Schedule:Week:Daily,
-  OfficeSmall CLGSETP_SCH_NO_OPTIMUM Week Rule - Jan1-Dec31, !- Name
-  OfficeSmall CLGSETP_SCH_NO_OPTIMUM_Default, !- Sunday Schedule:Day Name
-  Schedule Day 7,                         !- Monday Schedule:Day Name
-  Schedule Day 7,                         !- Tuesday Schedule:Day Name
-  Schedule Day 7,                         !- Wednesday Schedule:Day Name
-  Schedule Day 7,                         !- Thursday Schedule:Day Name
-  Schedule Day 7,                         !- Friday Schedule:Day Name
-  OfficeSmall CLGSETP_SCH_NO_OPTIMUM_Default, !- Saturday Schedule:Day Name
-  OfficeSmall CLGSETP_SCH_NO_OPTIMUM_Default, !- Holiday Schedule:Day Name
-  OfficeSmall CLGSETP_SCH_NO_OPTIMUM_SmrDsn 1, !- SummerDesignDay Schedule:Day Name
-  OfficeSmall CLGSETP_SCH_NO_OPTIMUM_WntrDsn 1, !- WinterDesignDay Schedule:Day Name
-  OfficeSmall CLGSETP_SCH_NO_OPTIMUM_Default, !- CustomDay1 Schedule:Day Name
-  OfficeSmall CLGSETP_SCH_NO_OPTIMUM_Default; !- CustomDay2 Schedule:Day Name
+  OfficeMedium CLGSETP_SCH_YES_OPTIMUM Week Rule - Jan1-Dec31, !- Name
+  OfficeMedium CLGSETP_SCH_YES_OPTIMUM_Default, !- Sunday Schedule:Day Name
+  Schedule Day 10,                        !- Monday Schedule:Day Name
+  Schedule Day 10,                        !- Tuesday Schedule:Day Name
+  Schedule Day 10,                        !- Wednesday Schedule:Day Name
+  Schedule Day 10,                        !- Thursday Schedule:Day Name
+  Schedule Day 10,                        !- Friday Schedule:Day Name
+  Schedule Day 9,                         !- Saturday Schedule:Day Name
+  OfficeMedium CLGSETP_SCH_YES_OPTIMUM_Default, !- Holiday Schedule:Day Name
+  OfficeMedium CLGSETP_SCH_YES_OPTIMUM_SmrDsn 1, !- SummerDesignDay Schedule:Day Name
+  OfficeMedium CLGSETP_SCH_YES_OPTIMUM_WntrDsn 1, !- WinterDesignDay Schedule:Day Name
+  OfficeMedium CLGSETP_SCH_YES_OPTIMUM_Default, !- CustomDay1 Schedule:Day Name
+  OfficeMedium CLGSETP_SCH_YES_OPTIMUM_Default; !- CustomDay2 Schedule:Day Name
 
 Schedule:Year,
-  OfficeSmall CLGSETP_SCH_NO_OPTIMUM,     !- Name
+  OfficeMedium CLGSETP_SCH_YES_OPTIMUM,   !- Name
   Temperature,                            !- Schedule Type Limits Name
-  OfficeSmall CLGSETP_SCH_NO_OPTIMUM Week Rule - Jan1-Dec31, !- Schedule:Week Name 1
+  OfficeMedium CLGSETP_SCH_YES_OPTIMUM Week Rule - Jan1-Dec31, !- Schedule:Week Name 1
   1,                                      !- Start Month 1
   1,                                      !- Start Day 1
   12,                                     !- End Month 1
   31;                                     !- End Day 1
 
 Schedule:Day:Interval,
-  OfficeSmall CLGSETP_SCH_NO_OPTIMUM_SmrDsn 1, !- Name
+  OfficeMedium CLGSETP_SCH_YES_OPTIMUM_SmrDsn 1, !- Name
   Temperature,                            !- Schedule Type Limits Name
   No,                                     !- Interpolate to Timestep
-  24:00,                                  !- Time 1 {hh:mm}
-  23.89;                                  !- Value Until Time 1
+  05:00,                                  !- Time 1 {hh:mm}
+  26.7,                                   !- Value Until Time 1
+  06:00,                                  !- Time 2 {hh:mm}
+  25.7,                                   !- Value Until Time 2
+  07:00,                                  !- Time 3 {hh:mm}
+  25,                                     !- Value Until Time 3
+  22:00,                                  !- Time 4 {hh:mm}
+  24,                                     !- Value Until Time 4
+  24:00,                                  !- Time 5 {hh:mm}
+  26.7;                                   !- Value Until Time 5
 
 Schedule:Day:Interval,
-  OfficeSmall CLGSETP_SCH_NO_OPTIMUM_WntrDsn 1, !- Name
+  OfficeMedium CLGSETP_SCH_YES_OPTIMUM_WntrDsn 1, !- Name
   Temperature,                            !- Schedule Type Limits Name
   No,                                     !- Interpolate to Timestep
   24:00,                                  !- Time 1 {hh:mm}
-  29.44;                                  !- Value Until Time 1
+  26.7;                                   !- Value Until Time 1
 
 ZoneHVAC:EquipmentConnections,
-  3_Office_8d7e84a1,                      !- Zone Name
-  3_Office_8d7e84a1 Equipment List,       !- Zone Conditioning Equipment List Name
-  3_Office_8d7e84a1 Inlet Node List,      !- Zone Air Inlet Node or NodeList Name
-  3_Office_8d7e84a1 Exhaust Node List,    !- Zone Air Exhaust Node or NodeList Name
+  3_Office_335e157a,                      !- Zone Name
+  3_Office_335e157a Equipment List,       !- Zone Conditioning Equipment List Name
+  3_Office_335e157a Inlet Node List,      !- Zone Air Inlet Node or NodeList Name
+  3_Office_335e157a Exhaust Node List,    !- Zone Air Exhaust Node or NodeList Name
   Node 2;                                 !- Zone Air Node Name
 
 NodeList,
-  3_Office_8d7e84a1 Inlet Node List,      !- Name
+  3_Office_335e157a Inlet Node List,      !- Name
   Node 6;                                 !- Node Name 1
 
 NodeList,
-  3_Office_8d7e84a1 Exhaust Node List,    !- Name
+  3_Office_335e157a Exhaust Node List,    !- Name
   Node 5;                                 !- Node Name 1
 
 ZoneHVAC:IdealLoadsAirSystem,
-  3_Office_8d7e84a1 Ideal Loads Air System, !- Name
+  3_Office_335e157a Ideal Loads Air System, !- Name
   ,                                       !- Availability Schedule Name
   Node 6,                                 !- Zone Supply Air Node Name
   Node 5,                                 !- Zone Exhaust Air Node Name
@@ -1133,7 +1187,7 @@ ZoneHVAC:IdealLoadsAirSystem,
   None,                                   !- Dehumidification Control Type
   ,                                       !- Cooling Sensible Heat Ratio {dimensionless}
   ,                                       !- Humidification Control Type
-  2019::SmallOffice::OpenOffice_Ventilation, !- Design Specification Outdoor Air Object Name
+  2019::MediumOffice::OpenOffice_Ventilation, !- Design Specification Outdoor Air Object Name
   ,                                       !- Outdoor Air Inlet Node Name
   None,                                   !- Demand Controlled Ventilation Type
   NoEconomizer,                           !- Outdoor Air Economizer Type
@@ -1142,7 +1196,7 @@ ZoneHVAC:IdealLoadsAirSystem,
   0;                                      !- Latent Heat Recovery Effectiveness {dimensionless}
 
 DesignSpecification:OutdoorAir,
-  2019::SmallOffice::OpenOffice_Ventilation, !- Name
+  2019::MediumOffice::OpenOffice_Ventilation, !- Name
   Sum,                                    !- Outdoor Air Method
   0.002359735,                            !- Outdoor Air Flow per Person {m3/s-person}
   0.0003048,                              !- Outdoor Air Flow per Zone Floor Area {m3/s-m2}
@@ -1150,17 +1204,17 @@ DesignSpecification:OutdoorAir,
   0;                                      !- Outdoor Air Flow Air Changes per Hour {1/hr}
 
 ZoneHVAC:EquipmentList,
-  3_Office_8d7e84a1 Equipment List,       !- Name
+  3_Office_335e157a Equipment List,       !- Name
   SequentialLoad,                         !- Load Distribution Scheme
   ZoneHVAC:IdealLoadsAirSystem,           !- Zone Equipment Object Type 1
-  3_Office_8d7e84a1 Ideal Loads Air System, !- Zone Equipment Name 1
+  3_Office_335e157a Ideal Loads Air System, !- Zone Equipment Name 1
   1,                                      !- Zone Equipment Cooling Sequence 1
   1,                                      !- Zone Equipment Heating or No-Load Sequence 1
   ,                                       !- Zone Equipment Sequential Cooling Fraction Schedule Name 1
   ;                                       !- Zone Equipment Sequential Heating Fraction Schedule Name 1
 
 Sizing:Zone,
-  3_Office_8d7e84a1,                      !- Zone or ZoneList Name
+  3_Office_335e157a,                      !- Zone or ZoneList Name
   SupplyAirTemperature,                   !- Zone Cooling Design Supply Air Temperature Input Method
   14,                                     !- Zone Cooling Design Supply Air Temperature {C}
   11.11,                                  !- Zone Cooling Design Supply Air Temperature Difference {deltaC}
@@ -1169,7 +1223,7 @@ Sizing:Zone,
   11.11,                                  !- Zone Heating Design Supply Air Temperature Difference {deltaC}
   0.0085,                                 !- Zone Cooling Design Supply Air Humidity Ratio {kgWater/kgDryAir}
   0.008,                                  !- Zone Heating Design Supply Air Humidity Ratio {kgWater/kgDryAir}
-  2019::SmallOffice::OpenOffice_Ventilation, !- Design Specification Outdoor Air Object Name
+  2019::MediumOffice::OpenOffice_Ventilation, !- Design Specification Outdoor Air Object Name
   ,                                       !- Zone Heating Sizing Factor
   ,                                       !- Zone Cooling Sizing Factor
   DesignDay,                              !- Cooling Design Air Flow Method
@@ -1187,7 +1241,7 @@ Sizing:Zone,
 
 SimulationControl,
   Yes,                                    !- Do Zone Sizing Calculation
-  Yes,                                    !- Do System Sizing Calculation
+  No,                                     !- Do System Sizing Calculation
   Yes,                                    !- Do Plant Sizing Calculation
   No,                                     !- Run Simulation for Sizing Periods
   Yes,                                    !- Run Simulation for Weather File Run Periods
@@ -2667,332 +2721,399 @@ Schedule:Day:Interval,
   1;                                      !- Value Until Time 8
 
 Schedule:Day:Interval,
-  OfficeSmall ACTIVITY_SCH_Default,       !- Name
+  OfficeMedium ACTIVITY_SCH_Default,      !- Name
   Activity Level,                         !- Schedule Type Limits Name
   No,                                     !- Interpolate to Timestep
   24:00,                                  !- Time 1 {hh:mm}
   120;                                    !- Value Until Time 1
 
 Schedule:Day:Interval,
-  OfficeSmall ACTIVITY_SCH_SmrDsn,        !- Name
+  OfficeMedium ACTIVITY_SCH_SmrDsn,       !- Name
   Activity Level,                         !- Schedule Type Limits Name
   No,                                     !- Interpolate to Timestep
   24:00,                                  !- Time 1 {hh:mm}
   120;                                    !- Value Until Time 1
 
 Schedule:Day:Interval,
-  OfficeSmall ACTIVITY_SCH_SmrDsn 1,      !- Name
+  OfficeMedium ACTIVITY_SCH_SmrDsn 1,     !- Name
   Activity Level,                         !- Schedule Type Limits Name
   No,                                     !- Interpolate to Timestep
   24:00,                                  !- Time 1 {hh:mm}
   120;                                    !- Value Until Time 1
 
 Schedule:Day:Interval,
-  OfficeSmall ACTIVITY_SCH_WntrDsn,       !- Name
+  OfficeMedium ACTIVITY_SCH_WntrDsn,      !- Name
   Activity Level,                         !- Schedule Type Limits Name
   No,                                     !- Interpolate to Timestep
   24:00,                                  !- Time 1 {hh:mm}
   120;                                    !- Value Until Time 1
 
 Schedule:Day:Interval,
-  OfficeSmall ACTIVITY_SCH_WntrDsn 1,     !- Name
+  OfficeMedium ACTIVITY_SCH_WntrDsn 1,    !- Name
   Activity Level,                         !- Schedule Type Limits Name
   No,                                     !- Interpolate to Timestep
   24:00,                                  !- Time 1 {hh:mm}
   120;                                    !- Value Until Time 1
 
 Schedule:Day:Interval,
-  OfficeSmall BLDG_EQUIP_SCH_2013_Default, !- Name
+  OfficeMedium BLDG_EQUIP_SCH_2013_Sat,   !- Name
   Fractional,                             !- Schedule Type Limits Name
   No,                                     !- Interpolate to Timestep
   06:00,                                  !- Time 1 {hh:mm}
-  0.4094775565,                           !- Value Until Time 1
+  0.2307553806,                           !- Value Until Time 1
   08:00,                                  !- Time 2 {hh:mm}
-  0.4797526335,                           !- Value Until Time 2
+  0.381234796,                            !- Value Until Time 2
   12:00,                                  !- Time 3 {hh:mm}
-  0.959505267,                            !- Value Until Time 3
-  13:00,                                  !- Time 4 {hh:mm}
-  0.90193495098,                          !- Value Until Time 4
-  17:00,                                  !- Time 5 {hh:mm}
-  0.959505267,                            !- Value Until Time 5
-  18:00,                                  !- Time 6 {hh:mm}
-  0.4797526335,                           !- Value Until Time 6
-  23:00,                                  !- Time 7 {hh:mm}
-  0.1919010534,                           !- Value Until Time 7
-  24:00,                                  !- Time 8 {hh:mm}
-  0.163791022;                            !- Value Until Time 8
+  0.476543495,                            !- Value Until Time 3
+  17:00,                                  !- Time 4 {hh:mm}
+  0.3335804465,                           !- Value Until Time 4
+  19:00,                                  !- Time 5 {hh:mm}
+  0.285926097,                            !- Value Until Time 5
+  24:00,                                  !- Time 6 {hh:mm}
+  0.2307553806;                           !- Value Until Time 6
 
 Schedule:Day:Interval,
-  OfficeSmall BLDG_EQUIP_SCH_2013_SmrDsn, !- Name
+  OfficeMedium BLDG_EQUIP_SCH_2013_SmrDsn, !- Name
   Fractional,                             !- Schedule Type Limits Name
   No,                                     !- Interpolate to Timestep
   24:00,                                  !- Time 1 {hh:mm}
   1;                                      !- Value Until Time 1
 
 Schedule:Day:Interval,
-  OfficeSmall BLDG_EQUIP_SCH_2013_SmrDsn 1, !- Name
+  OfficeMedium BLDG_EQUIP_SCH_2013_SmrDsn 1, !- Name
   Fractional,                             !- Schedule Type Limits Name
   No,                                     !- Interpolate to Timestep
   24:00,                                  !- Time 1 {hh:mm}
   1;                                      !- Value Until Time 1
 
 Schedule:Day:Interval,
-  OfficeSmall BLDG_EQUIP_SCH_2013_Wkdy,   !- Name
+  OfficeMedium BLDG_EQUIP_SCH_2013_Sun,   !- Name
   Fractional,                             !- Schedule Type Limits Name
   No,                                     !- Interpolate to Timestep
   06:00,                                  !- Time 1 {hh:mm}
-  0.4094775565,                           !- Value Until Time 1
+  0.2307553806,                           !- Value Until Time 1
+  18:00,                                  !- Time 2 {hh:mm}
+  0.288107175,                            !- Value Until Time 2
+  24:00,                                  !- Time 3 {hh:mm}
+  0.2307553806;                           !- Value Until Time 3
+
+Schedule:Day:Interval,
+  OfficeMedium BLDG_EQUIP_SCH_2013_Wkdy,  !- Name
+  Fractional,                             !- Schedule Type Limits Name
+  No,                                     !- Interpolate to Timestep
+  06:00,                                  !- Time 1 {hh:mm}
+  0.3076738408,                           !- Value Until Time 1
   08:00,                                  !- Time 2 {hh:mm}
-  0.4797526335,                           !- Value Until Time 2
+  0.381234796,                            !- Value Until Time 2
   12:00,                                  !- Time 3 {hh:mm}
-  0.959505267,                            !- Value Until Time 3
+  0.857778291,                            !- Value Until Time 3
   13:00,                                  !- Time 4 {hh:mm}
-  0.90193495098,                          !- Value Until Time 4
+  0.762469592,                            !- Value Until Time 4
   17:00,                                  !- Time 5 {hh:mm}
-  0.959505267,                            !- Value Until Time 5
+  0.857778291,                            !- Value Until Time 5
   18:00,                                  !- Time 6 {hh:mm}
-  0.4797526335,                           !- Value Until Time 6
-  23:00,                                  !- Time 7 {hh:mm}
-  0.1919010534,                           !- Value Until Time 7
-  24:00,                                  !- Time 8 {hh:mm}
-  0.163791022;                            !- Value Until Time 8
+  0.476543495,                            !- Value Until Time 6
+  24:00,                                  !- Time 7 {hh:mm}
+  0.381234796;                            !- Value Until Time 7
 
 Schedule:Day:Interval,
-  OfficeSmall BLDG_EQUIP_SCH_2013_Wknd,   !- Name
-  Fractional,                             !- Schedule Type Limits Name
-  No,                                     !- Interpolate to Timestep
-  24:00,                                  !- Time 1 {hh:mm}
-  0.1637910226;                           !- Value Until Time 1
-
-Schedule:Day:Interval,
-  OfficeSmall BLDG_EQUIP_SCH_2013_WntrDsn, !- Name
+  OfficeMedium BLDG_EQUIP_SCH_2013_WntrDsn, !- Name
   Fractional,                             !- Schedule Type Limits Name
   No,                                     !- Interpolate to Timestep
   24:00,                                  !- Time 1 {hh:mm}
   0;                                      !- Value Until Time 1
 
 Schedule:Day:Interval,
-  OfficeSmall BLDG_EQUIP_SCH_2013_WntrDsn 1, !- Name
+  OfficeMedium BLDG_EQUIP_SCH_2013_WntrDsn 1, !- Name
   Fractional,                             !- Schedule Type Limits Name
   No,                                     !- Interpolate to Timestep
   24:00,                                  !- Time 1 {hh:mm}
   0;                                      !- Value Until Time 1
 
 Schedule:Day:Interval,
-  OfficeSmall BLDG_LIGHT_SCH_2013_Default, !- Name
+  OfficeMedium BLDG_LIGHT_SCH_2013_Sat,   !- Name
+  Fractional,                             !- Schedule Type Limits Name
+  No,                                     !- Interpolate to Timestep
+  06:00,                                  !- Time 1 {hh:mm}
+  0.05,                                   !- Value Until Time 1
+  08:00,                                  !- Time 2 {hh:mm}
+  0.08623256,                             !- Value Until Time 2
+  12:00,                                  !- Time 3 {hh:mm}
+  0.25869768,                             !- Value Until Time 3
+  17:00,                                  !- Time 4 {hh:mm}
+  0.12934884,                             !- Value Until Time 4
+  19:00,                                  !- Time 5 {hh:mm}
+  0.04311628,                             !- Value Until Time 5
+  24:00,                                  !- Time 6 {hh:mm}
+  0.05;                                   !- Value Until Time 6
+
+Schedule:Day:Interval,
+  OfficeMedium BLDG_LIGHT_SCH_2013_SmrDsn, !- Name
+  Fractional,                             !- Schedule Type Limits Name
+  No,                                     !- Interpolate to Timestep
+  24:00,                                  !- Time 1 {hh:mm}
+  1;                                      !- Value Until Time 1
+
+Schedule:Day:Interval,
+  OfficeMedium BLDG_LIGHT_SCH_2013_SmrDsn 1, !- Name
+  Fractional,                             !- Schedule Type Limits Name
+  No,                                     !- Interpolate to Timestep
+  24:00,                                  !- Time 1 {hh:mm}
+  1;                                      !- Value Until Time 1
+
+Schedule:Day:Interval,
+  OfficeMedium BLDG_LIGHT_SCH_2013_Sun,   !- Name
+  Fractional,                             !- Schedule Type Limits Name
+  No,                                     !- Interpolate to Timestep
+  06:00,                                  !- Time 1 {hh:mm}
+  0.05,                                   !- Value Until Time 1
+  18:00,                                  !- Time 2 {hh:mm}
+  0.04311628,                             !- Value Until Time 2
+  24:00,                                  !- Time 3 {hh:mm}
+  0.05;                                   !- Value Until Time 3
+
+Schedule:Day:Interval,
+  OfficeMedium BLDG_LIGHT_SCH_2013_Wkdy,  !- Name
   Fractional,                             !- Schedule Type Limits Name
   No,                                     !- Interpolate to Timestep
   05:00,                                  !- Time 1 {hh:mm}
-  0.18,                                   !- Value Until Time 1
+  0.05,                                   !- Value Until Time 1
   06:00,                                  !- Time 2 {hh:mm}
-  0.23,                                   !- Value Until Time 2
+  0.1,                                    !- Value Until Time 2
   07:00,                                  !- Time 3 {hh:mm}
-  0.178641345,                            !- Value Until Time 3
+  0.08623256,                             !- Value Until Time 3
   08:00,                                  !- Time 4 {hh:mm}
-  0.32621463,                             !- Value Until Time 4
-  12:00,                                  !- Time 5 {hh:mm}
-  0.69903135,                             !- Value Until Time 5
-  13:00,                                  !- Time 6 {hh:mm}
-  0.6213612,                              !- Value Until Time 6
-  17:00,                                  !- Time 7 {hh:mm}
-  0.69903135,                             !- Value Until Time 7
-  18:00,                                  !- Time 8 {hh:mm}
-  0.473787915,                            !- Value Until Time 8
-  20:00,                                  !- Time 9 {hh:mm}
-  0.32621463,                             !- Value Until Time 9
-  22:00,                                  !- Time 10 {hh:mm}
-  0.24854448,                             !- Value Until Time 10
-  23:00,                                  !- Time 11 {hh:mm}
-  0.178641345,                            !- Value Until Time 11
-  24:00,                                  !- Time 12 {hh:mm}
-  0.18;                                   !- Value Until Time 12
+  0.25869768,                             !- Value Until Time 4
+  17:00,                                  !- Time 5 {hh:mm}
+  0.77609304,                             !- Value Until Time 5
+  18:00,                                  !- Time 6 {hh:mm}
+  0.4311628,                              !- Value Until Time 6
+  20:00,                                  !- Time 7 {hh:mm}
+  0.25869768,                             !- Value Until Time 7
+  22:00,                                  !- Time 8 {hh:mm}
+  0.17246512,                             !- Value Until Time 8
+  23:00,                                  !- Time 9 {hh:mm}
+  0.08623256,                             !- Value Until Time 9
+  24:00,                                  !- Time 10 {hh:mm}
+  0.04311628;                             !- Value Until Time 10
 
 Schedule:Day:Interval,
-  OfficeSmall BLDG_LIGHT_SCH_2013_SmrDsn, !- Name
-  Fractional,                             !- Schedule Type Limits Name
-  No,                                     !- Interpolate to Timestep
-  24:00,                                  !- Time 1 {hh:mm}
-  1;                                      !- Value Until Time 1
-
-Schedule:Day:Interval,
-  OfficeSmall BLDG_LIGHT_SCH_2013_SmrDsn 1, !- Name
-  Fractional,                             !- Schedule Type Limits Name
-  No,                                     !- Interpolate to Timestep
-  24:00,                                  !- Time 1 {hh:mm}
-  1;                                      !- Value Until Time 1
-
-Schedule:Day:Interval,
-  OfficeSmall BLDG_LIGHT_SCH_2013_Wkdy,   !- Name
-  Fractional,                             !- Schedule Type Limits Name
-  No,                                     !- Interpolate to Timestep
-  05:00,                                  !- Time 1 {hh:mm}
-  0.18,                                   !- Value Until Time 1
-  06:00,                                  !- Time 2 {hh:mm}
-  0.23,                                   !- Value Until Time 2
-  07:00,                                  !- Time 3 {hh:mm}
-  0.178641345,                            !- Value Until Time 3
-  08:00,                                  !- Time 4 {hh:mm}
-  0.32621463,                             !- Value Until Time 4
-  12:00,                                  !- Time 5 {hh:mm}
-  0.69903135,                             !- Value Until Time 5
-  13:00,                                  !- Time 6 {hh:mm}
-  0.6213612,                              !- Value Until Time 6
-  17:00,                                  !- Time 7 {hh:mm}
-  0.69903135,                             !- Value Until Time 7
-  18:00,                                  !- Time 8 {hh:mm}
-  0.473787915,                            !- Value Until Time 8
-  20:00,                                  !- Time 9 {hh:mm}
-  0.32621463,                             !- Value Until Time 9
-  22:00,                                  !- Time 10 {hh:mm}
-  0.24854448,                             !- Value Until Time 10
-  23:00,                                  !- Time 11 {hh:mm}
-  0.178641345,                            !- Value Until Time 11
-  24:00,                                  !- Time 12 {hh:mm}
-  0.18;                                   !- Value Until Time 12
-
-Schedule:Day:Interval,
-  OfficeSmall BLDG_LIGHT_SCH_2013_Wknd,   !- Name
-  Fractional,                             !- Schedule Type Limits Name
-  No,                                     !- Interpolate to Timestep
-  24:00,                                  !- Time 1 {hh:mm}
-  0.18;                                   !- Value Until Time 1
-
-Schedule:Day:Interval,
-  OfficeSmall BLDG_LIGHT_SCH_2013_WntrDsn, !- Name
+  OfficeMedium BLDG_LIGHT_SCH_2013_WntrDsn, !- Name
   Fractional,                             !- Schedule Type Limits Name
   No,                                     !- Interpolate to Timestep
   24:00,                                  !- Time 1 {hh:mm}
   0;                                      !- Value Until Time 1
 
 Schedule:Day:Interval,
-  OfficeSmall BLDG_LIGHT_SCH_2013_WntrDsn 1, !- Name
+  OfficeMedium BLDG_LIGHT_SCH_2013_WntrDsn 1, !- Name
   Fractional,                             !- Schedule Type Limits Name
   No,                                     !- Interpolate to Timestep
   24:00,                                  !- Time 1 {hh:mm}
   0;                                      !- Value Until Time 1
 
 Schedule:Day:Interval,
-  OfficeSmall BLDG_OCC_SCH_Default,       !- Name
+  OfficeMedium BLDG_OCC_SCH_Default,      !- Name
   Fractional,                             !- Schedule Type Limits Name
   No,                                     !- Interpolate to Timestep
-  24:00,                                  !- Time 1 {hh:mm}
-  0;                                      !- Value Until Time 1
+  06:00,                                  !- Time 1 {hh:mm}
+  0,                                      !- Value Until Time 1
+  18:00,                                  !- Time 2 {hh:mm}
+  0.05,                                   !- Value Until Time 2
+  24:00,                                  !- Time 3 {hh:mm}
+  0;                                      !- Value Until Time 3
 
 Schedule:Day:Interval,
-  OfficeSmall BLDG_OCC_SCH_SmrDsn,        !- Name
+  OfficeMedium BLDG_OCC_SCH_Sat,          !- Name
   Fractional,                             !- Schedule Type Limits Name
   No,                                     !- Interpolate to Timestep
-  24:00,                                  !- Time 1 {hh:mm}
-  1;                                      !- Value Until Time 1
+  06:00,                                  !- Time 1 {hh:mm}
+  0,                                      !- Value Until Time 1
+  08:00,                                  !- Time 2 {hh:mm}
+  0.1,                                    !- Value Until Time 2
+  12:00,                                  !- Time 3 {hh:mm}
+  0.3,                                    !- Value Until Time 3
+  17:00,                                  !- Time 4 {hh:mm}
+  0.1,                                    !- Value Until Time 4
+  19:00,                                  !- Time 5 {hh:mm}
+  0.05,                                   !- Value Until Time 5
+  24:00,                                  !- Time 6 {hh:mm}
+  0;                                      !- Value Until Time 6
 
 Schedule:Day:Interval,
-  OfficeSmall BLDG_OCC_SCH_SmrDsn 1,      !- Name
+  OfficeMedium BLDG_OCC_SCH_SmrDsn,       !- Name
   Fractional,                             !- Schedule Type Limits Name
   No,                                     !- Interpolate to Timestep
-  24:00,                                  !- Time 1 {hh:mm}
-  1;                                      !- Value Until Time 1
+  06:00,                                  !- Time 1 {hh:mm}
+  0,                                      !- Value Until Time 1
+  22:00,                                  !- Time 2 {hh:mm}
+  1,                                      !- Value Until Time 2
+  24:00,                                  !- Time 3 {hh:mm}
+  0.05;                                   !- Value Until Time 3
 
 Schedule:Day:Interval,
-  OfficeSmall BLDG_OCC_SCH_Wkdy,          !- Name
+  OfficeMedium BLDG_OCC_SCH_SmrDsn 1,     !- Name
+  Fractional,                             !- Schedule Type Limits Name
+  No,                                     !- Interpolate to Timestep
+  06:00,                                  !- Time 1 {hh:mm}
+  0,                                      !- Value Until Time 1
+  22:00,                                  !- Time 2 {hh:mm}
+  1,                                      !- Value Until Time 2
+  24:00,                                  !- Time 3 {hh:mm}
+  0.05;                                   !- Value Until Time 3
+
+Schedule:Day:Interval,
+  OfficeMedium BLDG_OCC_SCH_Wkdy,         !- Name
   Fractional,                             !- Schedule Type Limits Name
   No,                                     !- Interpolate to Timestep
   06:00,                                  !- Time 1 {hh:mm}
   0,                                      !- Value Until Time 1
   07:00,                                  !- Time 2 {hh:mm}
-  0.11,                                   !- Value Until Time 2
+  0.1,                                    !- Value Until Time 2
   08:00,                                  !- Time 3 {hh:mm}
-  0.21,                                   !- Value Until Time 3
+  0.2,                                    !- Value Until Time 3
   12:00,                                  !- Time 4 {hh:mm}
-  1,                                      !- Value Until Time 4
+  0.95,                                   !- Value Until Time 4
   13:00,                                  !- Time 5 {hh:mm}
-  0.53,                                   !- Value Until Time 5
+  0.5,                                    !- Value Until Time 5
   17:00,                                  !- Time 6 {hh:mm}
-  1,                                      !- Value Until Time 6
+  0.95,                                   !- Value Until Time 6
   18:00,                                  !- Time 7 {hh:mm}
-  0.32,                                   !- Value Until Time 7
+  0.3,                                    !- Value Until Time 7
   22:00,                                  !- Time 8 {hh:mm}
-  0.11,                                   !- Value Until Time 8
-  23:00,                                  !- Time 9 {hh:mm}
-  0.05,                                   !- Value Until Time 9
-  24:00,                                  !- Time 10 {hh:mm}
-  0;                                      !- Value Until Time 10
+  0.1,                                    !- Value Until Time 8
+  24:00,                                  !- Time 9 {hh:mm}
+  0.05;                                   !- Value Until Time 9
 
 Schedule:Day:Interval,
-  OfficeSmall BLDG_OCC_SCH_WntrDsn,       !- Name
+  OfficeMedium BLDG_OCC_SCH_WntrDsn,      !- Name
   Fractional,                             !- Schedule Type Limits Name
   No,                                     !- Interpolate to Timestep
   24:00,                                  !- Time 1 {hh:mm}
   0;                                      !- Value Until Time 1
 
 Schedule:Day:Interval,
-  OfficeSmall BLDG_OCC_SCH_WntrDsn 1,     !- Name
+  OfficeMedium BLDG_OCC_SCH_WntrDsn 1,    !- Name
   Fractional,                             !- Schedule Type Limits Name
   No,                                     !- Interpolate to Timestep
   24:00,                                  !- Time 1 {hh:mm}
   0;                                      !- Value Until Time 1
 
 Schedule:Day:Interval,
-  OfficeSmall CLGSETP_SCH_NO_OPTIMUM_SmrDsn, !- Name
+  OfficeMedium CLGSETP_SCH_YES_OPTIMUM_Sat, !- Name
+  Temperature,                            !- Schedule Type Limits Name
+  No,                                     !- Interpolate to Timestep
+  05:00,                                  !- Time 1 {hh:mm}
+  26.7,                                   !- Value Until Time 1
+  06:00,                                  !- Time 2 {hh:mm}
+  25.7,                                   !- Value Until Time 2
+  07:00,                                  !- Time 3 {hh:mm}
+  25,                                     !- Value Until Time 3
+  17:00,                                  !- Time 4 {hh:mm}
+  24,                                     !- Value Until Time 4
+  24:00,                                  !- Time 5 {hh:mm}
+  26.7;                                   !- Value Until Time 5
+
+Schedule:Day:Interval,
+  OfficeMedium CLGSETP_SCH_YES_OPTIMUM_SmrDsn, !- Name
+  Temperature,                            !- Schedule Type Limits Name
+  No,                                     !- Interpolate to Timestep
+  05:00,                                  !- Time 1 {hh:mm}
+  26.7,                                   !- Value Until Time 1
+  06:00,                                  !- Time 2 {hh:mm}
+  25.7,                                   !- Value Until Time 2
+  07:00,                                  !- Time 3 {hh:mm}
+  25,                                     !- Value Until Time 3
+  22:00,                                  !- Time 4 {hh:mm}
+  24,                                     !- Value Until Time 4
+  24:00,                                  !- Time 5 {hh:mm}
+  26.7;                                   !- Value Until Time 5
+
+Schedule:Day:Interval,
+  OfficeMedium CLGSETP_SCH_YES_OPTIMUM_Wkdy, !- Name
+  Temperature,                            !- Schedule Type Limits Name
+  No,                                     !- Interpolate to Timestep
+  05:00,                                  !- Time 1 {hh:mm}
+  26.7,                                   !- Value Until Time 1
+  06:00,                                  !- Time 2 {hh:mm}
+  25.6,                                   !- Value Until Time 2
+  07:00,                                  !- Time 3 {hh:mm}
+  25,                                     !- Value Until Time 3
+  22:00,                                  !- Time 4 {hh:mm}
+  24,                                     !- Value Until Time 4
+  24:00,                                  !- Time 5 {hh:mm}
+  26.7;                                   !- Value Until Time 5
+
+Schedule:Day:Interval,
+  OfficeMedium CLGSETP_SCH_YES_OPTIMUM_WntrDsn, !- Name
   Temperature,                            !- Schedule Type Limits Name
   No,                                     !- Interpolate to Timestep
   24:00,                                  !- Time 1 {hh:mm}
-  23.89;                                  !- Value Until Time 1
+  26.7;                                   !- Value Until Time 1
 
 Schedule:Day:Interval,
-  OfficeSmall CLGSETP_SCH_NO_OPTIMUM_Wkdy, !- Name
+  OfficeMedium HTGSETP_SCH_YES_OPTIMUM_Sat, !- Name
   Temperature,                            !- Schedule Type Limits Name
   No,                                     !- Interpolate to Timestep
-  06:00,                                  !- Time 1 {hh:mm}
-  29.44,                                  !- Value Until Time 1
-  18:00,                                  !- Time 2 {hh:mm}
-  23.89,                                  !- Value Until Time 2
-  24:00,                                  !- Time 3 {hh:mm}
-  29.44;                                  !- Value Until Time 3
+  05:00,                                  !- Time 1 {hh:mm}
+  15.6,                                   !- Value Until Time 1
+  06:00,                                  !- Time 2 {hh:mm}
+  17.8,                                   !- Value Until Time 2
+  07:00,                                  !- Time 3 {hh:mm}
+  20,                                     !- Value Until Time 3
+  17:00,                                  !- Time 4 {hh:mm}
+  21,                                     !- Value Until Time 4
+  24:00,                                  !- Time 5 {hh:mm}
+  15.6;                                   !- Value Until Time 5
 
 Schedule:Day:Interval,
-  OfficeSmall CLGSETP_SCH_NO_OPTIMUM_WntrDsn, !- Name
-  Temperature,                            !- Schedule Type Limits Name
-  No,                                     !- Interpolate to Timestep
-  24:00,                                  !- Time 1 {hh:mm}
-  29.44;                                  !- Value Until Time 1
-
-Schedule:Day:Interval,
-  OfficeSmall HTGSETP_SCH_NO_OPTIMUM_SmrDsn, !- Name
+  OfficeMedium HTGSETP_SCH_YES_OPTIMUM_SmrDsn, !- Name
   Temperature,                            !- Schedule Type Limits Name
   No,                                     !- Interpolate to Timestep
   24:00,                                  !- Time 1 {hh:mm}
-  15.56;                                  !- Value Until Time 1
+  15.6;                                   !- Value Until Time 1
 
 Schedule:Day:Interval,
-  OfficeSmall HTGSETP_SCH_NO_OPTIMUM_Wkdy, !- Name
+  OfficeMedium HTGSETP_SCH_YES_OPTIMUM_Wkdy, !- Name
   Temperature,                            !- Schedule Type Limits Name
   No,                                     !- Interpolate to Timestep
-  06:00,                                  !- Time 1 {hh:mm}
-  15.56,                                  !- Value Until Time 1
-  19:00,                                  !- Time 2 {hh:mm}
-  21.11,                                  !- Value Until Time 2
-  24:00,                                  !- Time 3 {hh:mm}
-  15.56;                                  !- Value Until Time 3
+  05:00,                                  !- Time 1 {hh:mm}
+  15.6,                                   !- Value Until Time 1
+  06:00,                                  !- Time 2 {hh:mm}
+  17.8,                                   !- Value Until Time 2
+  07:00,                                  !- Time 3 {hh:mm}
+  20,                                     !- Value Until Time 3
+  22:00,                                  !- Time 4 {hh:mm}
+  21,                                     !- Value Until Time 4
+  24:00,                                  !- Time 5 {hh:mm}
+  15.6;                                   !- Value Until Time 5
 
 Schedule:Day:Interval,
-  OfficeSmall HTGSETP_SCH_NO_OPTIMUM_WntrDsn, !- Name
+  OfficeMedium HTGSETP_SCH_YES_OPTIMUM_WntrDsn, !- Name
   Temperature,                            !- Schedule Type Limits Name
   No,                                     !- Interpolate to Timestep
-  24:00,                                  !- Time 1 {hh:mm}
-  21.11;                                  !- Value Until Time 1
+  05:00,                                  !- Time 1 {hh:mm}
+  15.6,                                   !- Value Until Time 1
+  06:00,                                  !- Time 2 {hh:mm}
+  17.6,                                   !- Value Until Time 2
+  07:00,                                  !- Time 3 {hh:mm}
+  19.6,                                   !- Value Until Time 3
+  22:00,                                  !- Time 4 {hh:mm}
+  21,                                     !- Value Until Time 4
+  24:00,                                  !- Time 5 {hh:mm}
+  15.6;                                   !- Value Until Time 5
 
 Schedule:Day:Interval,
-  OfficeSmall INFIL_QUARTER_ON_SCH_Default, !- Name
+  OfficeMedium INFIL_SCH_PNNL_Default,    !- Name
   Fractional,                             !- Schedule Type Limits Name
   No,                                     !- Interpolate to Timestep
   24:00,                                  !- Time 1 {hh:mm}
   1;                                      !- Value Until Time 1
 
 Schedule:Day:Interval,
-  OfficeSmall INFIL_QUARTER_ON_SCH_Sat,   !- Name
+  OfficeMedium INFIL_SCH_PNNL_Sat,        !- Name
   Fractional,                             !- Schedule Type Limits Name
   No,                                     !- Interpolate to Timestep
-  07:00,                                  !- Time 1 {hh:mm}
+  06:00,                                  !- Time 1 {hh:mm}
   1,                                      !- Value Until Time 1
   18:00,                                  !- Time 2 {hh:mm}
   0.25,                                   !- Value Until Time 2
@@ -3000,43 +3121,43 @@ Schedule:Day:Interval,
   1;                                      !- Value Until Time 3
 
 Schedule:Day:Interval,
-  OfficeSmall INFIL_QUARTER_ON_SCH_SmrDsn, !- Name
+  OfficeMedium INFIL_SCH_PNNL_SmrDsn,     !- Name
   Fractional,                             !- Schedule Type Limits Name
   No,                                     !- Interpolate to Timestep
-  07:00,                                  !- Time 1 {hh:mm}
+  06:00,                                  !- Time 1 {hh:mm}
   1,                                      !- Value Until Time 1
-  19:00,                                  !- Time 2 {hh:mm}
+  22:00,                                  !- Time 2 {hh:mm}
   0.25,                                   !- Value Until Time 2
   24:00,                                  !- Time 3 {hh:mm}
   1;                                      !- Value Until Time 3
 
 Schedule:Day:Interval,
-  OfficeSmall INFIL_QUARTER_ON_SCH_SmrDsn 1, !- Name
+  OfficeMedium INFIL_SCH_PNNL_SmrDsn 1,   !- Name
   Fractional,                             !- Schedule Type Limits Name
   No,                                     !- Interpolate to Timestep
-  07:00,                                  !- Time 1 {hh:mm}
+  06:00,                                  !- Time 1 {hh:mm}
   1,                                      !- Value Until Time 1
-  19:00,                                  !- Time 2 {hh:mm}
+  22:00,                                  !- Time 2 {hh:mm}
   0.25,                                   !- Value Until Time 2
   24:00,                                  !- Time 3 {hh:mm}
   1;                                      !- Value Until Time 3
 
 Schedule:Day:Interval,
-  OfficeSmall INFIL_QUARTER_ON_SCH_Wkdy,  !- Name
+  OfficeMedium INFIL_SCH_PNNL_Wkdy,       !- Name
   Fractional,                             !- Schedule Type Limits Name
   No,                                     !- Interpolate to Timestep
-  07:00,                                  !- Time 1 {hh:mm}
+  06:00,                                  !- Time 1 {hh:mm}
   1,                                      !- Value Until Time 1
-  19:00,                                  !- Time 2 {hh:mm}
+  22:00,                                  !- Time 2 {hh:mm}
   0.25,                                   !- Value Until Time 2
   24:00,                                  !- Time 3 {hh:mm}
   1;                                      !- Value Until Time 3
 
 Schedule:Day:Interval,
-  OfficeSmall INFIL_QUARTER_ON_SCH_WntrDsn, !- Name
+  OfficeMedium INFIL_SCH_PNNL_WntrDsn,    !- Name
   Fractional,                             !- Schedule Type Limits Name
   No,                                     !- Interpolate to Timestep
-  07:00,                                  !- Time 1 {hh:mm}
+  06:00,                                  !- Time 1 {hh:mm}
   1,                                      !- Value Until Time 1
   18:00,                                  !- Time 2 {hh:mm}
   0.25,                                   !- Value Until Time 2
@@ -3044,10 +3165,10 @@ Schedule:Day:Interval,
   1;                                      !- Value Until Time 3
 
 Schedule:Day:Interval,
-  OfficeSmall INFIL_QUARTER_ON_SCH_WntrDsn 1, !- Name
+  OfficeMedium INFIL_SCH_PNNL_WntrDsn 1,  !- Name
   Fractional,                             !- Schedule Type Limits Name
   No,                                     !- Interpolate to Timestep
-  07:00,                                  !- Time 1 {hh:mm}
+  06:00,                                  !- Time 1 {hh:mm}
   1,                                      !- Value Until Time 1
   18:00,                                  !- Time 2 {hh:mm}
   0.25,                                   !- Value Until Time 2
@@ -3059,46 +3180,41 @@ Schedule:Day:Interval,
   Fractional,                             !- Schedule Type Limits Name
   No,                                     !- Interpolate to Timestep
   06:00,                                  !- Time 1 {hh:mm}
-  0,                                      !- Value Until Time 1
-  07:00,                                  !- Time 2 {hh:mm}
-  0.11,                                   !- Value Until Time 2
-  08:00,                                  !- Time 3 {hh:mm}
-  0.21,                                   !- Value Until Time 3
-  12:00,                                  !- Time 4 {hh:mm}
-  1,                                      !- Value Until Time 4
-  13:00,                                  !- Time 5 {hh:mm}
-  0.53,                                   !- Value Until Time 5
-  17:00,                                  !- Time 6 {hh:mm}
-  1,                                      !- Value Until Time 6
-  18:00,                                  !- Time 7 {hh:mm}
-  0.32,                                   !- Value Until Time 7
-  22:00,                                  !- Time 8 {hh:mm}
-  0.11,                                   !- Value Until Time 8
-  23:00,                                  !- Time 9 {hh:mm}
-  0.05,                                   !- Value Until Time 9
-  24:00,                                  !- Time 10 {hh:mm}
-  0;                                      !- Value Until Time 10
-
-Schedule:Day:Interval,
-  Schedule Day 10,                        !- Name
-  Temperature 1,                          !- Schedule Type Limits Name
-  No,                                     !- Interpolate to Timestep
-  24:00,                                  !- Time 1 {hh:mm}
-  60;                                     !- Value Until Time 1
+  0.05,                                   !- Value Until Time 1
+  18:00,                                  !- Time 2 {hh:mm}
+  0.04311628,                             !- Value Until Time 2
+  24:00,                                  !- Time 3 {hh:mm}
+  0.05;                                   !- Value Until Time 3
 
 Schedule:Day:Interval,
   Schedule Day 11,                        !- Name
-  ,                                       !- Schedule Type Limits Name
+  Fractional,                             !- Schedule Type Limits Name
   No,                                     !- Interpolate to Timestep
-  24:00,                                  !- Time 1 {hh:mm}
-  0.2;                                    !- Value Until Time 1
+  06:00,                                  !- Time 1 {hh:mm}
+  0.2307553806,                           !- Value Until Time 1
+  18:00,                                  !- Time 2 {hh:mm}
+  0.288107175,                            !- Value Until Time 2
+  24:00,                                  !- Time 3 {hh:mm}
+  0.2307553806;                           !- Value Until Time 3
 
 Schedule:Day:Interval,
   Schedule Day 12,                        !- Name
-  ,                                       !- Schedule Type Limits Name
+  Fractional,                             !- Schedule Type Limits Name
   No,                                     !- Interpolate to Timestep
-  24:00,                                  !- Time 1 {hh:mm}
-  0.05;                                   !- Value Until Time 1
+  06:00,                                  !- Time 1 {hh:mm}
+  0.3076738408,                           !- Value Until Time 1
+  08:00,                                  !- Time 2 {hh:mm}
+  0.381234796,                            !- Value Until Time 2
+  12:00,                                  !- Time 3 {hh:mm}
+  0.857778291,                            !- Value Until Time 3
+  13:00,                                  !- Time 4 {hh:mm}
+  0.762469592,                            !- Value Until Time 4
+  17:00,                                  !- Time 5 {hh:mm}
+  0.857778291,                            !- Value Until Time 5
+  18:00,                                  !- Time 6 {hh:mm}
+  0.476543495,                            !- Value Until Time 6
+  24:00,                                  !- Time 7 {hh:mm}
+  0.381234796;                            !- Value Until Time 7
 
 Schedule:Day:Interval,
   Schedule Day 13,                        !- Name
@@ -3109,125 +3225,147 @@ Schedule:Day:Interval,
 
 Schedule:Day:Interval,
   Schedule Day 14,                        !- Name
-  Temperature 1,                          !- Schedule Type Limits Name
+  ,                                       !- Schedule Type Limits Name
   No,                                     !- Interpolate to Timestep
   24:00,                                  !- Time 1 {hh:mm}
-  22;                                     !- Value Until Time 1
+  0.2;                                    !- Value Until Time 1
 
 Schedule:Day:Interval,
   Schedule Day 15,                        !- Name
-  Temperature 1,                          !- Schedule Type Limits Name
+  ,                                       !- Schedule Type Limits Name
   No,                                     !- Interpolate to Timestep
   24:00,                                  !- Time 1 {hh:mm}
-  60;                                     !- Value Until Time 1
+  0.05;                                   !- Value Until Time 1
 
 Schedule:Day:Interval,
   Schedule Day 16,                        !- Name
   Temperature 1,                          !- Schedule Type Limits Name
   No,                                     !- Interpolate to Timestep
   24:00,                                  !- Time 1 {hh:mm}
+  60;                                     !- Value Until Time 1
+
+Schedule:Day:Interval,
+  Schedule Day 17,                        !- Name
+  Temperature 1,                          !- Schedule Type Limits Name
+  No,                                     !- Interpolate to Timestep
+  24:00,                                  !- Time 1 {hh:mm}
   22;                                     !- Value Until Time 1
+
+Schedule:Day:Interval,
+  Schedule Day 18,                        !- Name
+  Temperature 1,                          !- Schedule Type Limits Name
+  No,                                     !- Interpolate to Timestep
+  24:00,                                  !- Time 1 {hh:mm}
+  60;                                     !- Value Until Time 1
+
+Schedule:Day:Interval,
+  Schedule Day 19,                        !- Name
+  Temperature 1,                          !- Schedule Type Limits Name
+  No,                                     !- Interpolate to Timestep
+  24:00,                                  !- Time 1 {hh:mm}
+  22;                                     !- Value Until Time 1
+
+Schedule:Day:Interval,
+  Schedule Day 2,                         !- Name
+  Fractional,                             !- Schedule Type Limits Name
+  No,                                     !- Interpolate to Timestep
+  05:00,                                  !- Time 1 {hh:mm}
+  0.05,                                   !- Value Until Time 1
+  06:00,                                  !- Time 2 {hh:mm}
+  0.1,                                    !- Value Until Time 2
+  07:00,                                  !- Time 3 {hh:mm}
+  0.08623256,                             !- Value Until Time 3
+  08:00,                                  !- Time 4 {hh:mm}
+  0.25869768,                             !- Value Until Time 4
+  17:00,                                  !- Time 5 {hh:mm}
+  0.77609304,                             !- Value Until Time 5
+  18:00,                                  !- Time 6 {hh:mm}
+  0.4311628,                              !- Value Until Time 6
+  20:00,                                  !- Time 7 {hh:mm}
+  0.25869768,                             !- Value Until Time 7
+  22:00,                                  !- Time 8 {hh:mm}
+  0.17246512,                             !- Value Until Time 8
+  23:00,                                  !- Time 9 {hh:mm}
+  0.08623256,                             !- Value Until Time 9
+  24:00,                                  !- Time 10 {hh:mm}
+  0.04311628;                             !- Value Until Time 10
 
 Schedule:Day:Interval,
   Schedule Day 3,                         !- Name
   Fractional,                             !- Schedule Type Limits Name
   No,                                     !- Interpolate to Timestep
   06:00,                                  !- Time 1 {hh:mm}
-  0.4094775565,                           !- Value Until Time 1
-  08:00,                                  !- Time 2 {hh:mm}
-  0.4797526335,                           !- Value Until Time 2
-  12:00,                                  !- Time 3 {hh:mm}
-  0.959505267,                            !- Value Until Time 3
-  13:00,                                  !- Time 4 {hh:mm}
-  0.90193495098,                          !- Value Until Time 4
-  17:00,                                  !- Time 5 {hh:mm}
-  0.959505267,                            !- Value Until Time 5
-  18:00,                                  !- Time 6 {hh:mm}
-  0.4797526335,                           !- Value Until Time 6
-  23:00,                                  !- Time 7 {hh:mm}
-  0.1919010534,                           !- Value Until Time 7
-  24:00,                                  !- Time 8 {hh:mm}
-  0.163791022;                            !- Value Until Time 8
-
-Schedule:Day:Interval,
-  Schedule Day 4,                         !- Name
-  Fractional,                             !- Schedule Type Limits Name
-  No,                                     !- Interpolate to Timestep
-  24:00,                                  !- Time 1 {hh:mm}
-  0.1637910226;                           !- Value Until Time 1
-
-Schedule:Day:Interval,
-  Schedule Day 5,                         !- Name
-  Fractional,                             !- Schedule Type Limits Name
-  No,                                     !- Interpolate to Timestep
-  05:00,                                  !- Time 1 {hh:mm}
-  0.18,                                   !- Value Until Time 1
-  06:00,                                  !- Time 2 {hh:mm}
-  0.23,                                   !- Value Until Time 2
-  07:00,                                  !- Time 3 {hh:mm}
-  0.178641345,                            !- Value Until Time 3
-  08:00,                                  !- Time 4 {hh:mm}
-  0.32621463,                             !- Value Until Time 4
-  12:00,                                  !- Time 5 {hh:mm}
-  0.69903135,                             !- Value Until Time 5
-  13:00,                                  !- Time 6 {hh:mm}
-  0.6213612,                              !- Value Until Time 6
-  17:00,                                  !- Time 7 {hh:mm}
-  0.69903135,                             !- Value Until Time 7
-  18:00,                                  !- Time 8 {hh:mm}
-  0.473787915,                            !- Value Until Time 8
-  20:00,                                  !- Time 9 {hh:mm}
-  0.32621463,                             !- Value Until Time 9
-  22:00,                                  !- Time 10 {hh:mm}
-  0.24854448,                             !- Value Until Time 10
-  23:00,                                  !- Time 11 {hh:mm}
-  0.178641345,                            !- Value Until Time 11
-  24:00,                                  !- Time 12 {hh:mm}
-  0.18;                                   !- Value Until Time 12
-
-Schedule:Day:Interval,
-  Schedule Day 6,                         !- Name
-  Fractional,                             !- Schedule Type Limits Name
-  No,                                     !- Interpolate to Timestep
-  24:00,                                  !- Time 1 {hh:mm}
-  0.18;                                   !- Value Until Time 1
-
-Schedule:Day:Interval,
-  Schedule Day 8,                         !- Name
-  Fractional,                             !- Schedule Type Limits Name
-  No,                                     !- Interpolate to Timestep
-  07:00,                                  !- Time 1 {hh:mm}
   1,                                      !- Value Until Time 1
-  19:00,                                  !- Time 2 {hh:mm}
+  22:00,                                  !- Time 2 {hh:mm}
   0.25,                                   !- Value Until Time 2
   24:00,                                  !- Time 3 {hh:mm}
   1;                                      !- Value Until Time 3
 
 Schedule:Day:Interval,
-  Schedule Day 9,                         !- Name
+  Schedule Day 4,                         !- Name
   Fractional,                             !- Schedule Type Limits Name
   No,                                     !- Interpolate to Timestep
-  07:00,                                  !- Time 1 {hh:mm}
+  06:00,                                  !- Time 1 {hh:mm}
   1,                                      !- Value Until Time 1
   18:00,                                  !- Time 2 {hh:mm}
   0.25,                                   !- Value Until Time 2
   24:00,                                  !- Time 3 {hh:mm}
   1;                                      !- Value Until Time 3
 
+Schedule:Day:Interval,
+  Schedule Day 7,                         !- Name
+  Fractional,                             !- Schedule Type Limits Name
+  No,                                     !- Interpolate to Timestep
+  06:00,                                  !- Time 1 {hh:mm}
+  0,                                      !- Value Until Time 1
+  08:00,                                  !- Time 2 {hh:mm}
+  0.1,                                    !- Value Until Time 2
+  12:00,                                  !- Time 3 {hh:mm}
+  0.3,                                    !- Value Until Time 3
+  17:00,                                  !- Time 4 {hh:mm}
+  0.1,                                    !- Value Until Time 4
+  19:00,                                  !- Time 5 {hh:mm}
+  0.05,                                   !- Value Until Time 5
+  24:00,                                  !- Time 6 {hh:mm}
+  0;                                      !- Value Until Time 6
+
+Schedule:Day:Interval,
+  Schedule Day 8,                         !- Name
+  Fractional,                             !- Schedule Type Limits Name
+  No,                                     !- Interpolate to Timestep
+  06:00,                                  !- Time 1 {hh:mm}
+  0,                                      !- Value Until Time 1
+  07:00,                                  !- Time 2 {hh:mm}
+  0.1,                                    !- Value Until Time 2
+  08:00,                                  !- Time 3 {hh:mm}
+  0.2,                                    !- Value Until Time 3
+  12:00,                                  !- Time 4 {hh:mm}
+  0.95,                                   !- Value Until Time 4
+  13:00,                                  !- Time 5 {hh:mm}
+  0.5,                                    !- Value Until Time 5
+  17:00,                                  !- Time 6 {hh:mm}
+  0.95,                                   !- Value Until Time 6
+  18:00,                                  !- Time 7 {hh:mm}
+  0.3,                                    !- Value Until Time 7
+  22:00,                                  !- Time 8 {hh:mm}
+  0.1,                                    !- Value Until Time 8
+  24:00,                                  !- Time 9 {hh:mm}
+  0.05;                                   !- Value Until Time 9
+
 Schedule:Week:Daily,
   0.05 Hot Water Latent Fraction Week Rule - Jan1-Dec31, !- Name
-  Schedule Day 12,                        !- Sunday Schedule:Day Name
-  Schedule Day 12,                        !- Monday Schedule:Day Name
-  Schedule Day 12,                        !- Tuesday Schedule:Day Name
-  Schedule Day 12,                        !- Wednesday Schedule:Day Name
-  Schedule Day 12,                        !- Thursday Schedule:Day Name
-  Schedule Day 12,                        !- Friday Schedule:Day Name
-  Schedule Day 12,                        !- Saturday Schedule:Day Name
-  Schedule Day 12,                        !- Holiday Schedule:Day Name
-  Schedule Day 12,                        !- SummerDesignDay Schedule:Day Name
-  Schedule Day 12,                        !- WinterDesignDay Schedule:Day Name
-  Schedule Day 12,                        !- CustomDay1 Schedule:Day Name
-  Schedule Day 12;                        !- CustomDay2 Schedule:Day Name
+  Schedule Day 15,                        !- Sunday Schedule:Day Name
+  Schedule Day 15,                        !- Monday Schedule:Day Name
+  Schedule Day 15,                        !- Tuesday Schedule:Day Name
+  Schedule Day 15,                        !- Wednesday Schedule:Day Name
+  Schedule Day 15,                        !- Thursday Schedule:Day Name
+  Schedule Day 15,                        !- Friday Schedule:Day Name
+  Schedule Day 15,                        !- Saturday Schedule:Day Name
+  Schedule Day 15,                        !- Holiday Schedule:Day Name
+  Schedule Day 15,                        !- SummerDesignDay Schedule:Day Name
+  Schedule Day 15,                        !- WinterDesignDay Schedule:Day Name
+  Schedule Day 15,                        !- CustomDay1 Schedule:Day Name
+  Schedule Day 15;                        !- CustomDay2 Schedule:Day Name
 
 Schedule:Year,
   0.05 Hot Water Latent Fraction,         !- Name
@@ -3240,18 +3378,18 @@ Schedule:Year,
 
 Schedule:Week:Daily,
   0.2 Hot Water Sensible Fraction Week Rule - Jan1-Dec31, !- Name
-  Schedule Day 11,                        !- Sunday Schedule:Day Name
-  Schedule Day 11,                        !- Monday Schedule:Day Name
-  Schedule Day 11,                        !- Tuesday Schedule:Day Name
-  Schedule Day 11,                        !- Wednesday Schedule:Day Name
-  Schedule Day 11,                        !- Thursday Schedule:Day Name
-  Schedule Day 11,                        !- Friday Schedule:Day Name
-  Schedule Day 11,                        !- Saturday Schedule:Day Name
-  Schedule Day 11,                        !- Holiday Schedule:Day Name
-  Schedule Day 11,                        !- SummerDesignDay Schedule:Day Name
-  Schedule Day 11,                        !- WinterDesignDay Schedule:Day Name
-  Schedule Day 11,                        !- CustomDay1 Schedule:Day Name
-  Schedule Day 11;                        !- CustomDay2 Schedule:Day Name
+  Schedule Day 14,                        !- Sunday Schedule:Day Name
+  Schedule Day 14,                        !- Monday Schedule:Day Name
+  Schedule Day 14,                        !- Tuesday Schedule:Day Name
+  Schedule Day 14,                        !- Wednesday Schedule:Day Name
+  Schedule Day 14,                        !- Thursday Schedule:Day Name
+  Schedule Day 14,                        !- Friday Schedule:Day Name
+  Schedule Day 14,                        !- Saturday Schedule:Day Name
+  Schedule Day 14,                        !- Holiday Schedule:Day Name
+  Schedule Day 14,                        !- SummerDesignDay Schedule:Day Name
+  Schedule Day 14,                        !- WinterDesignDay Schedule:Day Name
+  Schedule Day 14,                        !- CustomDay1 Schedule:Day Name
+  Schedule Day 14;                        !- CustomDay2 Schedule:Day Name
 
 Schedule:Year,
   0.2 Hot Water Sensible Fraction,        !- Name
@@ -3264,18 +3402,18 @@ Schedule:Year,
 
 Schedule:Week:Daily,
   22C Ambient Condition Week Rule - Jan1-Dec31, !- Name
-  Schedule Day 16,                        !- Sunday Schedule:Day Name
-  Schedule Day 16,                        !- Monday Schedule:Day Name
-  Schedule Day 16,                        !- Tuesday Schedule:Day Name
-  Schedule Day 16,                        !- Wednesday Schedule:Day Name
-  Schedule Day 16,                        !- Thursday Schedule:Day Name
-  Schedule Day 16,                        !- Friday Schedule:Day Name
-  Schedule Day 16,                        !- Saturday Schedule:Day Name
-  Schedule Day 16,                        !- Holiday Schedule:Day Name
-  Schedule Day 16,                        !- SummerDesignDay Schedule:Day Name
-  Schedule Day 16,                        !- WinterDesignDay Schedule:Day Name
-  Schedule Day 16,                        !- CustomDay1 Schedule:Day Name
-  Schedule Day 16;                        !- CustomDay2 Schedule:Day Name
+  Schedule Day 19,                        !- Sunday Schedule:Day Name
+  Schedule Day 19,                        !- Monday Schedule:Day Name
+  Schedule Day 19,                        !- Tuesday Schedule:Day Name
+  Schedule Day 19,                        !- Wednesday Schedule:Day Name
+  Schedule Day 19,                        !- Thursday Schedule:Day Name
+  Schedule Day 19,                        !- Friday Schedule:Day Name
+  Schedule Day 19,                        !- Saturday Schedule:Day Name
+  Schedule Day 19,                        !- Holiday Schedule:Day Name
+  Schedule Day 19,                        !- SummerDesignDay Schedule:Day Name
+  Schedule Day 19,                        !- WinterDesignDay Schedule:Day Name
+  Schedule Day 19,                        !- CustomDay1 Schedule:Day Name
+  Schedule Day 19;                        !- CustomDay2 Schedule:Day Name
 
 Schedule:Year,
   22C Ambient Condition,                  !- Name
@@ -3288,30 +3426,6 @@ Schedule:Year,
 
 Schedule:Week:Daily,
   60.0C Hot Water Week Rule - Jan1-Dec31, !- Name
-  Schedule Day 10,                        !- Sunday Schedule:Day Name
-  Schedule Day 10,                        !- Monday Schedule:Day Name
-  Schedule Day 10,                        !- Tuesday Schedule:Day Name
-  Schedule Day 10,                        !- Wednesday Schedule:Day Name
-  Schedule Day 10,                        !- Thursday Schedule:Day Name
-  Schedule Day 10,                        !- Friday Schedule:Day Name
-  Schedule Day 10,                        !- Saturday Schedule:Day Name
-  Schedule Day 10,                        !- Holiday Schedule:Day Name
-  Schedule Day 10,                        !- SummerDesignDay Schedule:Day Name
-  Schedule Day 10,                        !- WinterDesignDay Schedule:Day Name
-  Schedule Day 10,                        !- CustomDay1 Schedule:Day Name
-  Schedule Day 10;                        !- CustomDay2 Schedule:Day Name
-
-Schedule:Year,
-  60.0C Hot Water,                        !- Name
-  Temperature 1,                          !- Schedule Type Limits Name
-  60.0C Hot Water Week Rule - Jan1-Dec31, !- Schedule:Week Name 1
-  1,                                      !- Start Month 1
-  1,                                      !- Start Day 1
-  12,                                     !- End Month 1
-  31;                                     !- End Day 1
-
-Schedule:Week:Daily,
-  60C Hot Water Week Rule - Jan1-Dec31,   !- Name
   Schedule Day 13,                        !- Sunday Schedule:Day Name
   Schedule Day 13,                        !- Monday Schedule:Day Name
   Schedule Day 13,                        !- Tuesday Schedule:Day Name
@@ -3324,6 +3438,30 @@ Schedule:Week:Daily,
   Schedule Day 13,                        !- WinterDesignDay Schedule:Day Name
   Schedule Day 13,                        !- CustomDay1 Schedule:Day Name
   Schedule Day 13;                        !- CustomDay2 Schedule:Day Name
+
+Schedule:Year,
+  60.0C Hot Water,                        !- Name
+  Temperature 1,                          !- Schedule Type Limits Name
+  60.0C Hot Water Week Rule - Jan1-Dec31, !- Schedule:Week Name 1
+  1,                                      !- Start Month 1
+  1,                                      !- Start Day 1
+  12,                                     !- End Month 1
+  31;                                     !- End Day 1
+
+Schedule:Week:Daily,
+  60C Hot Water Week Rule - Jan1-Dec31,   !- Name
+  Schedule Day 16,                        !- Sunday Schedule:Day Name
+  Schedule Day 16,                        !- Monday Schedule:Day Name
+  Schedule Day 16,                        !- Tuesday Schedule:Day Name
+  Schedule Day 16,                        !- Wednesday Schedule:Day Name
+  Schedule Day 16,                        !- Thursday Schedule:Day Name
+  Schedule Day 16,                        !- Friday Schedule:Day Name
+  Schedule Day 16,                        !- Saturday Schedule:Day Name
+  Schedule Day 16,                        !- Holiday Schedule:Day Name
+  Schedule Day 16,                        !- SummerDesignDay Schedule:Day Name
+  Schedule Day 16,                        !- WinterDesignDay Schedule:Day Name
+  Schedule Day 16,                        !- CustomDay1 Schedule:Day Name
+  Schedule Day 16;                        !- CustomDay2 Schedule:Day Name
 
 Schedule:Year,
   60C Hot Water,                          !- Name
@@ -3503,120 +3641,120 @@ Schedule:Year,
   31;                                     !- End Day 1
 
 Schedule:Week:Daily,
-  OfficeSmall ACTIVITY_SCH Week Rule - Jan1-Dec31, !- Name
-  OfficeSmall ACTIVITY_SCH_Default,       !- Sunday Schedule:Day Name
-  OfficeSmall ACTIVITY_SCH_Default,       !- Monday Schedule:Day Name
-  OfficeSmall ACTIVITY_SCH_Default,       !- Tuesday Schedule:Day Name
-  OfficeSmall ACTIVITY_SCH_Default,       !- Wednesday Schedule:Day Name
-  OfficeSmall ACTIVITY_SCH_Default,       !- Thursday Schedule:Day Name
-  OfficeSmall ACTIVITY_SCH_Default,       !- Friday Schedule:Day Name
-  OfficeSmall ACTIVITY_SCH_Default,       !- Saturday Schedule:Day Name
-  OfficeSmall ACTIVITY_SCH_Default,       !- Holiday Schedule:Day Name
-  OfficeSmall ACTIVITY_SCH_SmrDsn 1,      !- SummerDesignDay Schedule:Day Name
-  OfficeSmall ACTIVITY_SCH_WntrDsn 1,     !- WinterDesignDay Schedule:Day Name
-  OfficeSmall ACTIVITY_SCH_Default,       !- CustomDay1 Schedule:Day Name
-  OfficeSmall ACTIVITY_SCH_Default;       !- CustomDay2 Schedule:Day Name
+  OfficeMedium ACTIVITY_SCH Week Rule - Jan1-Dec31, !- Name
+  OfficeMedium ACTIVITY_SCH_Default,      !- Sunday Schedule:Day Name
+  OfficeMedium ACTIVITY_SCH_Default,      !- Monday Schedule:Day Name
+  OfficeMedium ACTIVITY_SCH_Default,      !- Tuesday Schedule:Day Name
+  OfficeMedium ACTIVITY_SCH_Default,      !- Wednesday Schedule:Day Name
+  OfficeMedium ACTIVITY_SCH_Default,      !- Thursday Schedule:Day Name
+  OfficeMedium ACTIVITY_SCH_Default,      !- Friday Schedule:Day Name
+  OfficeMedium ACTIVITY_SCH_Default,      !- Saturday Schedule:Day Name
+  OfficeMedium ACTIVITY_SCH_Default,      !- Holiday Schedule:Day Name
+  OfficeMedium ACTIVITY_SCH_SmrDsn 1,     !- SummerDesignDay Schedule:Day Name
+  OfficeMedium ACTIVITY_SCH_WntrDsn 1,    !- WinterDesignDay Schedule:Day Name
+  OfficeMedium ACTIVITY_SCH_Default,      !- CustomDay1 Schedule:Day Name
+  OfficeMedium ACTIVITY_SCH_Default;      !- CustomDay2 Schedule:Day Name
 
 Schedule:Year,
-  OfficeSmall ACTIVITY_SCH,               !- Name
+  OfficeMedium ACTIVITY_SCH,              !- Name
   Activity Level,                         !- Schedule Type Limits Name
-  OfficeSmall ACTIVITY_SCH Week Rule - Jan1-Dec31, !- Schedule:Week Name 1
+  OfficeMedium ACTIVITY_SCH Week Rule - Jan1-Dec31, !- Schedule:Week Name 1
   1,                                      !- Start Month 1
   1,                                      !- Start Day 1
   12,                                     !- End Month 1
   31;                                     !- End Day 1
 
 Schedule:Week:Daily,
-  OfficeSmall BLDG_EQUIP_SCH_2013 Week Rule - Jan1-Dec31, !- Name
-  Schedule Day 4,                         !- Sunday Schedule:Day Name
+  OfficeMedium BLDG_EQUIP_SCH_2013 Week Rule - Jan1-Dec31, !- Name
+  Schedule Day 11,                        !- Sunday Schedule:Day Name
+  Schedule Day 12,                        !- Monday Schedule:Day Name
+  Schedule Day 12,                        !- Tuesday Schedule:Day Name
+  Schedule Day 12,                        !- Wednesday Schedule:Day Name
+  Schedule Day 12,                        !- Thursday Schedule:Day Name
+  Schedule Day 12,                        !- Friday Schedule:Day Name
+  OfficeMedium BLDG_EQUIP_SCH_2013_Sat,   !- Saturday Schedule:Day Name
+  OfficeMedium BLDG_EQUIP_SCH_2013_Sat,   !- Holiday Schedule:Day Name
+  OfficeMedium BLDG_EQUIP_SCH_2013_SmrDsn 1, !- SummerDesignDay Schedule:Day Name
+  OfficeMedium BLDG_EQUIP_SCH_2013_WntrDsn 1, !- WinterDesignDay Schedule:Day Name
+  OfficeMedium BLDG_EQUIP_SCH_2013_Sat,   !- CustomDay1 Schedule:Day Name
+  OfficeMedium BLDG_EQUIP_SCH_2013_Sat;   !- CustomDay2 Schedule:Day Name
+
+Schedule:Year,
+  OfficeMedium BLDG_EQUIP_SCH_2013,       !- Name
+  Fractional,                             !- Schedule Type Limits Name
+  OfficeMedium BLDG_EQUIP_SCH_2013 Week Rule - Jan1-Dec31, !- Schedule:Week Name 1
+  1,                                      !- Start Month 1
+  1,                                      !- Start Day 1
+  12,                                     !- End Month 1
+  31;                                     !- End Day 1
+
+Schedule:Week:Daily,
+  OfficeMedium BLDG_LIGHT_SCH_2013 Week Rule - Jan1-Dec31, !- Name
+  Schedule Day 1,                         !- Sunday Schedule:Day Name
+  Schedule Day 2,                         !- Monday Schedule:Day Name
+  Schedule Day 2,                         !- Tuesday Schedule:Day Name
+  Schedule Day 2,                         !- Wednesday Schedule:Day Name
+  Schedule Day 2,                         !- Thursday Schedule:Day Name
+  Schedule Day 2,                         !- Friday Schedule:Day Name
+  OfficeMedium BLDG_LIGHT_SCH_2013_Sat,   !- Saturday Schedule:Day Name
+  OfficeMedium BLDG_LIGHT_SCH_2013_Sat,   !- Holiday Schedule:Day Name
+  OfficeMedium BLDG_LIGHT_SCH_2013_SmrDsn 1, !- SummerDesignDay Schedule:Day Name
+  OfficeMedium BLDG_LIGHT_SCH_2013_WntrDsn 1, !- WinterDesignDay Schedule:Day Name
+  OfficeMedium BLDG_LIGHT_SCH_2013_Sat,   !- CustomDay1 Schedule:Day Name
+  OfficeMedium BLDG_LIGHT_SCH_2013_Sat;   !- CustomDay2 Schedule:Day Name
+
+Schedule:Year,
+  OfficeMedium BLDG_LIGHT_SCH_2013,       !- Name
+  Fractional,                             !- Schedule Type Limits Name
+  OfficeMedium BLDG_LIGHT_SCH_2013 Week Rule - Jan1-Dec31, !- Schedule:Week Name 1
+  1,                                      !- Start Month 1
+  1,                                      !- Start Day 1
+  12,                                     !- End Month 1
+  31;                                     !- End Day 1
+
+Schedule:Week:Daily,
+  OfficeMedium BLDG_OCC_SCH Week Rule - Jan1-Dec31, !- Name
+  OfficeMedium BLDG_OCC_SCH_Default,      !- Sunday Schedule:Day Name
+  Schedule Day 8,                         !- Monday Schedule:Day Name
+  Schedule Day 8,                         !- Tuesday Schedule:Day Name
+  Schedule Day 8,                         !- Wednesday Schedule:Day Name
+  Schedule Day 8,                         !- Thursday Schedule:Day Name
+  Schedule Day 8,                         !- Friday Schedule:Day Name
+  Schedule Day 7,                         !- Saturday Schedule:Day Name
+  OfficeMedium BLDG_OCC_SCH_Default,      !- Holiday Schedule:Day Name
+  OfficeMedium BLDG_OCC_SCH_SmrDsn 1,     !- SummerDesignDay Schedule:Day Name
+  OfficeMedium BLDG_OCC_SCH_WntrDsn 1,    !- WinterDesignDay Schedule:Day Name
+  OfficeMedium BLDG_OCC_SCH_Default,      !- CustomDay1 Schedule:Day Name
+  OfficeMedium BLDG_OCC_SCH_Default;      !- CustomDay2 Schedule:Day Name
+
+Schedule:Year,
+  OfficeMedium BLDG_OCC_SCH,              !- Name
+  Fractional,                             !- Schedule Type Limits Name
+  OfficeMedium BLDG_OCC_SCH Week Rule - Jan1-Dec31, !- Schedule:Week Name 1
+  1,                                      !- Start Month 1
+  1,                                      !- Start Day 1
+  12,                                     !- End Month 1
+  31;                                     !- End Day 1
+
+Schedule:Week:Daily,
+  OfficeMedium INFIL_SCH_PNNL Week Rule - Jan1-Dec31, !- Name
+  OfficeMedium INFIL_SCH_PNNL_Default,    !- Sunday Schedule:Day Name
   Schedule Day 3,                         !- Monday Schedule:Day Name
   Schedule Day 3,                         !- Tuesday Schedule:Day Name
   Schedule Day 3,                         !- Wednesday Schedule:Day Name
   Schedule Day 3,                         !- Thursday Schedule:Day Name
   Schedule Day 3,                         !- Friday Schedule:Day Name
   Schedule Day 4,                         !- Saturday Schedule:Day Name
-  OfficeSmall BLDG_EQUIP_SCH_2013_Default, !- Holiday Schedule:Day Name
-  OfficeSmall BLDG_EQUIP_SCH_2013_SmrDsn 1, !- SummerDesignDay Schedule:Day Name
-  OfficeSmall BLDG_EQUIP_SCH_2013_WntrDsn 1, !- WinterDesignDay Schedule:Day Name
-  OfficeSmall BLDG_EQUIP_SCH_2013_Default, !- CustomDay1 Schedule:Day Name
-  OfficeSmall BLDG_EQUIP_SCH_2013_Default; !- CustomDay2 Schedule:Day Name
+  OfficeMedium INFIL_SCH_PNNL_Default,    !- Holiday Schedule:Day Name
+  OfficeMedium INFIL_SCH_PNNL_SmrDsn 1,   !- SummerDesignDay Schedule:Day Name
+  OfficeMedium INFIL_SCH_PNNL_WntrDsn 1,  !- WinterDesignDay Schedule:Day Name
+  OfficeMedium INFIL_SCH_PNNL_Default,    !- CustomDay1 Schedule:Day Name
+  OfficeMedium INFIL_SCH_PNNL_Default;    !- CustomDay2 Schedule:Day Name
 
 Schedule:Year,
-  OfficeSmall BLDG_EQUIP_SCH_2013,        !- Name
+  OfficeMedium INFIL_SCH_PNNL,            !- Name
   Fractional,                             !- Schedule Type Limits Name
-  OfficeSmall BLDG_EQUIP_SCH_2013 Week Rule - Jan1-Dec31, !- Schedule:Week Name 1
-  1,                                      !- Start Month 1
-  1,                                      !- Start Day 1
-  12,                                     !- End Month 1
-  31;                                     !- End Day 1
-
-Schedule:Week:Daily,
-  OfficeSmall BLDG_LIGHT_SCH_2013 Week Rule - Jan1-Dec31, !- Name
-  Schedule Day 6,                         !- Sunday Schedule:Day Name
-  Schedule Day 5,                         !- Monday Schedule:Day Name
-  Schedule Day 5,                         !- Tuesday Schedule:Day Name
-  Schedule Day 5,                         !- Wednesday Schedule:Day Name
-  Schedule Day 5,                         !- Thursday Schedule:Day Name
-  Schedule Day 5,                         !- Friday Schedule:Day Name
-  Schedule Day 6,                         !- Saturday Schedule:Day Name
-  OfficeSmall BLDG_LIGHT_SCH_2013_Default, !- Holiday Schedule:Day Name
-  OfficeSmall BLDG_LIGHT_SCH_2013_SmrDsn 1, !- SummerDesignDay Schedule:Day Name
-  OfficeSmall BLDG_LIGHT_SCH_2013_WntrDsn 1, !- WinterDesignDay Schedule:Day Name
-  OfficeSmall BLDG_LIGHT_SCH_2013_Default, !- CustomDay1 Schedule:Day Name
-  OfficeSmall BLDG_LIGHT_SCH_2013_Default; !- CustomDay2 Schedule:Day Name
-
-Schedule:Year,
-  OfficeSmall BLDG_LIGHT_SCH_2013,        !- Name
-  Fractional,                             !- Schedule Type Limits Name
-  OfficeSmall BLDG_LIGHT_SCH_2013 Week Rule - Jan1-Dec31, !- Schedule:Week Name 1
-  1,                                      !- Start Month 1
-  1,                                      !- Start Day 1
-  12,                                     !- End Month 1
-  31;                                     !- End Day 1
-
-Schedule:Week:Daily,
-  OfficeSmall BLDG_OCC_SCH Week Rule - Jan1-Dec31, !- Name
-  OfficeSmall BLDG_OCC_SCH_Default,       !- Sunday Schedule:Day Name
-  Schedule Day 1,                         !- Monday Schedule:Day Name
-  Schedule Day 1,                         !- Tuesday Schedule:Day Name
-  Schedule Day 1,                         !- Wednesday Schedule:Day Name
-  Schedule Day 1,                         !- Thursday Schedule:Day Name
-  Schedule Day 1,                         !- Friday Schedule:Day Name
-  OfficeSmall BLDG_OCC_SCH_Default,       !- Saturday Schedule:Day Name
-  OfficeSmall BLDG_OCC_SCH_Default,       !- Holiday Schedule:Day Name
-  OfficeSmall BLDG_OCC_SCH_SmrDsn 1,      !- SummerDesignDay Schedule:Day Name
-  OfficeSmall BLDG_OCC_SCH_WntrDsn 1,     !- WinterDesignDay Schedule:Day Name
-  OfficeSmall BLDG_OCC_SCH_Default,       !- CustomDay1 Schedule:Day Name
-  OfficeSmall BLDG_OCC_SCH_Default;       !- CustomDay2 Schedule:Day Name
-
-Schedule:Year,
-  OfficeSmall BLDG_OCC_SCH,               !- Name
-  Fractional,                             !- Schedule Type Limits Name
-  OfficeSmall BLDG_OCC_SCH Week Rule - Jan1-Dec31, !- Schedule:Week Name 1
-  1,                                      !- Start Month 1
-  1,                                      !- Start Day 1
-  12,                                     !- End Month 1
-  31;                                     !- End Day 1
-
-Schedule:Week:Daily,
-  OfficeSmall INFIL_QUARTER_ON_SCH Week Rule - Jan1-Dec31, !- Name
-  OfficeSmall INFIL_QUARTER_ON_SCH_Default, !- Sunday Schedule:Day Name
-  Schedule Day 8,                         !- Monday Schedule:Day Name
-  Schedule Day 8,                         !- Tuesday Schedule:Day Name
-  Schedule Day 8,                         !- Wednesday Schedule:Day Name
-  Schedule Day 8,                         !- Thursday Schedule:Day Name
-  Schedule Day 8,                         !- Friday Schedule:Day Name
-  Schedule Day 9,                         !- Saturday Schedule:Day Name
-  OfficeSmall INFIL_QUARTER_ON_SCH_Default, !- Holiday Schedule:Day Name
-  OfficeSmall INFIL_QUARTER_ON_SCH_SmrDsn 1, !- SummerDesignDay Schedule:Day Name
-  OfficeSmall INFIL_QUARTER_ON_SCH_WntrDsn 1, !- WinterDesignDay Schedule:Day Name
-  OfficeSmall INFIL_QUARTER_ON_SCH_Default, !- CustomDay1 Schedule:Day Name
-  OfficeSmall INFIL_QUARTER_ON_SCH_Default; !- CustomDay2 Schedule:Day Name
-
-Schedule:Year,
-  OfficeSmall INFIL_QUARTER_ON_SCH,       !- Name
-  Fractional,                             !- Schedule Type Limits Name
-  OfficeSmall INFIL_QUARTER_ON_SCH Week Rule - Jan1-Dec31, !- Schedule:Week Name 1
+  OfficeMedium INFIL_SCH_PNNL Week Rule - Jan1-Dec31, !- Schedule:Week Name 1
   1,                                      !- Start Month 1
   1,                                      !- Start Day 1
   12,                                     !- End Month 1
@@ -3624,18 +3762,18 @@ Schedule:Year,
 
 Schedule:Week:Daily,
   Schedule Ruleset 1 Week Rule - Jan1-Dec31, !- Name
-  Schedule Day 14,                        !- Sunday Schedule:Day Name
-  Schedule Day 14,                        !- Monday Schedule:Day Name
-  Schedule Day 14,                        !- Tuesday Schedule:Day Name
-  Schedule Day 14,                        !- Wednesday Schedule:Day Name
-  Schedule Day 14,                        !- Thursday Schedule:Day Name
-  Schedule Day 14,                        !- Friday Schedule:Day Name
-  Schedule Day 14,                        !- Saturday Schedule:Day Name
-  Schedule Day 14,                        !- Holiday Schedule:Day Name
-  Schedule Day 14,                        !- SummerDesignDay Schedule:Day Name
-  Schedule Day 14,                        !- WinterDesignDay Schedule:Day Name
-  Schedule Day 14,                        !- CustomDay1 Schedule:Day Name
-  Schedule Day 14;                        !- CustomDay2 Schedule:Day Name
+  Schedule Day 17,                        !- Sunday Schedule:Day Name
+  Schedule Day 17,                        !- Monday Schedule:Day Name
+  Schedule Day 17,                        !- Tuesday Schedule:Day Name
+  Schedule Day 17,                        !- Wednesday Schedule:Day Name
+  Schedule Day 17,                        !- Thursday Schedule:Day Name
+  Schedule Day 17,                        !- Friday Schedule:Day Name
+  Schedule Day 17,                        !- Saturday Schedule:Day Name
+  Schedule Day 17,                        !- Holiday Schedule:Day Name
+  Schedule Day 17,                        !- SummerDesignDay Schedule:Day Name
+  Schedule Day 17,                        !- WinterDesignDay Schedule:Day Name
+  Schedule Day 17,                        !- CustomDay1 Schedule:Day Name
+  Schedule Day 17;                        !- CustomDay2 Schedule:Day Name
 
 Schedule:Year,
   Schedule Ruleset 1,                     !- Name
@@ -3648,18 +3786,18 @@ Schedule:Year,
 
 Schedule:Week:Daily,
   Schedule Ruleset 2 Week Rule - Jan1-Dec31, !- Name
-  Schedule Day 15,                        !- Sunday Schedule:Day Name
-  Schedule Day 15,                        !- Monday Schedule:Day Name
-  Schedule Day 15,                        !- Tuesday Schedule:Day Name
-  Schedule Day 15,                        !- Wednesday Schedule:Day Name
-  Schedule Day 15,                        !- Thursday Schedule:Day Name
-  Schedule Day 15,                        !- Friday Schedule:Day Name
-  Schedule Day 15,                        !- Saturday Schedule:Day Name
-  Schedule Day 15,                        !- Holiday Schedule:Day Name
-  Schedule Day 15,                        !- SummerDesignDay Schedule:Day Name
-  Schedule Day 15,                        !- WinterDesignDay Schedule:Day Name
-  Schedule Day 15,                        !- CustomDay1 Schedule:Day Name
-  Schedule Day 15;                        !- CustomDay2 Schedule:Day Name
+  Schedule Day 18,                        !- Sunday Schedule:Day Name
+  Schedule Day 18,                        !- Monday Schedule:Day Name
+  Schedule Day 18,                        !- Tuesday Schedule:Day Name
+  Schedule Day 18,                        !- Wednesday Schedule:Day Name
+  Schedule Day 18,                        !- Thursday Schedule:Day Name
+  Schedule Day 18,                        !- Friday Schedule:Day Name
+  Schedule Day 18,                        !- Saturday Schedule:Day Name
+  Schedule Day 18,                        !- Holiday Schedule:Day Name
+  Schedule Day 18,                        !- SummerDesignDay Schedule:Day Name
+  Schedule Day 18,                        !- WinterDesignDay Schedule:Day Name
+  Schedule Day 18,                        !- CustomDay1 Schedule:Day Name
+  Schedule Day 18;                        !- CustomDay2 Schedule:Day Name
 
 Schedule:Year,
   Schedule Ruleset 2,                     !- Name
@@ -3898,17 +4036,17 @@ WaterUse:Connections,
   None,                                   !- Drain Water Heat Exchanger Type
   Plant,                                  !- Drain Water Heat Exchanger Destination
   ,                                       !- Drain Water Heat Exchanger U-Factor Times Area {W/K}
-  2019::MidriseApartment::Apartment_SHW..2_Residential_cc56a40e; !- Water Use Equipment Name 1
+  2019::MidriseApartment::Apartment_SHW..2_Residential_232d78c4; !- Water Use Equipment Name 1
 
 WaterUse:Equipment,
-  2019::MidriseApartment::Apartment_SHW..2_Residential_cc56a40e, !- Name
+  2019::MidriseApartment::Apartment_SHW..2_Residential_232d78c4, !- Name
   General,                                !- End-Use Subcategory
   3.08550072457252e-06,                   !- Peak Flow Rate {m3/s}
   ApartmentMidRise APT_DHW_SCH,           !- Flow Rate Fraction Schedule Name
   60.0C Hot Water,                        !- Target Temperature Schedule Name
   ,                                       !- Hot Water Supply Temperature Schedule Name
   ,                                       !- Cold Water Supply Temperature Schedule Name
-  2_Residential_cc56a40e,                 !- Zone Name
+  2_Residential_232d78c4,                 !- Zone Name
   0.2 Hot Water Sensible Fraction,        !- Sensible Fraction Schedule Name
   0.05 Hot Water Latent Fraction;         !- Latent Fraction Schedule Name
 
@@ -3969,143 +4107,143 @@ Site:WaterMainsTemperature,
   CorrelationFromWeatherFile;             !- Calculation Method
 
 SizingPeriod:DesignDay,
-  Phoenix Sky Harbor Intl Ap Ann Clg .4% Condns DB=>MWB, !- Name
-  7,                                      !- Month
+  Seattle Seattle Tacoma Intl A Ann Clg .4% Condns DB=>MWB, !- Name
+  8,                                      !- Month
   21,                                     !- Day of Month
   SummerDesignDay,                        !- Day Type
-  43.4,                                   !- Maximum Dry-Bulb Temperature {C}
-  12,                                     !- Daily Dry-Bulb Temperature Range {deltaC}
+  29.4,                                   !- Maximum Dry-Bulb Temperature {C}
+  10.4,                                   !- Daily Dry-Bulb Temperature Range {deltaC}
   DefaultMultipliers,                     !- Dry-Bulb Temperature Range Modifier Type
   ,                                       !- Dry-Bulb Temperature Range Modifier Day Schedule Name
   Wetbulb,                                !- Humidity Condition Type
-  21.1,                                   !- Wetbulb or DewPoint at Maximum Dry-Bulb {C}
+  18.3,                                   !- Wetbulb or DewPoint at Maximum Dry-Bulb {C}
   ,                                       !- Humidity Condition Day Schedule Name
   ,                                       !- Humidity Ratio at Maximum Dry-Bulb {kgWater/kgDryAir}
   ,                                       !- Enthalpy at Maximum Dry-Bulb {J/kg}
   ,                                       !- Daily Wet-Bulb Temperature Range {deltaC}
-  97342,                                  !- Barometric Pressure {Pa}
-  4.1,                                    !- Wind Speed {m/s}
-  260,                                    !- Wind Direction {deg}
+  99868,                                  !- Barometric Pressure {Pa}
+  4.2,                                    !- Wind Speed {m/s}
+  350,                                    !- Wind Direction {deg}
   No,                                     !- Rain Indicator
   No,                                     !- Snow Indicator
   No,                                     !- Daylight Saving Time Indicator
   ASHRAETau,                              !- Solar Model Indicator
   ,                                       !- Beam Solar Day Schedule Name
   ,                                       !- Diffuse Solar Day Schedule Name
-  0.588,                                  !- ASHRAE Clear Sky Optical Depth for Beam Irradiance (taub) {dimensionless}
-  1.653,                                  !- ASHRAE Clear Sky Optical Depth for Diffuse Irradiance (taud) {dimensionless}
+  0.352,                                  !- ASHRAE Clear Sky Optical Depth for Beam Irradiance (taub) {dimensionless}
+  2.561,                                  !- ASHRAE Clear Sky Optical Depth for Diffuse Irradiance (taud) {dimensionless}
   ,                                       !- Sky Clearness
   ,                                       !- Maximum Number Warmup Days
   FullResetAtBeginEnvironment;            !- Begin Environment Reset Mode
 
 SizingPeriod:DesignDay,
-  Phoenix Sky Harbor Intl Ap Ann Clg .4% Condns DP=>MDB, !- Name
-  7,                                      !- Month
+  Seattle Seattle Tacoma Intl A Ann Clg .4% Condns DP=>MDB, !- Name
+  8,                                      !- Month
   21,                                     !- Day of Month
   SummerDesignDay,                        !- Day Type
-  28.1,                                   !- Maximum Dry-Bulb Temperature {C}
-  12,                                     !- Daily Dry-Bulb Temperature Range {deltaC}
+  20.8,                                   !- Maximum Dry-Bulb Temperature {C}
+  10.4,                                   !- Daily Dry-Bulb Temperature Range {deltaC}
   DefaultMultipliers,                     !- Dry-Bulb Temperature Range Modifier Type
   ,                                       !- Dry-Bulb Temperature Range Modifier Day Schedule Name
   Dewpoint,                               !- Humidity Condition Type
-  21.8,                                   !- Wetbulb or DewPoint at Maximum Dry-Bulb {C}
+  15.9,                                   !- Wetbulb or DewPoint at Maximum Dry-Bulb {C}
   ,                                       !- Humidity Condition Day Schedule Name
   ,                                       !- Humidity Ratio at Maximum Dry-Bulb {kgWater/kgDryAir}
   ,                                       !- Enthalpy at Maximum Dry-Bulb {J/kg}
   ,                                       !- Daily Wet-Bulb Temperature Range {deltaC}
-  97342,                                  !- Barometric Pressure {Pa}
-  4.1,                                    !- Wind Speed {m/s}
-  260,                                    !- Wind Direction {deg}
+  99868,                                  !- Barometric Pressure {Pa}
+  4.2,                                    !- Wind Speed {m/s}
+  350,                                    !- Wind Direction {deg}
   No,                                     !- Rain Indicator
   No,                                     !- Snow Indicator
   No,                                     !- Daylight Saving Time Indicator
   ASHRAETau,                              !- Solar Model Indicator
   ,                                       !- Beam Solar Day Schedule Name
   ,                                       !- Diffuse Solar Day Schedule Name
-  0.588,                                  !- ASHRAE Clear Sky Optical Depth for Beam Irradiance (taub) {dimensionless}
-  1.653,                                  !- ASHRAE Clear Sky Optical Depth for Diffuse Irradiance (taud) {dimensionless}
+  0.352,                                  !- ASHRAE Clear Sky Optical Depth for Beam Irradiance (taub) {dimensionless}
+  2.561,                                  !- ASHRAE Clear Sky Optical Depth for Diffuse Irradiance (taud) {dimensionless}
   ,                                       !- Sky Clearness
   ,                                       !- Maximum Number Warmup Days
   FullResetAtBeginEnvironment;            !- Begin Environment Reset Mode
 
 SizingPeriod:DesignDay,
-  Phoenix Sky Harbor Intl Ap Ann Clg .4% Condns Enth=>MDB, !- Name
-  7,                                      !- Month
+  Seattle Seattle Tacoma Intl A Ann Clg .4% Condns Enth=>MDB, !- Name
+  8,                                      !- Month
   21,                                     !- Day of Month
   SummerDesignDay,                        !- Day Type
-  35.3,                                   !- Maximum Dry-Bulb Temperature {C}
-  12,                                     !- Daily Dry-Bulb Temperature Range {deltaC}
+  28.2,                                   !- Maximum Dry-Bulb Temperature {C}
+  10.4,                                   !- Daily Dry-Bulb Temperature Range {deltaC}
   DefaultMultipliers,                     !- Dry-Bulb Temperature Range Modifier Type
   ,                                       !- Dry-Bulb Temperature Range Modifier Day Schedule Name
   Enthalpy,                               !- Humidity Condition Type
   ,                                       !- Wetbulb or DewPoint at Maximum Dry-Bulb {C}
   ,                                       !- Humidity Condition Day Schedule Name
   ,                                       !- Humidity Ratio at Maximum Dry-Bulb {kgWater/kgDryAir}
-  75600,                                  !- Enthalpy at Maximum Dry-Bulb {J/kg}
+  54700,                                  !- Enthalpy at Maximum Dry-Bulb {J/kg}
   ,                                       !- Daily Wet-Bulb Temperature Range {deltaC}
-  97342,                                  !- Barometric Pressure {Pa}
-  4.1,                                    !- Wind Speed {m/s}
-  260,                                    !- Wind Direction {deg}
+  99868,                                  !- Barometric Pressure {Pa}
+  4.2,                                    !- Wind Speed {m/s}
+  350,                                    !- Wind Direction {deg}
   No,                                     !- Rain Indicator
   No,                                     !- Snow Indicator
   No,                                     !- Daylight Saving Time Indicator
   ASHRAETau,                              !- Solar Model Indicator
   ,                                       !- Beam Solar Day Schedule Name
   ,                                       !- Diffuse Solar Day Schedule Name
-  0.588,                                  !- ASHRAE Clear Sky Optical Depth for Beam Irradiance (taub) {dimensionless}
-  1.653,                                  !- ASHRAE Clear Sky Optical Depth for Diffuse Irradiance (taud) {dimensionless}
+  0.352,                                  !- ASHRAE Clear Sky Optical Depth for Beam Irradiance (taub) {dimensionless}
+  2.561,                                  !- ASHRAE Clear Sky Optical Depth for Diffuse Irradiance (taud) {dimensionless}
   ,                                       !- Sky Clearness
   ,                                       !- Maximum Number Warmup Days
   FullResetAtBeginEnvironment;            !- Begin Environment Reset Mode
 
 SizingPeriod:DesignDay,
-  Phoenix Sky Harbor Intl Ap Ann Clg .4% Condns WB=>MDB, !- Name
-  7,                                      !- Month
+  Seattle Seattle Tacoma Intl A Ann Clg .4% Condns WB=>MDB, !- Name
+  8,                                      !- Month
   21,                                     !- Day of Month
   SummerDesignDay,                        !- Day Type
-  35.8,                                   !- Maximum Dry-Bulb Temperature {C}
-  12,                                     !- Daily Dry-Bulb Temperature Range {deltaC}
+  27.9,                                   !- Maximum Dry-Bulb Temperature {C}
+  10.4,                                   !- Daily Dry-Bulb Temperature Range {deltaC}
   DefaultMultipliers,                     !- Dry-Bulb Temperature Range Modifier Type
   ,                                       !- Dry-Bulb Temperature Range Modifier Day Schedule Name
   Wetbulb,                                !- Humidity Condition Type
-  24.5,                                   !- Wetbulb or DewPoint at Maximum Dry-Bulb {C}
+  19.2,                                   !- Wetbulb or DewPoint at Maximum Dry-Bulb {C}
   ,                                       !- Humidity Condition Day Schedule Name
   ,                                       !- Humidity Ratio at Maximum Dry-Bulb {kgWater/kgDryAir}
   ,                                       !- Enthalpy at Maximum Dry-Bulb {J/kg}
   ,                                       !- Daily Wet-Bulb Temperature Range {deltaC}
-  97342,                                  !- Barometric Pressure {Pa}
-  4.1,                                    !- Wind Speed {m/s}
-  260,                                    !- Wind Direction {deg}
+  99868,                                  !- Barometric Pressure {Pa}
+  4.2,                                    !- Wind Speed {m/s}
+  350,                                    !- Wind Direction {deg}
   No,                                     !- Rain Indicator
   No,                                     !- Snow Indicator
   No,                                     !- Daylight Saving Time Indicator
   ASHRAETau,                              !- Solar Model Indicator
   ,                                       !- Beam Solar Day Schedule Name
   ,                                       !- Diffuse Solar Day Schedule Name
-  0.588,                                  !- ASHRAE Clear Sky Optical Depth for Beam Irradiance (taub) {dimensionless}
-  1.653,                                  !- ASHRAE Clear Sky Optical Depth for Diffuse Irradiance (taud) {dimensionless}
+  0.352,                                  !- ASHRAE Clear Sky Optical Depth for Beam Irradiance (taub) {dimensionless}
+  2.561,                                  !- ASHRAE Clear Sky Optical Depth for Diffuse Irradiance (taud) {dimensionless}
   ,                                       !- Sky Clearness
   ,                                       !- Maximum Number Warmup Days
   FullResetAtBeginEnvironment;            !- Begin Environment Reset Mode
 
 SizingPeriod:DesignDay,
-  Phoenix Sky Harbor Intl Ap Ann Htg 99.6% Condns DB, !- Name
+  Seattle Seattle Tacoma Intl A Ann Htg 99.6% Condns DB, !- Name
   12,                                     !- Month
   21,                                     !- Day of Month
   WinterDesignDay,                        !- Day Type
-  3.7,                                    !- Maximum Dry-Bulb Temperature {C}
+  -4.2,                                   !- Maximum Dry-Bulb Temperature {C}
   0,                                      !- Daily Dry-Bulb Temperature Range {deltaC}
   DefaultMultipliers,                     !- Dry-Bulb Temperature Range Modifier Type
   ,                                       !- Dry-Bulb Temperature Range Modifier Day Schedule Name
   Wetbulb,                                !- Humidity Condition Type
-  3.7,                                    !- Wetbulb or DewPoint at Maximum Dry-Bulb {C}
+  -4.2,                                   !- Wetbulb or DewPoint at Maximum Dry-Bulb {C}
   ,                                       !- Humidity Condition Day Schedule Name
   ,                                       !- Humidity Ratio at Maximum Dry-Bulb {kgWater/kgDryAir}
   ,                                       !- Enthalpy at Maximum Dry-Bulb {J/kg}
   ,                                       !- Daily Wet-Bulb Temperature Range {deltaC}
-  97342,                                  !- Barometric Pressure {Pa}
-  1.7,                                    !- Wind Speed {m/s}
-  100,                                    !- Wind Direction {deg}
+  99868,                                  !- Barometric Pressure {Pa}
+  4.3,                                    !- Wind Speed {m/s}
+  20,                                     !- Wind Direction {deg}
   No,                                     !- Rain Indicator
   No,                                     !- Snow Indicator
   No,                                     !- Daylight Saving Time Indicator
@@ -4119,23 +4257,23 @@ SizingPeriod:DesignDay,
   FullResetAtBeginEnvironment;            !- Begin Environment Reset Mode
 
 SizingPeriod:DesignDay,
-  Phoenix Sky Harbor Intl Ap Ann Htg Wind 99.6% Condns WS=>MCDB, !- Name
+  Seattle Seattle Tacoma Intl A Ann Htg Wind 99.6% Condns WS=>MCDB, !- Name
   12,                                     !- Month
   21,                                     !- Day of Month
   WinterDesignDay,                        !- Day Type
-  14.8,                                   !- Maximum Dry-Bulb Temperature {C}
+  5.6,                                    !- Maximum Dry-Bulb Temperature {C}
   0,                                      !- Daily Dry-Bulb Temperature Range {deltaC}
   DefaultMultipliers,                     !- Dry-Bulb Temperature Range Modifier Type
   ,                                       !- Dry-Bulb Temperature Range Modifier Day Schedule Name
   Wetbulb,                                !- Humidity Condition Type
-  14.8,                                   !- Wetbulb or DewPoint at Maximum Dry-Bulb {C}
+  5.6,                                    !- Wetbulb or DewPoint at Maximum Dry-Bulb {C}
   ,                                       !- Humidity Condition Day Schedule Name
   ,                                       !- Humidity Ratio at Maximum Dry-Bulb {kgWater/kgDryAir}
   ,                                       !- Enthalpy at Maximum Dry-Bulb {J/kg}
   ,                                       !- Daily Wet-Bulb Temperature Range {deltaC}
-  97342,                                  !- Barometric Pressure {Pa}
-  8.2,                                    !- Wind Speed {m/s}
-  100,                                    !- Wind Direction {deg}
+  99868,                                  !- Barometric Pressure {Pa}
+  12.1,                                   !- Wind Speed {m/s}
+  20,                                     !- Wind Direction {deg}
   No,                                     !- Rain Indicator
   No,                                     !- Snow Indicator
   No,                                     !- Daylight Saving Time Indicator
@@ -4149,23 +4287,23 @@ SizingPeriod:DesignDay,
   FullResetAtBeginEnvironment;            !- Begin Environment Reset Mode
 
 SizingPeriod:DesignDay,
-  Phoenix Sky Harbor Intl Ap Ann Hum_n 99.6% Condns DP=>MCDB, !- Name
+  Seattle Seattle Tacoma Intl A Ann Hum_n 99.6% Condns DP=>MCDB, !- Name
   12,                                     !- Month
   21,                                     !- Day of Month
   WinterDesignDay,                        !- Day Type
-  15.4,                                   !- Maximum Dry-Bulb Temperature {C}
+  -0.4,                                   !- Maximum Dry-Bulb Temperature {C}
   0,                                      !- Daily Dry-Bulb Temperature Range {deltaC}
   DefaultMultipliers,                     !- Dry-Bulb Temperature Range Modifier Type
   ,                                       !- Dry-Bulb Temperature Range Modifier Day Schedule Name
   Dewpoint,                               !- Humidity Condition Type
-  -14.5,                                  !- Wetbulb or DewPoint at Maximum Dry-Bulb {C}
+  -13,                                    !- Wetbulb or DewPoint at Maximum Dry-Bulb {C}
   ,                                       !- Humidity Condition Day Schedule Name
   ,                                       !- Humidity Ratio at Maximum Dry-Bulb {kgWater/kgDryAir}
   ,                                       !- Enthalpy at Maximum Dry-Bulb {J/kg}
   ,                                       !- Daily Wet-Bulb Temperature Range {deltaC}
-  97342,                                  !- Barometric Pressure {Pa}
-  1.7,                                    !- Wind Speed {m/s}
-  100,                                    !- Wind Direction {deg}
+  99868,                                  !- Barometric Pressure {Pa}
+  4.3,                                    !- Wind Speed {m/s}
+  20,                                     !- Wind Direction {deg}
   No,                                     !- Rain Indicator
   No,                                     !- Snow Indicator
   No,                                     !- Daylight Saving Time Indicator
@@ -4179,12 +4317,69 @@ SizingPeriod:DesignDay,
   FullResetAtBeginEnvironment;            !- Begin Environment Reset Mode
 
 ZoneList,
-  2019::MidriseApartment::Apartment_2_Residential_cc56a40e, !- Name
-  2_Residential_cc56a40e;                 !- Zone Name 1
+  2019::MediumOffice::OpenOffice,         !- Name
+  3_Office_335e157a;                      !- Zone Name 1
 
 Lights,
-  2019::MidriseApartment::Apartment_Lighting 1, !- Name
-  2019::MidriseApartment::Apartment_2_Residential_cc56a40e, !- Zone or ZoneList or Space or SpaceList Name
+  2019::MediumOffice::OpenOffice_Lighting, !- Name
+  2019::MediumOffice::OpenOffice,         !- Zone or ZoneList or Space or SpaceList Name
+  OfficeMedium BLDG_LIGHT_SCH_2013,       !- Schedule Name
+  Watts/Area,                             !- Design Level Calculation Method
+  ,                                       !- Lighting Level {W}
+  6.565979,                               !- Watts per Zone Floor Area {W/m2}
+  ,                                       !- Watts per Person {W/person}
+  0,                                      !- Return Air Fraction
+  0.7,                                    !- Fraction Radiant
+  0.2,                                    !- Fraction Visible
+  1,                                      !- Fraction Replaceable
+  General;                                !- End-Use Subcategory
+
+People,
+  2019::MediumOffice::OpenOffice_People,  !- Name
+  2019::MediumOffice::OpenOffice,         !- Zone or ZoneList or Space or SpaceList Name
+  OfficeMedium BLDG_OCC_SCH,              !- Number of People Schedule Name
+  People/Area,                            !- Number of People Calculation Method
+  ,                                       !- Number of People
+  0.0565105540187077,                     !- People per Floor Area {person/m2}
+  ,                                       !- Floor Area per Person {m2/person}
+  0.3,                                    !- Fraction Radiant
+  ,                                       !- Sensible Heat Fraction
+  OfficeMedium ACTIVITY_SCH;              !- Activity Level Schedule Name
+
+ElectricEquipment,
+  2019::MediumOffice::OpenOffice_Electric, !- Name
+  2019::MediumOffice::OpenOffice,         !- Zone or ZoneList or Space or SpaceList Name
+  OfficeMedium BLDG_EQUIP_SCH_2013,       !- Schedule Name
+  Watts/Area,                             !- Design Level Calculation Method
+  ,                                       !- Design Level {W}
+  10.333344,                              !- Watts per Zone Floor Area {W/m2}
+  ,                                       !- Watts per Person {W/person}
+  0,                                      !- Fraction Latent
+  0.5,                                    !- Fraction Radiant
+  0,                                      !- Fraction Lost
+  Electric Equipment;                     !- End-Use Subcategory
+
+ZoneInfiltration:DesignFlowRate,
+  2019::MediumOffice::OpenOffice_Infiltration, !- Name
+  2019::MediumOffice::OpenOffice,         !- Zone or ZoneList Name
+  OfficeMedium INFIL_SCH_PNNL,            !- Schedule Name
+  Flow/ExteriorArea,                      !- Design Flow Rate Calculation Method
+  ,                                       !- Design Flow Rate {m3/s}
+  ,                                       !- Flow per Zone Floor Area {m3/s-m2}
+  0.000226568,                            !- Flow per Exterior Surface Area {m3/s-m2}
+  ,                                       !- Air Changes per Hour {1/hr}
+  1,                                      !- Constant Term Coefficient
+  0,                                      !- Temperature Term Coefficient
+  0,                                      !- Velocity Term Coefficient
+  ;                                       !- Velocity Squared Term Coefficient
+
+ZoneList,
+  2019::MidriseApartment::Apartment,      !- Name
+  2_Residential_232d78c4;                 !- Zone Name 1
+
+Lights,
+  2019::MidriseApartment::Apartment_Lighting, !- Name
+  2019::MidriseApartment::Apartment,      !- Zone or ZoneList or Space or SpaceList Name
   ApartmentMidRise LTG_APT_SCH,           !- Schedule Name
   Watts/Area,                             !- Design Level Calculation Method
   ,                                       !- Lighting Level {W}
@@ -4197,8 +4392,8 @@ Lights,
   General;                                !- End-Use Subcategory
 
 People,
-  2019::MidriseApartment::Apartment_People 1, !- Name
-  2019::MidriseApartment::Apartment_2_Residential_cc56a40e, !- Zone or ZoneList or Space or SpaceList Name
+  2019::MidriseApartment::Apartment_People, !- Name
+  2019::MidriseApartment::Apartment,      !- Zone or ZoneList or Space or SpaceList Name
   ApartmentMidRise OCC_APT_SCH,           !- Number of People Schedule Name
   People/Area,                            !- Number of People Calculation Method
   ,                                       !- Number of People
@@ -4209,8 +4404,8 @@ People,
   ApartmentMidRise Activity Schedule;     !- Activity Level Schedule Name
 
 ElectricEquipment,
-  2019::MidriseApartment::Apartment_Electric 1, !- Name
-  2019::MidriseApartment::Apartment_2_Residential_cc56a40e, !- Zone or ZoneList or Space or SpaceList Name
+  2019::MidriseApartment::Apartment_Electric, !- Name
+  2019::MidriseApartment::Apartment,      !- Zone or ZoneList or Space or SpaceList Name
   ApartmentMidRise EQP_APT_SCH,           !- Schedule Name
   Watts/Area,                             !- Design Level Calculation Method
   ,                                       !- Design Level {W}
@@ -4222,70 +4417,13 @@ ElectricEquipment,
   Electric Equipment;                     !- End-Use Subcategory
 
 ZoneInfiltration:DesignFlowRate,
-  2_Residential_cc56a40e_infiltration,    !- Name
-  2019::MidriseApartment::Apartment_2_Residential_cc56a40e, !- Zone or ZoneList Name
+  2019::MidriseApartment::Apartment_Infiltration, !- Name
+  2019::MidriseApartment::Apartment,      !- Zone or ZoneList Name
   ApartmentMidRise INF_APT_SCH,           !- Schedule Name
   Flow/ExteriorArea,                      !- Design Flow Rate Calculation Method
   ,                                       !- Design Flow Rate {m3/s}
   ,                                       !- Flow per Zone Floor Area {m3/s-m2}
-  0.0001,                                 !- Flow per Exterior Surface Area {m3/s-m2}
-  ,                                       !- Air Changes per Hour {1/hr}
-  1,                                      !- Constant Term Coefficient
-  0,                                      !- Temperature Term Coefficient
-  0,                                      !- Velocity Term Coefficient
-  ;                                       !- Velocity Squared Term Coefficient
-
-ZoneList,
-  2019::SmallOffice::OpenOffice_3_Office_8d7e84a1, !- Name
-  3_Office_8d7e84a1;                      !- Zone Name 1
-
-Lights,
-  2019::SmallOffice::OpenOffice_Lighting 1, !- Name
-  2019::SmallOffice::OpenOffice_3_Office_8d7e84a1, !- Zone or ZoneList or Space or SpaceList Name
-  OfficeSmall BLDG_LIGHT_SCH_2013,        !- Schedule Name
-  Watts/Area,                             !- Design Level Calculation Method
-  ,                                       !- Lighting Level {W}
-  6.565979,                               !- Watts per Zone Floor Area {W/m2}
-  ,                                       !- Watts per Person {W/person}
-  0.4,                                    !- Return Air Fraction
-  0.4,                                    !- Fraction Radiant
-  0.2,                                    !- Fraction Visible
-  1,                                      !- Fraction Replaceable
-  General;                                !- End-Use Subcategory
-
-People,
-  2019::SmallOffice::OpenOffice_People 1, !- Name
-  2019::SmallOffice::OpenOffice_3_Office_8d7e84a1, !- Zone or ZoneList or Space or SpaceList Name
-  OfficeSmall BLDG_OCC_SCH,               !- Number of People Schedule Name
-  People/Area,                            !- Number of People Calculation Method
-  ,                                       !- Number of People
-  0.0565105540187077,                     !- People per Floor Area {person/m2}
-  ,                                       !- Floor Area per Person {m2/person}
-  0.3,                                    !- Fraction Radiant
-  ,                                       !- Sensible Heat Fraction
-  OfficeSmall ACTIVITY_SCH;               !- Activity Level Schedule Name
-
-ElectricEquipment,
-  2019::SmallOffice::OpenOffice_Electric 1, !- Name
-  2019::SmallOffice::OpenOffice_3_Office_8d7e84a1, !- Zone or ZoneList or Space or SpaceList Name
-  OfficeSmall BLDG_EQUIP_SCH_2013,        !- Schedule Name
-  Watts/Area,                             !- Design Level Calculation Method
-  ,                                       !- Design Level {W}
-  10.333344,                              !- Watts per Zone Floor Area {W/m2}
-  ,                                       !- Watts per Person {W/person}
-  0,                                      !- Fraction Latent
-  0.5,                                    !- Fraction Radiant
-  0,                                      !- Fraction Lost
-  Electric Equipment;                     !- End-Use Subcategory
-
-ZoneInfiltration:DesignFlowRate,
-  3_Office_8d7e84a1_infiltration,         !- Name
-  2019::SmallOffice::OpenOffice_3_Office_8d7e84a1, !- Zone or ZoneList Name
-  OfficeSmall INFIL_QUARTER_ON_SCH,       !- Schedule Name
-  Flow/ExteriorArea,                      !- Design Flow Rate Calculation Method
-  ,                                       !- Design Flow Rate {m3/s}
-  ,                                       !- Flow per Zone Floor Area {m3/s-m2}
-  0.0001,                                 !- Flow per Exterior Surface Area {m3/s-m2}
+  0.00056896,                             !- Flow per Exterior Surface Area {m3/s-m2}
   ,                                       !- Air Changes per Hour {1/hr}
   1,                                      !- Constant Term Coefficient
   0,                                      !- Temperature Term Coefficient
