@@ -996,17 +996,6 @@ def write_output_items(building):
     # fh.write('  ,                                       !- Key Value\n')
     # fh.write('  Water Heater Electricity Energy,        !- Variable Name\n')
     # fh.write('  Hourly;                                 !- Reporting Frequency\n')
-    
-
-    # Output:Table:Monthly,
-    #   Air Loop System Energy and Water Use, !- Name
-    #   , !- DigitsAfterDecimal Air System Hot Water Energy , SumOrAverage,
-    #   Air System Steam Energy , SumOrAverage,
-    #   Air System Chilled Water Energy, SumOrAverage,
-    #   1.26. GROUP – AIR DISTRIBUTION 1083
-    #   Air System Electricity Energy, SumOrAverage, Air System NaturalGas Energy, SumOrAverage,
-    #   Air System Water Volume, SumOrAverage;
-
 
     fh.write('\n')
     fh.write('\n')

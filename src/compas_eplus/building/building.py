@@ -120,7 +120,7 @@ class Building(object):
 
         self.ep_version = '22.2.0'
         self.infiltration_rate = .0003 # [m3/s]
-        self.num_timesteps = 4
+        self.num_timesteps = 1
         self.terrain = 'City'
         self.solar_distribution = 'FullExteriorWithReflections'
         self.zones = {}
@@ -131,12 +131,12 @@ class Building(object):
         self.layers = {}
         self.schedules = {}
 
-        self.mean_air_temperatures = {}
         self.construction_key_dict = {}
         self.srf_cpt_dict = {}
         self.material_key_dict = {}
 
         # these are not yet in json file - - - 
+        self.results = {}
         self.people_area = {'office': .056, 'small_office': .056, 'mid_office': .056, 'mid_apartment': .028}
         self.lights_area = {'office': 6.57, 'small_office': 6.57, 'mid_office': 6.57, 'mid_apartment': 6.46}
         self.lights_fraction = {'office': .7, 'mid_apartment': .6}
@@ -695,13 +695,7 @@ class Building(object):
         error_filepath = os.path.join(self.path, 'eplus_output', 'eplusout.err')
         read_error_file(error_filepath, print_error=True)
         for i in range(5): print('')
-        # try:
         read_results_file(self, filepath)
-        # temps, times = read_mean_zone_temperatures(self, filepath)
-        # self.mean_air_temperatures = temps
-        # self.result_times = times
-        # except:
-        #     raise NameError('Energy+ returned the above error message')
 
     def plot_mean_zone_temperatures(self, plot_type='scatter'):
         """
@@ -721,22 +715,21 @@ class Building(object):
         from datetime import datetime
         import pandas as pd
 
-        times = [datetime(2022, m, d, h) for h, d, m in self.result_times]
-        temps = self.mean_air_temperatures
-        data = {}
+        data = {zk:{} for zk in self.zones}
+        zones = [self.zones[zk].name for zk in self.zones] 
         counter = 0
-        for zk in self.zones:
-            # print(zk)
-            for i in range(len(times)):
-                # print(i)
-                # print(i, zk, temps[i])
-                data[counter] = {'zone': self.zones[zk].name, 
-                                 'temp': temps[i][zk],
-                                 'time': times[i],
-                                 'hour': self.result_times[i][0],
-                                 'day': self.result_times[i][1],
-                                 'month': self.result_times[i][2],
-                        }
+        for key in self.results:
+            _, h, d, m = key.split('_')
+            time = datetime(2022, int(m), int(d), int(h))
+            for zone in zones:
+                # data[counter][zone] = self.results[key][zone]['mean_air_temperature']
+                data[counter] = {'zone': zone,
+                                 'temp': self.results[key][zone]['mean_air_temperature'],
+                                 'time': time,
+                                 'day': d,
+                                 'hour': h,
+                                 'month': m,
+                                 }
                 counter += 1
 
         df = pd.DataFrame.from_dict(data, orient='index')

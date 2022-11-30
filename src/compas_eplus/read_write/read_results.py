@@ -16,8 +16,7 @@ __all__ = ['read_mean_zone_temperatures',
 
 def read_results_file(building, filepath):
     pre_dict = read_eso_preamble(building, filepath)
-    results = read_eso(building, filepath, pre_dict)
-    print(results)
+    building.results = read_eso(building, filepath, pre_dict)
 
 
 def read_eso(building, filepath, pre_dict):
@@ -40,7 +39,8 @@ def read_eso(building, filepath, pre_dict):
             hour = int(line[5]) - 1
             minutes = int(float(line[6]))
             time_key = '{}_{}_{}_{}'.format(minutes, hour, day, month)
-            data[time_key] =  {zk:{} for zk in zones}
+            if time_key not in data:
+                data[time_key] =  {zk:{} for zk in zones}
         else:
             zone = pre_dict[key]['zone']
             item = pre_dict[key]['item']
