@@ -697,12 +697,14 @@ class Building(object):
         for i in range(5): print('')
         read_results_file(self, filepath)
 
-    def plot_mean_zone_temperatures(self, plot_type='scatter'):
+    def plot_results(self, result_type, plot_type='scatter'):
         """
-        Plots mean zone air temperatures per zone
+        Plots results per zone
 
         Parameters
         ----------
+        result_type: str
+            The result to be plotted, for example mean_air_temperature, heating, etc. 
         plot_type: str, optional
             The plot type to be used. Options are "scatter" and "line" 
 
@@ -724,7 +726,10 @@ class Building(object):
             for zone in zones:
                 # data[counter][zone] = self.results[key][zone]['mean_air_temperature']
                 data[counter] = {'zone': zone,
-                                 'temp': self.results[key][zone]['mean_air_temperature'],
+                                 'mean_air_temperature': self.results[key][zone]['mean_air_temperature'],
+                                 'heating': self.results[key][zone]['heating'],
+                                 'cooling': self.results[key][zone]['cooling'],
+                                 'lighting': self.results[key][zone]['lighting'],
                                  'time': time,
                                  'day': d,
                                  'hour': h,
@@ -738,10 +743,10 @@ class Building(object):
             if len(self.zones) > 1:
                 color_by = 'zone'
             else:
-                color_by = 'temp'
-            fig = px.scatter(df, x='time', y='temp', hover_data={"time": "|%B %d, %H, %Y"}, color=color_by, size=None)
+                color_by = result_type
+            fig = px.scatter(df, x='time', y=result_type, hover_data={"time": "|%B %d, %H, %Y"}, color=color_by, size=None)
         elif plot_type == 'line':
-            fig = px.line(df, x='time', y='temp', hover_data={"time": "|%B %d, %H, %Y"}, color='zone')
+            fig = px.line(df, x='time', y=result_type, hover_data={"time": "|%B %d, %H, %Y"}, color='zone')
         fig.update_xaxes(dtick="M1",tickformat="%b", ticklabelmode="period")
         fig.show()
 
