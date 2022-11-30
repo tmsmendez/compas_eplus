@@ -37,7 +37,7 @@ def find_zones(filepath, data):
 
     data['zones'] = {}    
     for i in i_lines:
-        name = lines[i + 1].split(',')[0].strip()
+        name = lines[i + 1].split(',')[0].strip().lower()
         x = float(lines[i + 2].split(',')[0].strip())
         y = float(lines[i + 3].split(',')[0].strip())
         z = float(lines[i + 4].split(',')[0].strip())
@@ -63,7 +63,7 @@ def find_sufaces(filepath, data):
             i_lines.append(i)
     for i in i_lines:
         name = lines[i + 1].split(',')[0].strip()
-        zone  = lines[i + 4].split(',')[0].strip()
+        zone  = lines[i + 4].split(',')[0].strip().lower()
         stype = lines[i + 2].split(',')[0].strip()
         cons  = lines[i + 3].split(',')[0].strip()
         outs = lines[i + 6].split(',')[0].strip()

@@ -815,5 +815,9 @@ if __name__ == '__main__':
     b.analyze(exe='/Applications/EnergyPlus/energyplus')
     b.load_results()
 
+    b.plot_results('mean_air_temperature', plot_type='scatter')
+    b.plot_results('heating', plot_type='line')
+    b.plot_results('cooling', plot_type='line')
+    b.plot_results('lighting', plot_type='line')
     # v = BuildingViewer(b)
     # v.show()
