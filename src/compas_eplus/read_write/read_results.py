@@ -16,7 +16,37 @@ __all__ = ['read_mean_zone_temperatures',
 
 def read_results_file(building, filepath):
     pre_dict = read_eso_preamble(building, filepath)
+    results = read_eso(building, filepath, pre_dict)
+    print(results)
 
+
+def read_eso(building, filepath, pre_dict):
+    fh = open(filepath, 'r')
+    lines = fh.readlines()
+    fh.close()
+
+    zones = [building.zones[zk].name for zk in building.zones] 
+
+    del lines[:9 + pre_dict['len_preamble']]
+    del lines[-2:]
+
+    data = {}
+    for line in lines:
+        line = line.split(',')
+        key = line[0]
+        if key == '2':
+            month = int(line[2])
+            day = int(line[3])
+            hour = int(line[5]) - 1
+            minutes = int(float(line[6]))
+            time_key = '{}_{}_{}_{}'.format(minutes, hour, day, month)
+            data[time_key] =  {zk:{} for zk in zones}
+        else:
+            zone = pre_dict[key]['zone']
+            item = pre_dict[key]['item']
+            value = float(line[1].strip())
+            data[time_key][zone][item] = value
+    return data
 
 
 def read_eso_preamble(building, filepath):
@@ -25,13 +55,16 @@ def read_eso_preamble(building, filepath):
     fh.close()
 
     del lines[:7]
+    del lines[-2:]
 
     data = {}
+    len_preamble = 0
     for line in lines:
         line = line.strip()
         if line == 'End of Data Dictionary':
             break
         # print(line)
+        len_preamble += 1
         stuff = line.split(',')
         key = stuff[0]
         zone = stuff[2].split(' ')[0].lower()
@@ -46,6 +79,7 @@ def read_eso_preamble(building, filepath):
             item = 'mean_air_temperature'
         
         data[key] = {'zone': zone, 'item': item}
+    data['len_preamble'] = len_preamble
     return data
 
 
@@ -96,6 +130,7 @@ def read_mean_zone_temperatures(building, filepath):
     mean_air_temperatures = temps
     result_times = times
     return mean_air_temperatures, result_times
+
 
 def read_error_file(filepath, print_error=True):
     fh = open(filepath, 'r')
