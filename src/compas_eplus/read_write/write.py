@@ -980,6 +980,9 @@ def write_output_items(building):
     fh.write('  Hourly;                                 !- Reporting Frequency\n')
     fh.write('\n')
 
+
+
+
     # fh.write('Output:Variable,\n')
     # fh.write('  ,                                       !- Key Value\n')
     # fh.write('  Zone Electric Equipment Electricity Energy, !- Variable Name\n')

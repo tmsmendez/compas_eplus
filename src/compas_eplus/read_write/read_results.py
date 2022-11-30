@@ -25,8 +25,6 @@ def read_eso(building, filepath, pre_dict):
     fh.close()
 
     zones = [building.zones[zk].name for zk in building.zones] 
-
-    print(zones)
     
     del lines[:9 + pre_dict['len_preamble']]
     del lines[-2:]

@@ -697,7 +697,7 @@ class Building(object):
         for i in range(5): print('')
         read_results_file(self, filepath)
 
-    def plot_results(self, result_type, plot_type='scatter'):
+    def plot_results(self, result_type, plot_type='scatter', timeframe='daily'):
         """
         Plots results per zone
 
@@ -720,16 +720,35 @@ class Building(object):
         data = {zk:{} for zk in self.zones}
         zones = [self.zones[zk].name for zk in self.zones] 
         counter = 0
-        for key in self.results:
+
+        if timeframe == 'daily':
+            results = {}
+            # day = 0
+            for key in self.results:
+                _, h, d, m = key.split('_')
+                tkey = '0_0_{}_{}'.format(d, m)
+                if tkey not in results:
+                    results[tkey] = {}
+                for zone in self.results[key]:
+                    if zone not in results[tkey]:
+                        results[tkey][zone] = {'mean_air_temperature':0, 'heating': 0, 'cooling':0, 'lighting': 0}
+
+                    results[tkey][zone]['heating'] += self.results[key][zone]['heating']
+                    results[tkey][zone]['cooling'] += self.results[key][zone]['cooling']
+                    results[tkey][zone]['lighting'] += self.results[key][zone]['lighting']
+        else:
+            results = self.results
+
+        for key in results:
             _, h, d, m = key.split('_')
             time = datetime(2022, int(m), int(d), int(h))
             for zone in zones:
                 # data[counter][zone] = self.results[key][zone]['mean_air_temperature']
                 data[counter] = {'zone': zone,
-                                 'mean_air_temperature': self.results[key][zone]['mean_air_temperature'],
-                                 'heating': self.results[key][zone]['heating'],
-                                 'cooling': self.results[key][zone]['cooling'],
-                                 'lighting': self.results[key][zone]['lighting'],
+                                 'mean_air_temperature': results[key][zone]['mean_air_temperature'],
+                                 'heating': results[key][zone]['heating'],
+                                 'cooling': results[key][zone]['cooling'],
+                                 'lighting': results[key][zone]['lighting'],
                                  'time': time,
                                  'day': d,
                                  'hour': h,
@@ -808,16 +827,15 @@ if __name__ == '__main__':
     wea = compas_eplus.SEATTLE
     b = Building.from_idf(filepath, path, wea)
 
-    # for con in b.materials:
-    #     print(b.materials[con].thermal_absorptance)
-
     b.write_idf()
     b.analyze(exe='/Applications/EnergyPlus/energyplus')
     b.load_results()
 
-    b.plot_results('mean_air_temperature', plot_type='scatter')
-    b.plot_results('heating', plot_type='line')
-    b.plot_results('cooling', plot_type='line')
-    b.plot_results('lighting', plot_type='line')
+    # b.plot_results('mean_air_temperature', plot_type='scatter')
+    b.plot_results('heating', plot_type='line', timeframe='daily')
+    # b.plot_results('cooling', plot_type='line')
+    # b.plot_results('lighting', plot_type='line')
+
+
     # v = BuildingViewer(b)
     # v.show()
