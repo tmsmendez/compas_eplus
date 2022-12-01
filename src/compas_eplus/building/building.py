@@ -68,7 +68,9 @@ from compas.datastructures import Mesh
 # TODO: look into ideal airloads values, need parametrizing?
 # TODO: Does Zone sizing needs to be added?
 
-# TODO: read results needs to read hourly data
+# TODO: make results plotter, move functionality there
+# TODO: make results comparison plottter
+
 
 class Building(object):
     """
