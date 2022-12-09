@@ -78,8 +78,8 @@ rules = {'Wall': 'ext_wall', 'Window': 'double_glazing', 'Floor': 'floor', 'Roof
 b.assign_constructions_from_rules(rules)
 
 
-# v = BuildingViewer(b)
-# v.show()
+v = BuildingViewer(b)
+v.show()
 
 
 b.write_idf()
@@ -88,7 +88,7 @@ b.analyze(exe='/Applications/EnergyPlus/energyplus')
 for i in range(50): print('')
 b.load_results()
 # b.plot_results('mean_air_temperature', plot_type='scatter')
-b.plot_results('lighting', plot_type='line', timeframe='daily')
+# b.plot_results('lighting', plot_type='line', timeframe='daily')
 # b.to_json(os.path.join(compas_eplus.DATA, 'buildings', '2_zone.json'))
 
 

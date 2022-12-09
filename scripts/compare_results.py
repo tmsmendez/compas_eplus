@@ -23,4 +23,4 @@ filepath = os.path.join(compas_eplus.DATA, 'results', 'counter_teresa.eso')
 read_results_file(b2, filepath)
 
 v = ResultsViewer(b1, b2)
-v.compare('cooling')
+v.show('cooling')
