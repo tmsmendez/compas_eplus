@@ -748,6 +748,7 @@ class Building(object):
 if __name__ == '__main__':
 
     from compas_eplus.viewers import BuildingViewer
+    from compas_eplus.viewers import ResultsViewer
 
     for i in range(50): print('')
     
@@ -757,18 +758,12 @@ if __name__ == '__main__':
     wea = compas_eplus.SEATTLE
     b = Building.from_idf(filepath, path, wea)
 
-    for zk in b.zones:
-        print(b.zones[zk].area)
-
-    # b.write_idf()
-    # b.analyze(exe='/Applications/EnergyPlus/energyplus')
-    # b.load_results()
-
-    # b.plot_results('mean_air_temperature', plot_type='scatter')
-    # b.plot_results('heating', plot_type='line', timeframe='daily')
-    # b.plot_results('cooling', plot_type='line')
-    # b.plot_results('lighting', plot_type='line')
-
+    b.write_idf()
+    b.analyze(exe='/Applications/EnergyPlus/energyplus')
+    b.load_results()
 
     v = BuildingViewer(b)
     v.show()
+
+    v = ResultsViewer(b)
+    v.show('total')

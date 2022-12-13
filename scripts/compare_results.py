@@ -35,11 +35,8 @@ Complex
 - Try to implement model where zones have different programs
 
 Easy
-- Plot results in a more meaningful unit (kWh / m2)
 - Make the comparison tool plot the delta between two data sets
-- Give option to normalize by area or not
 - Write results conversion into imperial (kBtu / ft2)
-- Send Teresa the latest IDF from compas_eplus
 - Make EUI map plot
 
 """

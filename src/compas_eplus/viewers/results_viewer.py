@@ -15,16 +15,20 @@ import pandas as pd
 
 
 class ResultsViewer(object):
-    def __init__(self, building, building2=None):
+    def __init__(self, building, building2=None, eui_units='kWh'):
         self.plot_type = 'line'
         self.timeframe = 'daily'
         self.building = building
         self.building2 = building2
-        self.units = 'metric'  # 'imperial'
-        self.normalize = True
+        self.eui_units = eui_units  # 'kWh', 'kBtu', 'J'
+        self.area_units = 'm2'
+        self.multiplier = {'Btu': 0.000947817, 'J': 1, 'kWh': 2.77778e-7, 'kBtu': 9.47817e-7}
+        self.area_normalize = True
+        self.df = None
 
     def show(self, result_type):
         data = {zk:{} for zk in self.building.zones}
+        zks = [zk for zk in self.building.zones] 
         zones = [self.building.zones[zk].name for zk in self.building.zones] 
         counter = 0
 
@@ -49,12 +53,22 @@ class ResultsViewer(object):
         for key in results:
             _, h, d, m = key.split('_')
             time = datetime(2022, int(m), int(d), int(h))
-            for zone in zones:
+            for i, zone in enumerate(zones):
+                heat = results[key][zone]['heating'] * self.multiplier[self.eui_units]
+                cool = results[key][zone]['cooling'] * self.multiplier[self.eui_units]
+                light = results[key][zone]['lighting'] * self.multiplier[self.eui_units]
+
+                if self.area_normalize:
+                    heat /= self.building.zones[zks[i]].area
+                    cool /= self.building.zones[zks[i]].area
+                    light /= self.building.zones[zks[i]].area
+
                 data[counter] = {'zone': zone,
                                 'mean_air_temperature': results[key][zone]['mean_air_temperature'],
-                                'heating': results[key][zone]['heating'],
-                                'cooling': results[key][zone]['cooling'],
-                                'lighting': results[key][zone]['lighting'],
+                                'heating': heat,
+                                'cooling': cool,
+                                'lighting':light,
+                                'total': heat + cool + light,
                                 'time': time,
                                 'day': d,
                                 'hour': h,
@@ -62,19 +76,9 @@ class ResultsViewer(object):
                                 }
                 counter += 1
 
-        df = pd.DataFrame.from_dict(data, orient='index')
+        self.df = pd.DataFrame.from_dict(data, orient='index')
+        self.plot(result_type)
         
-        if self.plot_type == 'scatter':
-            if len(self.building.zones) > 1:
-                color_by = 'zone'
-            else:
-                color_by = result_type
-            fig = px.scatter(df, x='time', y=result_type, hover_data={"time": "|%B %d, %H, %Y"}, color=color_by, size=None)
-        elif self.plot_type == 'line':
-            fig = px.line(df, x='time', y=result_type, hover_data={"time": "|%B %d, %H, %Y"}, color='zone')
-        fig.update_xaxes(dtick="M1",tickformat="%b", ticklabelmode="period")
-        fig.show()
-
     def compare(self, result_type):
         buildings = [self.building, self.building2]
         data = {}
@@ -103,12 +107,18 @@ class ResultsViewer(object):
                 _, h, d, m = key.split('_')
                 time = datetime(2022, int(m), int(d), int(h))
                 for zone in zones:
+                    heat = results[key][zone]['heating'] * self.multiplier[self.eui_units]
+                    cool = results[key][zone]['cooling'] * self.multiplier[self.eui_units]
+                    light = results[key][zone]['lighting'] * self.multiplier[self.eui_units]
+                    if self.area_normalize:
+                        for item in [heat, cool, light]:
+                            item /= self.building.zones[zone].area
                     data[counter] = {'zone': '{}_{}_{}'.format(zone, b.name, i),
                                      'mean_air_temperature': results[key][zone]['mean_air_temperature'],
-                                     'heating': results[key][zone]['heating'],
-                                     'cooling': results[key][zone]['cooling'],
-                                     'lighting': results[key][zone]['lighting'],
-                                     'total': results[key][zone]['heating'] + results[key][zone]['heating']+ results[key][zone]['heating'],
+                                     'heating': heat,
+                                     'cooling': cool,
+                                     'lighting':light,
+                                     'total': heat + cool + light,
                                      'time': time,
                                      'day': d,
                                      'hour': h,
@@ -116,17 +126,23 @@ class ResultsViewer(object):
                                      }
                     counter += 1
 
-        df = pd.DataFrame.from_dict(data, orient='index')
+        self.df = pd.DataFrame.from_dict(data, orient='index')
+        self.plot(result_type)
         
+    def plot(self, result_type):
         if self.plot_type == 'scatter':
             if len(self.building.zones) > 1:
                 color_by = 'zone'
             else:
                 color_by = result_type
-            fig = px.scatter(df, x='time', y=result_type, hover_data={"time": "|%B %d, %H, %Y"}, color=color_by, size=None)
+            fig = px.scatter(self.df, x='time', y=result_type, hover_data={"time": "|%B %d, %H, %Y"}, color=color_by, size=None)
         elif self.plot_type == 'line':
-            fig = px.line(df, x='time', y=result_type, hover_data={"time": "|%B %d, %H, %Y"}, color='zone')
+            fig = px.line(self.df, x='time', y=result_type, hover_data={"time": "|%B %d, %H, %Y"}, color='zone')
         fig.update_xaxes(dtick="M1",tickformat="%b", ticklabelmode="period")
+        if self.area_normalize:
+            fig.update_yaxes(title='{} EUI ({}/{})'.format(result_type, self.eui_units, self.area_units))
+        else:
+            fig.update_yaxes(title='{} EUI ({})'.format(result_type, self.eui_units))
         fig.show()
 
 
@@ -197,5 +213,5 @@ if __name__ == '__main__':
     filepath = os.path.join(compas_eplus.DATA, 'results', 'counter_teresa.eso')
     read_results_file(b2, filepath)
 
-    v = ResultsViewer(b1, b2)
-    v.compare('total')
+    v = ResultsViewer(b1, b2, eui_units='kWh')
+    v.show('total')
