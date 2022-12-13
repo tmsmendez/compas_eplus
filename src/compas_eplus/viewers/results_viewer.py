@@ -104,15 +104,16 @@ class ResultsViewer(object):
                 time = datetime(2022, int(m), int(d), int(h))
                 for zone in zones:
                     data[counter] = {'zone': '{}_{}_{}'.format(zone, b.name, i),
-                                    'mean_air_temperature': results[key][zone]['mean_air_temperature'],
-                                    'heating': results[key][zone]['heating'],
-                                    'cooling': results[key][zone]['cooling'],
-                                    'lighting': results[key][zone]['lighting'],
-                                    'time': time,
-                                    'day': d,
-                                    'hour': h,
-                                    'month': m,
-                                    }
+                                     'mean_air_temperature': results[key][zone]['mean_air_temperature'],
+                                     'heating': results[key][zone]['heating'],
+                                     'cooling': results[key][zone]['cooling'],
+                                     'lighting': results[key][zone]['lighting'],
+                                     'total': results[key][zone]['heating'] + results[key][zone]['heating']+ results[key][zone]['heating'],
+                                     'time': time,
+                                     'day': d,
+                                     'hour': h,
+                                     'month': m,
+                                     }
                     counter += 1
 
         df = pd.DataFrame.from_dict(data, orient='index')
@@ -197,4 +198,4 @@ if __name__ == '__main__':
     read_results_file(b2, filepath)
 
     v = ResultsViewer(b1, b2)
-    v.compare('cooling')
+    v.compare('total')

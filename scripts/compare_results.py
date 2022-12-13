@@ -29,15 +29,17 @@ v.compare('heating')
 Homework
 --------
 
+Complex
 - Read and apply schedules from IDF
+- Make sure set-points are imported from IDF too
+- Try to implement model where zones have different programs
+
+Easy
 - Plot results in a more meaningful unit (kWh / m2)
-- Sum Heating cooling lighting into a total operational plot
 - Make the comparison tool plot the delta between two data sets
 - Give option to normalize by area or not
 - Write results conversion into imperial (kBtu / ft2)
-- Make sure set-points are imported from IDF too
 - Send Teresa the latest IDF from compas_eplus
-- Try to implement model where zones have different programs
-
+- Make EUI map plot
 
 """
