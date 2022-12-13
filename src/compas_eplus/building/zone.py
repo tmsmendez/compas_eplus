@@ -45,6 +45,13 @@ class Zone(object):
             json.dump(self.data, fp)
 
     @property
+    def area(self):
+        for fk in self.surfaces.faces():
+            st = self.surfaces.face_attribute(fk, 'surface_type')
+            if st == 'Floor':
+                return self.surfaces.face_area(fk)
+
+    @property
     def data(self):
         data = {'name'                  : self.name,
                 'surfaces'              : self.surfaces.to_data(),
@@ -185,3 +192,6 @@ class ZoneSurfaces(Mesh):
             self.face_attribute(i, 'name', '{}_wall_{}'.format(zname, i))
             self.face_attribute(i, 'surface_type', 'Wall')
 
+
+if __name__ == '__main__':
+    pass

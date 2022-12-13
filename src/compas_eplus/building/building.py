@@ -757,9 +757,12 @@ if __name__ == '__main__':
     wea = compas_eplus.SEATTLE
     b = Building.from_idf(filepath, path, wea)
 
-    b.write_idf()
-    b.analyze(exe='/Applications/EnergyPlus/energyplus')
-    b.load_results()
+    for zk in b.zones:
+        print(b.zones[zk].area)
+
+    # b.write_idf()
+    # b.analyze(exe='/Applications/EnergyPlus/energyplus')
+    # b.load_results()
 
     # b.plot_results('mean_air_temperature', plot_type='scatter')
     # b.plot_results('heating', plot_type='line', timeframe='daily')

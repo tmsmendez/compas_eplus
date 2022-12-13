@@ -20,6 +20,8 @@ class ResultsViewer(object):
         self.timeframe = 'daily'
         self.building = building
         self.building2 = building2
+        self.units = 'metric'  # 'imperial'
+        self.normalize = True
 
     def show(self, result_type):
         data = {zk:{} for zk in self.building.zones}

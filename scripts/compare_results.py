@@ -23,4 +23,22 @@ filepath = os.path.join(compas_eplus.DATA, 'results', 'counter_teresa.eso')
 read_results_file(b2, filepath)
 
 v = ResultsViewer(b1, b2)
-v.show('cooling')
+v.compare('heating')
+
+"""
+Homework
+--------
+
+- Read and apply schedules from IDF
+- Plot results in a more meaningful unit (kWh / m2)
+- Sum Heating cooling lighting into a total operational plot
+- Make the comparison tool plot the delta between two data sets
+- Give option to normalize by area or not
+- Write results conversion into imperial (kBtu / ft2)
+- Make sure set-points are imported from IDF too
+- Send Teresa the latest IDF from compas_eplus
+- Add a north to the building viewer
+- Try to implement model where zones have different programs
+
+
+"""
