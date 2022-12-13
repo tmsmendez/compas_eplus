@@ -37,7 +37,6 @@ Homework
 - Write results conversion into imperial (kBtu / ft2)
 - Make sure set-points are imported from IDF too
 - Send Teresa the latest IDF from compas_eplus
-- Add a north to the building viewer
 - Try to implement model where zones have different programs
 
 

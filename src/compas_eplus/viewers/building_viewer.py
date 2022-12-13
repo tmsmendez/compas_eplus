@@ -32,6 +32,7 @@ class BuildingViewer(object):
         self.building = building
         self.data = []
         self.layout = None
+        self.fig = None
 
     def make_layout(self):
         """
@@ -87,9 +88,10 @@ class BuildingViewer(object):
         self.add_zones()
         self.add_windows()
         self.add_shadings()
+        self.add_north()
 
-        fig = go.Figure(data=self.data, layout=self.layout)
-        fig.show()
+        self.fig = go.Figure(data=self.data, layout=self.layout)
+        self.fig.show()
 
     def add_zones(self):
         """
@@ -410,9 +412,49 @@ class BuildingViewer(object):
         self.data.extend(lines)
         self.data.extend(faces)
 
+    def find_npt(self):
+        x = []
+        y = []
+        z = []
+        for zk in self.building.zones:
+            vs = list(self.building.zones[zk].surfaces.vertices())
+            x_ = [self.building.zones[zk].surfaces.vertex_coordinates(v)[0] for v in vs]
+            y_ = [self.building.zones[zk].surfaces.vertex_coordinates(v)[1] for v in vs]
+            z_ = [self.building.zones[zk].surfaces.vertex_coordinates(v)[2] for v in vs]
+            x.extend(x_)
+            y.extend(y_)
+            z.extend(z_)
+
+        return [min(x) - 2, min(y) - 2 , min(z)]
+
+    def add_north(self):
+
+        x, y, z = self.find_npt()
+
+
+        north = go.Scatter3d(x=[x, x-.5, x+.5, x],
+                             y=[y+3, y+.5, y+.5, y+3],
+                             z=[z, z, z, z], 
+                             mode='lines+text',
+                             text=['North', '', '', '', ''],
+                             name='North',
+                             marker={'color':'red'},
+                             )
+        self.data.extend([north])
+
+
 if __name__ == '__main__':
     import os
     import compas_eplus
     from compas_eplus.building import Building
 
-    pass
+    for i in range(50): print('')
+
+    file = 'teresa_example.idf'
+    filepath = os.path.join(compas_eplus.DATA, 'idf_examples', file)
+    path = compas_eplus.TEMP
+    wea = compas_eplus.SEATTLE
+    b = Building.from_idf(filepath, path, wea)
+
+    v = BuildingViewer(b)
+    v.show()

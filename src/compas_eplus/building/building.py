@@ -770,5 +770,5 @@ if __name__ == '__main__':
     # b.plot_results('lighting', plot_type='line')
 
 
-    # v = BuildingViewer(b)
-    # v.show()
+    v = BuildingViewer(b)
+    v.show()
