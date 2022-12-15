@@ -36,7 +36,6 @@ Complex
 
 Easy
 - Make the comparison tool plot the delta between two data sets
-- Write results conversion into imperial (kBtu / ft2)
 - Make EUI map plot
 
 """

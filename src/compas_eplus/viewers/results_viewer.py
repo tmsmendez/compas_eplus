@@ -84,6 +84,7 @@ class ResultsViewer(object):
         data = {}
         counter = 0
         for i, b in enumerate(buildings):
+            zks = [zk for zk in self.building.zones] 
             zones = [self.building.zones[zk].name for zk in self.building.zones] 
             if self.timeframe == 'daily':
                 results = {}
@@ -106,13 +107,15 @@ class ResultsViewer(object):
             for key in results:
                 _, h, d, m = key.split('_')
                 time = datetime(2022, int(m), int(d), int(h))
-                for zone in zones:
+                for j, zone in enumerate(zones):
                     heat = results[key][zone]['heating'] * self.multiplier[self.eui_units]
                     cool = results[key][zone]['cooling'] * self.multiplier[self.eui_units]
                     light = results[key][zone]['lighting'] * self.multiplier[self.eui_units]
                     if self.area_normalize:
-                        for item in [heat, cool, light]:
-                            item /= self.building.zones[zone].area
+                        heat /= self.building.zones[zks[j]].area
+                        cool /= self.building.zones[zks[j]].area
+                        light /= self.building.zones[zks[j]].area
+
                     data[counter] = {'zone': '{}_{}_{}'.format(zone, b.name, i),
                                      'mean_air_temperature': results[key][zone]['mean_air_temperature'],
                                      'heating': heat,
@@ -214,4 +217,4 @@ if __name__ == '__main__':
     read_results_file(b2, filepath)
 
     v = ResultsViewer(b1, b2, eui_units='kWh')
-    v.show('total')
+    v.compare('total')
