@@ -3,7 +3,7 @@ import compas_eplus
 from compas_eplus.read_write import read_results_file
 from compas_eplus.building import Building
 from compas_eplus.viewers import ResultsViewer
-
+from compas_eplus.viewers import BuildingViewer
 
 import os
 import compas_eplus
@@ -24,6 +24,11 @@ read_results_file(b2, filepath)
 
 v = ResultsViewer(b1, b2)
 v.compare('heating')
+
+v = BuildingViewer(b1)
+v.show()
+
+
 
 """
 Homework

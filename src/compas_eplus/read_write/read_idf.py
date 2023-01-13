@@ -20,6 +20,7 @@ def get_idf_data(filepath):
     find_glazing_materials(filepath, data)
     find_glazing_material_simple(filepath, data)
     find_constructions(filepath, data)
+    find_schedule_compact(filepath, data)
     return data
 
 
@@ -308,6 +309,43 @@ def find_glazing_material_simple(filepath, data):
                                     }
 
 
+def find_schedule_compact(filepath, data):
+    fh = open(filepath, 'r')
+    lines = fh.readlines()
+    fh.close()
+
+    i_lines = []
+    for i, line in enumerate(lines):
+        line = line.split(',')
+        if line[0].lower() == 'schedule:compact':
+            i_lines.append(i)
+    
+    data['schedules'] = {}
+    for i in i_lines:
+        name = lines[i + 1].split(',')[0].strip()
+        stl = lines[i + 2].split(',')[0].strip()
+        th = lines[i + 3].split(',')[0].split(':')[1].strip()
+        fo = lines[i + 4].split(',')[0].split(':')[1].strip()
+        un = lines[i + 5].split(',')[0].split(':')[1].strip()
+        value = float(lines[i + 6].split(';')[0].strip())
+
+        data['schedules'][name] = {'__type__': 'compact',
+                                   'name': name,
+                                   'schedule_type_limits': stl,
+                                   'through': th,
+                                   'for': fo,
+                                   'until': un,
+                                   'value': value,
+                                  }
+    # Schedule:Compact,
+    #   3_Office_335e157a Thermostat Schedule,  !- Name
+    #   3_Office_335e157a Thermostat Schedule Type Limits, !- Schedule Type Limits Name
+    #   Through: 12/31,                         !- Field 1
+    #   For: AllDays,                           !- Field 2
+    #   Until: 24:00,                           !- Field 3
+    #   4;                                      !- Field 4
+
+
 if __name__ == '__main__':
     import os
     import compas_eplus
@@ -319,8 +357,8 @@ if __name__ == '__main__':
 
     data = get_idf_data(path)
     print(data.keys())
-    for con in data['zones']:
-        print(con)
-        print(data['zones'][con]['surfaces'])
-        print('')
+
+    for k in data['schedules']:
+        print(k)
+        print(data['schedules'][k])
         print('')
