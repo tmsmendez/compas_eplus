@@ -21,6 +21,7 @@ def get_idf_data(filepath):
     find_glazing_material_simple(filepath, data)
     find_constructions(filepath, data)
     find_schedule_compact(filepath, data)
+    find_schedule_type_limits(filepath, data)
     return data
 
 
@@ -299,7 +300,7 @@ def find_glazing_material_simple(filepath, data):
         name = lines[i + 1].split(',')[0].strip()
         ufac  = float(lines[i + 2].split(',')[0])
         solh  = float(lines[i + 3].split(',')[0])
-        vist  = float(lines[i + 4].split(';')[0])
+        vist  = lines[i + 4].split(';')[0]
 
         data['materials'][name] = {'__type__': 'WindowMaterialGlazingSimple',
                                    'name':name,
@@ -337,13 +338,49 @@ def find_schedule_compact(filepath, data):
                                    'until': un,
                                    'value': value,
                                   }
-    # Schedule:Compact,
-    #   3_Office_335e157a Thermostat Schedule,  !- Name
-    #   3_Office_335e157a Thermostat Schedule Type Limits, !- Schedule Type Limits Name
-    #   Through: 12/31,                         !- Field 1
-    #   For: AllDays,                           !- Field 2
-    #   Until: 24:00,                           !- Field 3
-    #   4;                                      !- Field 4
+
+
+def find_schedule_type_limits(filepath, data):
+
+    fh = open(filepath, 'r')
+    lines = fh.readlines()
+    fh.close()
+
+    i_lines = []
+    for i, line in enumerate(lines):
+        line = line.split(',')
+        if line[0].lower() == 'scheduletypelimits':
+            i_lines.append(i)
+
+    for i in i_lines:
+        name = lines[i + 1].split(',')[0].strip()
+        low = lines[i + 2].split(',')[0].strip()
+        if low:
+            low = float(low)
+        else:
+            low = ''
+        up = lines[i + 3].split(',')[0].strip()
+        if up:
+            up = float(up)
+        else:
+            up = ''
+        if ';' in lines[i + 4]:
+            nt = lines[i + 4].split(';')[0].strip()
+            ut = None
+        else:
+            nt = lines[i + 4].split(',')[0].strip()
+            ut = lines[i + 4].split(';')[0].strip()
+        print(nt)
+
+        data['schedules'][name] = {'__type__': 'schedule_type_limits',
+                                   'name': name, 
+                                   'lower_limit': low,
+                                   'upper_limit': up,
+                                   'numeric_type': nt,
+                                   'unit_type': ut, 
+                                    }
+
+
 
 
 if __name__ == '__main__':
