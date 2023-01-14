@@ -22,6 +22,7 @@ def get_idf_data(filepath):
     find_constructions(filepath, data)
     find_schedule_compact(filepath, data)
     find_schedule_type_limits(filepath, data)
+    find_schedule_day_interval(filepath, data)
     return data
 
 
@@ -381,6 +382,49 @@ def find_schedule_type_limits(filepath, data):
                                     }
 
 
+def find_schedule_day_interval(filepath, data):
+
+    fh = open(filepath, 'r')
+    lines = fh.readlines()
+    fh.close()
+
+    i_lines = []
+    for i, line in enumerate(lines):
+        line = line.split(',')
+        if line[0].lower() == 'schedule:day:interval':
+            i_lines.append(i)
+
+    for i in i_lines:
+        name = lines[i + 1].split(',')[0].strip()
+        stl = lines[i + 2].split(',')[0].strip()
+        itt = lines[i + 3].split(',')[0].strip()
+
+        time_values = {}
+        count = 0
+        for j in range(100):
+            time = lines[i + 4 + count]
+            time = time.split(',')[0].strip()
+            value = lines[i + 5 + count]
+            if ';' in value: 
+                value = float(value.split(';')[0].strip())
+                time_values[str(j)] = {'time': time, 'value': value}
+                break
+            else:
+                value = float(value.split(',')[0].strip())
+                time_values[str(j)] = {'time': time, 'value': value}
+            count += 2
+
+        data['schedules'][name] = {'__type__': 'day_interval',
+                                   'name': name,
+                                   'schedule_type_limits': stl,
+                                   'interpolate_timestep': itt,
+                                   'time_values': time_values,
+                                  }
+
+# TODO: Finish other schedule types
+# Schedule:Week:Daily
+# Schedule:Year
+#...
 
 
 if __name__ == '__main__':
