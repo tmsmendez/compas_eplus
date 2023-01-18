@@ -23,6 +23,8 @@ def get_idf_data(filepath):
     find_schedule_compact(filepath, data)
     find_schedule_type_limits(filepath, data)
     find_schedule_day_interval(filepath, data)
+    find_schedule_week_daily(filepath, data)
+    find_schedule_year(filepath, data)
     return data
 
 
@@ -421,10 +423,81 @@ def find_schedule_day_interval(filepath, data):
                                    'time_values': time_values,
                                   }
 
-# TODO: Finish other schedule types
-# Schedule:Week:Daily
-# Schedule:Year
-#...
+
+def find_schedule_week_daily(filepath, data):
+
+    fh = open(filepath, 'r')
+    lines = fh.readlines()
+    fh.close()
+
+    i_lines = []
+    for i, line in enumerate(lines):
+        line = line.split(',')
+        if line[0].lower() == 'schedule:week:daily':
+            i_lines.append(i)
+
+    for i in i_lines:
+        name = lines[i + 1].split(',')[0].strip()
+        sund = lines[i + 2].split(',')[0].strip()
+        mond = lines[i + 3].split(',')[0].strip()
+        tues = lines[i + 4].split(',')[0].strip()
+        wedn = lines[i + 5].split(',')[0].strip()
+        thur = lines[i + 6].split(',')[0].strip()
+        frid = lines[i + 7].split(',')[0].strip()
+        satu = lines[i + 8].split(',')[0].strip()
+        holi = lines[i + 9].split(',')[0].strip()
+        summ = lines[i + 10].split(',')[0].strip()
+        wint = lines[i + 11].split(',')[0].strip()
+        cus1 = lines[i + 12].split(',')[0].strip()
+        cus2 = lines[i + 13].split(';')[0].strip()
+
+        data['schedules'][name] = {'__type__': 'week_daily',
+                                   'name': name,
+                                   'sund':sund,
+                                   'monday':mond,
+                                   'tuesday':tues,
+                                   'wednesdat':wedn,
+                                   'thursday':thur,
+                                   'friday':frid,
+                                   'saturday':satu,
+                                   'holiday':holi,
+                                   'summer_design_day':summ,
+                                   'winter_design_day':wint,
+                                   'custom_day1':cus1,
+                                   'custom_day2':cus2,
+                                   }
+
+
+def find_schedule_year(filepath, data):
+    fh = open(filepath, 'r')
+    lines = fh.readlines()
+    fh.close()
+
+    i_lines = []
+    for i, line in enumerate(lines):
+        line = line.split(',')
+        if line[0].lower() == 'schedule:year':
+            i_lines.append(i)
+
+    for i in i_lines:
+        name = lines[i + 1].split(',')[0].strip()
+        stln = lines[i + 2].split(',')[0].strip()
+        swn1 = lines[i + 3].split(',')[0].strip()
+        stm1 = lines[i + 4].split(',')[0].strip()
+        std1 = lines[i + 5].split(',')[0].strip()
+        enm1 = lines[i + 6].split(',')[0].strip()
+        end1 = lines[i + 7].split(';')[0].strip()
+
+        data['schedules'][name] = {'__type__': 'year',
+                                   'name': name,
+                                   'schedule_type_limits': stln,
+                                   'schedule_week_name1': swn1,
+                                   'start_month_1': stm1,
+                                   'start_day1': std1,
+                                   'end_month1': enm1,
+                                   'end_dat1': end1,
+                                  }
+
 
 
 if __name__ == '__main__':
@@ -441,5 +514,5 @@ if __name__ == '__main__':
 
     for k in data['schedules']:
         print(k)
-        print(data['schedules'][k])
+        print(data['schedules'][k]['__type__'])
         print('')
