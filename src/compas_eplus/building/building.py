@@ -31,6 +31,7 @@ from compas_eplus.building.window import Window
 from compas_eplus.building.zone import Zone
 from compas_eplus.building.zone import ZoneSurfaces
 
+from compas_eplus.building.schedule import Schedule
 from compas_eplus.building.schedule import OfficeOccupancySchedule
 from compas_eplus.building.schedule import OfficeLightsSchedule
 from compas_eplus.building.schedule import OfficeEquipmentSchedule
@@ -374,6 +375,12 @@ class Building(object):
             c = Construction.from_data(con_)
             building.add_construction(c)
         building.make_layers_dict()
+
+        schedules = data['schedules']
+        for sk in schedules:
+            s = Schedule.from_idf_data(schedules[sk])
+            building.add_schedule(s)
+        
         return building
 
     def to_json(self, filepath):
@@ -409,7 +416,8 @@ class Building(object):
         """
 
         self.make_layers_dict()
-        self.get_schedules()
+        if not self.schedules:
+            self.get_schedules()
         write_idf_from_building(self)
 
     def get_schedules(self):
@@ -629,6 +637,23 @@ class Building(object):
         ck = len(self.constructions)
         self.constructions[ck] = construction
         self.construction_key_dict[construction.name] = ck
+
+    def add_schedule(self, schedule):
+        """
+        Adds a schedule object to the building datastructure.
+
+        Parameters
+        ----------
+        schedule: object
+            The schedule object to be added
+        
+        Returns
+        -------
+        None
+        
+        """
+        sk = len(self.schedules)
+        self.schedules[sk] = schedule
 
     def add_shading(self, shading):
         """

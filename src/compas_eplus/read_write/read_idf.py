@@ -373,7 +373,6 @@ def find_schedule_type_limits(filepath, data):
         else:
             nt = lines[i + 4].split(',')[0].strip()
             ut = lines[i + 4].split(';')[0].strip()
-        print(nt)
 
         data['schedules'][name] = {'__type__': 'schedule_type_limits',
                                    'name': name, 
@@ -453,10 +452,10 @@ def find_schedule_week_daily(filepath, data):
 
         data['schedules'][name] = {'__type__': 'week_daily',
                                    'name': name,
-                                   'sund':sund,
+                                   'sunday':sund,
                                    'monday':mond,
                                    'tuesday':tues,
-                                   'wednesdat':wedn,
+                                   'wednesday':wedn,
                                    'thursday':thur,
                                    'friday':frid,
                                    'saturday':satu,
