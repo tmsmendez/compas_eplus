@@ -675,7 +675,17 @@ def write_schedule(building, schedule):
 def write_schedules(building):
 
     for sk in building.schedules:
-        write_schedule(building, building.schedules[sk])
+        schedule = building.schedules[sk]
+        stype = schedule.type
+        if stype == 'compact':
+            write_schedule_compact(building, schedule)
+        elif stype == 'day_interval':
+            write_schedule_day_interval(building, schedule)
+        elif stype == 'week_daily':
+            write_schedule_week_daily(building, schedule)
+        else:
+            continue
+            # write_schedule(building, building.schedules[sk])
 
     fh = open(building.idf_filepath, 'a')
 
@@ -722,6 +732,62 @@ def write_schedules(building):
     fh.write('\n')
 
     fh.close()
+
+
+def write_schedule_compact(self, schedule):
+    fh = open(self.idf_filepath, 'a')
+    fh.write('Schedule:Compact,\n')
+    fh.write('  {},  !- Name\n'.format(schedule.name))
+    fh.write('  {}, !- Schedule Type Limits Name\n'.format(schedule.type_limits))
+    fh.write('  Through: {}, !- Field 1\n'.format(schedule.through))
+    fh.write('  For: {},     !- Field 2\n'.format(schedule.for_))
+    fh.write('  Until: {},   !- Field 3\n'.format(schedule.until))
+    fh.write('  {};          !- Field 4\n'.format(schedule.value))
+    fh.write('\n')
+    fh.close()
+
+
+def write_schedule_day_interval(building, schedule):
+    fh = open(building.idf_filepath, 'a')
+    fh.write('Schedule:Day:Interval,\n')
+    # fh.write('  Schedule Day 5,   !- Name\n'.format(schedule.through))
+    # fh.write('  Temperature,      !- Schedule Type Limits Name\n'.format(schedule.through))
+    # fh.write('  No,               !- Interpolate to Timestep\n'.format(schedule.through))
+    # fh.write('  05:00,            !- Time 1 [hh:mm]\n'.format(schedule.through))
+    # fh.write('  15.6,             !- Value Until Time 1\n'.format(schedule.through))
+    # fh.write('  06:00,            !- Time 2 [hh:mm]\n'.format(schedule.through))
+    # fh.write('  17.8,             !- Value Until Time 2\n'.format(schedule.through))
+    # fh.write('  07:00,            !- Time 3 [hh:mm]\n'.format(schedule.through))
+    # fh.write('  20,               !- Value Until Time 3\n'.format(schedule.through))
+    # fh.write('  17:00,            !- Time 4 [hh:mm]\n'.format(schedule.through))
+    # fh.write('  21,               !- Value Until Time 4\n'.format(schedule.through))
+    # fh.write('  24:00,            !- Time 5 [hh:mm]\n'.format(schedule.through))
+    # fh.write('  15.6;             !- Value Until Time 5\n'.format(schedule.through))
+
+    fh.write('\n')
+    fh.close()
+
+
+def write_schedule_week_daily(building, schedule):
+    fh = open(building.idf_filepath, 'a')
+    fh.write('Schedule:Week:Daily,\n')
+
+    fh.write('  {},         !- Name\n'.format(schedule.name))
+    fh.write('  {},         !- Sunday Schedule:Day Name\n'.format(schedule.sunday))
+    fh.write('  {},         !- Monday Schedule:Day Name\n'.format(schedule.monday))
+    fh.write('  {},         !- Tuesday Schedule:Day Name\n'.format(schedule.tuesday))
+    fh.write('  {},         !- Wednesday Schedule:Day Name\n'.format(schedule.wednesday))
+    fh.write('  {},         !- Thursday Schedule:Day Name\n'.format(schedule.thursday))
+    fh.write('  {},         !- Friday Schedule:Day Name\n'.format(schedule.friday))
+    fh.write('  {},         !- Saturday Schedule:Day Name\n'.format(schedule.saturday))
+    fh.write('  {},         !- Holiday Schedule:Day Name\n'.format(schedule.holiday))
+    fh.write('  {},         !- SummerDesignDay Schedule:Day Name\n'.format(schedule.summer_design_day))
+    fh.write('  {},         !- WinterDesignDay Schedule:Day Name\n'.format(schedule.winter_design_day))
+    fh.write('  {},         !- CustomDay1 Schedule:Day Name\n'.format(schedule.custom_day1))
+    fh.write('  {};         !- CustomDay2 Schedule:Day Name\n'.format(schedule.custom_day2))
+    fh.write('\n')
+    fh.close()
+
 
 def write_schedule_type_limits(building):
     fh = open(building.idf_filepath, 'a')
