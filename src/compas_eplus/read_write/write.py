@@ -10,6 +10,7 @@ __version__ = "0.1.0"
 # TODO: the write_construction should eventually use saved layer names, not make up new ones
 # TODO: write functions should work in ironpython, use old format statement
 
+
 def write_idf_from_building(building):
     """
     Writes the .idf file from the building data.
@@ -38,13 +39,14 @@ def write_idf_from_building(building):
 
     write_simulation_control(building)
     write_schedules(building)
-    write_schedule_type_limits(building)
+    # write_schedule_type_limits(building)
     write_internal_gains(building)
     write_infiltration_rates(building)
     write_thermostats(building)
     write_hvac(building)
 
     write_output_items(building)
+
 
 def write_separator(building):
     fh = open(building.idf_filepath, 'a')
@@ -62,6 +64,7 @@ def write_separator(building):
     fh.write('\n') 
     fh.write('\n') 
     fh.close()
+
 
 def write_pre(building):
     """
@@ -84,6 +87,7 @@ def write_pre(building):
     fh.write('  {};\t\t\t\t\t!- Number of Timesteps per Hour\n'.format(building.num_timesteps))  
     fh.write('\n')           
     fh.close()
+
 
 def write_building(building):
     """
@@ -110,6 +114,7 @@ def write_building(building):
     fh.write('\n')
     fh.close()
 
+
 def write_global_vars(building):
     """
     Writes the global variables to the .idf file from the building data.
@@ -130,6 +135,7 @@ def write_global_vars(building):
     fh.write('  World;\t\t\t\t\t!- Coordinate System\n')
     fh.write('\n')           
     fh.close()
+
 
 def write_run_period(building):
     """
@@ -161,6 +167,7 @@ def write_run_period(building):
     fh.write('\n')
     fh.close()
 
+
 def write_zones(building):
     """
     Writes all zones to the .idf file from the building data.
@@ -179,6 +186,7 @@ def write_zones(building):
         write_zone_surfaces(building, zone)
     write_zone_list(building)
 
+
 def write_zone_list(building):
     fh = open(building.idf_filepath, 'a')
     fh.write('ZoneList,\n')
@@ -193,6 +201,7 @@ def write_zone_list(building):
     fh.write('\n')
     fh.write('\n')
     fh.close()
+
 
 def write_zone(building, zone):
     """
@@ -226,6 +235,7 @@ def write_zone(building, zone):
     fh.write('\n')
     fh.close()
 
+
 def write_layers(building):
     """
     Writes all layers to the .idf file from the building data.
@@ -256,6 +266,7 @@ def write_layers(building):
         elif mat.__type__ == 'WindowMaterialGlazingSimple':
             write_materials_glazing_simple(building, mat)
 
+
 def write_materials_glazing_simple(building, mat):
     fh = open(building.idf_filepath, 'a')
     fh.write('\n')
@@ -266,6 +277,7 @@ def write_materials_glazing_simple(building, mat):
     fh.write('  {};             !- Visible Transmittance\n'.format(mat.visible_transmittance))
     fh.write('\n')
     fh.close()
+
 
 def write_material_glazing(building, mat, thickness, layer_name):
     """
@@ -307,6 +319,7 @@ def write_material_glazing(building, mat, thickness, layer_name):
     fh.write('\n')
     fh.close()
 
+
 def write_material_gas(building, mat, thickness, layer_name):
     """
     Writes a gas material to the .idf file from the building data.
@@ -332,6 +345,7 @@ def write_material_gas(building, mat, thickness, layer_name):
     fh.write('  {};         !- Thickness (m)\n'.format(thickness))
     fh.write('\n')
     fh.close()
+
 
 def write_materials_nomass(building, mat):
     """
@@ -359,6 +373,7 @@ def write_materials_nomass(building, mat):
     fh.write('\n')
     fh.write('\n')
     fh.close()
+
 
 def write_material(building, mat, thickness, layer_name):
     """
@@ -394,6 +409,7 @@ def write_material(building, mat, thickness, layer_name):
     fh.write('\n')
     fh.close()
 
+
 def write_zone_surfaces(building, zone):
     """
     Writes all zone surfaces to the .idf file from the building data.
@@ -412,6 +428,7 @@ def write_zone_surfaces(building, zone):
     for fk in zone.surfaces.faces():
         write_building_surface(building, zone, fk)
     fh.close()
+
 
 def write_building_surface(building, zone, fk):
     """
@@ -470,6 +487,7 @@ def write_building_surface(building, zone, fk):
     fh.write('\n')
     fh.close()
 
+
 def write_windows(building):
     """
     Writes all windows  to the .idf file from the building data.
@@ -510,6 +528,7 @@ def write_windows(building):
     fh.write('\n')
     fh.close()
 
+
 def write_constructions(building):
     """
     Writes all constructions to the .idf file from the building data.
@@ -544,6 +563,7 @@ def write_constructions(building):
     fh.write('\n')
     fh.close()
 
+
 def write_shadings(building):
     """
     Writes all shading devices to the .idf file from the building data.
@@ -558,6 +578,7 @@ def write_shadings(building):
     """
     for sk in building.shadings:
         write_shading(building, building.shadings[sk])
+
 
 def write_shading(building, shading):
     """
@@ -594,6 +615,7 @@ def write_shading(building, shading):
     fh.write('\n')
     fh.close()
 
+
 def write_simulation_control(building):
 
     fh = open(building.idf_filepath, 'a')
@@ -624,6 +646,7 @@ def write_simulation_control(building):
     fh.write('  \n')
     fh.write('  \n')
     fh.close()
+
 
 def write_schedule(building, schedule):
     if schedule.alldays:
@@ -672,20 +695,24 @@ def write_schedule(building, schedule):
         fh.write('  \n')
         fh.close()
 
-def write_schedules(building):
 
-    for sk in building.schedules:
-        schedule = building.schedules[sk]
-        stype = schedule.type
-        if stype == 'compact':
-            write_schedule_compact(building, schedule)
-        elif stype == 'day_interval':
-            write_schedule_day_interval(building, schedule)
-        elif stype == 'week_daily':
-            write_schedule_week_daily(building, schedule)
-        else:
-            continue
-            # write_schedule(building, building.schedules[sk])
+def write_schedules(building):
+    for sk in building.set_schedules:
+        sk = building.set_schedules[sk]
+        if sk:
+            schedule = building.schedules[sk]
+            stype = schedule.type
+            if stype == 'compact':
+                write_schedule_compact(building, schedule)
+            elif stype == 'day_interval':
+                write_schedule_day_interval(building, schedule)
+            elif stype == 'week_daily':
+                write_schedule_week_daily(building, schedule)
+            elif stype == 'schedule_type_limits':
+                write_schedule_type_limits(building, schedule)
+            else:
+                continue
+                # write_schedule(building, building.schedules[sk])
 
     fh = open(building.idf_filepath, 'a')
 
@@ -741,29 +768,26 @@ def write_schedule_compact(self, schedule):
     fh.write('  {}, !- Schedule Type Limits Name\n'.format(schedule.type_limits))
     fh.write('  Through: {}, !- Field 1\n'.format(schedule.through))
     fh.write('  For: {},     !- Field 2\n'.format(schedule.for_))
-    fh.write('  Until: {},   !- Field 3\n'.format(schedule.until))
+    fh.write('  Until: {}:00,   !- Field 3\n'.format(schedule.until))
     fh.write('  {};          !- Field 4\n'.format(schedule.value))
     fh.write('\n')
     fh.close()
 
 
 def write_schedule_day_interval(building, schedule):
+
+    time_values = schedule.time_values
+    sep = ','
     fh = open(building.idf_filepath, 'a')
     fh.write('Schedule:Day:Interval,\n')
-    # fh.write('  Schedule Day 5,   !- Name\n'.format(schedule.through))
-    # fh.write('  Temperature,      !- Schedule Type Limits Name\n'.format(schedule.through))
-    # fh.write('  No,               !- Interpolate to Timestep\n'.format(schedule.through))
-    # fh.write('  05:00,            !- Time 1 [hh:mm]\n'.format(schedule.through))
-    # fh.write('  15.6,             !- Value Until Time 1\n'.format(schedule.through))
-    # fh.write('  06:00,            !- Time 2 [hh:mm]\n'.format(schedule.through))
-    # fh.write('  17.8,             !- Value Until Time 2\n'.format(schedule.through))
-    # fh.write('  07:00,            !- Time 3 [hh:mm]\n'.format(schedule.through))
-    # fh.write('  20,               !- Value Until Time 3\n'.format(schedule.through))
-    # fh.write('  17:00,            !- Time 4 [hh:mm]\n'.format(schedule.through))
-    # fh.write('  21,               !- Value Until Time 4\n'.format(schedule.through))
-    # fh.write('  24:00,            !- Time 5 [hh:mm]\n'.format(schedule.through))
-    # fh.write('  15.6;             !- Value Until Time 5\n'.format(schedule.through))
-
+    fh.write('  {},   !- Name\n'.format(schedule.name))
+    fh.write('  {},   !- Schedule Type Limits Name\n'.format(schedule.type_limits))
+    fh.write('  {},   !- Interpolate to Timestep\n'.format(schedule.interpolate_timestep))
+    for i, tk in enumerate(time_values):
+        fh.write('  {},    !- Time {} [hh:mm]\n'.format(time_values[tk]['time'], i + 1))
+        if i == len(time_values) - 1:
+            sep = ';'
+        fh.write('  {}{}    !- Value Until Time {}\n'.format(time_values[tk]['value'], sep, i + 1))
     fh.write('\n')
     fh.close()
 
@@ -789,52 +813,46 @@ def write_schedule_week_daily(building, schedule):
     fh.close()
 
 
-def write_schedule_type_limits(building):
+def write_schedule_type_limits(building, schedule):
     fh = open(building.idf_filepath, 'a')
-
     fh.write('ScheduleTypeLimits,\n')
-    fh.write('  Any Number;              !- Name\n')
-    fh.write('  \n')
-
-    fh.write('ScheduleTypeLimits,\n')
-    fh.write('  Fraction,                !- Name\n')
-    fh.write('  0.0,                     !- Lower Limit Value\n')
-    fh.write('  1.0,                     !- Upper Limit Value\n')
-    fh.write('  CONTINUOUS;              !- Numeric Type\n')
-    fh.write('  \n')
-
-    fh.write('ScheduleTypeLimits,\n')
-    fh.write('  Temperature,             !- Name\n')
-    fh.write('  -60,                     !- Lower Limit Value\n')
-    fh.write('  200,                     !- Upper Limit Value\n')
-    fh.write('  CONTINUOUS,              !- Numeric Type\n')
-    fh.write('  Temperature;             !- Unit Type\n')
-    fh.write('  \n')
-
-    fh.write('ScheduleTypeLimits,\n')
-    fh.write('  Control Type,            !- Name\n')
-    fh.write('  0,                       !- Lower Limit Value\n')
-    fh.write('  4,                       !- Upper Limit Value\n')
-    fh.write('  DISCRETE;                !- Numeric Type\n')
+    fh.write('  {},     !- Name\n'.format(schedule.name))
+    fh.write('  {},     !- Lower Limit Value\n'.format(schedule.lower_limit))
+    fh.write('  {},     !- Upper Limit Value\n'.format(schedule.upper_limit))
+    fh.write('  {},     !- Numeric Type\n'.format(schedule.numeric_type))
+    fh.write('  {};     !- Unit Type\n'.format(schedule.unit_type))
     fh.write('  \n')
 
     # fh.write('ScheduleTypeLimits,\n')
-    # fh.write('  On/Off,                  !- Name\n')
-    # fh.write('  0,                       !- Lower Limit Value\n')
-    # fh.write('  1,                       !- Upper Limit Value\n')
-    # fh.write('  DISCRETE;                !- Numeric Type\n')
+    # fh.write('  Any Number;              !- Name\n')
     # fh.write('  \n')
 
     # fh.write('ScheduleTypeLimits,\n')
-    # fh.write('  FlowRate,                !- Name\n')
+    # fh.write('  Fraction,                !- Name\n')
     # fh.write('  0.0,                     !- Lower Limit Value\n')
-    # fh.write('  10,                      !- Upper Limit Value\n')
+    # fh.write('  1.0,                     !- Upper Limit Value\n')
     # fh.write('  CONTINUOUS;              !- Numeric Type\n')
+    # fh.write('  \n')
 
+    # fh.write('ScheduleTypeLimits,\n')
+    # fh.write('  Temperature,             !- Name\n')
+    # fh.write('  -60,                     !- Lower Limit Value\n')
+    # fh.write('  200,                     !- Upper Limit Value\n')
+    # fh.write('  CONTINUOUS,              !- Numeric Type\n')
+    # fh.write('  Temperature;             !- Unit Type\n')
+    # fh.write('  \n')
+
+    # fh.write('ScheduleTypeLimits,\n')
+    # fh.write('  Control Type,            !- Name\n')
+    # fh.write('  0,                       !- Lower Limit Value\n')
+    # fh.write('  4,                       !- Upper Limit Value\n')
+    # fh.write('  DISCRETE;                !- Numeric Type\n')
+    # fh.write('  \n')
 
     fh.write('  \n')
     fh.write('  \n')
     fh.close()
+
 
 def write_internal_gains(building):
 
@@ -887,6 +905,7 @@ def write_internal_gains(building):
     fh.write('  \n')
     fh.close()
 
+
 def write_infiltration_rates(building):
     fh = open(building.idf_filepath, 'a')
     fh.write('  ZoneInfiltration:DesignFlowRate,\n')
@@ -905,6 +924,7 @@ def write_infiltration_rates(building):
     fh.write('  \n')
     fh.write('  \n')
     fh.close()
+
 
 def write_thermostats(building):
     fh = open(building.idf_filepath, 'a')
@@ -938,6 +958,7 @@ def write_thermostats(building):
     fh.write('  \n')
     fh.write('  \n')
     fh.close()
+
 
 def write_hvac(building):
 
@@ -1003,6 +1024,7 @@ def write_hvac(building):
         fh.write('  \n')
         fh.write('  \n')
         fh.close()
+
 
 def write_output_items(building):
     """
@@ -1070,6 +1092,7 @@ def write_output_items(building):
     fh.write('\n')
 
     fh.close()
+
 
 if __name__ == '__main__':
     pass

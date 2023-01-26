@@ -369,10 +369,10 @@ def find_schedule_type_limits(filepath, data):
             up = ''
         if ';' in lines[i + 4]:
             nt = lines[i + 4].split(';')[0].strip()
-            ut = None
+            ut = ''
         else:
             nt = lines[i + 4].split(',')[0].strip()
-            ut = lines[i + 4].split(';')[0].strip()
+            ut = lines[i + 5].split(';')[0].strip()
 
         data['schedules'][name] = {'__type__': 'schedule_type_limits',
                                    'name': name, 

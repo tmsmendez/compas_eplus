@@ -134,6 +134,19 @@ class Building(object):
         self.layers = {}
         self.schedules = {}
 
+        self.set_schedules = {'occupancy': None,
+                              'lights': None,
+                              'equipment': None,
+                              'activity': None,
+                              'control': None,
+                              'heating': None,
+                              'cooling': None,
+                              'any_number': None,
+                              'fraction': None,
+                              'temperature': None,
+                              'control_type': None, 
+                             }
+
         self.construction_key_dict = {}
         self.srf_cpt_dict = {}
         self.material_key_dict = {}
@@ -379,7 +392,7 @@ class Building(object):
         schedules = data['schedules']
         for sk in schedules:
             s = Schedule.from_idf_data(schedules[sk])
-            building.add_schedule(s)
+            building.add_schedule(s, sk)
         
         return building
 
@@ -638,7 +651,7 @@ class Building(object):
         self.constructions[ck] = construction
         self.construction_key_dict[construction.name] = ck
 
-    def add_schedule(self, schedule):
+    def add_schedule(self, schedule, sk):
         """
         Adds a schedule object to the building datastructure.
 
@@ -652,7 +665,6 @@ class Building(object):
         None
         
         """
-        sk = len(self.schedules)
         self.schedules[sk] = schedule
 
     def add_shading(self, shading):
@@ -782,6 +794,19 @@ if __name__ == '__main__':
     path = compas_eplus.TEMP
     wea = compas_eplus.SEATTLE
     b = Building.from_idf(filepath, path, wea)
+
+    b.set_schedules['occupancy'] = 'OfficeMedium BLDG_OCC_SCH_Default'
+    b.set_schedules['lights'] = 'OfficeMedium BLDG_LIGHT_SCH_2013_Wkdy'
+    b.set_schedules['equipment'] = 'ApartmentMidRise EQP_APT_SCH_Default'
+    b.set_schedules['activity'] = 'OfficeMedium ACTIVITY_SCH_Default'
+    # b.set_schedules['control'] = ''
+    # b.set_schedules['heating'] = ''
+    # b.set_schedules['cooling'] = ''
+    # b.set_schedules['any_number'] = ''
+    # b.set_schedules['fraction'] = ''
+    # b.set_schedules['temperature'] = ''
+    # b.set_schedules['control_type'] = ''
+
 
     b.write_idf()
     # b.analyze(exe='/Applications/EnergyPlus/energyplus')
