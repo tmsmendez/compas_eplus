@@ -919,7 +919,7 @@ def write_infiltration_rates(building):
     fh.write('    ,                        !- Air Changes per Hour [1/hr]\n')
     fh.write('    0,                       !- Constant Term Coefficient\n')
     fh.write('    0,                       !- Temperature Term Coefficient\n')
-    fh.write('    0,                  !- Velocity Term Coefficient\n')
+    fh.write('    0,                       !- Velocity Term Coefficient\n')
     fh.write('    0;                       !- Velocity Squared Term Coefficient\n')
     fh.write('  \n')
     fh.write('  \n')

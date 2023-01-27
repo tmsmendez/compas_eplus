@@ -789,24 +789,23 @@ if __name__ == '__main__':
 
     for i in range(50): print('')
     
-    file = 'teresa_example.idf'
+    file = 'teresa_example_apt.idf'
     filepath = os.path.join(compas_eplus.DATA, 'idf_examples', file)
     path = compas_eplus.TEMP
     wea = compas_eplus.SEATTLE
     b = Building.from_idf(filepath, path, wea)
 
-    b.set_schedules['occupancy'] = 'OfficeMedium BLDG_OCC_SCH_Default'
-    b.set_schedules['lights'] = 'OfficeMedium BLDG_LIGHT_SCH_2013_Wkdy'
-    b.set_schedules['equipment'] = 'ApartmentMidRise EQP_APT_SCH_Default'
-    b.set_schedules['activity'] = 'OfficeMedium ACTIVITY_SCH_Default'
-    # b.set_schedules['control'] = ''
-    # b.set_schedules['heating'] = ''
-    # b.set_schedules['cooling'] = ''
-    # b.set_schedules['any_number'] = ''
-    # b.set_schedules['fraction'] = ''
-    # b.set_schedules['temperature'] = ''
-    # b.set_schedules['control_type'] = ''
-
+    b.set_schedules['occupancy'] = ''
+    b.set_schedules['lights'] = ''
+    b.set_schedules['equipment'] = ''
+    b.set_schedules['activity'] = ''
+    b.set_schedules['control'] = '1_residential_4c5ac20f Thermostat Schedule'
+    b.set_schedules['heating'] = ''
+    b.set_schedules['cooling'] = ''
+    b.set_schedules['any_number'] = ''
+    b.set_schedules['fraction'] = ''
+    b.set_schedules['temperature'] = ''
+    b.set_schedules['control_type'] = '1_residential_4c5ac20f Thermostat Schedule Type Limits'
 
     b.write_idf()
     # b.analyze(exe='/Applications/EnergyPlus/energyplus')
