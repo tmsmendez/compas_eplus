@@ -681,16 +681,17 @@ def find_thermostat_setpoint(filepath, data):
         if line[0].lower() == 'thermostatsetpoint:dualsetpoint':
             i_lines.append(i)
     
-    data['thermostat_setpoint_dual_setpoint'] = {}
+    data['setpoint'] = {}
 
     for i in i_lines:
         name = lines[i + 1].split(',')[0].strip()
         htsp = lines[i + 2].split(',')[0].strip()
         clsp = lines[i + 3].split(';')[0].strip()
 
-        data['thermostat_setpoint_dual_setpoint'][name] = {'heating_setpoint': htsp,
-                                                           'cooling_setpoint': clsp,
-                                                            }
+        data['setpoint'][name] = {'name': name,
+                                  'heating_setpoint': htsp,
+                                  'cooling_setpoint': clsp,
+                                   }
 
 
 def find_ideal_air_loads(filepath, data):
@@ -822,7 +823,7 @@ if __name__ == '__main__':
     data = get_idf_data(path)
     # print(data.keys())
 
-    object = 'zone_control_thermostat'
+    object = 'setpoint'
 
     for k in data[object]:
         for j in data[object][k]:

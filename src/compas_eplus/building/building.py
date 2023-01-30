@@ -36,6 +36,7 @@ from compas_eplus.building.light import Light
 from compas_eplus.building.people import People
 from compas_eplus.building.electric_eq import ElectricEquipment
 from compas_eplus.building.zone_control_thermostat import ZoneControlThermostat
+from compas_eplus.building.setpoint import DualSetpoint
 
 # from compas_eplus.building.schedule import OfficeOccupancySchedule
 # from compas_eplus.building.schedule import OfficeLightsSchedule
@@ -141,7 +142,8 @@ class Building(object):
         self.lights                     = {}
         self.peoples                    = {}
         self.electric_equipments        = {}
-        self.zone_control_thermostats    = {}
+        self.zone_control_thermostats   = {}
+        self.setpoints                  = {}
 
         self.set_schedules = {'occupancy': None,
                               'lights': None,
@@ -423,6 +425,11 @@ class Building(object):
         for zk in zct:
             z = ZoneControlThermostat.from_data(zct[zk])
             building.add_zone_control_thermostat(z, zk)
+
+        spt = data['setpoint']
+        for sk in spt:
+            s = DualSetpoint.from_data(spt[sk])
+            building.add_setpoint(s, sk)
 
 
         return building
@@ -761,6 +768,23 @@ class Building(object):
         
         """
         self.zone_control_thermostats[zk] = zct
+
+    def add_setpoint(self, spt, sk):
+        """
+        Adds a setpoint object to the building datastructure.
+
+        Parameters
+        ----------
+        setpoints: object
+            The setpoint object to be added
+        
+        Returns
+        -------
+        None
+        
+        """
+        self.setpoints[sk] = spt
+
 
     def add_shading(self, shading):
         """
