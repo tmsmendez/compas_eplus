@@ -18,3 +18,4 @@ from .people import *
 from .electric_eq import *
 from .zone_control_thermostat import *
 from .setpoint import *
+from .ideal_air_loads import *

@@ -37,6 +37,7 @@ from compas_eplus.building.people import People
 from compas_eplus.building.electric_eq import ElectricEquipment
 from compas_eplus.building.zone_control_thermostat import ZoneControlThermostat
 from compas_eplus.building.setpoint import DualSetpoint
+from compas_eplus.building.ideal_air_loads import IdealAirLoad
 
 # from compas_eplus.building.schedule import OfficeOccupancySchedule
 # from compas_eplus.building.schedule import OfficeLightsSchedule
@@ -144,6 +145,7 @@ class Building(object):
         self.electric_equipments        = {}
         self.zone_control_thermostats   = {}
         self.setpoints                  = {}
+        self.ideal_air_loads            = {}
 
         self.set_schedules = {'occupancy': None,
                               'lights': None,
@@ -431,6 +433,10 @@ class Building(object):
             s = DualSetpoint.from_data(spt[sk])
             building.add_setpoint(s, sk)
 
+        ial = data['ideal_air_load']
+        for ik in ial:
+            i = IdealAirLoad.from_data(ial[ik])
+            building.add_ideal_air_load(i, ik)
 
         return building
 
@@ -785,6 +791,21 @@ class Building(object):
         """
         self.setpoints[sk] = spt
 
+    def add_ideal_air_load(self, ideal_air_load, ik):
+        """
+        Adds an ideal_air_load object to the building datastructure.
+
+        Parameters
+        ----------
+        ideal_air_load: object
+            The ideal_air_load object to be added
+        
+        Returns
+        -------
+        None
+        
+        """
+        self.ideal_air_loads[ik] = ideal_air_load
 
     def add_shading(self, shading):
         """
@@ -914,7 +935,7 @@ if __name__ == '__main__':
     wea = compas_eplus.SEATTLE
     b = Building.from_idf(filepath, path, wea)
 
-    print(b.zone_control_thermostats)
+    print(b.ideal_air_loads)
 
     # b.write_idf()
     # b.analyze(exe='/Applications/EnergyPlus/energyplus')

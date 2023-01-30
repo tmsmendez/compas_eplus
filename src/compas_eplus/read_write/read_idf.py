@@ -705,7 +705,7 @@ def find_ideal_air_loads(filepath, data):
         if line[0].lower() == 'zonehvac:idealloadsairsystem':
             i_lines.append(i)
     
-    data['ideal_air_loads'] = {}
+    data['ideal_air_load'] = {}
 
     for i in i_lines:
         name = lines[i + 1].split(',')[0].strip()
@@ -737,33 +737,33 @@ def find_ideal_air_loads(filepath, data):
         lhre = lines[i + 27].split(';')[0].strip()
 
 
-        data['ideal_air_loads'][name] = {'name': name,
-                                         'availability_schedule_name': avsn,
-                                         'zone_supply_air_node_name': zsan,
-                                         'zone_exhaust_air_node_name': zean,
-                                         'system_inlet_air_node_name': sian,
-                                         'max_heating_supply_temperature': mhat,
-                                         'min_cooling_supply_temperature': mcat,
-                                         'max_heating_supply_humidity_ratio': mhhr,
-                                         'min_cooling_supply_humidity_ratio': mchr,
-                                         'heating_limit': hlim,
-                                         'max_heating_air_flow_rate': mhaf,
-                                         'max_sensible_heating_capacity': mshc,
-                                         'cooling_limit': clim,
-                                         'maximum_cooling_air_flow_rate': mcaf,
-                                         'maximum_total_cooling_capacity': mtcc,
-                                         'heating_availability_schedule_name': hasn,
-                                         'cooling_availability_schedule_name': casn,
-                                         'dehimidification_control_type': dhct,
-                                         'cooling_sensible_heat_ratio': cshr,
-                                         'humidification_control_type': hmct,
-                                         'desing_specification_outdoor_air_name': dsoa,
-                                         'outdoor_inlet_node_name': oain,
-                                         'demand_controlled_ventilation_type': dcvt,
-                                         'outdoor_air_economizer_type': oaet,
-                                         'heat_recovery_type': hrty,
-                                         'sensible_heat_recovery_effectiveness': shre,
-                                         'latent_heat_revovery_effectiveness': lhre,
+        data['ideal_air_load'][name] = {'name': name,
+                                        'availability_schedule_name': avsn,
+                                        'zone_supply_air_node_name': zsan,
+                                        'zone_exhaust_air_node_name': zean,
+                                        'system_inlet_air_node_name': sian,
+                                        'max_heating_supply_temperature': mhat,
+                                        'min_cooling_supply_temperature': mcat,
+                                        'max_heating_supply_humidity_ratio': mhhr,
+                                        'min_cooling_supply_humidity_ratio': mchr,
+                                        'heating_limit': hlim,
+                                        'max_heating_air_flow_rate': mhaf,
+                                        'max_sensible_heating_capacity': mshc,
+                                        'cooling_limit': clim,
+                                        'maximum_cooling_air_flow_rate': mcaf,
+                                        'maximum_total_cooling_capacity': mtcc,
+                                        'heating_availability_schedule_name': hasn,
+                                        'cooling_availability_schedule_name': casn,
+                                        'dehimidification_control_type': dhct,
+                                        'cooling_sensible_heat_ratio': cshr,
+                                        'humidification_control_type': hmct,
+                                        'desing_specification_outdoor_air_name': dsoa,
+                                        'outdoor_inlet_node_name': oain,
+                                        'demand_controlled_ventilation_type': dcvt,
+                                        'outdoor_air_economizer_type': oaet,
+                                        'heat_recovery_type': hrty,
+                                        'sensible_heat_recovery_effectiveness': shre,
+                                        'latent_heat_revovery_effectiveness': lhre,
                                         } 
 
 
@@ -823,7 +823,7 @@ if __name__ == '__main__':
     data = get_idf_data(path)
     # print(data.keys())
 
-    object = 'setpoint'
+    object = 'ideal_air_load'
 
     for k in data[object]:
         for j in data[object][k]:
