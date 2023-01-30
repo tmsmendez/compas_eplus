@@ -32,13 +32,14 @@ from compas_eplus.building.zone import Zone
 from compas_eplus.building.zone import ZoneSurfaces
 
 from compas_eplus.building.schedule import Schedule
-from compas_eplus.building.schedule import OfficeOccupancySchedule
-from compas_eplus.building.schedule import OfficeLightsSchedule
-from compas_eplus.building.schedule import OfficeEquipmentSchedule
-from compas_eplus.building.schedule import OfficeActivitySchedule
-from compas_eplus.building.schedule import OfficeControlTypeSchedule
-from compas_eplus.building.schedule import OfficeHeatingSchedule
-from compas_eplus.building.schedule import OfficeCoolingSchedule
+from compas_eplus.building.light import Light
+# from compas_eplus.building.schedule import OfficeOccupancySchedule
+# from compas_eplus.building.schedule import OfficeLightsSchedule
+# from compas_eplus.building.schedule import OfficeEquipmentSchedule
+# from compas_eplus.building.schedule import OfficeActivitySchedule
+# from compas_eplus.building.schedule import OfficeControlTypeSchedule
+# from compas_eplus.building.schedule import OfficeHeatingSchedule
+# from compas_eplus.building.schedule import OfficeCoolingSchedule
 
 from compas_eplus.read_write import write_idf_from_building
 from compas_eplus.read_write import read_results_file
@@ -395,6 +396,12 @@ class Building(object):
             s = Schedule.from_idf_data(schedules[sk])
             building.add_schedule(s, sk)
         
+        lights = data['lights']
+        for lk in lights:
+            l = Light.from_data(lights[lk])
+            building.add_light(l, lk)
+
+
         return building
 
     def to_json(self, filepath):
@@ -668,6 +675,22 @@ class Building(object):
         """
         self.schedules[sk] = schedule
 
+    def add_light(self, light, lk):
+        """
+        Adds a light object to the building datastructure.
+
+        Parameters
+        ----------
+        light: object
+            The light object to be added
+        
+        Returns
+        -------
+        None
+        
+        """
+        self.lights[lk] = light
+
     def add_shading(self, shading):
         """
         Adds a shading object to the building datastructure.
@@ -796,7 +819,7 @@ if __name__ == '__main__':
     wea = compas_eplus.SEATTLE
     b = Building.from_idf(filepath, path, wea)
 
-    b.write_idf()
+    # b.write_idf()
     # b.analyze(exe='/Applications/EnergyPlus/energyplus')
     # b.load_results()
 

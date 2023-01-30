@@ -822,9 +822,9 @@ if __name__ == '__main__':
     data = get_idf_data(path)
     # print(data.keys())
 
-    object = 'zone_infiltration'
+    object = 'lights'
 
     for k in data[object]:
-        print(k)
-        print(data[object][k])
+        for j in data[object][k]:
+            print(j)
         print('')

@@ -13,4 +13,4 @@ from .shading import *
 from .window import *
 from .zone import *
 from .schedule import *
-from .lights import *
+from .light import *
