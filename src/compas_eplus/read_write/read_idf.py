@@ -778,7 +778,7 @@ def find_infiltration(filepath, data):
         if line[0].lower() == 'zoneinfiltration:designflowrate':
             i_lines.append(i)
     
-    data['zone_infiltration'] = {}
+    data['infiltration'] = {}
 
     for i in i_lines:
         name = lines[i + 1].split(',')[0].strip()
@@ -795,19 +795,19 @@ def find_infiltration(filepath, data):
         vstc = lines[i + 12].split(';')[0].strip()
 
 
-        data['zone_infiltration'][name] = {'name': name,
-                                           'zone_name': znam,
-                                           'schedule_name': snam,
-                                           'design_flow_rate_calculation_method': dfcm,
-                                           'design_flow_rate': dfrt,
-                                           'flow_per_zone_floor_area': fpza,
-                                           'flow_per_exterior_area': fpes, 
-                                           'air_changes_per_hour': acph,
-                                           'constant_term_coefficient': ctco,
-                                           'temperature_term_coefficient': ttco,
-                                           'velocity_term_coefficient': vtco,
-                                           'velocity_squared_term_coefficient': vstc,
-                                            }
+        data['infiltration'][name] = {'name': name,
+                                      'zone_name': znam,
+                                      'schedule_name': snam,
+                                      'design_flow_rate_calculation_method': dfcm,
+                                      'design_flow_rate': dfrt,
+                                      'flow_per_zone_floor_area': fpza,
+                                      'flow_per_exterior_area': fpes, 
+                                      'air_changes_per_hour': acph,
+                                      'constant_term_coefficient': ctco,
+                                      'temperature_term_coefficient': ttco,
+                                      'velocity_term_coefficient': vtco,
+                                      'velocity_squared_term_coefficient': vstc,
+                                       }
 
 
 
@@ -823,7 +823,7 @@ if __name__ == '__main__':
     data = get_idf_data(path)
     # print(data.keys())
 
-    object = 'ideal_air_load'
+    object = 'infiltration'
 
     for k in data[object]:
         for j in data[object][k]:

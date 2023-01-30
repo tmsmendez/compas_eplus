@@ -37,7 +37,8 @@ from compas_eplus.building.people import People
 from compas_eplus.building.electric_eq import ElectricEquipment
 from compas_eplus.building.zone_control_thermostat import ZoneControlThermostat
 from compas_eplus.building.setpoint import DualSetpoint
-from compas_eplus.building.ideal_air_loads import IdealAirLoad
+from compas_eplus.building.ideal_air_load import IdealAirLoad
+from compas_eplus.building.infiltration import Infiltration
 
 # from compas_eplus.building.schedule import OfficeOccupancySchedule
 # from compas_eplus.building.schedule import OfficeLightsSchedule
@@ -146,6 +147,7 @@ class Building(object):
         self.zone_control_thermostats   = {}
         self.setpoints                  = {}
         self.ideal_air_loads            = {}
+        self.infiltrations              = {}
 
         self.set_schedules = {'occupancy': None,
                               'lights': None,
@@ -437,6 +439,11 @@ class Building(object):
         for ik in ial:
             i = IdealAirLoad.from_data(ial[ik])
             building.add_ideal_air_load(i, ik)
+
+        infiltration = data['infiltration']
+        for ik in infiltration:
+            i = Infiltration.from_data(infiltration[ik])
+            building.add_infiltration(i, ik)
 
         return building
 
@@ -807,6 +814,23 @@ class Building(object):
         """
         self.ideal_air_loads[ik] = ideal_air_load
 
+    def add_infiltration(self, infiltration, ik):
+        """
+        Adds an infiltration object to the building datastructure.
+
+        Parameters
+        ----------
+        infiltration: object
+            The infiltration object to be added
+        
+        Returns
+        -------
+        None
+        
+        """
+        self.infiltrations[ik] = infiltration
+
+
     def add_shading(self, shading):
         """
         Adds a shading object to the building datastructure.
@@ -935,7 +959,7 @@ if __name__ == '__main__':
     wea = compas_eplus.SEATTLE
     b = Building.from_idf(filepath, path, wea)
 
-    print(b.ideal_air_loads)
+    print(b.infiltrations)
 
     # b.write_idf()
     # b.analyze(exe='/Applications/EnergyPlus/energyplus')
