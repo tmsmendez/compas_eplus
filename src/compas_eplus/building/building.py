@@ -33,6 +33,9 @@ from compas_eplus.building.zone import ZoneSurfaces
 
 from compas_eplus.building.schedule import Schedule
 from compas_eplus.building.light import Light
+from compas_eplus.building.people import People
+from compas_eplus.building.electric_eq import ElectricEquipment
+
 # from compas_eplus.building.schedule import OfficeOccupancySchedule
 # from compas_eplus.building.schedule import OfficeLightsSchedule
 # from compas_eplus.building.schedule import OfficeEquipmentSchedule
@@ -126,14 +129,17 @@ class Building(object):
         self.num_timesteps = 1
         self.terrain = 'City'
         self.solar_distribution = 'FullExteriorWithReflections'
-        self.zones = {}
-        self.windows = {}
-        self.materials = {}
-        self.constructions = {}
-        self.shadings = {}
-        self.layers = {}
-        self.schedules = {}
-        self.lights = {}
+
+        self.zones                  = {}
+        self.windows                = {}
+        self.materials              = {}
+        self.constructions          = {}
+        self.shadings               = {}
+        self.layers                 = {}
+        self.schedules              = {}
+        self.lights                 = {}
+        self.peoples                = {}
+        self.electric_equipments    = {}
 
         self.set_schedules = {'occupancy': None,
                               'lights': None,
@@ -400,6 +406,16 @@ class Building(object):
         for lk in lights:
             l = Light.from_data(lights[lk])
             building.add_light(l, lk)
+
+        peoples = data['people']
+        for pk in peoples:
+            p = People.from_data(peoples[pk])
+            building.add_people(p, pk)
+
+        eeq = data['electric_equipment']
+        for ek in eeq:
+            e = ElectricEquipment.from_data(eeq[ek])
+            building.add_electric_equipment(e, ek)
 
 
         return building
@@ -691,6 +707,40 @@ class Building(object):
         """
         self.lights[lk] = light
 
+    def add_people(self, people, pk):
+        """
+        Adds a people object to the building datastructure.
+
+        Parameters
+        ----------
+        people: object
+            The people object to be added
+        
+        Returns
+        -------
+        None
+        
+        """
+        self.peoples[pk] = people
+
+    def add_electric_equipment(self, eeq, ek):
+        """
+        Adds a electric_equipment object to the building datastructure.
+
+        Parameters
+        ----------
+        electric_equipment: object
+            The electric_equipment object to be added
+        
+        Returns
+        -------
+        None
+        
+        """
+        self.electric_equipments[ek] = eeq
+
+
+
     def add_shading(self, shading):
         """
         Adds a shading object to the building datastructure.
@@ -818,6 +868,8 @@ if __name__ == '__main__':
     path = compas_eplus.TEMP
     wea = compas_eplus.SEATTLE
     b = Building.from_idf(filepath, path, wea)
+
+    print(b.electric_equipments)
 
     # b.write_idf()
     # b.analyze(exe='/Applications/EnergyPlus/energyplus')

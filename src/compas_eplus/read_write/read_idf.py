@@ -23,12 +23,12 @@ def get_idf_data(filepath):
     
     find_lights(filepath, data)
     find_people(filepath, data)
+    find_electric_equipment(filepath, data)
     find_zone_control_thermostat(filepath, data)
     find_thermostat_setpoint(filepath, data)
     find_ideal_air_loads(filepath, data)
     find_infiltration(filepath, data)
 
-    find_electric_equipment(filepath, data)
     find_schedule_compact(filepath, data)
     find_schedule_type_limits(filepath, data)
     find_schedule_day_interval(filepath, data)
@@ -822,7 +822,7 @@ if __name__ == '__main__':
     data = get_idf_data(path)
     # print(data.keys())
 
-    object = 'lights'
+    object = 'electric_equipment'
 
     for k in data[object]:
         for j in data[object][k]:

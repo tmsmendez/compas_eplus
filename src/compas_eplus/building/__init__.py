@@ -14,3 +14,5 @@ from .window import *
 from .zone import *
 from .schedule import *
 from .light import *
+from .people import *
+from .electric_eq import *

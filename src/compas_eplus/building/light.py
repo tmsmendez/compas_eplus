@@ -6,8 +6,8 @@ __license__ = "MIT License"
 __email__ = "tmendeze@uw.edu"
 __version__ = "0.1.0"
 
-import json
-from ast import literal_eval
+# import json
+# from ast import literal_eval
 
 
 class Light(object):
@@ -31,7 +31,7 @@ class Light(object):
         end_use_subcategory
     """
     def __init__(self):
-        self.__type__                           = 'Lights'
+        self.__type__                           = 'Light'
         self.name                               = None
         self.zone_name                          = None
         self.schedule_name                      = None
@@ -48,7 +48,7 @@ class Light(object):
     @classmethod
     def from_data(cls, data):
         lights = cls()
-        lights.__type__                           = 'Lights'
+        lights.__type__                           = 'Light'
         lights.name                               = data['name']
         lights.zone_name                          = data['zone_name']
         lights.schedule_name                      = data['schedule_name']
