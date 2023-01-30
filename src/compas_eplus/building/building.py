@@ -35,6 +35,7 @@ from compas_eplus.building.schedule import Schedule
 from compas_eplus.building.light import Light
 from compas_eplus.building.people import People
 from compas_eplus.building.electric_eq import ElectricEquipment
+from compas_eplus.building.zone_control_thermostat import ZoneControlThermostat
 
 # from compas_eplus.building.schedule import OfficeOccupancySchedule
 # from compas_eplus.building.schedule import OfficeLightsSchedule
@@ -130,16 +131,17 @@ class Building(object):
         self.terrain = 'City'
         self.solar_distribution = 'FullExteriorWithReflections'
 
-        self.zones                  = {}
-        self.windows                = {}
-        self.materials              = {}
-        self.constructions          = {}
-        self.shadings               = {}
-        self.layers                 = {}
-        self.schedules              = {}
-        self.lights                 = {}
-        self.peoples                = {}
-        self.electric_equipments    = {}
+        self.zones                      = {}
+        self.windows                    = {}
+        self.materials                  = {}
+        self.constructions              = {}
+        self.shadings                   = {}
+        self.layers                     = {}
+        self.schedules                  = {}
+        self.lights                     = {}
+        self.peoples                    = {}
+        self.electric_equipments        = {}
+        self.zone_control_thermostats    = {}
 
         self.set_schedules = {'occupancy': None,
                               'lights': None,
@@ -416,6 +418,11 @@ class Building(object):
         for ek in eeq:
             e = ElectricEquipment.from_data(eeq[ek])
             building.add_electric_equipment(e, ek)
+
+        zct = data['zone_control_thermostat']
+        for zk in zct:
+            z = ZoneControlThermostat.from_data(zct[zk])
+            building.add_zone_control_thermostat(z, zk)
 
 
         return building
@@ -739,7 +746,21 @@ class Building(object):
         """
         self.electric_equipments[ek] = eeq
 
+    def add_zone_control_thermostat(self, zct, zk):
+        """
+        Adds a zone_control_thermostat object to the building datastructure.
 
+        Parameters
+        ----------
+        zone_control_thermostat: object
+            The zone_control_thermostat object to be added
+        
+        Returns
+        -------
+        None
+        
+        """
+        self.zone_control_thermostats[zk] = zct
 
     def add_shading(self, shading):
         """
@@ -869,7 +890,7 @@ if __name__ == '__main__':
     wea = compas_eplus.SEATTLE
     b = Building.from_idf(filepath, path, wea)
 
-    print(b.electric_equipments)
+    print(b.zone_control_thermostats)
 
     # b.write_idf()
     # b.analyze(exe='/Applications/EnergyPlus/energyplus')
