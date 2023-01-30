@@ -122,7 +122,6 @@ class Building(object):
         self.program = program
 
         self.ep_version = '22.2.0'
-        self.infiltration_rate = .0003 # [m3/s]
         self.num_timesteps = 1
         self.terrain = 'City'
         self.solar_distribution = 'FullExteriorWithReflections'
@@ -133,6 +132,7 @@ class Building(object):
         self.shadings = {}
         self.layers = {}
         self.schedules = {}
+        self.lights = {}
 
         self.set_schedules = {'occupancy': None,
                               'lights': None,
@@ -151,12 +151,13 @@ class Building(object):
         self.srf_cpt_dict = {}
         self.material_key_dict = {}
 
-        # these are not yet in json file - - - 
-        self.results = {}
-        self.people_area = {'office': .056, 'small_office': .056, 'mid_office': .056, 'mid_apartment': .028}
-        self.lights_area = {'office': 6.57, 'small_office': 6.57, 'mid_office': 6.57, 'mid_apartment': 6.46}
-        self.lights_fraction = {'office': .7, 'mid_apartment': .6}
-        self.equipment_area = {'office': 10.333, 'mid_apartment': 6.67}
+        ### these are not yet in json file - - - 
+        # self.results = {}
+        # self.people_area = {'office': .056, 'small_office': .056, 'mid_office': .056, 'mid_apartment': .028}
+        # self.lights_area = {'office': 6.57, 'small_office': 6.57, 'mid_office': 6.57, 'mid_apartment': 6.46}
+        # self.lights_fraction = {'office': .7, 'mid_apartment': .6}
+        # self.equipment_area = {'office': 10.333, 'mid_apartment': 6.67}
+        # self.infiltration_rate = .0003 # [m3/s]
 
     @property
     def data(self):
@@ -794,18 +795,6 @@ if __name__ == '__main__':
     path = compas_eplus.TEMP
     wea = compas_eplus.SEATTLE
     b = Building.from_idf(filepath, path, wea)
-
-    b.set_schedules['occupancy'] = ''
-    b.set_schedules['lights'] = ''
-    b.set_schedules['equipment'] = ''
-    b.set_schedules['activity'] = ''
-    b.set_schedules['control'] = '1_residential_4c5ac20f Thermostat Schedule'
-    b.set_schedules['heating'] = ''
-    b.set_schedules['cooling'] = ''
-    b.set_schedules['any_number'] = ''
-    b.set_schedules['fraction'] = ''
-    b.set_schedules['temperature'] = ''
-    b.set_schedules['control_type'] = '1_residential_4c5ac20f Thermostat Schedule Type Limits'
 
     b.write_idf()
     # b.analyze(exe='/Applications/EnergyPlus/energyplus')

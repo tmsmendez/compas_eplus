@@ -20,12 +20,22 @@ def get_idf_data(filepath):
     find_glazing_materials(filepath, data)
     find_glazing_material_simple(filepath, data)
     find_constructions(filepath, data)
+    
+    find_lights(filepath, data)
+    find_people(filepath, data)
+    find_zone_control_thermostat(filepath, data)
+    find_thermostat_setpoint(filepath, data)
+    find_ideal_air_loads(filepath, data)
+    find_infiltration(filepath, data)
+
+    find_electric_equipment(filepath, data)
     find_schedule_compact(filepath, data)
     find_schedule_type_limits(filepath, data)
     find_schedule_day_interval(filepath, data)
     find_schedule_week_daily(filepath, data)
     find_schedule_year(filepath, data)
     return data
+
 
 
 def find_zones(filepath, data):
@@ -498,6 +508,307 @@ def find_schedule_year(filepath, data):
                                   }
 
 
+def find_lights(filepath, data):
+    fh = open(filepath, 'r')
+    lines = fh.readlines()
+    fh.close()
+
+    i_lines = []
+    for i, line in enumerate(lines):
+        line = line.split(',')
+        if line[0].lower() == 'lights':
+            i_lines.append(i)
+    
+    data['lights'] = {}
+
+    for i in i_lines:
+        name = lines[i + 1].split(',')[0].strip()
+        znam = lines[i + 2].split(',')[0].strip()
+        snam = lines[i + 3].split(',')[0].strip()
+        calm = lines[i + 4].split(',')[0].strip()
+        ligl = lines[i + 5].split(',')[0].strip()
+        wzfa = lines[i + 6].split(',')[0].strip()
+        wppe = lines[i + 7].split(',')[0].strip()
+        rafr = lines[i + 8].split(',')[0].strip()
+        frad = lines[i + 9].split(',')[0].strip()
+        fvis = lines[i + 10].split(',')[0].strip()
+        frep = lines[i + 11].split(',')[0].strip()
+        euct = lines[i + 12].split(';')[0].strip()
+
+        data['lights'][name] = {'name':name,
+                                'zone_name': znam,
+                                'schedule_name': snam,
+                                'design_level_calculation_method': calm,
+                                'lighting_level': ligl,
+                                'watts_per_zone_floor_area': wzfa,
+                                'watts_per_person': wppe,
+                                'return_air_fraction': rafr,
+                                'fraction_radiant': frad,
+                                'fraction_visible': fvis,
+                                'fraction_replaceable': frep,
+                                'end_use_subcategory': euct,
+                                }
+
+
+def find_people(filepath, data):
+    fh = open(filepath, 'r')
+    lines = fh.readlines()
+    fh.close()
+
+    i_lines = []
+    for i, line in enumerate(lines):
+        line = line.split(',')
+        if line[0].lower() == 'people':
+            i_lines.append(i)
+    
+    data['people'] = {}
+
+    for i in i_lines:
+        name = lines[i + 1].split(',')[0].strip()
+        znam = lines[i + 2].split(',')[0].strip()
+        snam = lines[i + 3].split(',')[0].strip()
+        calm = lines[i + 4].split(',')[0].strip()
+        nump = lines[i + 5].split(',')[0].strip()
+        ppfa = lines[i + 6].split(',')[0].strip()
+        fapp = lines[i + 7].split(',')[0].strip()
+        frad = lines[i + 8].split(',')[0].strip()
+        shfr = lines[i + 9].split(',')[0].strip()
+        alsn = lines[i + 10].split(';')[0].strip()
+
+        data['people'][name] = {'name':name,
+                                'zone_name': znam,
+                                'schedule_name': snam,
+                                'calculation_method': calm,
+                                'number_of_people': nump,
+                                'people_per_floor_area': ppfa,
+                                'floor_area_per_person': fapp,
+                                'fraction_radiant': frad,
+                                'sensible_heat_fraction':shfr,
+                                'activity_level_schedule_name': alsn,
+                                }
+
+
+def find_electric_equipment(filepath, data):
+    fh = open(filepath, 'r')
+    lines = fh.readlines()
+    fh.close()
+
+    i_lines = []
+    for i, line in enumerate(lines):
+        line = line.split(',')
+        if line[0].lower() == 'electricequipment':
+            i_lines.append(i)
+    
+    data['electric_equipment'] = {}
+
+    for i in i_lines:
+        name = lines[i + 1].split(',')[0].strip()
+        znam = lines[i + 2].split(',')[0].strip()
+        snam = lines[i + 3].split(',')[0].strip()
+        calm = lines[i + 4].split(',')[0].strip()
+        desl = lines[i + 5].split(',')[0].strip()
+        wzfa = lines[i + 6].split(',')[0].strip()
+        wppe = lines[i + 7].split(',')[0].strip()
+        flat = lines[i + 8].split(',')[0].strip()
+        frad = lines[i + 9].split(',')[0].strip()
+        flst = lines[i + 10].split(',')[0].strip()
+        eusc = lines[i + 11].split(';')[0].strip()
+
+        data['electric_equipment'][name] = {'name': name,
+                                            'zone_name': znam,
+                                            'schedule_name': snam,
+                                            'calculation_method': calm,
+                                            'design_level': desl,
+                                            'watts_per_zone_floor_area': wzfa,
+                                            'watts_per_person': wppe,
+                                            'fraction_latent': flat,
+                                            'fraction_radiant': frad,
+                                            'fraction_lost': flst,
+                                            'end_use_subcategory': eusc,
+                                            }
+
+
+def find_zone_control_thermostat(filepath, data):
+    fh = open(filepath, 'r')
+    lines = fh.readlines()
+    fh.close()
+
+    i_lines = []
+    for i, line in enumerate(lines):
+        line = line.split(',')
+        if line[0].lower() == 'zonecontrol:thermostat':
+            i_lines.append(i)
+    
+    data['zone_control_thermostat'] = {}
+
+    for i in i_lines:
+        name = lines[i + 1].split(',')[0].strip()
+        znam = lines[i + 2].split(',')[0].strip()
+        snam = lines[i + 3].split(',')[0].strip()
+        ct1t = lines[i + 4].split(',')[0].strip()
+        ct1n = lines[i + 5].split(',')[0].strip()
+        ct2t = lines[i + 6].split(',')[0].strip()
+        ct2n = lines[i + 7].split(',')[0].strip()
+        ct3t = lines[i + 8].split(',')[0].strip()
+        ct3n = lines[i + 9].split(',')[0].strip()
+        ct4t = lines[i + 10].split(',')[0].strip()
+        ct4n = lines[i + 11].split(',')[0].strip()
+        tmpd = lines[i + 12].split(';')[0].strip()
+
+        data['zone_control_thermostat'][name] = {'name': name,
+                                                 'zone_name': znam,
+                                                 'schedule_name': snam,
+                                                 'control1_object_type': ct1t,
+                                                 'control1_object_name': ct1n,
+                                                 'control2_object_type': ct2t,
+                                                 'control2_object_name': ct2n,
+                                                 'control3_object_type': ct3t,
+                                                 'control3_object_name': ct3n,
+                                                 'control4_object_type': ct4t,
+                                                 'control4_object_name': ct4n,
+                                                 'temperature_difference': tmpd,
+                                                } 
+
+
+def find_thermostat_setpoint(filepath, data):
+    fh = open(filepath, 'r')
+    lines = fh.readlines()
+    fh.close()
+
+    i_lines = []
+    for i, line in enumerate(lines):
+        line = line.split(',')
+        if line[0].lower() == 'thermostatsetpoint:dualsetpoint':
+            i_lines.append(i)
+    
+    data['thermostat_setpoint_dual_setpoint'] = {}
+
+    for i in i_lines:
+        name = lines[i + 1].split(',')[0].strip()
+        htsp = lines[i + 2].split(',')[0].strip()
+        clsp = lines[i + 3].split(';')[0].strip()
+
+        data['thermostat_setpoint_dual_setpoint'][name] = {'heating_setpoint': htsp,
+                                                           'cooling_setpoint': clsp,
+                                                            }
+
+
+def find_ideal_air_loads(filepath, data):
+    fh = open(filepath, 'r')
+    lines = fh.readlines()
+    fh.close()
+
+    i_lines = []
+    for i, line in enumerate(lines):
+        line = line.split(',')
+        if line[0].lower() == 'zonehvac:idealloadsairsystem':
+            i_lines.append(i)
+    
+    data['ideal_air_loads'] = {}
+
+    for i in i_lines:
+        name = lines[i + 1].split(',')[0].strip()
+        avsn = lines[i + 2].split(',')[0].strip()
+        zsan = lines[i + 3].split(',')[0].strip()
+        zean = lines[i + 4].split(',')[0].strip()
+        sian = lines[i + 5].split(',')[0].strip()
+        mhat = lines[i + 6].split(',')[0].strip()
+        mcat = lines[i + 7].split(',')[0].strip()
+        mhhr = lines[i + 8].split(',')[0].strip()
+        mchr = lines[i + 9].split(',')[0].strip()
+        hlim = lines[i + 10].split(',')[0].strip()
+        mhaf = lines[i + 11].split(',')[0].strip()
+        mshc = lines[i + 12].split(',')[0].strip()
+        clim = lines[i + 13].split(',')[0].strip()
+        mcaf = lines[i + 14].split(',')[0].strip()
+        mtcc = lines[i + 15].split(',')[0].strip()
+        hasn = lines[i + 16].split(',')[0].strip()
+        casn = lines[i + 17].split(',')[0].strip()
+        dhct = lines[i + 18].split(',')[0].strip()
+        cshr = lines[i + 19].split(',')[0].strip()
+        hmct = lines[i + 20].split(',')[0].strip()
+        dsoa = lines[i + 21].split(',')[0].strip()
+        oain = lines[i + 22].split(',')[0].strip()
+        dcvt = lines[i + 23].split(',')[0].strip()
+        oaet = lines[i + 24].split(',')[0].strip()
+        hrty = lines[i + 25].split(',')[0].strip()
+        shre = lines[i + 26].split(',')[0].strip()
+        lhre = lines[i + 27].split(';')[0].strip()
+
+
+        data['ideal_air_loads'][name] = {'name': name,
+                                         'availability_schedule_name': avsn,
+                                         'zone_supply_air_node_name': zsan,
+                                         'zone_exhaust_air_node_name': zean,
+                                         'system_inlet_air_node_name': sian,
+                                         'max_heating_supply_temperature': mhat,
+                                         'min_cooling_supply_temperature': mcat,
+                                         'max_heating_supply_humidity_ratio': mhhr,
+                                         'min_cooling_supply_humidity_ratio': mchr,
+                                         'heating_limit': hlim,
+                                         'max_heating_air_flow_rate': mhaf,
+                                         'max_sensible_heating_capacity': mshc,
+                                         'cooling_limit': clim,
+                                         'maximum_cooling_air_flow_rate': mcaf,
+                                         'maximum_total_cooling_capacity': mtcc,
+                                         'heating_availability_schedule_name': hasn,
+                                         'cooling_availability_schedule_name': casn,
+                                         'dehimidification_control_type': dhct,
+                                         'cooling_sensible_heat_ratio': cshr,
+                                         'humidification_control_type': hmct,
+                                         'desing_specification_outdoor_air_name': dsoa,
+                                         'outdoor_inlet_node_name': oain,
+                                         'demand_controlled_ventilation_type': dcvt,
+                                         'outdoor_air_economizer_type': oaet,
+                                         'heat_recovery_type': hrty,
+                                         'sensible_heat_recovery_effectiveness': shre,
+                                         'latent_heat_revovery_effectiveness': lhre,
+                                        } 
+
+
+def find_infiltration(filepath, data):
+    fh = open(filepath, 'r')
+    lines = fh.readlines()
+    fh.close()
+
+    i_lines = []
+    for i, line in enumerate(lines):
+        line = line.split(',')
+        if line[0].lower() == 'zoneinfiltration:designflowrate':
+            i_lines.append(i)
+    
+    data['zone_infiltration'] = {}
+
+    for i in i_lines:
+        name = lines[i + 1].split(',')[0].strip()
+        znam = lines[i + 2].split(',')[0].strip()
+        snam = lines[i + 3].split(',')[0].strip()
+        dfcm = lines[i + 4].split(',')[0].strip()
+        dfrt = lines[i + 5].split(',')[0].strip()
+        fpza = lines[i + 6].split(',')[0].strip()
+        fpes = lines[i + 7].split(',')[0].strip()
+        acph = lines[i + 8].split(',')[0].strip()
+        ctco = lines[i + 9].split(',')[0].strip()
+        ttco = lines[i + 10].split(',')[0].strip()
+        vtco = lines[i + 11].split(',')[0].strip()
+        vstc = lines[i + 12].split(';')[0].strip()
+
+
+        data['zone_infiltration'][name] = {'name': name,
+                                           'zone_name': znam,
+                                           'schedule_name': snam,
+                                           'design_flow_rate_calculation_method': dfcm,
+                                           'design_flow_rate': dfrt,
+                                           'flow_per_zone_floor_area': fpza,
+                                           'flow_per_exterior_area': fpes, 
+                                           'air_changes_per_hour': acph,
+                                           'constant_term_coefficient': ctco,
+                                           'temperature_term_coefficient': ttco,
+                                           'velocity_term_coefficient': vtco,
+                                           'velocity_squared_term_coefficient': vstc,
+                                            }
+
+
 
 if __name__ == '__main__':
     import os
@@ -509,9 +820,11 @@ if __name__ == '__main__':
     path = os.path.join(compas_eplus.DATA, 'idf_examples', file)
 
     data = get_idf_data(path)
-    print(data.keys())
+    # print(data.keys())
 
-    for k in data['schedules']:
+    object = 'zone_infiltration'
+
+    for k in data[object]:
         print(k)
-        print(data['schedules'][k]['__type__'])
+        print(data[object][k])
         print('')
