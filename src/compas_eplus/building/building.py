@@ -960,6 +960,10 @@ if __name__ == '__main__':
     b = Building.from_idf(filepath, path, wea)
 
     # print(b.infiltrations)
+    
+    
+    #TODO: Continue on write thermostats!!!
+
 
     b.write_idf()
     # b.analyze(exe='/Applications/EnergyPlus/energyplus')

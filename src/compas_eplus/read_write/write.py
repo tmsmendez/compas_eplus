@@ -935,26 +935,52 @@ def write_internal_gains(building):
 
 
 def write_infiltration_rates(building):
-    fh = open(building.idf_filepath, 'a')
-    fh.write('  ZoneInfiltration:DesignFlowRate,\n')
-    fh.write('    All zones Infil 1,       !- Name\n')
-    fh.write('    all_zones_list,          !- Zone or ZoneList Name\n')
-    fh.write('    Always On,               !- Schedule Name\n')
-    fh.write('    flow/exteriorwallarea,   !- Design Flow Rate Calculation Method\n')
-    fh.write('    ,                        !- Design Flow Rate [m3/s]\n')
-    fh.write('    ,                        !- Flow per Zone Floor Area [m3/s-m2]\n')
-    fh.write('    {},                      !- Flow per Exterior Surface Area [m3/s-m2]\n'.format(building.infiltration_rate))
-    fh.write('    ,                        !- Air Changes per Hour [1/hr]\n')
-    fh.write('    0,                       !- Constant Term Coefficient\n')
-    fh.write('    0,                       !- Temperature Term Coefficient\n')
-    fh.write('    0,                       !- Velocity Term Coefficient\n')
-    fh.write('    0;                       !- Velocity Squared Term Coefficient\n')
-    fh.write('  \n')
-    fh.write('  \n')
-    fh.close()
+    for ik in building.infiltrations:
+        i = building.infiltrations[ik]
+
+        fh = open(building.idf_filepath, 'a')
+        fh.write('  ZoneInfiltration:DesignFlowRate,\n')
+        fh.write('    {},       !- Name\n'.format(i.name))
+        fh.write('    {},       !- Zone or ZoneList Name\n'.format(i.zone_name))
+        fh.write('    {},       !- Schedule Name\n'.format(i.schedule_name))
+        fh.write('    {},       !- Design Flow Rate Calculation Method\n'.format(i.design_flow_rate_calculation_method))
+        fh.write('    {},       !- Design Flow Rate [m3/s]\n'.format(i.design_flow_rate))
+        fh.write('    {},       !- Flow per Zone Floor Area [m3/s-m2]\n'.format(i.flow_per_zone_floor_area))
+        fh.write('    {},       !- Flow per Exterior Surface Area [m3/s-m2]\n'.format(i.flow_per_exterior_area))
+        fh.write('    {},       !- Air Changes per Hour [1/hr]\n'.format(i.air_changes_per_hour))
+        fh.write('    {},       !- Constant Term Coefficient\n'.format(i.constant_term_coefficient))
+        fh.write('    {},       !- Temperature Term Coefficient\n'.format(i.temperature_term_coefficient))
+        fh.write('    {},       !- Velocity Term Coefficient\n'.format(i.velocity_term_coefficient))
+        fh.write('    {};       !- Velocity Squared Term Coefficient\n'.format(i.velocity_squared_term_coefficient))
+        fh.write('  \n')
+        fh.write('  \n')
+        fh.close()
+
+
+
+    # fh = open(building.idf_filepath, 'a')
+    # fh.write('  ZoneInfiltration:DesignFlowRate,\n')
+    # fh.write('    All zones Infil 1,       !- Name\n')
+    # fh.write('    all_zones_list,          !- Zone or ZoneList Name\n')
+    # fh.write('    Always On,               !- Schedule Name\n')
+    # fh.write('    flow/exteriorwallarea,   !- Design Flow Rate Calculation Method\n')
+    # fh.write('    ,                        !- Design Flow Rate [m3/s]\n')
+    # fh.write('    ,                        !- Flow per Zone Floor Area [m3/s-m2]\n')
+    # fh.write('    {},                      !- Flow per Exterior Surface Area [m3/s-m2]\n'.format(building.infiltration_rate))
+    # fh.write('    ,                        !- Air Changes per Hour [1/hr]\n')
+    # fh.write('    0,                       !- Constant Term Coefficient\n')
+    # fh.write('    0,                       !- Temperature Term Coefficient\n')
+    # fh.write('    0,                       !- Velocity Term Coefficient\n')
+    # fh.write('    0;                       !- Velocity Squared Term Coefficient\n')
+    # fh.write('  \n')
+    # fh.write('  \n')
+    # fh.close()
 
 
 def write_thermostats(building):
+
+    # TODO: Continue here!!!!
+
     fh = open(building.idf_filepath, 'a')
     fh.write('ZoneControl:Thermostat,\n')
     fh.write('  All zones Control,                  !- Name\n')
