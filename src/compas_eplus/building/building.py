@@ -123,9 +123,10 @@ class Building(object):
         Dictionary mapping material names to material keys
     """
     def __init__(self, path, weather, name='Building', program='office'):
+        
         self.name = name
         self.path = path
-        self.idf_filepath = os.path.join(path, f'{self.name}.idf')
+        self.idf_filepath = os.path.join(path, '{}.idf'.format(self.name))
         self.weather = weather
         self.program = program
 
@@ -830,7 +831,6 @@ class Building(object):
         """
         self.infiltrations[ik] = infiltration
 
-
     def add_shading(self, shading):
         """
         Adds a shading object to the building datastructure.
@@ -959,9 +959,9 @@ if __name__ == '__main__':
     wea = compas_eplus.SEATTLE
     b = Building.from_idf(filepath, path, wea)
 
-    print(b.infiltrations)
+    # print(b.infiltrations)
 
-    # b.write_idf()
+    b.write_idf()
     # b.analyze(exe='/Applications/EnergyPlus/energyplus')
     # b.load_results()
 
