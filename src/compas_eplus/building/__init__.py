@@ -20,3 +20,4 @@ from .zone_control_thermostat import *
 from .setpoint import *
 from .ideal_air_load import *
 from .infiltration import *
+from .equipment import *

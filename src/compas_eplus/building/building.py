@@ -961,9 +961,10 @@ if __name__ == '__main__':
 
     # print(b.infiltrations)
     
-    
-    #TODO: Continue on write thermostats!!!
 
+    #TODO: finish writing from objects, Ideal air loads
+    # Creat objects for HVAC equipment list, and HVAC equipment connections
+    # Write schedules, year > week > day
 
     b.write_idf()
     # b.analyze(exe='/Applications/EnergyPlus/energyplus')
