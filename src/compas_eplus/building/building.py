@@ -39,6 +39,8 @@ from compas_eplus.building.zone_control_thermostat import ZoneControlThermostat
 from compas_eplus.building.setpoint import DualSetpoint
 from compas_eplus.building.ideal_air_load import IdealAirLoad
 from compas_eplus.building.infiltration import Infiltration
+from compas_eplus.building.equipment import EquipmentList
+from compas_eplus.building.equipment import EquipmentConnection
 
 # from compas_eplus.building.schedule import OfficeOccupancySchedule
 # from compas_eplus.building.schedule import OfficeLightsSchedule
@@ -149,6 +151,8 @@ class Building(object):
         self.setpoints                  = {}
         self.ideal_air_loads            = {}
         self.infiltrations              = {}
+        self.equipment_lists            = {}
+        self.equipment_connections      = {}
 
         self.set_schedules = {'occupancy': None,
                               'lights': None,
@@ -445,6 +449,16 @@ class Building(object):
         for ik in infiltration:
             i = Infiltration.from_data(infiltration[ik])
             building.add_infiltration(i, ik)
+
+        el = data['equipment_list']
+        for ek in el:
+            e = EquipmentList.from_data(el[ek])
+            building.add_equipment_list(e, ek)
+
+        ec = data['equipment_connection']
+        for ek in ec:
+            e = EquipmentConnection.from_data(ec[ek])
+            building.add_equipment_connection(e, ek)
 
         return building
 
@@ -830,6 +844,39 @@ class Building(object):
         
         """
         self.infiltrations[ik] = infiltration
+
+    def add_equipment_list(self, equipment_list, ek):
+        """
+        Adds an equipment_list object to the building datastructure.
+
+        Parameters
+        ----------
+        infiltration: object
+            The equipment_list object to be added
+        
+        Returns
+        -------
+        None
+        
+        """
+        self.equipment_lists[ek] = equipment_list
+
+    def add_equipment_connection(self, equipment_connection, ek):
+        """
+        Adds an equipment_connection object to the building datastructure.
+
+        Parameters
+        ----------
+        infiltration: object
+            The equipment_connection object to be added
+        
+        Returns
+        -------
+        None
+        
+        """
+        self.equipment_connections[ek] = equipment_connection
+
 
     def add_shading(self, shading):
         """

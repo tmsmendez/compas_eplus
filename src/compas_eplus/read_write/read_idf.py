@@ -856,7 +856,7 @@ def find_equipment_connections(filepath, data):
         if line[0].lower() == 'zonehvac:equipmentconnections':
             i_lines.append(i)
     
-    data['equipment_connections'] = {}
+    data['equipment_connection'] = {}
 
     for i in i_lines:
         name = lines[i + 1].split(',')[0].strip()
@@ -865,11 +865,11 @@ def find_equipment_connections(filepath, data):
         zaen = lines[i + 4].split(',')[0].strip()
         zann = lines[i + 5].split(';')[0].strip()
 
-        data['equipment_connections'][name] = {'name': name,
-                                               'zone_conditioning_equipment_list': zcel,
-                                               'zone_air_inlet_node': zain,
-                                               'zone_air_exhaust_node': zaen,
-                                               'zone_air_node': zann,
+        data['equipment_connection'][name] = {'name': name,
+                                              'zone_conditioning_equipment_list': zcel,
+                                              'zone_air_inlet_node': zain,
+                                              'zone_air_exhaust_node': zaen,
+                                              'zone_air_node': zann,
                                                }
 
 

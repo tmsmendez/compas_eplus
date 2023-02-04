@@ -17,41 +17,67 @@ class EquipmentList(object):
     Parameters
     ----------
     name: str, optional
+    load_distribution_scheme
+    zone_equipment_object_type1
+    zone_equipment_name1
+    zone_equipment_cooling_sequence
+    zone_equipment_heating_sequence
+    zone_equipment_sequenctial_cooling_fraction_schedule
+    zone_equipment_sequential_heating_fraction_schedule
     """
     def __init__(self):
-        self.__type__                           = 'EquipmentList'
-
-    
+        self.__type__                                               = 'EquipmentList'
+        self.name                                                  = None
+        self.load_distribution_scheme                              = None
+        self.zone_equipment_object_type1                           = None
+        self.zone_equipment_name1                                  = None
+        self.zone_equipment_cooling_sequence                       = None
+        self.zone_equipment_heating_sequence                       = None
+        self.zone_equipment_sequenctial_cooling_fraction_schedule  = None
+        self.zone_equipment_sequential_heating_fraction_schedule   = None
 
     @classmethod
     def from_data(cls, data):
-        eeq = cls()
-        eeq.__type__                           = 'EquipmentList'
-        return eeq
+        eql = cls()
+        eql.__type__                                                = 'EquipmentList'
+        eql.name                                                    = data['name']
+        eql.load_distribution_scheme                                = data['load_distribution_scheme']
+        eql.zone_equipment_object_type1                             = data['zone_equipment_object_type1']
+        eql.zone_equipment_name1                                    = data['zone_equipment_name1']
+        eql.zone_equipment_cooling_sequence                         = data['zone_equipment_cooling_sequence']
+        eql.zone_equipment_heating_sequence                         = data['zone_equipment_heating_sequence']
+        eql.zone_equipment_sequenctial_cooling_fraction_schedule    = data['zone_equipment_sequenctial_cooling_fraction_schedule']
+        eql.zone_equipment_sequential_heating_fraction_schedule     = data['zone_equipment_sequential_heating_fraction_schedule']
+        return eql
 
 
+class EquipmentConnection(object):
+    """
+    Datastructure containing an EquipmentConnection object for Energy+ analysis
 
-# ZoneHVAC:EquipmentList,
-#   2_residential_aa024cf2 Equipment List,          !- Name
-#   SequentialLoad,                                 !- Load Distribution Scheme
-#   ZoneHVAC:IdealLoadsAirSystem,                   !- Zone Equipment Object Type 1
-#   2_residential_aa024cf2 Ideal Loads Air System,  !- Zone Equipment Name 1
-#   1,                                              !- Zone Equipment Cooling Sequence 1
-#   1,                                              !- Zone Equipment Heating or No-Load Sequence 1
-#   ,                                               !- Zone Equipment Sequential Cooling Fraction Schedule Name 1
-#   ;                                               !- Zone Equipment Sequential Heating Fraction Schedule Name 1
+    Parameters
+    ----------
+    name: str, optional
+    """
+    def __init__(self):
+        self.__type__                           = 'EquipmentConnection'
+        self.name                               = None
+        self.name                               = None
+        self.zone_conditioning_equipment_list   = None
+        self.zone_air_inlet_node                = None
+        self.zone_air_exhaust_node              = None
+        self.zone_air_node                      = None
 
-
-
-
-# ZoneHVAC:EquipmentConnections,
-#   2_residential_aa024cf2,                     !- Zone Name
-#   2_residential_aa024cf2 Equipment List,      !- Zone Conditioning Equipment List Name
-#   2_residential_aa024cf2 Inlet Node List,     !- Zone Air Inlet Node or NodeList Name
-#   2_residential_aa024cf2 Exhaust Node List,   !- Zone Air Exhaust Node or NodeList Name
-#   Node 2;                                     !- Zone Air Node Name
-
-
+    @classmethod
+    def from_data(cls, data):
+        eqc = cls()
+        eqc.__type__                            = 'EquipmentConnection'
+        eqc.name                                = data['name']
+        eqc.zone_conditioning_equipment_list    = data['zone_conditioning_equipment_list']
+        eqc.zone_air_inlet_node                 = data['zone_air_inlet_node']
+        eqc.zone_air_exhaust_node               = data['zone_air_exhaust_node']
+        eqc.zone_air_node                       = data['zone_air_node']
+        return eqc
 
 
 

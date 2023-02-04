@@ -1135,9 +1135,38 @@ def write_hvac(building):
         fh.write('  {},     !- Sensible Heat Recovery Effectiveness\n'.format(i.sensible_heat_recovery_effectiveness))
         fh.write('  {};     !- Latent Heat Recovery Effectiveness\n'.format(i.latent_heat_revovery_effectiveness))
         fh.write('  \n')
+        fh.write('  \n')
         fh.close()
-    
 
+    for ek in building.equipment_lists:
+        el = building.equipment_lists[ek]
+        fh = open(building.idf_filepath, 'a')
+        fh.write('ZoneHVAC:EquipmentList,\n')
+        fh.write('  {},     !- Name\n'.format(el.name))
+        fh.write('  {},     !- Load Distribution Scheme\n'.format(el.load_distribution_scheme))
+        fh.write('  {},     !- Zone Equipment 1 Object Type\n'.format(el.zone_equipment_object_type1))
+        fh.write('  {},     !- Zone Equipment 1 Name\n'.format(el.zone_equipment_name1))
+        fh.write('  {},     !- Zone Equipment 1 Cooling Sequence\n'.format(el.zone_equipment_cooling_sequence))
+        fh.write('  {},     !- Zone Equipment 1 Heating or No-Load Sequence\n'.format(el.zone_equipment_heating_sequence))
+        fh.write('  {},     !- Zone Equipment 1 Sequential Cooling Fraction Schedule Name\n'.format(el.zone_equipment_sequenctial_cooling_fraction_schedule))
+        fh.write('  {};     !- Zone Equipment 1 Sequential Heating Fraction Schedule Name\n'.format(el.zone_equipment_sequential_heating_fraction_schedule))
+        fh.write('  \n')
+        fh.write('  \n')
+        fh.close()
+
+
+    for ek in building.equipment_connections:
+        ec = building.equipment_connections[ek]
+        fh = open(building.idf_filepath, 'a')
+        fh.write('ZoneHVAC:EquipmentConnections,\n')
+        fh.write('  {},     !- Zone Name\n'.format(ec.name))
+        fh.write('  {},     !- Zone Conditioning Equipment List Name\n'.format(ec.zone_conditioning_equipment_list))
+        fh.write('  {},     !- Zone Air Inlet Node or NodeList Name\n'.format(ec.zone_air_inlet_node))
+        fh.write('  {},     !- Zone Air Exhaust Node or NodeList Name\n'.format(ec.zone_air_exhaust_node))
+        fh.write('  {};     !- Zone Air Node Name\n'.format(ec.zone_air_node))
+        fh.write('  \n')
+        fh.write('  \n')
+        fh.close()
 
 def write_output_items(building):
     """
