@@ -28,6 +28,8 @@ def get_idf_data(filepath):
     find_thermostat_setpoint(filepath, data)
     find_ideal_air_loads(filepath, data)
     find_infiltration(filepath, data)
+    find_equipment_list(filepath, data)
+    find_equipment_connections(filepath, data)
 
     find_schedule_compact(filepath, data)
     find_schedule_type_limits(filepath, data)
@@ -35,7 +37,6 @@ def get_idf_data(filepath):
     find_schedule_week_daily(filepath, data)
     find_schedule_year(filepath, data)
     return data
-
 
 
 def find_zones(filepath, data):
@@ -810,6 +811,67 @@ def find_infiltration(filepath, data):
                                        }
 
 
+def find_equipment_list(filepath, data):
+    fh = open(filepath, 'r')
+    lines = fh.readlines()
+    fh.close()
+
+    i_lines = []
+    for i, line in enumerate(lines):
+        line = line.split(',')
+        if line[0].lower() == 'zonehvac:equipmentlist':
+            i_lines.append(i)
+    
+    data['equipment_list'] = {}
+
+    for i in i_lines:
+        name = lines[i + 1].split(',')[0].strip()
+        lsch = lines[i + 2].split(',')[0].strip()
+        zeo1 = lines[i + 3].split(',')[0].strip()
+        zen1 = lines[i + 4].split(',')[0].strip()
+        zec1 = lines[i + 5].split(',')[0].strip()
+        zeh1 = lines[i + 6].split(',')[0].strip()
+        zsc1 = lines[i + 7].split(',')[0].strip()
+        zsh1 = lines[i + 8].split(';')[0].strip()
+
+        data['equipment_list'][name] = {'name': name,
+                                        'load_distribution_scheme': lsch,
+                                        'zone_equipment_object_type1': zeo1, 
+                                        'zone_equipment_name1': zen1,
+                                        'zone_equipment_cooling_sequence': zec1, 
+                                        'zone_equipment_heating_sequence': zeh1, 
+                                        'zone_equipment_sequenctial_cooling_fraction_schedule': zsc1,
+                                        'zone_equipment_sequential_heating_fraction_schedule': zsh1,
+                                        }
+
+
+def find_equipment_connections(filepath, data):
+    fh = open(filepath, 'r')
+    lines = fh.readlines()
+    fh.close()
+
+    i_lines = []
+    for i, line in enumerate(lines):
+        line = line.split(',')
+        if line[0].lower() == 'zonehvac:equipmentconnections':
+            i_lines.append(i)
+    
+    data['equipment_connections'] = {}
+
+    for i in i_lines:
+        name = lines[i + 1].split(',')[0].strip()
+        zcel = lines[i + 2].split(',')[0].strip()
+        zain = lines[i + 3].split(',')[0].strip()
+        zaen = lines[i + 4].split(',')[0].strip()
+        zann = lines[i + 5].split(';')[0].strip()
+
+        data['equipment_connections'][name] = {'name': name,
+                                               'zone_conditioning_equipment_list': zcel,
+                                               'zone_air_inlet_node': zain,
+                                               'zone_air_exhaust_node': zaen,
+                                               'zone_air_node': zann,
+                                               }
+
 
 if __name__ == '__main__':
     import os
@@ -823,9 +885,10 @@ if __name__ == '__main__':
     data = get_idf_data(path)
     # print(data.keys())
 
-    # object = 'infiltration'
+    object = 'equipment_connections'
 
-    # for k in data[object]:
-    #     for j in data[object][k]:
-    #         print(j)
-    #     print('')
+    for k in data[object]:
+        print(k)
+        for j in data[object][k]:
+            print(j)
+        print('')
