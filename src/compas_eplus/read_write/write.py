@@ -65,7 +65,33 @@ def write_pre(building):
     fh.write('\n')
     fh.write('Timestep,\n')
     fh.write('  {};\t\t\t\t\t!- Number of Timesteps per Hour\n'.format(building.num_timesteps))  
-    fh.write('\n')           
+    fh.write('\n')
+
+    ## HARD CODED STUFF TO DELETE LATER
+
+    fh.write('ZoneList,\n')
+    fh.write('  2019::MidriseApartment::Apartment,      !- Name\n')
+    fh.write('  1_residential_4c5ac20f,                 !- Zone Name 1\n')
+    fh.write('  2_residential_aa024cf2;                 !- Zone Name 2\n')
+    fh.write('\n')
+
+    fh.write('NodeList,\n')
+    fh.write('  1_residential_4c5ac20f Inlet Node List, !- Name\n')
+    fh.write('  Node 4;                                 !- Node Name 1\n')
+    fh.write('\n')
+    fh.write('NodeList,\n')
+    fh.write('  1_residential_4c5ac20f Exhaust Node List, !- Name\n')
+    fh.write('  Node 3;   \n')
+    fh.write('\n')
+    fh.write('NodeList,\n')
+    fh.write('  tomas2, !- Name\n')
+    fh.write('  Node 2;   \n')
+    fh.write('\n')
+    fh.write('NodeList,\n')
+    fh.write('  tomas1, !- Name\n')
+    fh.write('  Node 1;   \n')
+    fh.write('\n')
+
     fh.close()
 
 
@@ -1083,6 +1109,7 @@ def write_hvac(building):
         fh.write('ZoneHVAC:IdealLoadsAirSystem,\n')
         fh.write('  {},     !- Name\n'.format(i.name))
         fh.write('  {},     !- Availability Schedule Name\n'.format(i.availability_schedule_name))
+        # fh.write('  tomas _ {},     !- Zone Supply Air Node Name \n'.format(ik))
         fh.write('  {},     !- Zone Supply Air Node Name \n'.format(i.zone_supply_air_node_name))
         fh.write('  {},     !- Zone Exhaust Air Node Name\n'.format(i.zone_exhaust_air_node_name))
         fh.write('  {},     !- System Inlet Air Node Name\n'.format(i.system_inlet_air_node_name))
@@ -1101,7 +1128,8 @@ def write_hvac(building):
         fh.write('  {},     !- Dehumidification Control Type\n'.format(i.dehimidification_control_type))
         fh.write('  {},     !- Cooling Sensible Heat Ratio\n'.format(i.cooling_sensible_heat_ratio))
         fh.write('  {},     !- Humidification Control Type\n'.format(i.humidification_control_type))
-        fh.write('  {},     !- Design Specification Outdoor Air Object Name\n'.format(i.desing_specification_outdoor_air_name))
+        fh.write('  ,     !- Design Specification Outdoor Air Object Name\n')
+        # fh.write('  {},     !- Design Specification Outdoor Air Object Name\n'.format(i.desing_specification_outdoor_air_name))
         fh.write('  {},     !- Outdoor Air Inlet Node Name\n'.format(i.outdoor_inlet_node_name))
         fh.write('  {},     !- Demand Controlled Ventilation Type\n'.format(i.demand_controlled_ventilation_type))
         fh.write('  {},     !- Outdoor Air Economizer Type\n'.format(i.outdoor_air_economizer_type))

@@ -1012,6 +1012,10 @@ class Building(object):
                 skeys = [o[ok].heating_setpoint for ok in oks]
             elif k == 'cooling':
                 skeys = [o[ok].cooling_setpoint for ok in oks]
+            elif k == 'activity':
+                skeys = [o[ok].schedule_name for ok in oks]
+                skeys_ = [o[ok].activity_level_schedule_name for ok in oks]
+                skeys.extend(skeys_)
             else:
                 skeys = [o[ok].schedule_name for ok in oks]
             self.set_schedules.update(skeys)
@@ -1022,6 +1026,7 @@ class Building(object):
             stype = schedule.type
             if stype == 'year':
                 year_schs.add(schedule.schedule_week_name1)
+            
 
         self.set_schedules.update(year_schs)
         for sk in year_schs:
@@ -1040,6 +1045,14 @@ class Building(object):
             wks.append(self.schedules[sk].custom_day2)
             self.set_schedules.update(wks)
 
+        tls = []
+        for sk in self.schedules:
+            schedule = self.schedules[sk]
+            stype = schedule.type
+            if stype == 'schedule_type_limits':
+                tls.append(sk)
+        self.set_schedules.update(tls)
+
 
 if __name__ == '__main__':
 
@@ -1057,13 +1070,15 @@ if __name__ == '__main__':
     # print(b.infiltrations)
     
 
-    #TODO: continue adding year and week schedules to set schedules
-    #TODO: Write schedules, year > week > day
+    #TODO: Zone list is currewntly hard coded
+    #TODO: Schedule type limits are not added to set schedules yet....
+    #TODO: Ideal air loads, design specification not using object for now, just deleting it
+    #TODO: None list is hard coded for now
 
     b.write_idf()
     b.analyze(exe='/Applications/EnergyPlus/energyplus')
-    # b.load_results()
-
+    b.load_results()
+    print('here')
     # v = BuildingViewer(b)
     # v.show()
 

@@ -355,7 +355,7 @@ def find_schedule_compact(filepath, data):
 
 
 def find_schedule_type_limits(filepath, data):
-
+    
     fh = open(filepath, 'r')
     lines = fh.readlines()
     fh.close()
