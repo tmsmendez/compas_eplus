@@ -91,6 +91,24 @@ def write_pre(building):
     fh.write('  tomas1, !- Name\n')
     fh.write('  Node 1;   \n')
     fh.write('\n')
+    fh.write('NodeList,\n')
+    fh.write('  2_residential_aa024cf2 Inlet Node List, !- Name\n')
+    fh.write('  Node 6;                                 !- Node Name 1\n')
+    fh.write('\n')
+    fh.write('NodeList,\n')
+    fh.write('  2_residential_aa024cf2 Exhaust Node List, !- Name\n')
+    fh.write('  Node 5;                                 !- Node Name 1\n')
+    fh.write('\n')
+
+
+    # fh.write('DesignSpecification:OutdoorAir,\n')
+    # fh.write('2019::MidriseApartment::Apartment_Ventilation, !- Name\n')
+    # fh.write('Sum,                                    !- Outdoor Air Method\n')
+    # fh.write('0,                                      !- Outdoor Air Flow per Person {m3/s-person}\n')
+    # fh.write('0,                                      !- Outdoor Air Flow per Zone Floor Area {m3/s-m2}\n')
+    # fh.write('0,                                      !- Outdoor Air Flow per Zone {m3/s}\n')
+    # fh.write('0.35;                                   !- Outdoor Air Flow Air Changes per Hour {1/hr}\n')
+    # fh.write('\n')
 
     fh.close()
 
@@ -703,8 +721,9 @@ def write_schedule(building, schedule):
 
 
 def write_schedules(building):
-    building.find_set_schedules()
-    for sk in building.set_schedules:
+    # building.find_set_schedules()
+    # for sk in building.set_schedules:
+    for sk in building.schedules:
         schedule = building.schedules[sk]
         stype = schedule.type
         if stype == 'compact':
@@ -1109,7 +1128,6 @@ def write_hvac(building):
         fh.write('ZoneHVAC:IdealLoadsAirSystem,\n')
         fh.write('  {},     !- Name\n'.format(i.name))
         fh.write('  {},     !- Availability Schedule Name\n'.format(i.availability_schedule_name))
-        # fh.write('  tomas _ {},     !- Zone Supply Air Node Name \n'.format(ik))
         fh.write('  {},     !- Zone Supply Air Node Name \n'.format(i.zone_supply_air_node_name))
         fh.write('  {},     !- Zone Exhaust Air Node Name\n'.format(i.zone_exhaust_air_node_name))
         fh.write('  {},     !- System Inlet Air Node Name\n'.format(i.system_inlet_air_node_name))
@@ -1117,12 +1135,17 @@ def write_hvac(building):
         fh.write('  {},     !- Minimum Cooling Supply Air Temperature [C]\n'.format(i.min_cooling_supply_temperature))
         fh.write('  {},     !- Maximum Heating Supply Air Humidity Ratio [kgWater/kgDryAir]\n'.format(i.max_heating_supply_humidity_ratio))
         fh.write('  {},     !- Minimum Cooling Supply Air Humidity Ratio [kgWater/kgDryAir]\n'.format(i.min_cooling_supply_humidity_ratio))
-        fh.write('  {},     !- Heating Limit\n'.format(i.heating_limit))
+        fh.write('  NoLimit,     !- Heating Limit\n')
+        # fh.write('  {},     !- Heating Limit\n'.format(i.heating_limit))
         fh.write('  {},     !- Maximum Heating Air Flow Rate [m3/s]\n'.format(i.max_heating_air_flow_rate))
-        fh.write('  {},     !- Maximum Sensible Heating Capacity [W]\n'.format(i.max_sensible_heating_capacity))
-        fh.write('  {},     !- Cooling Limit\n'.format(i.cooling_limit))
-        fh.write('  {},     !- Maximum Cooling Air Flow Rate [m3/s]\n'.format(i.maximum_cooling_air_flow_rate))
-        fh.write('  {},     !- Maximum Total Cooling Capacity [W]\n'.format(i.maximum_total_cooling_capacity))
+        fh.write('  ,       !- Maximum Sensible Heating Capacity [W]\n')
+        # fh.write('  {},     !- Maximum Sensible Heating Capacity [W]\n'.format(i.max_sensible_heating_capacity))
+        fh.write('  NoLimit,     !- Cooling Limit\n')
+        # fh.write('  {},     !- Cooling Limit\n'.format(i.cooling_limit))
+        fh.write('  ,       !- Maximum Cooling Air Flow Rate [m3/s]\n')
+        fh.write('  ,       !- Maximum Total Cooling Capacity [W]\n')
+        # fh.write('  {},     !- Maximum Cooling Air Flow Rate [m3/s]\n'.format(i.maximum_cooling_air_flow_rate))
+        # fh.write('  {},     !- Maximum Total Cooling Capacity [W]\n'.format(i.maximum_total_cooling_capacity))
         fh.write('  {},     !- Heating Availability Schedule Name\n'.format(i.heating_availability_schedule_name))
         fh.write('  {},     !- Cooling Availability Schedule Name\n'.format(i.cooling_availability_schedule_name))
         fh.write('  {},     !- Dehumidification Control Type\n'.format(i.dehimidification_control_type))
@@ -1139,6 +1162,7 @@ def write_hvac(building):
         fh.write('  \n')
         fh.write('  \n')
         fh.close()
+
 
     for ek in building.equipment_lists:
         el = building.equipment_lists[ek]

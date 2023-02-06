@@ -153,19 +153,6 @@ class Building(object):
         self.infiltrations              = {}
         self.equipment_lists            = {}
         self.equipment_connections      = {}
-
-        # self.set_schedules = {'occupancy': None,
-        #                       'lights': None,
-        #                       'equipment': None,
-        #                       'activity': None,
-        #                       'control': None,
-        #                       'heating': None,
-        #                       'cooling': None,
-        #                       'any_number': None,
-        #                       'fraction': None,
-        #                       'temperature': None,
-        #                       'control_type': None, 
-        #                      }
         
         self.set_schedules = set()
 
@@ -1071,16 +1058,18 @@ if __name__ == '__main__':
     
 
     #TODO: Zone list is currewntly hard coded
-    #TODO: Schedule type limits are not added to set schedules yet....
-    #TODO: Ideal air loads, design specification not using object for now, just deleting it
+    #TODO: Ideal air loads, design specification not using object for now, hard coded
     #TODO: None list is hard coded for now
+
+    ###### Some schedule day intervals are missing, are they needed?
+    ####### Write all schedules and see what happens
 
     b.write_idf()
     b.analyze(exe='/Applications/EnergyPlus/energyplus')
     b.load_results()
     print('here')
-    # v = BuildingViewer(b)
-    # v.show()
+    v = BuildingViewer(b)
+    v.show()
 
-    # v = ResultsViewer(b)
-    # v.show('total')
+    v = ResultsViewer(b)
+    v.show('total')
