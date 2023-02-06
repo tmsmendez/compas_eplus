@@ -677,72 +677,24 @@ def write_schedule(building, schedule):
 
 
 def write_schedules(building):
+    building.find_set_schedules()
     for sk in building.set_schedules:
-        sk = building.set_schedules[sk]
-        if sk:
-            schedule = building.schedules[sk]
-            stype = schedule.type
-            if stype == 'compact':
-                write_schedule_compact(building, schedule)
-            elif stype == 'day_interval':
-                write_schedule_day_interval(building, schedule)
-            elif stype == 'week_daily':
-                write_schedule_week_daily(building, schedule)
-            elif stype == 'schedule_type_limits':
-                write_schedule_type_limits(building, schedule)
-            else:
-                continue
-                # write_schedule(building, building.schedules[sk])
+        schedule = building.schedules[sk]
+        stype = schedule.type
+        if stype == 'compact':
+            write_schedule_compact(building, schedule)
+        elif stype == 'day_interval':
+            write_schedule_day_interval(building, schedule)
+        elif stype == 'week_daily':
+            write_schedule_week_daily(building, schedule)
+        elif stype == 'year':
+            write_schedule_year(building, schedule)
+        elif stype == 'schedule_type_limits':
+            write_schedule_type_limits(building, schedule)
 
+
+def write_schedule_compact(building, schedule):
     fh = open(building.idf_filepath, 'a')
-
-    fh.write('Schedule:Constant,\n')
-    fh.write('    Always On,               !- Name\n')
-    fh.write('    Any Number,              !- Schedule Type Limits Name\n')
-    fh.write('    1;                       !- Hourly Value\n')
-    fh.write('  \n')
-
-    fh.write('Schedule:Compact,\n')
-    fh.write('  Htg-SetP-Sch,            !- Name\n')
-    fh.write('  Temperature,             !- Schedule Type Limits Name\n')
-    fh.write('  Through: 12/31,          !- Field 1\n')
-    fh.write('  For: SummerDesignDay,    !- Field 2\n')
-    fh.write('  Until: 24:00,16.7,       !- Field 3\n')
-    fh.write('  For: WinterDesignDay,    !- Field 5\n')
-    fh.write('  Until: 24:00,22.2,       !- Field 6\n')
-    fh.write('  For: WeekDays,           !- Field 8\n')
-    fh.write('  Until: 6:00,16.7,        !- Field 9\n')
-    fh.write('  Until: 20:00,22.2,       !- Field 11\n')
-    fh.write('  Until: 24:00,16.7,       !- Field 13\n')
-    fh.write('  For: WeekEnds Holiday,   !- Field 15\n')
-    fh.write('  Until: 24:00,16.7,       !- Field 16\n')
-    fh.write('  For: AllOtherDays,       !- Field 18\n')
-    fh.write('  Until: 24:00,16.7;       !- Field 19\n')
-    fh.write('  \n')
-
-    fh.write('Schedule:Compact,\n')
-    fh.write('  Clg-SetP-Sch,            !- Name\n')
-    fh.write('  Temperature,             !- Schedule Type Limits Name\n')
-    fh.write('  Through: 12/31,          !- Field 1\n')
-    fh.write('  For: SummerDesignDay,    !- Field 2\n')
-    fh.write('  Until: 24:00,23.9,       !- Field 3\n')
-    fh.write('  For: WinterDesignDay,    !- Field 5\n')
-    fh.write('  Until: 24:00,29.4,       !- Field 6\n')
-    fh.write('  For: WeekDays,           !- Field 8\n')
-    fh.write('  Until: 6:00,29.4,        !- Field 9\n')
-    fh.write('  Until: 20:00,23.9,       !- Field 11\n')
-    fh.write('  Until: 24:00,29.4,       !- Field 13\n')
-    fh.write('  For: WeekEnds Holiday,   !- Field 15\n')
-    fh.write('  Until: 24:00,29.4,       !- Field 16\n')
-    fh.write('  For: AllOtherDays,       !- Field 18\n')
-    fh.write('  Until: 24:00,29.4;       !- Field 19\n')
-    fh.write('\n')
-
-    fh.close()
-
-
-def write_schedule_compact(self, schedule):
-    fh = open(self.idf_filepath, 'a')
     fh.write('Schedule:Compact,\n')
     fh.write('  {},  !- Name\n'.format(schedule.name))
     fh.write('  {}, !- Schedule Type Limits Name\n'.format(schedule.type_limits))
@@ -790,6 +742,28 @@ def write_schedule_week_daily(building, schedule):
     fh.write('  {},         !- CustomDay1 Schedule:Day Name\n'.format(schedule.custom_day1))
     fh.write('  {};         !- CustomDay2 Schedule:Day Name\n'.format(schedule.custom_day2))
     fh.write('\n')
+    fh.close()
+
+    # sks = [schedule.sunday, schedule.monday, schedule.tuesday, schedule.wednesday,
+    #        schedule.thursday, schedule.friday, schedule.saturday, schedule.hiliday,
+    #        schedule.summerd_design_day, schedule.winter_design_day,
+    #        schedule.custom_day1, schedule.custom_day2]
+    # return sks
+
+
+def write_schedule_year(building, schedule):
+    fh = open(building.idf_filepath, 'a')
+
+    fh.write('Schedule:Year,\n')
+    fh.write('  {},     !- Name\n'.format(schedule.name))
+    fh.write('  {},     !- Schedule Type Limits Name\n'.format(schedule.type_limits))
+    fh.write('  {},     !- Schedule:Week Name 1\n'.format(schedule.schedule_week_name1))
+    fh.write('  {},     !- Start Month 1\n'.format(schedule.start_month_1))
+    fh.write('  {},     !- Start Day 1\n'.format(schedule.start_day1))
+    fh.write('  {},     !- End Month 1\n'.format(schedule.end_month1))
+    fh.write('  {};     !- End Day 1\n'.format(schedule.end_day1))
+    fh.write('  \n')
+    fh.write('  \n')
     fh.close()
 
 
@@ -995,7 +969,7 @@ def write_thermostats(building):
         fh.write('  {},    !- Control 3 Name\n'.format(t.control3_object_name))
         fh.write('  {},    !- Control 4 Object Type\n'.format(t.control4_object_type))
         fh.write('  {},    !- Control 4 Name\n'.format(t.control4_object_name))
-        fh.write('  {},    !- Temperature Difference Between Cutout And Setpoint [deltaC]'.format(t.temperature_difference))
+        fh.write('  {};    !- Temperature Difference Between Cutout And Setpoint [deltaC]'.format(t.temperature_difference))
         fh.write('  \n')
 
     # fh = open(building.idf_filepath, 'a')
@@ -1167,6 +1141,7 @@ def write_hvac(building):
         fh.write('  \n')
         fh.write('  \n')
         fh.close()
+
 
 def write_output_items(building):
     """

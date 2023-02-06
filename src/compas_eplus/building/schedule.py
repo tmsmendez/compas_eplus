@@ -70,7 +70,7 @@ class Schedule(object):
             schedule.start_month_1 = data['start_month_1']
             schedule.start_day1 = data['start_day1']
             schedule.end_month1 = data['end_month1']
-            schedule.end_dat1 = data['end_dat1']
+            schedule.end_day1 = data['end_dat1']
 
         elif schedule.type == 'schedule_type_limits':
             schedule.lower_limit = data['lower_limit']

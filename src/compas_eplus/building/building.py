@@ -154,18 +154,20 @@ class Building(object):
         self.equipment_lists            = {}
         self.equipment_connections      = {}
 
-        self.set_schedules = {'occupancy': None,
-                              'lights': None,
-                              'equipment': None,
-                              'activity': None,
-                              'control': None,
-                              'heating': None,
-                              'cooling': None,
-                              'any_number': None,
-                              'fraction': None,
-                              'temperature': None,
-                              'control_type': None, 
-                             }
+        # self.set_schedules = {'occupancy': None,
+        #                       'lights': None,
+        #                       'equipment': None,
+        #                       'activity': None,
+        #                       'control': None,
+        #                       'heating': None,
+        #                       'cooling': None,
+        #                       'any_number': None,
+        #                       'fraction': None,
+        #                       'temperature': None,
+        #                       'control_type': None, 
+        #                      }
+        
+        self.set_schedules = set()
 
         self.construction_key_dict = {}
         self.srf_cpt_dict = {}
@@ -877,7 +879,6 @@ class Building(object):
         """
         self.equipment_connections[ek] = equipment_connection
 
-
     def add_shading(self, shading):
         """
         Adds a shading object to the building datastructure.
@@ -992,6 +993,53 @@ class Building(object):
         """
         shutil.rmtree(out_path)
 
+    def find_set_schedules(self):
+
+        sdict = {'occupancy': self.peoples,
+                 'lights': self.lights,
+                 'equipment': self.electric_equipments,
+                 'activity': self.peoples,
+                 'control': self.zone_control_thermostats,
+                 'heating': self.setpoints,
+                 'cooling': self.setpoints,
+                 'any_number': self.infiltrations,
+                }
+
+        for k in sdict:
+            o = sdict[k]
+            oks = o.keys()
+            if k == 'heating':
+                skeys = [o[ok].heating_setpoint for ok in oks]
+            elif k == 'cooling':
+                skeys = [o[ok].cooling_setpoint for ok in oks]
+            else:
+                skeys = [o[ok].schedule_name for ok in oks]
+            self.set_schedules.update(skeys)
+
+        year_schs =  set()
+        for sk in self.set_schedules:
+            schedule = self.schedules[sk]
+            stype = schedule.type
+            if stype == 'year':
+                year_schs.add(schedule.schedule_week_name1)
+
+        self.set_schedules.update(year_schs)
+        for sk in year_schs:
+            wks = []
+            wks.append(self.schedules[sk].sunday)
+            wks.append(self.schedules[sk].monday)           
+            wks.append(self.schedules[sk].tuesday)        
+            wks.append(self.schedules[sk].wednesday)        
+            wks.append(self.schedules[sk].thursday)         
+            wks.append(self.schedules[sk].friday)           
+            wks.append(self.schedules[sk].saturday)         
+            wks.append(self.schedules[sk].holiday)          
+            wks.append(self.schedules[sk].summer_design_day)
+            wks.append(self.schedules[sk].winter_design_day)
+            wks.append(self.schedules[sk].custom_day1)      
+            wks.append(self.schedules[sk].custom_day2)
+            self.set_schedules.update(wks)
+
 
 if __name__ == '__main__':
 
@@ -1009,12 +1057,11 @@ if __name__ == '__main__':
     # print(b.infiltrations)
     
 
-    #TODO: finish writing from objects, Ideal air loads
-    # Creat objects for HVAC equipment list, and HVAC equipment connections
-    # Write schedules, year > week > day
+    #TODO: continue adding year and week schedules to set schedules
+    #TODO: Write schedules, year > week > day
 
     b.write_idf()
-    # b.analyze(exe='/Applications/EnergyPlus/energyplus')
+    b.analyze(exe='/Applications/EnergyPlus/energyplus')
     # b.load_results()
 
     # v = BuildingViewer(b)
