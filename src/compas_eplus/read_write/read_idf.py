@@ -922,11 +922,11 @@ if __name__ == '__main__':
     data = get_idf_data(path)
     # print(data.keys())
 
-    object = 'zone_lists'
+    # object = 'zone_lists'
 
-    for k in data[object]:
-        # print(k)
-        # for j in data[object][k]:
-            # print(j)
-        print(data[object][k]['zones'])
-        print('')
+    # for k in data[object]:
+    #     # print(k)
+    #     # for j in data[object][k]:
+    #         # print(j)
+    #     print(data[object][k]['zones'])
+    #     print('')

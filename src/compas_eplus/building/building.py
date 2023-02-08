@@ -41,6 +41,7 @@ from compas_eplus.building.ideal_air_load import IdealAirLoad
 from compas_eplus.building.infiltration import Infiltration
 from compas_eplus.building.equipment import EquipmentList
 from compas_eplus.building.equipment import EquipmentConnection
+from compas_eplus.building.zone_lists import ZoneList
 
 # from compas_eplus.building.schedule import OfficeOccupancySchedule
 # from compas_eplus.building.schedule import OfficeLightsSchedule
@@ -69,18 +70,6 @@ from compas.utilities import geometric_key
 
 from compas.datastructures import Mesh
 
-
-# TODO: Add .ddy file info to the weather/location information written into the input file
-# TODO: Finish by program schedule writer
-# TODO: parametrize compact schedules in smarter function, read schedule data from library
-# TODO: Parametrize heating and cooling setpoints
-# TODO: Parametrize lights, equipment and activity schedules
-# TODO: Parametrize internal gains people per m2
-# TODO: look into ideal airloads values, need parametrizing?
-# TODO: Does Zone sizing needs to be added?
-
-# TODO: make results plotter, move functionality there
-# TODO: make results comparison plottter
 
 
 class Building(object):
@@ -153,6 +142,7 @@ class Building(object):
         self.infiltrations              = {}
         self.equipment_lists            = {}
         self.equipment_connections      = {}
+        self.zone_lists                 = {}
         
         self.set_schedules = set()
 
@@ -448,6 +438,12 @@ class Building(object):
         for ek in ec:
             e = EquipmentConnection.from_data(ec[ek])
             building.add_equipment_connection(e, ek)
+
+        zl = data['zone_lists']
+        for zlk in zl:
+            zl_ = ZoneList.from_data(zl[zlk])
+            building.add_zone_list(zl_, zlk)
+
 
         return building
 
@@ -856,7 +852,7 @@ class Building(object):
 
         Parameters
         ----------
-        infiltration: object
+        equipment_connection: object
             The equipment_connection object to be added
         
         Returns
@@ -865,6 +861,23 @@ class Building(object):
         
         """
         self.equipment_connections[ek] = equipment_connection
+
+    def add_zone_list(self, zone_list, zlk):
+        """
+        Adds an zone_list object to the building datastructure.
+
+        Parameters
+        ----------
+        zone_list: object
+            The zone_list object to be added
+        
+        Returns
+        -------
+        None
+        
+        """
+        self.zone_lists[zlk] = zone_list
+
 
     def add_shading(self, shading):
         """
@@ -1057,7 +1070,6 @@ if __name__ == '__main__':
     # print(b.infiltrations)
     
 
-    #TODO: Zone list is currewntly hard coded
     #TODO: Ideal air loads, design specification not using object for now, hard coded
     #TODO: None list is hard coded for now
 
@@ -1065,11 +1077,11 @@ if __name__ == '__main__':
     ####### Write all schedules and see what happens
 
     b.write_idf()
-    b.analyze(exe='/Applications/EnergyPlus/energyplus')
-    b.load_results()
-    print('here')
-    v = BuildingViewer(b)
-    v.show()
+    # b.analyze(exe='/Applications/EnergyPlus/energyplus')
+    # b.load_results()
+    # print('here')
+    # v = BuildingViewer(b)
+    # v.show()
 
-    v = ResultsViewer(b)
-    v.show('total')
+    # v = ResultsViewer(b)
+    # v.show('total')

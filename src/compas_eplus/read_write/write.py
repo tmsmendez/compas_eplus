@@ -69,12 +69,6 @@ def write_pre(building):
 
     ## HARD CODED STUFF TO DELETE LATER
 
-    fh.write('ZoneList,\n')
-    fh.write('  2019::MidriseApartment::Apartment,      !- Name\n')
-    fh.write('  1_residential_4c5ac20f,                 !- Zone Name 1\n')
-    fh.write('  2_residential_aa024cf2;                 !- Zone Name 2\n')
-    fh.write('\n')
-
     fh.write('NodeList,\n')
     fh.write('  1_residential_4c5ac20f Inlet Node List, !- Name\n')
     fh.write('  Node 4;                                 !- Node Name 1\n')
@@ -208,10 +202,11 @@ def write_zones(building):
         zone = building.zones[zkey]
         write_zone(building, zone)
         write_zone_surfaces(building, zone)
-    write_zone_list(building)
+    write_all_zone_list(building)
+    write_zone_lists(building)
 
 
-def write_zone_list(building):
+def write_all_zone_list(building):
     fh = open(building.idf_filepath, 'a')
     fh.write('ZoneList,\n')
     fh.write('  all_zones_list, !- Name\n')
@@ -225,6 +220,24 @@ def write_zone_list(building):
     fh.write('\n')
     fh.write('\n')
     fh.close()
+
+
+def write_zone_lists(building):
+    fh = open(building.idf_filepath, 'a')
+
+    for zlk in building.zone_lists:
+        zl = building.zone_lists[zlk]
+        zones = building.zone_lists[zlk].zones
+        fh.write('ZoneList,\n')
+        fh.write('  {},     !- Name\n'.format(zl.name))
+        for i, zk in enumerate(zones):
+            if i == len(zones) - 1:
+                sep = ';'
+            else:
+                sep = ','
+            fh.write('  {}{}        !- Zone Name {}\n'.format(zones[zk], sep, i + 1))
+        fh.write('\n')
+        fh.close()
 
 
 def write_zone(building, zone):
