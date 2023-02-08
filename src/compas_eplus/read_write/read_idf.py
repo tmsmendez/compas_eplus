@@ -30,6 +30,7 @@ def get_idf_data(filepath):
     find_infiltration(filepath, data)
     find_equipment_list(filepath, data)
     find_equipment_connections(filepath, data)
+    find_zone_lists(filepath, data)
 
     find_schedule_compact(filepath, data)
     find_schedule_type_limits(filepath, data)
@@ -873,22 +874,59 @@ def find_equipment_connections(filepath, data):
                                                }
 
 
+def find_zone_lists(filepath, data):
+    fh = open(filepath, 'r')
+    lines = fh.readlines()
+    fh.close()
+
+    i_lines = []
+    for i, line in enumerate(lines):
+        line = line.split(',')
+        if line[0].lower() == 'zonelist':
+            i_lines.append(i)
+    
+    data['zone_lists'] = {}
+
+    for i in i_lines:
+        name = lines[i + 1].split(',')[0].strip()
+        zones = {}
+        for j in range(100):
+            zone = lines[i + 2 + j]
+            if ';' in zone: 
+                zone = zone.split(';')[0].strip()
+                zones[str(j)] = zone
+                break
+            else:
+                zone = zone.split(',')[0].strip()
+                zones[str(j)] = zone
+        data['zone_lists'][name] = {'name': name,
+                                    'zones': zones,
+                                    }
+
+# ZoneList,
+#   2019::MidriseApartment::Apartment,      !- Name
+#   1_residential_4c5ac20f,                 !- Zone Name 1
+#   2_residential_aa024cf2;                 !- Zone Name 2
+
+
+
 if __name__ == '__main__':
     import os
     import compas_eplus
 
     for i in range(50): print('')
 
-    file = 'teresa_example.idf'
+    file = 'teresa_example_apt.idf'
     path = os.path.join(compas_eplus.DATA, 'idf_examples', file)
 
     data = get_idf_data(path)
     # print(data.keys())
 
-    object = 'equipment_connections'
+    object = 'zone_lists'
 
     for k in data[object]:
-        print(k)
-        for j in data[object][k]:
-            print(j)
+        # print(k)
+        # for j in data[object][k]:
+            # print(j)
+        print(data[object][k]['zones'])
         print('')
