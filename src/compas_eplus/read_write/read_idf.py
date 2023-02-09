@@ -31,6 +31,7 @@ def get_idf_data(filepath):
     find_equipment_list(filepath, data)
     find_equipment_connections(filepath, data)
     find_zone_lists(filepath, data)
+    find_node_lists(filepath, data)
 
     find_schedule_compact(filepath, data)
     find_schedule_type_limits(filepath, data)
@@ -900,14 +901,35 @@ def find_zone_lists(filepath, data):
                 zone = zone.split(',')[0].strip()
                 zones[str(j)] = zone
         data['zone_lists'][name] = {'name': name,
-                                    'zones': zones,
-                                    }
+                                    'zones': zones,}
 
-# ZoneList,
-#   2019::MidriseApartment::Apartment,      !- Name
-#   1_residential_4c5ac20f,                 !- Zone Name 1
-#   2_residential_aa024cf2;                 !- Zone Name 2
+def find_node_lists(filepath, data):
+    fh = open(filepath, 'r')
+    lines = fh.readlines()
+    fh.close()
 
+    i_lines = []
+    for i, line in enumerate(lines):
+        line = line.split(',')
+        if line[0].lower() == 'nodelist':
+            i_lines.append(i)
+    
+    data['node_lists'] = {}
+
+    for i in i_lines:
+        name = lines[i + 1].split(',')[0].strip()
+        nodes = {}
+        for j in range(100):
+            node = lines[i + 2 + j]
+            if ';' in node: 
+                node = node.split(';')[0].strip()
+                nodes[str(j)] = node
+                break
+            else:
+                node = node.split(',')[0].strip()
+                nodes[str(j)] = node
+        data['node_lists'][name] = {'name': name,
+                                    'nodes': nodes,}
 
 
 if __name__ == '__main__':
@@ -922,11 +944,11 @@ if __name__ == '__main__':
     data = get_idf_data(path)
     # print(data.keys())
 
-    # object = 'zone_lists'
+    object = 'node_lists'
 
-    # for k in data[object]:
-    #     # print(k)
-    #     # for j in data[object][k]:
-    #         # print(j)
-    #     print(data[object][k]['zones'])
-    #     print('')
+    for k in data[object]:
+        print(k)
+        for j in data[object][k]:
+            print(j)
+        print(data[object][k]['nodes'])
+        print('')

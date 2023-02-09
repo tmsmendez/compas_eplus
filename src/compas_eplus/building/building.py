@@ -41,7 +41,8 @@ from compas_eplus.building.ideal_air_load import IdealAirLoad
 from compas_eplus.building.infiltration import Infiltration
 from compas_eplus.building.equipment import EquipmentList
 from compas_eplus.building.equipment import EquipmentConnection
-from compas_eplus.building.zone_lists import ZoneList
+from compas_eplus.building.zone_list import ZoneList
+from compas_eplus.building.node_list import NodeList
 
 # from compas_eplus.building.schedule import OfficeOccupancySchedule
 # from compas_eplus.building.schedule import OfficeLightsSchedule
@@ -143,6 +144,7 @@ class Building(object):
         self.equipment_lists            = {}
         self.equipment_connections      = {}
         self.zone_lists                 = {}
+        self.node_lists                 = {}
         
         self.set_schedules = set()
 
@@ -150,13 +152,6 @@ class Building(object):
         self.srf_cpt_dict = {}
         self.material_key_dict = {}
 
-        ### these are not yet in json file - - - 
-        # self.results = {}
-        # self.people_area = {'office': .056, 'small_office': .056, 'mid_office': .056, 'mid_apartment': .028}
-        # self.lights_area = {'office': 6.57, 'small_office': 6.57, 'mid_office': 6.57, 'mid_apartment': 6.46}
-        # self.lights_fraction = {'office': .7, 'mid_apartment': .6}
-        # self.equipment_area = {'office': 10.333, 'mid_apartment': 6.67}
-        # self.infiltration_rate = .0003 # [m3/s]
 
     @property
     def data(self):
@@ -443,6 +438,11 @@ class Building(object):
         for zlk in zl:
             zl_ = ZoneList.from_data(zl[zlk])
             building.add_zone_list(zl_, zlk)
+
+        nl = data['node_lists']
+        for nlk in nl:
+            nl_ = NodeList.from_data(nl[nlk])
+            building.add_node_list(nl_, nlk)
 
 
         return building
@@ -864,7 +864,7 @@ class Building(object):
 
     def add_zone_list(self, zone_list, zlk):
         """
-        Adds an zone_list object to the building datastructure.
+        Adds a zone_list object to the building datastructure.
 
         Parameters
         ----------
@@ -878,6 +878,21 @@ class Building(object):
         """
         self.zone_lists[zlk] = zone_list
 
+    def add_node_list(self, node_list, nlk):
+        """
+        Adds an node_list object to the building datastructure.
+
+        Parameters
+        ----------
+        zone_list: object
+            The node_list object to be added
+        
+        Returns
+        -------
+        None
+        
+        """
+        self.node_lists[nlk] = node_list
 
     def add_shading(self, shading):
         """
@@ -1066,22 +1081,19 @@ if __name__ == '__main__':
     path = compas_eplus.TEMP
     wea = compas_eplus.SEATTLE
     b = Building.from_idf(filepath, path, wea)
-
-    # print(b.infiltrations)
     
 
     #TODO: Ideal air loads, design specification not using object for now, hard coded
-    #TODO: None list is hard coded for now
+    
+    #TODO: Decide to write all schedules or just needed ones. (I vote all for now)
+    #TODO: update to/from JSON eventually, or give a OBJ pickle option
 
-    ###### Some schedule day intervals are missing, are they needed?
-    ####### Write all schedules and see what happens
 
     b.write_idf()
-    # b.analyze(exe='/Applications/EnergyPlus/energyplus')
-    # b.load_results()
-    # print('here')
+    b.analyze(exe='/Applications/EnergyPlus/energyplus')
+    b.load_results()
     # v = BuildingViewer(b)
     # v.show()
 
-    # v = ResultsViewer(b)
-    # v.show('total')
+    v = ResultsViewer(b)
+    v.show('total')

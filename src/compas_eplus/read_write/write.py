@@ -42,6 +42,7 @@ def write_idf_from_building(building):
     write_infiltration_rates(building)
     write_thermostats(building)
     write_hvac(building)
+    write_node_lists(building)
 
     write_output_items(building)
 
@@ -68,32 +69,6 @@ def write_pre(building):
     fh.write('\n')
 
     ## HARD CODED STUFF TO DELETE LATER
-
-    fh.write('NodeList,\n')
-    fh.write('  1_residential_4c5ac20f Inlet Node List, !- Name\n')
-    fh.write('  Node 4;                                 !- Node Name 1\n')
-    fh.write('\n')
-    fh.write('NodeList,\n')
-    fh.write('  1_residential_4c5ac20f Exhaust Node List, !- Name\n')
-    fh.write('  Node 3;   \n')
-    fh.write('\n')
-    fh.write('NodeList,\n')
-    fh.write('  tomas2, !- Name\n')
-    fh.write('  Node 2;   \n')
-    fh.write('\n')
-    fh.write('NodeList,\n')
-    fh.write('  tomas1, !- Name\n')
-    fh.write('  Node 1;   \n')
-    fh.write('\n')
-    fh.write('NodeList,\n')
-    fh.write('  2_residential_aa024cf2 Inlet Node List, !- Name\n')
-    fh.write('  Node 6;                                 !- Node Name 1\n')
-    fh.write('\n')
-    fh.write('NodeList,\n')
-    fh.write('  2_residential_aa024cf2 Exhaust Node List, !- Name\n')
-    fh.write('  Node 5;                                 !- Node Name 1\n')
-    fh.write('\n')
-
 
     # fh.write('DesignSpecification:OutdoorAir,\n')
     # fh.write('2019::MidriseApartment::Apartment_Ventilation, !- Name\n')
@@ -1206,6 +1181,24 @@ def write_hvac(building):
         fh.write('  \n')
         fh.write('  \n')
         fh.close()
+
+
+def write_node_lists(building):
+    fh = open(building.idf_filepath, 'a')
+
+    for nlk in building.node_lists:
+        nl = building.node_lists[nlk]
+        nodes = building.node_lists[nlk].nodes
+        fh.write('NodeList,\n')
+        fh.write('  {},     !- Name\n'.format(nl.name))
+        for i, nk in enumerate(nodes):
+            if i == len(nodes) - 1:
+                sep = ';'
+            else:
+                sep = ','
+            fh.write('  {}{}        !- Node Name {}\n'.format(nodes[nk], sep, i + 1))
+        fh.write('\n')
+    fh.close()
 
 
 def write_output_items(building):
