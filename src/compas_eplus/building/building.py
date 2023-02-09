@@ -43,14 +43,7 @@ from compas_eplus.building.equipment import EquipmentList
 from compas_eplus.building.equipment import EquipmentConnection
 from compas_eplus.building.zone_list import ZoneList
 from compas_eplus.building.node_list import NodeList
-
-# from compas_eplus.building.schedule import OfficeOccupancySchedule
-# from compas_eplus.building.schedule import OfficeLightsSchedule
-# from compas_eplus.building.schedule import OfficeEquipmentSchedule
-# from compas_eplus.building.schedule import OfficeActivitySchedule
-# from compas_eplus.building.schedule import OfficeControlTypeSchedule
-# from compas_eplus.building.schedule import OfficeHeatingSchedule
-# from compas_eplus.building.schedule import OfficeCoolingSchedule
+from compas_eplus.building.outdoor_air import OutdoorAir
 
 from compas_eplus.read_write import write_idf_from_building
 from compas_eplus.read_write import read_results_file
@@ -145,6 +138,7 @@ class Building(object):
         self.equipment_connections      = {}
         self.zone_lists                 = {}
         self.node_lists                 = {}
+        self.outdoor_airs               = {}
         
         self.set_schedules = set()
 
@@ -443,6 +437,11 @@ class Building(object):
         for nlk in nl:
             nl_ = NodeList.from_data(nl[nlk])
             building.add_node_list(nl_, nlk)
+
+        oa = data['outdoor_air']
+        for oak in oa:
+            oa = OutdoorAir.from_data(oa[oak])
+            building.add_outdoor_air(oa, oak)
 
 
         return building
@@ -894,6 +893,22 @@ class Building(object):
         """
         self.node_lists[nlk] = node_list
 
+    def add_outdoor_air(self, outdoor_air, nlk):
+        """
+        Adds an outdoor_air object to the building datastructure.
+
+        Parameters
+        ----------
+        zone_list: object
+            The outdoor_air object to be added
+        
+        Returns
+        -------
+        None
+        
+        """
+        self.outdoor_airs[nlk] = outdoor_air
+
     def add_shading(self, shading):
         """
         Adds a shading object to the building datastructure.
@@ -1081,9 +1096,6 @@ if __name__ == '__main__':
     path = compas_eplus.TEMP
     wea = compas_eplus.SEATTLE
     b = Building.from_idf(filepath, path, wea)
-    
-
-    #TODO: Ideal air loads, design specification not using object for now, hard coded
     
     #TODO: Decide to write all schedules or just needed ones. (I vote all for now)
     #TODO: update to/from JSON eventually, or give a OBJ pickle option

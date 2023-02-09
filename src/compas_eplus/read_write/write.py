@@ -43,6 +43,7 @@ def write_idf_from_building(building):
     write_thermostats(building)
     write_hvac(building)
     write_node_lists(building)
+    write_outdoor_airs(building)
 
     write_output_items(building)
 
@@ -67,18 +68,6 @@ def write_pre(building):
     fh.write('Timestep,\n')
     fh.write('  {};\t\t\t\t\t!- Number of Timesteps per Hour\n'.format(building.num_timesteps))  
     fh.write('\n')
-
-    ## HARD CODED STUFF TO DELETE LATER
-
-    # fh.write('DesignSpecification:OutdoorAir,\n')
-    # fh.write('2019::MidriseApartment::Apartment_Ventilation, !- Name\n')
-    # fh.write('Sum,                                    !- Outdoor Air Method\n')
-    # fh.write('0,                                      !- Outdoor Air Flow per Person {m3/s-person}\n')
-    # fh.write('0,                                      !- Outdoor Air Flow per Zone Floor Area {m3/s-m2}\n')
-    # fh.write('0,                                      !- Outdoor Air Flow per Zone {m3/s}\n')
-    # fh.write('0.35;                                   !- Outdoor Air Flow Air Changes per Hour {1/hr}\n')
-    # fh.write('\n')
-
     fh.close()
 
 
@@ -777,12 +766,6 @@ def write_schedule_week_daily(building, schedule):
     fh.write('\n')
     fh.close()
 
-    # sks = [schedule.sunday, schedule.monday, schedule.tuesday, schedule.wednesday,
-    #        schedule.thursday, schedule.friday, schedule.saturday, schedule.hiliday,
-    #        schedule.summerd_design_day, schedule.winter_design_day,
-    #        schedule.custom_day1, schedule.custom_day2]
-    # return sks
-
 
 def write_schedule_year(building, schedule):
     fh = open(building.idf_filepath, 'a')
@@ -896,51 +879,6 @@ def write_internal_gains(building):
         fh.close()
 
 
-    # fh = open(building.idf_filepath, 'a')
-    # fh.write('People,\n')
-    # fh.write('  All zones People,        !- Name\n')
-    # fh.write('  all_zones_list,          !- Zone or ZoneList Name\n')
-    # fh.write('  {}_occupancy,            !- Number of People Schedule Name\n'.format(building.name))
-    # fh.write('  people/area,             !- Number of People Calculation Method\n')
-    # fh.write('  ,                        !- Number of People\n')
-    # fh.write('  {},                      !- People per Zone Floor Area [person/m2]\n'.format(ppl_area))
-    # fh.write('  ,                        !- Zone Floor Area per Person [m2/person]\n')
-    # fh.write('  0.3,                     !- Fraction Radiant\n')
-    # fh.write('  ,                        !- Sensible Heat Fraction\n')
-    # fh.write('  {}_activity;             !- Activity Level Schedule Name\n'.format(building.name))
-    # fh.write('  \n')
-
-    # fh.write('Lights,\n')
-    # fh.write('  All zones Lights,        !- Name\n')
-    # fh.write('  all_zones_list,          !- Zone or ZoneList Name\n')
-    # fh.write('  {}_lights,                !- Schedule Name\n'.format(building.name))
-    # fh.write('  Watts/Area,              !- Design Level Calculation Method\n')
-    # fh.write('  ,                        !- Lighting Level [W]\n')
-    # fh.write('  {},                      !- Watts per Zone Floor Area [W/m2]\n'.format(lgt_area))
-    # fh.write('  ,                        !- Watts per Person [W/person]\n')
-    # fh.write('  0,                       !- Return Air Fraction\n')
-    # fh.write('  {},                    !- Fraction Radiant\n'.format(lgt_frac))
-    # fh.write('  0.2,                     !- Fraction Visible\n')
-    # fh.write('  0,                       !- Fraction Replaceable\n')
-    # fh.write('  GeneralLights;           !- End-Use Subcategory\n')
-    # fh.write('  \n')
-
-    # fh.write('ElectricEquipment,\n')
-    # fh.write('  All zones ElecEq,        !- Name\n')
-    # fh.write('  all_zones_list,          !- Zone or ZoneList Name\n')
-    # fh.write('  {}_equipment,                 !- Schedule Name\n'.format(building.name))
-    # fh.write('  Watts/Area,              !- Design Level Calculation Method\n')
-    # fh.write('  ,                        !- Design Level [W]\n')
-    # fh.write('  {},                       !- Watts per Zone Floor Area [W/m2]\n'.format(eqp_area))
-    # fh.write('  ,                        !- Watts per Person {W/person}\n')
-    # fh.write('  0,                       !- Fraction Latent\n')
-    # fh.write('  0.5,                     !- Fraction Radiant\n')
-    # fh.write('  0;                       !- Fraction Lost\n')
-    # fh.write('  \n')
-    # fh.write('  \n')
-    # fh.close()
-
-
 def write_infiltration_rates(building):
     for ik in building.infiltrations:
         i = building.infiltrations[ik]
@@ -964,26 +902,6 @@ def write_infiltration_rates(building):
         fh.close()
 
 
-
-    # fh = open(building.idf_filepath, 'a')
-    # fh.write('  ZoneInfiltration:DesignFlowRate,\n')
-    # fh.write('    All zones Infil 1,       !- Name\n')
-    # fh.write('    all_zones_list,          !- Zone or ZoneList Name\n')
-    # fh.write('    Always On,               !- Schedule Name\n')
-    # fh.write('    flow/exteriorwallarea,   !- Design Flow Rate Calculation Method\n')
-    # fh.write('    ,                        !- Design Flow Rate [m3/s]\n')
-    # fh.write('    ,                        !- Flow per Zone Floor Area [m3/s-m2]\n')
-    # fh.write('    {},                      !- Flow per Exterior Surface Area [m3/s-m2]\n'.format(building.infiltration_rate))
-    # fh.write('    ,                        !- Air Changes per Hour [1/hr]\n')
-    # fh.write('    0,                       !- Constant Term Coefficient\n')
-    # fh.write('    0,                       !- Temperature Term Coefficient\n')
-    # fh.write('    0,                       !- Velocity Term Coefficient\n')
-    # fh.write('    0;                       !- Velocity Squared Term Coefficient\n')
-    # fh.write('  \n')
-    # fh.write('  \n')
-    # fh.close()
-
-
 def write_thermostats(building):
 
     for tk in building.zone_control_thermostats:
@@ -1005,33 +923,6 @@ def write_thermostats(building):
         fh.write('  {};    !- Temperature Difference Between Cutout And Setpoint [deltaC]'.format(t.temperature_difference))
         fh.write('  \n')
 
-    # fh = open(building.idf_filepath, 'a')
-    # fh.write('ZoneControl:Thermostat,\n')
-    # fh.write('  All zones Control,                  !- Name\n')
-    # fh.write('  all_zones_list,                     !- Zone or ZoneList Name\n')
-    # fh.write('  {}_control_type,            !- Control Type Schedule Name\n'.format(building.name))
-    # # fh.write('  ThermostatSetpoint:SingleCooling,   !- Control 1 Object Type\n')
-    # # fh.write('  CoolingSetPoint,                    !- Control 1 Name\n')
-    # # fh.write('  ThermostatSetpoint:SingleHeating,   !- Control 2 Object Type\n')
-    # # fh.write('  HeatingSetpoint,                    !- Control 2 Name\n')
-    # fh.write('  ThermostatSetpoint:DualSetpoint,    !- Control 3 Object Type\n')
-    # fh.write('  DualSetPoint;                       !- Control 3 Name\n')
-    # fh.write('  \n')
-    
-    # fh.write('ThermostatSetpoint:SingleHeating,\n')
-    # fh.write('  HeatingSetpoint,         !- Name\n')
-    # fh.write('  Htg-SetP-Sch;            !- Setpoint Temperature Schedule Name\n')
-    # fh.write('  \n')
-
-    # fh.write('ThermostatSetpoint:SingleCooling,\n')
-    # fh.write('  CoolingSetpoint,         !- Name\n')
-    # fh.write('  Clg-SetP-Sch;            !- Setpoint Temperature Schedule Name\n')
-    # fh.write('  \n')
-
-    # fh.write('ThermostatSetpoint:DualSetpoint,\n')
-    # fh.write('  DualSetPoint,            !- Name\n')
-    # fh.write('  Htg-SetP-Sch,            !- Heating Setpoint Temperature Schedule Name\n')
-    # fh.write('  Clg-SetP-Sch;            !- Cooling Setpoint Temperature Schedule Name\n')
     
     for sk in building.setpoints:
         s = building.setpoints[sk]
@@ -1046,69 +937,6 @@ def write_thermostats(building):
 
 
 def write_hvac(building):
-
-    # for zkey in building.zones:
-    #     zone = building.zones[zkey]
-    #     zname = zone.name
-
-    #     fh = open(building.idf_filepath, 'a')
-
-    #     fh.write('! Zone {} Idal air load system - - - - - - -\n'.format(zname))
-    #     fh.write('!--------------------------------------------\n')
-    #     fh.write('  \n')
-
-    #     fh.write('ZoneHVAC:IdealLoadsAirSystem,\n')
-    #     fh.write('  {} Ideal Loads System,              !- Name\n'.format(zname))
-    #     fh.write('  Always On,                           !- Availability Schedule Name\n')
-    #     fh.write('  {} Ideal Loads Supply Node,         !- Zone Supply Air Node Name \n'.format(zname))
-    #     fh.write('  {} Ideal Loads Exhaust Node,         !- Zone Exhaust Air Node Name\n'.format(zname))
-    #     fh.write('  ,                                   !- System Inlet Air Node Name\n')
-    #     fh.write('  50,                                 !- Maximum Heating Supply Air Temperature [C]\n')
-    #     fh.write('  13,                                 !- Minimum Cooling Supply Air Temperature [C]\n')
-    #     fh.write('  0.0156,                             !- Maximum Heating Supply Air Humidity Ratio [kgWater/kgDryAir]\n')
-    #     fh.write('  0.0077,                             !- Minimum Cooling Supply Air Humidity Ratio [kgWater/kgDryAir]\n')
-    #     fh.write('  NoLimit,                            !- Heating Limit\n')
-    #     fh.write('  ,                                   !- Maximum Heating Air Flow Rate [m3/s]\n')
-    #     fh.write('  ,                                   !- Maximum Sensible Heating Capacity [W]\n')
-    #     fh.write('  NoLimit,                            !- Cooling Limit\n')
-    #     fh.write('  ,                                   !- Maximum Cooling Air Flow Rate [m3/s]\n')
-    #     fh.write('  ,                                   !- Maximum Total Cooling Capacity [W]\n')
-    #     fh.write('  ,                                   !- Heating Availability Schedule Name\n')
-    #     fh.write('  ,                                   !- Cooling Availability Schedule Name\n')
-    #     fh.write('  None,                               !- Dehumidification Control Type\n')
-    #     fh.write('  0.7,                                !- Cooling Sensible Heat Ratio\n')
-    #     fh.write('  None,                               !- Humidification Control Type\n')
-    #     fh.write('  ,                                   !- Design Specification Outdoor Air Object Name\n')
-    #     # fh.write('  {} Ideal Loads OA Inlet Node,       !- Outdoor Air Inlet Node Name\n'.format(zname))
-    #     fh.write('  ,                                   !- Outdoor Air Inlet Node Name\n'.format(zname))
-    #     fh.write('  None,                               !- Demand Controlled Ventilation Type\n')
-    #     fh.write('  NoEconomizer,                       !- Outdoor Air Economizer Type\n')
-    #     fh.write('  None,                               !- Heat Recovery Type\n')
-    #     fh.write('  0.70,                               !- Sensible Heat Recovery Effectiveness\n')
-    #     fh.write('  0.65;                               !- Latent Heat Recovery Effectiveness\n')
-    #     fh.write('  \n')
-
-    #     fh.write('ZoneHVAC:EquipmentList,\n')
-    #     fh.write('  {}Equipment,                    !- Name\n'.format(zname))
-    #     fh.write('  SequentialLoad,                 !- Load Distribution Scheme\n')
-    #     fh.write('  ZoneHVAC:IdealLoadsAirSystem,   !- Zone Equipment 1 Object Type\n')
-    #     fh.write('  {} Ideal Loads System,          !- Zone Equipment 1 Name\n'.format(zname))
-    #     fh.write('  1,                              !- Zone Equipment 1 Cooling Sequence\n')
-    #     fh.write('  1,                              !- Zone Equipment 1 Heating or No-Load Sequence\n')
-    #     fh.write('  ,                               !- Zone Equipment 1 Sequential Cooling Fraction Schedule Name\n')
-    #     fh.write('  ;                               !- Zone Equipment 1 Sequential Heating Fraction Schedule Name\n')
-    #     fh.write('  \n')
-
-    #     fh.write('ZoneHVAC:EquipmentConnections,\n')
-    #     fh.write('  {},                             !- Zone Name\n'.format(zname))
-    #     fh.write('  {}Equipment,                    !- List Name: Zone Equipment\n'.format(zname))
-    #     fh.write('  {} Ideal Loads Supply Node,     !- List Name: Zone Air Inlet Nodes\n'.format(zname))
-    #     fh.write('  {} Ideal Loads Exhaust Node,    !- List Name: Zone Air Exhaust Nodes\n'.format(zname))
-    #     fh.write('  {}AirNode                       !- Zone Air Node Name\n'.format(zname))
-    #     fh.write('  {} Ideal Loads Return Node;     !- Zone Return Air Node or NodeList Name\n'.format(zname))
-    #     fh.write('  \n')
-    #     fh.write('  \n')
-    #     fh.close()
 
     for ik in building.ideal_air_loads:
         i = building.ideal_air_loads[ik]
@@ -1128,7 +956,7 @@ def write_hvac(building):
         fh.write('  {},     !- Maximum Heating Air Flow Rate [m3/s]\n'.format(i.max_heating_air_flow_rate))
         fh.write('  ,       !- Maximum Sensible Heating Capacity [W]\n')
         # fh.write('  {},     !- Maximum Sensible Heating Capacity [W]\n'.format(i.max_sensible_heating_capacity))
-        fh.write('  NoLimit,     !- Cooling Limit\n')
+        fh.write('  LimitFlowRate,     !- Cooling Limit\n')
         # fh.write('  {},     !- Cooling Limit\n'.format(i.cooling_limit))
         fh.write('  ,       !- Maximum Cooling Air Flow Rate [m3/s]\n')
         fh.write('  ,       !- Maximum Total Cooling Capacity [W]\n')
@@ -1139,14 +967,18 @@ def write_hvac(building):
         fh.write('  {},     !- Dehumidification Control Type\n'.format(i.dehimidification_control_type))
         fh.write('  {},     !- Cooling Sensible Heat Ratio\n'.format(i.cooling_sensible_heat_ratio))
         fh.write('  {},     !- Humidification Control Type\n'.format(i.humidification_control_type))
-        fh.write('  ,     !- Design Specification Outdoor Air Object Name\n')
-        # fh.write('  {},     !- Design Specification Outdoor Air Object Name\n'.format(i.desing_specification_outdoor_air_name))
+        # fh.write('  ,     !- Design Specification Outdoor Air Object Name\n')
+        fh.write('  {},     !- Design Specification Outdoor Air Object Name\n'.format(i.desing_specification_outdoor_air_name))
         fh.write('  {},     !- Outdoor Air Inlet Node Name\n'.format(i.outdoor_inlet_node_name))
         fh.write('  {},     !- Demand Controlled Ventilation Type\n'.format(i.demand_controlled_ventilation_type))
-        fh.write('  {},     !- Outdoor Air Economizer Type\n'.format(i.outdoor_air_economizer_type))
-        fh.write('  {},     !- Heat Recovery Type\n'.format(i.heat_recovery_type))
-        fh.write('  {},     !- Sensible Heat Recovery Effectiveness\n'.format(i.sensible_heat_recovery_effectiveness))
-        fh.write('  {};     !- Latent Heat Recovery Effectiveness\n'.format(i.latent_heat_revovery_effectiveness))
+        fh.write('  NoEconomizer,     !- Outdoor Air Economizer Type\n'.format(i.outdoor_air_economizer_type))
+        # fh.write('  {},     !- Outdoor Air Economizer Type\n'.format(i.outdoor_air_economizer_type))
+        fh.write('  Enthalpy,     !- Heat Recovery Type\n'.format(i.heat_recovery_type))
+        # fh.write('  {},     !- Heat Recovery Type\n'.format(i.heat_recovery_type))
+        fh.write('  0.7,     !- Sensible Heat Recovery Effectiveness\n'.format(i.sensible_heat_recovery_effectiveness))
+        # fh.write('  {},     !- Sensible Heat Recovery Effectiveness\n'.format(i.sensible_heat_recovery_effectiveness))
+        fh.write('  0.7;     !- Latent Heat Recovery Effectiveness\n'.format(i.latent_heat_revovery_effectiveness))
+        # fh.write('  {};     !- Latent Heat Recovery Effectiveness\n'.format(i.latent_heat_revovery_effectiveness))
         fh.write('  \n')
         fh.write('  \n')
         fh.close()
@@ -1197,6 +1029,21 @@ def write_node_lists(building):
             else:
                 sep = ','
             fh.write('  {}{}        !- Node Name {}\n'.format(nodes[nk], sep, i + 1))
+        fh.write('\n')
+    fh.close()
+
+
+def write_outdoor_airs(building):
+    fh = open(building.idf_filepath, 'a')
+    for oak in building.outdoor_airs:
+        oa = building.outdoor_airs[oak]
+        fh.write('DesignSpecification:OutdoorAir,\n')
+        fh.write('  {},       !- Name\n'.format(oa.name))
+        fh.write('  {},       !- Outdoor Air Method\n'.format(oa.outdoor_air_method))
+        fh.write('  {},       !- Outdoor Air Flow per Person [m3/s-person]\n'.format(oa.outdoor_air_flow_per_person))
+        fh.write('  {},       !- Outdoor Air Flow per Zone Floor Area [m3/s-m2]\n'.format(oa.outdoor_air_flow_zone_area))
+        fh.write('  {},       !- Outdoor Air Flow per Zone [m3/s]\n'.format(oa.outdoor_air_zone))
+        fh.write('  {};       !- Outdoor Air Flow Air Changes per Hour [1/hr]\n'.format(oa.outdoor_air_flow_air_changes_per_hour))
         fh.write('\n')
     fh.close()
 

@@ -32,6 +32,7 @@ def get_idf_data(filepath):
     find_equipment_connections(filepath, data)
     find_zone_lists(filepath, data)
     find_node_lists(filepath, data)
+    find_outdoor_air(filepath, data)
 
     find_schedule_compact(filepath, data)
     find_schedule_type_limits(filepath, data)
@@ -903,6 +904,7 @@ def find_zone_lists(filepath, data):
         data['zone_lists'][name] = {'name': name,
                                     'zones': zones,}
 
+
 def find_node_lists(filepath, data):
     fh = open(filepath, 'r')
     lines = fh.readlines()
@@ -932,6 +934,45 @@ def find_node_lists(filepath, data):
                                     'nodes': nodes,}
 
 
+def find_outdoor_air(filepath, data):
+    fh = open(filepath, 'r')
+    lines = fh.readlines()
+    fh.close()
+
+    i_lines = []
+    for i, line in enumerate(lines):
+        line = line.split(',')
+        if line[0].lower() == 'designspecification:outdoorair':
+            i_lines.append(i)
+    
+    data['outdoor_air'] = {}
+
+    for i in i_lines:
+        name = lines[i + 1].split(',')[0].strip()
+        oamt = lines[i + 2].split(',')[0].strip()
+        oafp = lines[i + 3].split(',')[0].strip()
+        oaza = lines[i + 4].split(',')[0].strip()
+        oapz = lines[i + 5].split(',')[0].strip()
+        pach = lines[i + 6].split(';')[0].strip()
+
+        data['outdoor_air'][name] = {'name': name,
+                                     'outdoor_air_method': oamt,
+                                     'outdoor_air_flow_per_person': oafp,
+                                     'outdoor_air_flow_zone_area': oaza,
+                                     'outdoor_air_zone': oapz,
+                                     'outdoor_air_flow_air_changes_per_hour': pach,
+                                    }
+
+    # DesignSpecification:OutdoorAir,
+    #   2019::MidriseApartment::Apartment_Ventilation, !- Name
+    #   Sum,                                    !- Outdoor Air Method
+    #   0,                                      !- Outdoor Air Flow per Person {m3/s-person}
+    #   0,                                      !- Outdoor Air Flow per Zone Floor Area {m3/s-m2}
+    #   0,                                      !- Outdoor Air Flow per Zone {m3/s}
+    #   0.35;                                   !- Outdoor Air Flow Air Changes per Hour {1/hr}
+
+
+
 if __name__ == '__main__':
     import os
     import compas_eplus
@@ -944,11 +985,10 @@ if __name__ == '__main__':
     data = get_idf_data(path)
     # print(data.keys())
 
-    object = 'node_lists'
+    object = 'outdoor_air'
 
     for k in data[object]:
         print(k)
         for j in data[object][k]:
             print(j)
-        print(data[object][k]['nodes'])
         print('')
