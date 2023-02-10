@@ -1390,137 +1390,128 @@ Schedule:Day:Interval,
   24:00,                                  !- Time 8 {hh:mm}
   1;                                      !- Value Until Time 8
 
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!!!! this has been done already!!!!
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
 Schedule:Week:Daily,
-  Always On Week Rule - Jan1-Dec31,       !- Name
-  always_on_day_schedule,                 !- Sunday Schedule:Day Name
-  always_on_day_schedule,                 !- Monday Schedule:Day Name
-  always_on_day_schedule,                 !- Tuesday Schedule:Day Name
-  always_on_day_schedule,                 !- Wednesday Schedule:Day Name
-  always_on_day_schedule,                 !- Thursday Schedule:Day Name
-  always_on_day_schedule,                 !- Friday Schedule:Day Name
-  always_on_day_schedule,                 !- Saturday Schedule:Day Name
-  always_on_day_schedule,                 !- Holiday Schedule:Day Name
-  always_on_day_schedule,                 !- SummerDesignDay Schedule:Day Name
-  always_on_day_schedule,                 !- WinterDesignDay Schedule:Day Name
-  always_on_day_schedule,                 !- CustomDay1 Schedule:Day Name
-  always_on_day_schedule;                 !- CustomDay2 Schedule:Day Name
+  always_on_week_schedule,                    !- Name
+  always_on_day_schedule,                     !- Sunday Schedule:Day Name
+  always_on_day_schedule,                     !- Monday Schedule:Day Name
+  always_on_day_schedule,                     !- Tuesday Schedule:Day Name
+  always_on_day_schedule,                     !- Wednesday Schedule:Day Name
+  always_on_day_schedule,                     !- Thursday Schedule:Day Name
+  always_on_day_schedule,                     !- Friday Schedule:Day Name
+  always_on_day_schedule,                     !- Saturday Schedule:Day Name
+  always_on_day_schedule,                     !- Holiday Schedule:Day Name
+  always_on_day_schedule,                     !- SummerDesignDay Schedule:Day Name
+  always_on_day_schedule,                     !- WinterDesignDay Schedule:Day Name
+  always_on_day_schedule,                     !- CustomDay1 Schedule:Day Name
+  always_on_day_schedule;                     !- CustomDay2 Schedule:Day Name
 
 Schedule:Year,
-  Always On,                              !- Name
-  fractional,                             !- Schedule Type Limits Name
-  Always On Week Rule - Jan1-Dec31,       !- Schedule:Week Name 1
-  1,                                      !- Start Month 1
-  1,                                      !- Start Day 1
-  12,                                     !- End Month 1
-  31;                                     !- End Day 1
+  always_on,                                  !- Name
+  fractional,                                 !- Schedule Type Limits Name
+  always_on_week_schedule,                    !- Schedule:Week Name 1
+  1,                                          !- Start Month 1
+  1,                                          !- Start Day 1
+  12,                                         !- End Month 1
+  31;                                         !- End Day 1
 
 Schedule:Week:Daily,
-  ApartmentMidRise Activity Schedule Week Rule - Jan1-Dec31, !- Name
-  doe_midrise_apt_activity_schedule_default, !- Sunday Schedule:Day Name
-  doe_midrise_apt_activity_schedule_default, !- Monday Schedule:Day Name
-  doe_midrise_apt_activity_schedule_default, !- Tuesday Schedule:Day Name
-  doe_midrise_apt_activity_schedule_default, !- Wednesday Schedule:Day Name
-  doe_midrise_apt_activity_schedule_default, !- Thursday Schedule:Day Name
-  doe_midrise_apt_activity_schedule_default, !- Friday Schedule:Day Name
-  doe_midrise_apt_activity_schedule_default, !- Saturday Schedule:Day Name
-  doe_midrise_apt_activity_schedule_default, !- Holiday Schedule:Day Name
-  doe_midrise_apt_activity_schedule_sdd1, !- SummerDesignDay Schedule:Day Name
-  doe_midrise_apt_activity_schedule_wdd1, !- WinterDesignDay Schedule:Day Name
-  doe_midrise_apt_activity_schedule_default, !- CustomDay1 Schedule:Day Name
-  doe_midrise_apt_activity_schedule_default; !- CustomDay2 Schedule:Day Name
+  doe_midrise_apt_activity_schedule_week,     !- Name
+  doe_midrise_apt_activity_schedule_default,  !- Sunday Schedule:Day Name
+  doe_midrise_apt_activity_schedule_default,  !- Monday Schedule:Day Name
+  doe_midrise_apt_activity_schedule_default,  !- Tuesday Schedule:Day Name
+  doe_midrise_apt_activity_schedule_default,  !- Wednesday Schedule:Day Name
+  doe_midrise_apt_activity_schedule_default,  !- Thursday Schedule:Day Name
+  doe_midrise_apt_activity_schedule_default,  !- Friday Schedule:Day Name
+  doe_midrise_apt_activity_schedule_default,  !- Saturday Schedule:Day Name
+  doe_midrise_apt_activity_schedule_default,  !- Holiday Schedule:Day Name
+  doe_midrise_apt_activity_schedule_sdd1,     !- SummerDesignDay Schedule:Day Name
+  doe_midrise_apt_activity_schedule_wdd1,     !- WinterDesignDay Schedule:Day Name
+  doe_midrise_apt_activity_schedule_default,  !- CustomDay1 Schedule:Day Name
+  doe_midrise_apt_activity_schedule_default;  !- CustomDay2 Schedule:Day Name
 
 Schedule:Year,
-  ApartmentMidRise Activity Schedule,     !- Name
-  activity_level,                         !- Schedule Type Limits Name
-  ApartmentMidRise Activity Schedule Week Rule - Jan1-Dec31, !- Schedule:Week Name 1
-  1,                                      !- Start Month 1
-  1,                                      !- Start Day 1
-  12,                                     !- End Month 1
-  31;                                     !- End Day 1
-
+  doe_midrise_apt_activity_schedule,                !- Name
+  activity_level,                                   !- Schedule Type Limits Name
+  doe_midrise_apt_activity_schedule_week,           !- Schedule:Week Name 1
+  1,                                                !- Start Month 1
+  1,                                                !- Start Day 1
+  12,                                               !- End Month 1
+  31;                                               !- End Day 1
 
 Schedule:Week:Daily,
-  ApartmentMidRise EQP_APT_SCH Week Rule - Jan1-Dec31, !- Name
-  doe_midrise_apt_equipment_schedule_default,   !- Sunday Schedule:Day Name
-  doe_midrise_apt_equipment_schedule_default,   !- Monday Schedule:Day Name
-  doe_midrise_apt_equipment_schedule_default,   !- Tuesday Schedule:Day Name
-  doe_midrise_apt_equipment_schedule_default,   !- Wednesday Schedule:Day Name
-  doe_midrise_apt_equipment_schedule_default,   !- Thursday Schedule:Day Name
-  doe_midrise_apt_equipment_schedule_default,   !- Friday Schedule:Day Name
-  doe_midrise_apt_equipment_schedule_default,   !- Saturday Schedule:Day Name
-  doe_midrise_apt_equipment_schedule_default,   !- Holiday Schedule:Day Name
-  doe_midrise_apt_equipment_schedule_sdd1 ,  !- SummerDesignDay Schedule:Day Name
-  doe_midrise_apt_equipment_schedule_wdd1, !- WinterDesignDay Schedule:Day Name
-  doe_midrise_apt_equipment_schedule_default,   !- CustomDay1 Schedule:Day Name
-  doe_midrise_apt_equipment_schedule_default;   !- CustomDay2 Schedule:Day Name
+  doe_midrise_apt_equipment_schedule_week,          !- Name
+  doe_midrise_apt_equipment_schedule_default,       !- Sunday Schedule:Day Name
+  doe_midrise_apt_equipment_schedule_default,       !- Monday Schedule:Day Name
+  doe_midrise_apt_equipment_schedule_default,       !- Tuesday Schedule:Day Name
+  doe_midrise_apt_equipment_schedule_default,       !- Wednesday Schedule:Day Name
+  doe_midrise_apt_equipment_schedule_default,       !- Thursday Schedule:Day Name
+  doe_midrise_apt_equipment_schedule_default,       !- Friday Schedule:Day Name
+  doe_midrise_apt_equipment_schedule_default,       !- Saturday Schedule:Day Name
+  doe_midrise_apt_equipment_schedule_default,       !- Holiday Schedule:Day Name
+  doe_midrise_apt_equipment_schedule_sdd1 ,         !- SummerDesignDay Schedule:Day Name
+  doe_midrise_apt_equipment_schedule_wdd1,          !- WinterDesignDay Schedule:Day Name
+  doe_midrise_apt_equipment_schedule_default,       !- CustomDay1 Schedule:Day Name
+  doe_midrise_apt_equipment_schedule_default;       !- CustomDay2 Schedule:Day Name
 
 Schedule:Year,
-  ApartmentMidRise EQP_APT_SCH,           !- Name
-  fractional,                             !- Schedule Type Limits Name
-  ApartmentMidRise EQP_APT_SCH Week Rule - Jan1-Dec31, !- Schedule:Week Name 1
-  1,                                      !- Start Month 1
-  1,                                      !- Start Day 1
-  12,                                     !- End Month 1
-  31;                                     !- End Day 1
+  doe_midrise_apt_equipment_schedule,               !- Name
+  fractional,                                       !- Schedule Type Limits Name
+  doe_midrise_apt_equipment_schedule_week,          !- Schedule:Week Name 1
+  1,                                                !- Start Month 1
+  1,                                                !- Start Day 1
+  12,                                               !- End Month 1
+  31;                                               !- End Day 1
 
 Schedule:Week:Daily,
-  ApartmentMidRise INF_APT_SCH Week Rule - Jan1-Dec31, !- Name
-  doe_midrise_apt_infiltration_schedule_default,   !- Sunday Schedule:Day Name
-  doe_midrise_apt_infiltration_schedule_default,   !- Monday Schedule:Day Name
-  doe_midrise_apt_infiltration_schedule_default,   !- Tuesday Schedule:Day Name
-  doe_midrise_apt_infiltration_schedule_default,   !- Wednesday Schedule:Day Name
-  doe_midrise_apt_infiltration_schedule_default,   !- Thursday Schedule:Day Name
-  doe_midrise_apt_infiltration_schedule_default,   !- Friday Schedule:Day Name
-  doe_midrise_apt_infiltration_schedule_default,   !- Saturday Schedule:Day Name
-  doe_midrise_apt_infiltration_schedule_default,   !- Holiday Schedule:Day Name
-  doe_midrise_apt_infiltration_schedule_sdd1,  !- SummerDesignDay Schedule:Day Name
-  doe_midrise_apt_infiltration_schedule_wdd1, !- WinterDesignDay Schedule:Day Name
-  doe_midrise_apt_infiltration_schedule_default,   !- CustomDay1 Schedule:Day Name
-  doe_midrise_apt_infiltration_schedule_default;   !- CustomDay2 Schedule:Day Name
+  doe_midrise_apt_infiltration_schedule_week,       !- Name
+  doe_midrise_apt_infiltration_schedule_default,    !- Sunday Schedule:Day Name
+  doe_midrise_apt_infiltration_schedule_default,    !- Monday Schedule:Day Name
+  doe_midrise_apt_infiltration_schedule_default,    !- Tuesday Schedule:Day Name
+  doe_midrise_apt_infiltration_schedule_default,    !- Wednesday Schedule:Day Name
+  doe_midrise_apt_infiltration_schedule_default,    !- Thursday Schedule:Day Name
+  doe_midrise_apt_infiltration_schedule_default,    !- Friday Schedule:Day Name
+  doe_midrise_apt_infiltration_schedule_default,    !- Saturday Schedule:Day Name
+  doe_midrise_apt_infiltration_schedule_default,    !- Holiday Schedule:Day Name
+  doe_midrise_apt_infiltration_schedule_sdd1,       !- SummerDesignDay Schedule:Day Name
+  doe_midrise_apt_infiltration_schedule_wdd1,       !- WinterDesignDay Schedule:Day Name
+  doe_midrise_apt_infiltration_schedule_default,    !- CustomDay1 Schedule:Day Name
+  doe_midrise_apt_infiltration_schedule_default;    !- CustomDay2 Schedule:Day Name
 
 Schedule:Year,
-  ApartmentMidRise INF_APT_SCH,           !- Name
-  fractional,                             !- Schedule Type Limits Name
-  ApartmentMidRise INF_APT_SCH Week Rule - Jan1-Dec31, !- Schedule:Week Name 1
-  1,                                      !- Start Month 1
-  1,                                      !- Start Day 1
-  12,                                     !- End Month 1
-  31;                                     !- End Day 1
+  doe_midrise_apt_infiltration_schedule,           !- Name
+  fractional,                                      !- Schedule Type Limits Name
+  doe_midrise_apt_infiltration_schedule_week,      !- Schedule:Week Name 1
+  1,                                               !- Start Month 1
+  1,                                               !- Start Day 1
+  12,                                              !- End Month 1
+  31;                                              !- End Day 1
 
 Schedule:Week:Daily,
-  ApartmentMidRise LTG_APT_SCH Week Rule - Jan1-Dec31, !- Name
-  doe_midrise_apt_lighting_schedule_default,   !- Sunday Schedule:Day Name
-  doe_midrise_apt_lighting_schedule_default,   !- Monday Schedule:Day Name
-  doe_midrise_apt_lighting_schedule_default,   !- Tuesday Schedule:Day Name
-  doe_midrise_apt_lighting_schedule_default,   !- Wednesday Schedule:Day Name
-  doe_midrise_apt_lighting_schedule_default,   !- Thursday Schedule:Day Name
-  doe_midrise_apt_lighting_schedule_default,   !- Friday Schedule:Day Name
-  doe_midrise_apt_lighting_schedule_default,   !- Saturday Schedule:Day Name
-  doe_midrise_apt_lighting_schedule_default,   !- Holiday Schedule:Day Name
-  doe_midrise_apt_lighting_schedule_sdd1,  !- SummerDesignDay Schedule:Day Name
-  doe_midrise_apt_lighting_schedule_wdd1, !- WinterDesignDay Schedule:Day Name
-  doe_midrise_apt_lighting_schedule_default,   !- CustomDay1 Schedule:Day Name
-  doe_midrise_apt_lighting_schedule_default;   !- CustomDay2 Schedule:Day Name
+  doe_midrise_apt_lighting_schedule_week,         !- Name
+  doe_midrise_apt_lighting_schedule_default,      !- Sunday Schedule:Day Name
+  doe_midrise_apt_lighting_schedule_default,      !- Monday Schedule:Day Name
+  doe_midrise_apt_lighting_schedule_default,      !- Tuesday Schedule:Day Name
+  doe_midrise_apt_lighting_schedule_default,      !- Wednesday Schedule:Day Name
+  doe_midrise_apt_lighting_schedule_default,      !- Thursday Schedule:Day Name
+  doe_midrise_apt_lighting_schedule_default,      !- Friday Schedule:Day Name
+  doe_midrise_apt_lighting_schedule_default,      !- Saturday Schedule:Day Name
+  doe_midrise_apt_lighting_schedule_default,      !- Holiday Schedule:Day Name
+  doe_midrise_apt_lighting_schedule_sdd1,         !- SummerDesignDay Schedule:Day Name
+  doe_midrise_apt_lighting_schedule_wdd1,         !- WinterDesignDay Schedule:Day Name
+  doe_midrise_apt_lighting_schedule_default,      !- CustomDay1 Schedule:Day Name
+  doe_midrise_apt_lighting_schedule_default;      !- CustomDay2 Schedule:Day Name
 
 Schedule:Year,
-  ApartmentMidRise LTG_APT_SCH,           !- Name
-  fractional,                             !- Schedule Type Limits Name
-  ApartmentMidRise LTG_APT_SCH Week Rule - Jan1-Dec31, !- Schedule:Week Name 1
-  1,                                      !- Start Month 1
-  1,                                      !- Start Day 1
-  12,                                     !- End Month 1
-  31;                                     !- End Day 1
+  doe_midrise_apt_lighting_schedule,              !- Name
+  fractional,                                     !- Schedule Type Limits Name
+  doe_midrise_apt_lighting_schedule_week,         !- Schedule:Week Name 1
+  1,                                              !- Start Month 1
+  1,                                              !- Start Day 1
+  12,                                             !- End Month 1
+  31;                                             !- End Day 1
 
 Schedule:Week:Daily,
-  ApartmentMidRise OCC_APT_SCH Week Rule - Jan1-Dec31, !- Name
+  doe_midrise_apt_occupant_schedule_week,      !- Name
   doe_midrise_apt_occupant_schedule_default,   !- Sunday Schedule:Day Name
   doe_midrise_apt_occupant_schedule_default,   !- Monday Schedule:Day Name
   doe_midrise_apt_occupant_schedule_default,   !- Tuesday Schedule:Day Name
@@ -1529,41 +1520,37 @@ Schedule:Week:Daily,
   doe_midrise_apt_occupant_schedule_default,   !- Friday Schedule:Day Name
   doe_midrise_apt_occupant_schedule_default,   !- Saturday Schedule:Day Name
   doe_midrise_apt_occupant_schedule_default,   !- Holiday Schedule:Day Name
-  doe_midrise_apt_occupant_schedule_sdd1,  !- SummerDesignDay Schedule:Day Name
-  doe_midrise_apt_occupant_schedule_wdd1, !- WinterDesignDay Schedule:Day Name
+  doe_midrise_apt_occupant_schedule_sdd1,      !- SummerDesignDay Schedule:Day Name
+  doe_midrise_apt_occupant_schedule_wdd1,      !- WinterDesignDay Schedule:Day Name
   doe_midrise_apt_occupant_schedule_default,   !- CustomDay1 Schedule:Day Name
   doe_midrise_apt_occupant_schedule_default;   !- CustomDay2 Schedule:Day Name
 
 Schedule:Year,
-  ApartmentMidRise OCC_APT_SCH,           !- Name
+  doe_midrise_apt_occupant_schedule,      !- Name
   fractional,                             !- Schedule Type Limits Name
-  ApartmentMidRise OCC_APT_SCH Week Rule - Jan1-Dec31, !- Schedule:Week Name 1
+  doe_midrise_apt_occupant_schedule_week, !- Schedule:Week Name 1
   1,                                      !- Start Month 1
   1,                                      !- Start Day 1
   12,                                     !- End Month 1
   31;                                     !- End Day 1
 
 Schedule:Constant,
-  Always Off Discrete,                    !- Name
+  always_off_discrete,                    !- Name
   ,                                       !- Schedule Type Limits Name
   0;                                      !- Hourly Value
 
 Schedule:Constant,
-  Always On Continuous,                   !- Name
+  always_off_continious,                  !- Name
   ,                                       !- Schedule Type Limits Name
   1;                                      !- Hourly Value
 
 OutdoorAir:Node,
-  Model Outdoor Air Node;                 !- Name
-
-
-
-
+  model_outdoor_air_node;                 !- Name
 
 Lights,
-  2019::MidriseApartment::Apartment_Lighting, !- Name
-  2019::MidriseApartment::Apartment,      !- Zone or ZoneList or Space or SpaceList Name
-  ApartmentMidRise LTG_APT_SCH,           !- Schedule Name
+  doe_midrise_apt_lighting,               !- Name
+  insert_zone_list,                       !- Zone or ZoneList or Space or SpaceList Name
+  doe_midrise_apt_lighting_schedule,      !- Schedule Name
   Watts/Area,                             !- Design Level Calculation Method
   ,                                       !- Lighting Level {W}
   6.45834,                                !- Watts per Zone Floor Area {W/m2}
@@ -1575,21 +1562,21 @@ Lights,
   General;                                !- End-Use Subcategory
 
 People,
-  2019::MidriseApartment::Apartment_People, !- Name
-  2019::MidriseApartment::Apartment,      !- Zone or ZoneList or Space or SpaceList Name
-  ApartmentMidRise OCC_APT_SCH,           !- Number of People Schedule Name
+  doe_midrise_apt_people,                 !- Name
+  insert_zone_here,                       !- Zone or ZoneList or Space or SpaceList Name
+  doe_midrise_apt_occupant_schedule,      !- Number of People Schedule Name
   People/Area,                            !- Number of People Calculation Method
   ,                                       !- Number of People
   0.0283090965846098,                     !- People per Floor Area {person/m2}
   ,                                       !- Floor Area per Person {m2/person}
   0.3,                                    !- Fraction Radiant
   ,                                       !- Sensible Heat Fraction
-  ApartmentMidRise Activity Schedule;     !- activity_level Schedule Name
+  doe_midrise_apt_activity_schedule;      !- activity_level Schedule Name
 
 ElectricEquipment,
-  2019::MidriseApartment::Apartment_Electric, !- Name
-  2019::MidriseApartment::Apartment,      !- Zone or ZoneList or Space or SpaceList Name
-  ApartmentMidRise EQP_APT_SCH,           !- Schedule Name
+  doe_midrise_apt_electric_equipment,     !- Name
+  insert_zone_here,                       !- Zone or ZoneList or Space or SpaceList Name
+  doe_midrise_apt_equipment_schedule,     !- Schedule Name
   Watts/Area,                             !- Design Level Calculation Method
   ,                                       !- Design Level {W}
   6.66999354514752,                       !- Watts per Zone Floor Area {W/m2}
@@ -1600,9 +1587,9 @@ ElectricEquipment,
   Electric Equipment;                     !- End-Use Subcategory
 
 ZoneInfiltration:DesignFlowRate,
-  2019::MidriseApartment::Apartment_Infiltration, !- Name
-  2019::MidriseApartment::Apartment,      !- Zone or ZoneList Name
-  ApartmentMidRise INF_APT_SCH,           !- Schedule Name
+  doe_midrise_apt_infiltration,           !- Name
+  insert_zone_here,                       !- Zone or ZoneList Name
+  doe_midrise_apt_infiltration_schedule,  !- Schedule Name
   Flow/ExteriorArea,                      !- Design Flow Rate Calculation Method
   ,                                       !- Design Flow Rate {m3/s}
   ,                                       !- Flow per Zone Floor Area {m3/s-m2}

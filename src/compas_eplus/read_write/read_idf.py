@@ -983,12 +983,12 @@ if __name__ == '__main__':
     path = os.path.join(compas_eplus.DATA, 'idf_examples', file)
 
     data = get_idf_data(path)
-    print(data.keys())
+    # print(data.keys())
 
-    # object = 'outdoor_air'
+    object = 'materials'
 
-    # for k in data[object]:
-    #     print(k)
-    #     for j in data[object][k]:
-    #         print(j)
-    #     print('')
+    for k in data[object]:
+        print(k)
+        # for j in data[object][k]:
+        #     print(j)
+        # print('')
