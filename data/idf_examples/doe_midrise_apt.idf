@@ -1,0 +1,1614 @@
+ZoneControl:Thermostat,
+  doe_midrise_apt_thermostat,                           !- Name
+  insert_zone_name_here,                                !- Zone or ZoneList Name
+  doe_midrise_apt_thermostat_schedule,                  !- Control Type Schedule Name
+  ThermostatSetpoint:DualSetpoint,                      !- Control 1 Object Type
+  doe_midrise_apt_thermostat_setpoint,                  !- Control 1 Name
+  ,                                                     !- Control 2 Object Type
+  ,                                                     !- Control 2 Name
+  ,                                                     !- Control 3 Object Type
+  ,                                                     !- Control 3 Name
+  ,                                                     !- Control 4 Object Type
+  ,                                                     !- Control 4 Name
+  0;                                                    !- Temperature Difference Between Cutout And Setpoint {deltaC}
+
+Schedule:Compact,
+  doe_midrise_apt_thermostat_schedule,                  !- Name
+  doe_midrise_apt_thermostat_schedule_type_limits,      !- Schedule Type Limits Name
+  Through: 12/31,                                       !- Field 1
+  For: AllDays,                                         !- Field 2
+  Until: 24:00,                                         !- Field 3
+  4;                                                    !- Field 4
+
+ScheduleTypeLimits,
+  doe_midrise_apt_thermostat_schedule_type_limits,      !- Name
+  0,                                                    !- Lower Limit Value {BasedOnField A3}
+  4,                                                    !- Upper Limit Value {BasedOnField A3}
+  DISCRETE;                                             !- Numeric Type
+
+ThermostatSetpoint:DualSetpoint,
+  doe_midrise_apt_thermostat_setpoint,                  !- Name
+  doe_midrise_apt_heating_setpoint_schedule_name,       !- Heating Setpoint Temperature Schedule Name
+  doe_midrise_apt_cooling_setpoint_schedule_name;       !- Cooling Setpoint Temperature Schedule Name
+
+ScheduleTypeLimits,
+  Temperature,                                          !- Name
+  -273.15,                                              !- Lower Limit Value {BasedOnField A3}
+  ,                                                     !- Upper Limit Value {BasedOnField A3}
+  Continuous,                                           !- Numeric Type
+  temperature;                                          !- Unit Type
+
+
+Schedule:Day:Interval,
+  doe_midrise_apt_heating_setpoint_schedule_default,    !- Name
+  Temperature,                                          !- Schedule Type Limits Name
+  No,                                                   !- Interpolate to Timestep
+  24:00,                                                !- Time 1 {hh:mm}
+  21.7;                                                 !- Value Until Time 1
+
+Schedule:Week:Daily,
+  doe_midrise_apt_heating_setpoint_schedule_week,       !- Name
+  doe_midrise_apt_heating_setpoint_schedule_default,    !- Sunday Schedule:Day Name
+  doe_midrise_apt_heating_setpoint_schedule_default,    !- Monday Schedule:Day Name
+  doe_midrise_apt_heating_setpoint_schedule_default,    !- Tuesday Schedule:Day Name
+  doe_midrise_apt_heating_setpoint_schedule_default,    !- Wednesday Schedule:Day Name
+  doe_midrise_apt_heating_setpoint_schedule_default,    !- Thursday Schedule:Day Name
+  doe_midrise_apt_heating_setpoint_schedule_default,    !- Friday Schedule:Day Name
+  doe_midrise_apt_heating_setpoint_schedule_default,    !- Saturday Schedule:Day Name
+  doe_midrise_apt_heating_setpoint_schedule_default,    !- Holiday Schedule:Day Name
+  doe_midrise_apt_heating_setpoint_schedule_sdd1,       !- SummerDesignDay Schedule:Day Name
+  doe_midrise_apt_heating_setpoint_schedule_wdd1,       !- WinterDesignDay Schedule:Day Name
+  doe_midrise_apt_heating_setpoint_schedule_default,    !- CustomDay1 Schedule:Day Name
+  doe_midrise_apt_heating_setpoint_schedule_default;    !- CustomDay2 Schedule:Day Name
+
+Schedule:Year,
+  doe_midrise_apt_heating_schedule,                     !- Name
+  Temperature,                                          !- Schedule Type Limits Name
+  doe_midrise_apt_heating_setpoint_schedule_week,       !- Schedule:Week Name 1
+  1,                                                    !- Start Month 1
+  1,                                                    !- Start Day 1
+  12,                                                   !- End Month 1
+  31;                                                   !- End Day 1
+
+Schedule:Day:Interval,
+  doe_midrise_apt_heating_setpoint_schedule_sdd1,       !- Name
+  Temperature,                                          !- Schedule Type Limits Name
+  No,                                                   !- Interpolate to Timestep
+  24:00,                                                !- Time 1 {hh:mm}
+  21.7;                                                 !- Value Until Time 1
+
+Schedule:Day:Interval,
+  doe_midrise_apt_heating_setpoint_schedule_wdd1,       !- Name
+  Temperature,                                          !- Schedule Type Limits Name
+  No,                                                   !- Interpolate to Timestep
+  24:00,                                                !- Time 1 {hh:mm}
+  21.7;                                                 !- Value Until Time 1
+
+Schedule:Day:Interval,
+  doe_midrise_apt_cooling_setpoint_schedule_default,    !- Name
+  Temperature,                                          !- Schedule Type Limits Name
+  No,                                                   !- Interpolate to Timestep
+  24:00,                                                !- Time 1 {hh:mm}
+  24.4;                                                 !- Value Until Time 1
+
+Schedule:Week:Daily,
+  doe_midrise_apt_cooling_setpoint_schedule_week,       !- Name
+  doe_midrise_apt_cooling_setpoint_schedule_default,    !- Sunday Schedule:Day Name
+  doe_midrise_apt_cooling_setpoint_schedule_default,    !- Monday Schedule:Day Name
+  doe_midrise_apt_cooling_setpoint_schedule_default,    !- Tuesday Schedule:Day Name
+  doe_midrise_apt_cooling_setpoint_schedule_default,    !- Wednesday Schedule:Day Name
+  doe_midrise_apt_cooling_setpoint_schedule_default,    !- Thursday Schedule:Day Name
+  doe_midrise_apt_cooling_setpoint_schedule_default,    !- Friday Schedule:Day Name
+  doe_midrise_apt_cooling_setpoint_schedule_default,    !- Saturday Schedule:Day Name
+  doe_midrise_apt_cooling_setpoint_schedule_default,    !- Holiday Schedule:Day Name
+  doe_midrise_apt_cooling_setpoint_schedule_sdd1,       !- SummerDesignDay Schedule:Day Name
+  doe_midrise_apt_cooling_setpoint_schedule_wdd1,       !- WinterDesignDay Schedule:Day Name
+  doe_midrise_apt_cooling_setpoint_schedule_default,    !- CustomDay1 Schedule:Day Name
+  doe_midrise_apt_cooling_setpoint_schedule_default;    !- CustomDay2 Schedule:Day Name
+
+Schedule:Year,
+  doe_midrise_apt_cooling_setpoint_schedule,            !- Name
+  Temperature,                                          !- Schedule Type Limits Name
+  doe_midrise_apt_cooling_setpoint_schedule_week,       !- Schedule:Week Name 1
+  1,                                                    !- Start Month 1
+  1,                                                    !- Start Day 1
+  12,                                                   !- End Month 1
+  31;                                                   !- End Day 1
+
+Schedule:Day:Interval,
+  doe_midrise_apt_cooling_setpoint_schedule_sdd1,       !- Name
+  Temperature,                                          !- Schedule Type Limits Name
+  No,                                                   !- Interpolate to Timestep
+  24:00,                                                !- Time 1 {hh:mm}
+  24.4;                                                 !- Value Until Time 1
+
+Schedule:Day:Interval,
+  doe_midrise_apt_cooling_setpoint_schedule_wdd1,       !- Name
+  Temperature,                                          !- Schedule Type Limits Name
+  No,                                                   !- Interpolate to Timestep
+  24:00,                                                !- Time 1 {hh:mm}
+  24.4;                                                 !- Value Until Time 1
+
+ZoneHVAC:EquipmentConnections,
+  insert_zone_name_here,                                !- Zone Name
+  doe_midrise_apt_equipment_list,                       !- Zone Conditioning Equipment List Name
+  doe_midrise_apt_inlet_node_list,                      !- Zone Air Inlet Node or NodeList Name
+  doe_midrise_apt_exhaust_node_list,                    !- Zone Air Exhaust Node or NodeList Name
+  Node 1;                                               !- Zone Air Node Name
+
+NodeList,
+  doe_midrise_apt_inlet_node_list,                      !- Name
+  Node 4;                                               !- Node Name 1
+
+NodeList,
+  doe_midrise_apt_exhaust_node_list,                    !- Name
+  Node 3;                                               !- Node Name 1
+
+ZoneHVAC:IdealLoadsAirSystem,
+  doe_midrise_apt_ideal_loads,                          !- Name
+  ,                                                     !- Availability Schedule Name
+  Node 4,                                               !- Zone Supply Air Node Name
+  Node 3,                                               !- Zone Exhaust Air Node Name
+  ,                                                     !- System Inlet Air Node Name
+  50,                                                   !- Maximum Heating Supply Air Temperature {C}
+  13,                                                   !- Minimum Cooling Supply Air Temperature {C}
+  ,                                                     !- Maximum Heating Supply Air Humidity Ratio {kgWater/kgDryAir}
+  ,                                                     !- Minimum Cooling Supply Air Humidity Ratio {kgWater/kgDryAir}
+  LimitCapacity,                                        !- Heating Limit
+  ,                                                     !- Maximum Heating Air Flow Rate {m3/s}
+  Autosize,                                             !- Maximum Sensible Heating Capacity {W}
+  LimitFlowRateAndCapacity,                             !- Cooling Limit
+  Autosize,                                             !- Maximum Cooling Air Flow Rate {m3/s}
+  Autosize,                                             !- Maximum Total Cooling Capacity {W}
+  ,                                                     !- Heating Availability Schedule Name
+  ,                                                     !- Cooling Availability Schedule Name
+  None,                                                 !- Dehumidification Control Type
+  ,                                                     !- Cooling Sensible Heat Ratio {dimensionless}
+  ,                                                     !- Humidification Control Type
+  doe_midrise_apt_outdoor_air_ventilation,              !- Design Specification Outdoor Air Object Name
+  ,                                                     !- Outdoor Air Inlet Node Name
+  None,                                                 !- Demand Controlled Ventilation Type
+  DifferentialDryBulb,                                  !- Outdoor Air Economizer Type
+  ,                                                     !- Heat Recovery Type
+  0,                                                    !- Sensible Heat Recovery Effectiveness {dimensionless}
+  0;                                                    !- Latent Heat Recovery Effectiveness {dimensionless}
+
+DesignSpecification:OutdoorAir,
+  doe_midrise_apt_outdoor_air_ventilation,              !- Name
+  Sum,                                                  !- Outdoor Air Method
+  0,                                                    !- Outdoor Air Flow per Person {m3/s-person}
+  0,                                                    !- Outdoor Air Flow per Zone Floor Area {m3/s-m2}
+  0,                                                    !- Outdoor Air Flow per Zone {m3/s}
+  0.35;                                                 !- Outdoor Air Flow Air Changes per Hour {1/hr}
+
+ZoneHVAC:EquipmentList,
+  doe_midrise_apt_equipment_list,                       !- Name
+  SequentialLoad,                                       !- Load Distribution Scheme
+  ZoneHVAC:IdealLoadsAirSystem,                         !- Zone Equipment Object Type 1
+  doe_midrise_apt_ideal_loads,                          !- Zone Equipment Name 1
+  1,                                                    !- Zone Equipment Cooling Sequence 1
+  1,                                                    !- Zone Equipment Heating or No-Load Sequence 1
+  ,                                                     !- Zone Equipment Sequential Cooling Fraction Schedule Name 1
+  ;                                                     !- Zone Equipment Sequential Heating Fraction Schedule Name 1
+
+Material,
+  25mm Stucco,                            !- Name
+  Smooth,                                 !- Roughness
+  0.0254,                                 !- Thickness {m}
+  0.71951849592325,                       !- Conductivity {W/m-K}
+  1856.00424372353,                       !- Density {kg/m3}
+  839.458381452284,                       !- Specific Heat {J/kg-K}
+  0.9,                                    !- Thermal Absorptance
+  0.7,                                    !- Solar Absorptance
+  0.7;                                    !- Visible Absorptance
+
+Material,
+  5/8 in. Gypsum Board,                   !- Name
+  MediumSmooth,                           !- Roughness
+  0.0159,                                 !- Thickness {m}
+  0.159892999094055,                      !- Conductivity {W/m-K}
+  800.001829191177,                       !- Density {kg/m3}
+  1089.29718545594,                       !- Specific Heat {J/kg-K}
+  0.9,                                    !- Thermal Absorptance
+  0.7,                                    !- Solar Absorptance
+  0.7;                                    !- Visible Absorptance
+
+Material,
+  8 in. Concrete Block Basement Wall,     !- Name
+  MediumRough,                            !- Roughness
+  0.2032,                                 !- Thickness {m}
+  1.32511322999199,                       !- Conductivity {W/m-K}
+  1842.00421171268,                       !- Density {kg/m3}
+  911.411957005339,                       !- Specific Heat {J/kg-K}
+  0.9,                                    !- Thermal Absorptance
+  0.7,                                    !- Solar Absorptance
+  0.7;                                    !- Visible Absorptance
+
+Material,
+  8 in. Normalweight Concrete Floor,      !- Name
+  MediumRough,                            !- Roughness
+  0.2032,                                 !- Thickness {m}
+  2.30845517442043,                       !- Conductivity {W/m-K}
+  2322.00530922738,                       !- Density {kg/m3}
+  831.463539724167,                       !- Specific Heat {J/kg-K}
+  0.9,                                    !- Thermal Absorptance
+  0.7,                                    !- Solar Absorptance
+  0.7;                                    !- Visible Absorptance
+
+Material,
+  F08 Metal surface,                      !- Name
+  Smooth,                                 !- Roughness
+  0.0008,                                 !- Thickness {m}
+  45.2497187436178,                       !- Conductivity {W/m-K}
+  7824.01788948971,                       !- Density {kg/m3}
+  499.677608007314,                       !- Specific Heat {J/kg-K}
+  0.9,                                    !- Thermal Absorptance
+  0.7,                                    !- Solar Absorptance
+  0.7;                                    !- Visible Absorptance
+
+Material,
+  Generic 25mm Insulation,                !- Name
+  MediumRough,                            !- Roughness
+  0.05,                                   !- Thickness {m}
+  0.03,                                   !- Conductivity {W/m-K}
+  43,                                     !- Density {kg/m3}
+  1210,                                   !- Specific Heat {J/kg-K}
+  0.9,                                    !- Thermal Absorptance
+  0.7,                                    !- Solar Absorptance
+  0.7;                                    !- Visible Absorptance
+
+Material,
+  Generic 25mm Wood,                      !- Name
+  MediumSmooth,                           !- Roughness
+  0.0254,                                 !- Thickness {m}
+  0.15,                                   !- Conductivity {W/m-K}
+  608,                                    !- Density {kg/m3}
+  1630,                                   !- Specific Heat {J/kg-K}
+  0.9,                                    !- Thermal Absorptance
+  0.5,                                    !- Solar Absorptance
+  0.5;                                    !- Visible Absorptance
+
+Material,
+  Generic 50mm Insulation,                !- Name
+  MediumRough,                            !- Roughness
+  0.05,                                   !- Thickness {m}
+  0.03,                                   !- Conductivity {W/m-K}
+  43,                                     !- Density {kg/m3}
+  1210,                                   !- Specific Heat {J/kg-K}
+  0.9,                                    !- Thermal Absorptance
+  0.7,                                    !- Solar Absorptance
+  0.7;                                    !- Visible Absorptance
+
+Material,
+  Generic Acoustic Tile,                  !- Name
+  MediumSmooth,                           !- Roughness
+  0.02,                                   !- Thickness {m}
+  0.06,                                   !- Conductivity {W/m-K}
+  368,                                    !- Density {kg/m3}
+  590,                                    !- Specific Heat {J/kg-K}
+  0.9,                                    !- Thermal Absorptance
+  0.2,                                    !- Solar Absorptance
+  0.2;                                    !- Visible Absorptance
+
+Material,
+  Generic Brick,                          !- Name
+  MediumRough,                            !- Roughness
+  0.1,                                    !- Thickness {m}
+  0.9,                                    !- Conductivity {W/m-K}
+  1920,                                   !- Density {kg/m3}
+  790,                                    !- Specific Heat {J/kg-K}
+  0.9,                                    !- Thermal Absorptance
+  0.65,                                   !- Solar Absorptance
+  0.65;                                   !- Visible Absorptance
+
+Material,
+  Generic Ceiling Air Gap,                !- Name
+  Smooth,                                 !- Roughness
+  0.1,                                    !- Thickness {m}
+  0.556,                                  !- Conductivity {W/m-K}
+  1.28,                                   !- Density {kg/m3}
+  1000,                                   !- Specific Heat {J/kg-K}
+  0.9,                                    !- Thermal Absorptance
+  0.7,                                    !- Solar Absorptance
+  0.7;                                    !- Visible Absorptance
+
+Material,
+  Generic Gypsum Board,                   !- Name
+  MediumSmooth,                           !- Roughness
+  0.0127,                                 !- Thickness {m}
+  0.16,                                   !- Conductivity {W/m-K}
+  800,                                    !- Density {kg/m3}
+  1090,                                   !- Specific Heat {J/kg-K}
+  0.9,                                    !- Thermal Absorptance
+  0.5,                                    !- Solar Absorptance
+  0.5;                                    !- Visible Absorptance
+
+Material,
+  Generic HW Concrete,                    !- Name
+  MediumRough,                            !- Roughness
+  0.2,                                    !- Thickness {m}
+  1.95,                                   !- Conductivity {W/m-K}
+  2240,                                   !- Density {kg/m3}
+  900,                                    !- Specific Heat {J/kg-K}
+  0.9,                                    !- Thermal Absorptance
+  0.8,                                    !- Solar Absorptance
+  0.8;                                    !- Visible Absorptance
+
+Material,
+  Generic LW Concrete,                    !- Name
+  MediumRough,                            !- Roughness
+  0.1,                                    !- Thickness {m}
+  0.53,                                   !- Conductivity {W/m-K}
+  1280,                                   !- Density {kg/m3}
+  840,                                    !- Specific Heat {J/kg-K}
+  0.9,                                    !- Thermal Absorptance
+  0.8,                                    !- Solar Absorptance
+  0.8;                                    !- Visible Absorptance
+
+Material,
+  Generic Painted Metal,                  !- Name
+  Smooth,                                 !- Roughness
+  0.0015,                                 !- Thickness {m}
+  45,                                     !- Conductivity {W/m-K}
+  7690,                                   !- Density {kg/m3}
+  410,                                    !- Specific Heat {J/kg-K}
+  0.9,                                    !- Thermal Absorptance
+  0.5,                                    !- Solar Absorptance
+  0.5;                                    !- Visible Absorptance
+
+Material,
+  Generic Roof Membrane,                  !- Name
+  MediumRough,                            !- Roughness
+  0.01,                                   !- Thickness {m}
+  0.16,                                   !- Conductivity {W/m-K}
+  1120,                                   !- Density {kg/m3}
+  1460,                                   !- Specific Heat {J/kg-K}
+  0.9,                                    !- Thermal Absorptance
+  0.65,                                   !- Solar Absorptance
+  0.65;                                   !- Visible Absorptance
+
+Material,
+  Generic Wall Air Gap,                   !- Name
+  Smooth,                                 !- Roughness
+  0.1,                                    !- Thickness {m}
+  0.667,                                  !- Conductivity {W/m-K}
+  1.28,                                   !- Density {kg/m3}
+  1000,                                   !- Specific Heat {J/kg-K}
+  0.9,                                    !- Thermal Absorptance
+  0.7,                                    !- Solar Absorptance
+  0.7;                                    !- Visible Absorptance
+
+Material,
+  Material 1,                             !- Name
+  Smooth,                                 !- Roughness
+  0.1,                                    !- Thickness {m}
+  0.1,                                    !- Conductivity {W/m-K}
+  0.1,                                    !- Density {kg/m3}
+  100,                                    !- Specific Heat {J/kg-K}
+  0.9,                                    !- Thermal Absorptance
+  0.65,                                   !- Solar Absorptance
+  0.65;                                   !- Visible Absorptance
+
+Material,
+  Material 2,                             !- Name
+  Smooth,                                 !- Roughness
+  0.1,                                    !- Thickness {m}
+  0.1,                                    !- Conductivity {W/m-K}
+  0.1,                                    !- Density {kg/m3}
+  100,                                    !- Specific Heat {J/kg-K}
+  0.9,                                    !- Thermal Absorptance
+  0.8,                                    !- Solar Absorptance
+  0.8;                                    !- Visible Absorptance
+
+Material,
+  Metal Roof Surface,                     !- Name
+  Smooth,                                 !- Roughness
+  0.000799999999999998,                   !- Thickness {m}
+  45.2497187436177,                       !- Conductivity {W/m-K}
+  7824.01788948971,                       !- Density {kg/m3}
+  499.67760800731,                        !- Specific Heat {J/kg-K}
+  0.9,                                    !- Thermal Absorptance
+  0.7,                                    !- Solar Absorptance
+  0.7;                                    !- Visible Absorptance
+
+Material,
+  Roof Membrane,                          !- Name
+  VeryRough,                              !- Roughness
+  0.0095,                                 !- Thickness {m}
+  0.159892999094056,                      !- Conductivity {W/m-K}
+  1121.29256381722,                       !- Density {kg/m3}
+  1459.05861538136,                       !- Specific Heat {J/kg-K}
+  0.9,                                    !- Thermal Absorptance
+  0.7,                                    !- Solar Absorptance
+  0.7;                                    !- Visible Absorptance
+
+Material:NoMass,
+  Typical Carpet Pad,                     !- Name
+  VeryRough,                              !- Roughness
+  0.2164799871521,                        !- Thermal Resistance {m2-K/W}
+  0.9,                                    !- Thermal Absorptance
+  0.7,                                    !- Solar Absorptance
+  0.8;                                    !- Visible Absorptance
+
+Material:NoMass,
+  Typical Insulation-R15,                 !- Name
+  MediumSmooth,                           !- Roughness
+  2.64165275714827,                       !- Thermal Resistance {m2-K/W}
+  0.9,                                    !- Thermal Absorptance
+  0.7,                                    !- Solar Absorptance
+  0.7;                                    !- Visible Absorptance
+
+Material:NoMass,
+  Typical Insulation-R24,                 !- Name
+  MediumSmooth,                           !- Roughness
+  4.22664441143724,                       !- Thermal Resistance {m2-K/W}
+  0.9,                                    !- Thermal Absorptance
+  0.7,                                    !- Solar Absorptance
+  0.7;                                    !- Visible Absorptance
+
+Material:NoMass,
+  Typical Insulation-R3,                  !- Name
+  MediumSmooth,                           !- Roughness
+  0.528330551429654,                      !- Thermal Resistance {m2-K/W}
+  0.9,                                    !- Thermal Absorptance
+  0.7,                                    !- Solar Absorptance
+  0.7;                                    !- Visible Absorptance
+
+Material:NoMass,
+  Typical Insulation-R31,                 !- Name
+  MediumSmooth,                           !- Roughness
+  5.45941569810643,                       !- Thermal Resistance {m2-K/W}
+  0.9,                                    !- Thermal Absorptance
+  0.7,                                    !- Solar Absorptance
+  0.7;                                    !- Visible Absorptance
+
+Material:NoMass,
+  Typical Insulation-R4,                  !- Name
+  MediumSmooth,                           !- Roughness
+  0.704440735239539,                      !- Thermal Resistance {m2-K/W}
+  0.9,                                    !- Thermal Absorptance
+  0.7,                                    !- Solar Absorptance
+  0.7;                                    !- Visible Absorptance
+
+Material:NoMass,
+  Typical Insulation-R7,                  !- Name
+  MediumSmooth,                           !- Roughness
+  1.23277128666919,                       !- Thermal Resistance {m2-K/W}
+  0.9,                                    !- Thermal Absorptance
+  0.7,                                    !- Solar Absorptance
+  0.7;                                    !- Visible Absorptance
+
+WindowMaterial:Gas,
+  AIR 13MM,                               !- Name
+  Air,                                    !- Gas Type
+  0.0127;                                 !- Thickness {m}
+
+WindowMaterial:Gas,
+  Generic Window Air Gap,                 !- Name
+  Air,                                    !- Gas Type
+  0.0127;                                 !- Thickness {m}
+
+WindowMaterial:Gas,
+  Generic Window Argon Gap,               !- Name
+  Argon,                                  !- Gas Type
+  0.0127;                                 !- Thickness {m}
+
+WindowMaterial:Glazing,
+  CLEAR 6MM,                              !- Name
+  SpectralAverage,                        !- Optical Data Type
+  ,                                       !- Window Glass Spectral Data Set Name
+  0.00599999999999998,                    !- Thickness {m}
+  0.775,                                  !- Solar Transmittance at Normal Incidence
+  0.071,                                  !- Front Side Solar Reflectance at Normal Incidence
+  0.071,                                  !- Back Side Solar Reflectance at Normal Incidence
+  0.881,                                  !- Visible Transmittance at Normal Incidence
+  0.08,                                   !- Front Side Visible Reflectance at Normal Incidence
+  0.08,                                   !- Back Side Visible Reflectance at Normal Incidence
+  0,                                      !- Infrared Transmittance at Normal Incidence
+  0.84,                                   !- Front Side Infrared Hemispherical Emissivity
+  0.84,                                   !- Back Side Infrared Hemispherical Emissivity
+  0.899398119904063,                      !- Conductivity {W/m-K}
+  1,                                      !- Dirt Correction Factor for Solar and Visible Transmittance
+  No;                                     !- Solar Diffusing
+
+WindowMaterial:Glazing,
+  Generic Clear Glass,                    !- Name
+  SpectralAverage,                        !- Optical Data Type
+  ,                                       !- Window Glass Spectral Data Set Name
+  0.006,                                  !- Thickness {m}
+  0.77,                                   !- Solar Transmittance at Normal Incidence
+  0.07,                                   !- Front Side Solar Reflectance at Normal Incidence
+  0.07,                                   !- Back Side Solar Reflectance at Normal Incidence
+  0.88,                                   !- Visible Transmittance at Normal Incidence
+  0.08,                                   !- Front Side Visible Reflectance at Normal Incidence
+  0.08,                                   !- Back Side Visible Reflectance at Normal Incidence
+  0,                                      !- Infrared Transmittance at Normal Incidence
+  0.84,                                   !- Front Side Infrared Hemispherical Emissivity
+  0.84,                                   !- Back Side Infrared Hemispherical Emissivity
+  1,                                      !- Conductivity {W/m-K}
+  1,                                      !- Dirt Correction Factor for Solar and Visible Transmittance
+  No;                                     !- Solar Diffusing
+
+WindowMaterial:Glazing,
+  Generic Low-e Glass,                    !- Name
+  SpectralAverage,                        !- Optical Data Type
+  ,                                       !- Window Glass Spectral Data Set Name
+  0.006,                                  !- Thickness {m}
+  0.45,                                   !- Solar Transmittance at Normal Incidence
+  0.36,                                   !- Front Side Solar Reflectance at Normal Incidence
+  0.36,                                   !- Back Side Solar Reflectance at Normal Incidence
+  0.71,                                   !- Visible Transmittance at Normal Incidence
+  0.21,                                   !- Front Side Visible Reflectance at Normal Incidence
+  0.21,                                   !- Back Side Visible Reflectance at Normal Incidence
+  0,                                      !- Infrared Transmittance at Normal Incidence
+  0.84,                                   !- Front Side Infrared Hemispherical Emissivity
+  0.047,                                  !- Back Side Infrared Hemispherical Emissivity
+  1,                                      !- Conductivity {W/m-K}
+  1,                                      !- Dirt Correction Factor for Solar and Visible Transmittance
+  No;                                     !- Solar Diffusing
+
+WindowMaterial:Glazing,
+  REF B CLEAR HI 6MM,                     !- Name
+  SpectralAverage,                        !- Optical Data Type
+  ,                                       !- Window Glass Spectral Data Set Name
+  0.00599999999999998,                    !- Thickness {m}
+  0.24,                                   !- Solar Transmittance at Normal Incidence
+  0.16,                                   !- Front Side Solar Reflectance at Normal Incidence
+  0.32,                                   !- Back Side Solar Reflectance at Normal Incidence
+  0.3,                                    !- Visible Transmittance at Normal Incidence
+  0.16,                                   !- Front Side Visible Reflectance at Normal Incidence
+  0.29,                                   !- Back Side Visible Reflectance at Normal Incidence
+  0,                                      !- Infrared Transmittance at Normal Incidence
+  0.84,                                   !- Front Side Infrared Hemispherical Emissivity
+  0.6,                                    !- Back Side Infrared Hemispherical Emissivity
+  0.899398119904063,                      !- Conductivity {W/m-K}
+  1,                                      !- Dirt Correction Factor for Solar and Visible Transmittance
+  No;                                     !- Solar Diffusing
+
+WindowMaterial:SimpleGlazingSystem,
+  U 0.36 SHGC 0.36 Simple Glazing,        !- Name
+  2.04408,                                !- U-Factor {W/m2-K}
+  0.36,                                   !- Solar Heat Gain Coefficient
+  0.6;                                    !- Visible Transmittance
+
+WindowMaterial:SimpleGlazingSystem,
+  U 0.5 SHGC 0.4 Simple Glazing,          !- Name
+  2.839,                                  !- U-Factor {W/m2-K}
+  0.4,                                    !- Solar Heat Gain Coefficient
+  0.6;                                    !- Visible Transmittance
+
+Construction,
+  Generic Context,                        !- Name
+  Material 2;                             !- Layer 1
+
+Construction,
+  Generic Double Pane,                    !- Name
+  Generic Low-e Glass,                    !- Layer 1
+  Generic Window Air Gap,                 !- Layer 2
+  Generic Clear Glass;                    !- Layer 3
+
+Construction,
+  Generic Exposed Floor,                  !- Name
+  Generic Painted Metal,                  !- Layer 1
+  Generic Ceiling Air Gap,                !- Layer 2
+  Generic 50mm Insulation,                !- Layer 3
+  Generic LW Concrete;                    !- Layer 4
+
+Construction,
+  Generic Exterior Door,                  !- Name
+  Generic Painted Metal,                  !- Layer 1
+  Generic 25mm Insulation,                !- Layer 2
+  Generic Painted Metal;                  !- Layer 3
+
+Construction,
+  Generic Exterior Wall,                  !- Name
+  Generic Brick,                          !- Layer 1
+  Generic LW Concrete,                    !- Layer 2
+  Generic 50mm Insulation,                !- Layer 3
+  Generic Wall Air Gap,                   !- Layer 4
+  Generic Gypsum Board;                   !- Layer 5
+
+Construction,
+  Generic Ground Slab,                    !- Name
+  Generic 50mm Insulation,                !- Layer 1
+  Generic HW Concrete;                    !- Layer 2
+
+Construction,
+  Generic Interior Ceiling,               !- Name
+  Generic LW Concrete,                    !- Layer 1
+  Generic Ceiling Air Gap,                !- Layer 2
+  Generic Acoustic Tile;                  !- Layer 3
+
+Construction,
+  Generic Interior Door,                  !- Name
+  Generic 25mm Wood;                      !- Layer 1
+
+Construction,
+  Generic Interior Floor,                 !- Name
+  Generic Acoustic Tile,                  !- Layer 1
+  Generic Ceiling Air Gap,                !- Layer 2
+  Generic LW Concrete;                    !- Layer 3
+
+Construction,
+  Generic Interior Wall,                  !- Name
+  Generic Gypsum Board,                   !- Layer 1
+  Generic Wall Air Gap,                   !- Layer 2
+  Generic Gypsum Board;                   !- Layer 3
+
+Construction,
+  Generic Roof,                           !- Name
+  Generic Roof Membrane,                  !- Layer 1
+  Generic 50mm Insulation,                !- Layer 2
+  Generic LW Concrete,                    !- Layer 3
+  Generic Ceiling Air Gap,                !- Layer 4
+  Generic Acoustic Tile;                  !- Layer 5
+
+Construction,
+  Generic Shade,                          !- Name
+  Material 1;                             !- Layer 1
+
+Construction,
+  Generic Single Pane,                    !- Name
+  Generic Clear Glass;                    !- Layer 1
+
+Construction,
+  Generic Underground Roof,               !- Name
+  Generic 50mm Insulation,                !- Layer 1
+  Generic HW Concrete,                    !- Layer 2
+  Generic Ceiling Air Gap,                !- Layer 3
+  Generic Acoustic Tile;                  !- Layer 4
+
+Construction,
+  Generic Underground Wall,               !- Name
+  Generic 50mm Insulation,                !- Layer 1
+  Generic HW Concrete,                    !- Layer 2
+  Generic Wall Air Gap,                   !- Layer 3
+  Generic Gypsum Board;                   !- Layer 4
+
+Construction,
+  Typical IEAD Roof-R32,                  !- Name
+  Roof Membrane,                          !- Layer 1
+  Typical Insulation-R31,                 !- Layer 2
+  Metal Roof Surface;                     !- Layer 3
+
+Construction,
+  Typical Insulated Basement Mass Wall-R8, !- Name
+  Typical Insulation-R7,                  !- Layer 1
+  8 in. Concrete Block Basement Wall;     !- Layer 2
+
+Construction,
+  Typical Insulated Carpeted 8in Slab Floor-R5, !- Name
+  Typical Insulation-R4,                  !- Layer 1
+  8 in. Normalweight Concrete Floor,      !- Layer 2
+  Typical Carpet Pad;                     !- Layer 3
+
+Construction,
+  Typical Insulated Metal Door-R3,        !- Name
+  F08 Metal surface,                      !- Layer 1
+  Typical Insulation-R3;                  !- Layer 2
+
+Construction,
+  Typical Insulated Steel Framed Exterior Floor-R27, !- Name
+  25mm Stucco,                            !- Layer 1
+  5/8 in. Gypsum Board,                   !- Layer 2
+  Typical Insulation-R24,                 !- Layer 3
+  5/8 in. Gypsum Board,                   !- Layer 4
+  Typical Carpet Pad;                     !- Layer 5
+
+Construction,
+  Typical Insulated Steel Framed Exterior Wall-R16, !- Name
+  25mm Stucco,                            !- Layer 1
+  5/8 in. Gypsum Board,                   !- Layer 2
+  Typical Insulation-R15,                 !- Layer 3
+  5/8 in. Gypsum Board;                   !- Layer 4
+
+Construction,
+  Typical Overhead Door-R4,               !- Name
+  Typical Insulation-R4;                  !- Layer 1
+
+Construction,
+  U 0.36 SHGC 0.36 Simple Glazing Window, !- Name
+  U 0.36 SHGC 0.36 Simple Glazing;        !- Layer 1
+
+Construction,
+  U 0.44 SHGC 0.26 Dbl Ref-B-H Clr 6mm/13mm Air, !- Name
+  REF B CLEAR HI 6MM,                     !- Layer 1
+  AIR 13MM,                               !- Layer 2
+  CLEAR 6MM;                              !- Layer 3
+
+Construction,
+  U 0.5 SHGC 0.4 Simple Glazing Skylight, !- Name
+  U 0.5 SHGC 0.4 Simple Glazing;          !- Layer 1
+
+Construction:AirBoundary,
+  Generic Air Boundary,                   !- Name
+  None,                                   !- Air Exchange Method
+  0,                                      !- Simple Mixing Air Changes per Hour {1/hr}
+  ;                                       !- Simple Mixing Schedule Name
+
+ScheduleTypeLimits,
+  activity_level,                         !- Name
+  0,                                      !- Lower Limit Value {BasedOnField A3}
+  ,                                       !- Upper Limit Value {BasedOnField A3}
+  Continuous,                             !- Numeric Type
+  activitylevel;                          !- Unit Type
+
+ScheduleTypeLimits,
+  fractional,                             !- Name
+  0,                                      !- Lower Limit Value {BasedOnField A3}
+  1,                                      !- Upper Limit Value {BasedOnField A3}
+  Continuous,                             !- Numeric Type
+  dimensionless;                          !- Unit Type
+
+ScheduleTypeLimits,
+  on_off,                                  !- Name
+  0,                                      !- Lower Limit Value {BasedOnField A3}
+  1,                                      !- Upper Limit Value {BasedOnField A3}
+  Discrete,                               !- Numeric Type
+  availability;                           !- Unit Type
+
+ScheduleTypeLimits,
+  temperature_1,                          !- Name
+  ,                                       !- Lower Limit Value {BasedOnField A3}
+  ,                                       !- Upper Limit Value {BasedOnField A3}
+  Continuous,                             !- Numeric Type
+  temperature;                            !- Unit Type
+
+Schedule:Constant,
+  always_on_discrete,                     !- Name
+  on_off,                                  !- Schedule Type Limits Name
+  1;                                      !- Hourly Value
+
+Schedule:Day:Interval,
+  always_on_day_schedule,                 !- Name
+  fractional,                             !- Schedule Type Limits Name
+  No,                                     !- Interpolate to Timestep
+  24:00,                                  !- Time 1 {hh:mm}
+  1;                                      !- Value Until Time 1
+
+Schedule:Day:Interval,
+  doe_midrise_apt_activity_schedule_default,        !- Name
+  activity_level,                                   !- Schedule Type Limits Name
+  No,                                               !- Interpolate to Timestep
+  24:00,                                            !- Time 1 {hh:mm}
+  95;                                               !- Value Until Time 1
+
+Schedule:Day:Interval,      
+  doe_midrise_apt_activity_schedule_sdd,            !- Name
+  activity_level,                                   !- Schedule Type Limits Name
+  No,                                               !- Interpolate to Timestep
+  24:00,                                            !- Time 1 {hh:mm}
+  95;                                               !- Value Until Time 1
+
+Schedule:Day:Interval,          
+  doe_midrise_apt_activity_schedule_sdd1,           !- Name
+  activity_level,                                   !- Schedule Type Limits Name
+  No,                                               !- Interpolate to Timestep
+  24:00,                                            !- Time 1 {hh:mm}
+  95;                                               !- Value Until Time 1
+
+Schedule:Day:Interval,      
+  doe_midrise_apt_activity_schedule_wdd,            !- Name
+  activity_level,                                   !- Schedule Type Limits Name
+  No,                                               !- Interpolate to Timestep
+  24:00,                                            !- Time 1 {hh:mm}
+  95;                                               !- Value Until Time 1
+
+Schedule:Day:Interval,      
+  doe_midrise_apt_activity_schedule_wdd1,           !- Name
+  activity_level,                                   !- Schedule Type Limits Name
+  No,                                               !- Interpolate to Timestep
+  24:00,                                            !- Time 1 {hh:mm}
+  95;                                               !- Value Until Time 1
+
+Schedule:Day:Interval,
+  doe_midrise_apt_cooling_setpoint_schedule_sdd,    !- Name
+  Temperature,                                      !- Schedule Type Limits Name
+  No,                                               !- Interpolate to Timestep
+  24:00,                                            !- Time 1 {hh:mm}
+  24.4;                                             !- Value Until Time 1
+
+Schedule:Day:Interval,
+  doe_midrise_apt_cooling_setpoint_schedule_wdd,    !- Name
+  Temperature,                                      !- Schedule Type Limits Name
+  No,                                               !- Interpolate to Timestep
+  24:00,                                            !- Time 1 {hh:mm}
+  24.4;                                             !- Value Until Time 1
+
+
+Schedule:Day:Interval,
+  doe_midrise_apt_equipment_schedule_default,   !- Name
+  fractional,                             !- Schedule Type Limits Name
+  No,                                     !- Interpolate to Timestep
+  01:00,                                  !- Time 1 {hh:mm}
+  0.45,                                   !- Value Until Time 1
+  02:00,                                  !- Time 2 {hh:mm}
+  0.41,                                   !- Value Until Time 2
+  03:00,                                  !- Time 3 {hh:mm}
+  0.39,                                   !- Value Until Time 3
+  05:00,                                  !- Time 4 {hh:mm}
+  0.38,                                   !- Value Until Time 4
+  06:00,                                  !- Time 5 {hh:mm}
+  0.43,                                   !- Value Until Time 5
+  07:00,                                  !- Time 6 {hh:mm}
+  0.54,                                   !- Value Until Time 6
+  08:00,                                  !- Time 7 {hh:mm}
+  0.65,                                   !- Value Until Time 7
+  09:00,                                  !- Time 8 {hh:mm}
+  0.66,                                   !- Value Until Time 8
+  10:00,                                  !- Time 9 {hh:mm}
+  0.67,                                   !- Value Until Time 9
+  11:00,                                  !- Time 10 {hh:mm}
+  0.69,                                   !- Value Until Time 10
+  12:00,                                  !- Time 11 {hh:mm}
+  0.7,                                    !- Value Until Time 11
+  13:00,                                  !- Time 12 {hh:mm}
+  0.69,                                   !- Value Until Time 12
+  14:00,                                  !- Time 13 {hh:mm}
+  0.66,                                   !- Value Until Time 13
+  15:00,                                  !- Time 14 {hh:mm}
+  0.65,                                   !- Value Until Time 14
+  16:00,                                  !- Time 15 {hh:mm}
+  0.68,                                   !- Value Until Time 15
+  17:00,                                  !- Time 16 {hh:mm}
+  0.8,                                    !- Value Until Time 16
+  19:00,                                  !- Time 17 {hh:mm}
+  1,                                      !- Value Until Time 17
+  20:00,                                  !- Time 18 {hh:mm}
+  0.93,                                   !- Value Until Time 18
+  21:00,                                  !- Time 19 {hh:mm}
+  0.89,                                   !- Value Until Time 19
+  22:00,                                  !- Time 20 {hh:mm}
+  0.85,                                   !- Value Until Time 20
+  23:00,                                  !- Time 21 {hh:mm}
+  0.71,                                   !- Value Until Time 21
+  24:00,                                  !- Time 22 {hh:mm}
+  0.58;                                   !- Value Until Time 22
+
+Schedule:Day:Interval,
+  doe_midrise_apt_equipment_schedule_sdd,    !- Name
+  fractional,                             !- Schedule Type Limits Name
+  No,                                     !- Interpolate to Timestep
+  01:00,                                  !- Time 1 {hh:mm}
+  0.45,                                   !- Value Until Time 1
+  02:00,                                  !- Time 2 {hh:mm}
+  0.41,                                   !- Value Until Time 2
+  03:00,                                  !- Time 3 {hh:mm}
+  0.39,                                   !- Value Until Time 3
+  05:00,                                  !- Time 4 {hh:mm}
+  0.38,                                   !- Value Until Time 4
+  06:00,                                  !- Time 5 {hh:mm}
+  0.43,                                   !- Value Until Time 5
+  07:00,                                  !- Time 6 {hh:mm}
+  0.54,                                   !- Value Until Time 6
+  08:00,                                  !- Time 7 {hh:mm}
+  0.65,                                   !- Value Until Time 7
+  09:00,                                  !- Time 8 {hh:mm}
+  0.66,                                   !- Value Until Time 8
+  10:00,                                  !- Time 9 {hh:mm}
+  0.67,                                   !- Value Until Time 9
+  11:00,                                  !- Time 10 {hh:mm}
+  0.69,                                   !- Value Until Time 10
+  12:00,                                  !- Time 11 {hh:mm}
+  0.7,                                    !- Value Until Time 11
+  13:00,                                  !- Time 12 {hh:mm}
+  0.69,                                   !- Value Until Time 12
+  14:00,                                  !- Time 13 {hh:mm}
+  0.66,                                   !- Value Until Time 13
+  15:00,                                  !- Time 14 {hh:mm}
+  0.65,                                   !- Value Until Time 14
+  16:00,                                  !- Time 15 {hh:mm}
+  0.68,                                   !- Value Until Time 15
+  17:00,                                  !- Time 16 {hh:mm}
+  0.8,                                    !- Value Until Time 16
+  19:00,                                  !- Time 17 {hh:mm}
+  1,                                      !- Value Until Time 17
+  20:00,                                  !- Time 18 {hh:mm}
+  0.93,                                   !- Value Until Time 18
+  21:00,                                  !- Time 19 {hh:mm}
+  0.89,                                   !- Value Until Time 19
+  22:00,                                  !- Time 20 {hh:mm}
+  0.85,                                   !- Value Until Time 20
+  23:00,                                  !- Time 21 {hh:mm}
+  0.71,                                   !- Value Until Time 21
+  24:00,                                  !- Time 22 {hh:mm}
+  0.58;                                   !- Value Until Time 22
+
+Schedule:Day:Interval,
+  doe_midrise_apt_equipment_schedule_sdd1 ,  !- Name
+  fractional,                             !- Schedule Type Limits Name
+  No,                                     !- Interpolate to Timestep
+  01:00,                                  !- Time 1 {hh:mm}
+  0.45,                                   !- Value Until Time 1
+  02:00,                                  !- Time 2 {hh:mm}
+  0.41,                                   !- Value Until Time 2
+  03:00,                                  !- Time 3 {hh:mm}
+  0.39,                                   !- Value Until Time 3
+  05:00,                                  !- Time 4 {hh:mm}
+  0.38,                                   !- Value Until Time 4
+  06:00,                                  !- Time 5 {hh:mm}
+  0.43,                                   !- Value Until Time 5
+  07:00,                                  !- Time 6 {hh:mm}
+  0.54,                                   !- Value Until Time 6
+  08:00,                                  !- Time 7 {hh:mm}
+  0.65,                                   !- Value Until Time 7
+  09:00,                                  !- Time 8 {hh:mm}
+  0.66,                                   !- Value Until Time 8
+  10:00,                                  !- Time 9 {hh:mm}
+  0.67,                                   !- Value Until Time 9
+  11:00,                                  !- Time 10 {hh:mm}
+  0.69,                                   !- Value Until Time 10
+  12:00,                                  !- Time 11 {hh:mm}
+  0.7,                                    !- Value Until Time 11
+  13:00,                                  !- Time 12 {hh:mm}
+  0.69,                                   !- Value Until Time 12
+  14:00,                                  !- Time 13 {hh:mm}
+  0.66,                                   !- Value Until Time 13
+  15:00,                                  !- Time 14 {hh:mm}
+  0.65,                                   !- Value Until Time 14
+  16:00,                                  !- Time 15 {hh:mm}
+  0.68,                                   !- Value Until Time 15
+  17:00,                                  !- Time 16 {hh:mm}
+  0.8,                                    !- Value Until Time 16
+  19:00,                                  !- Time 17 {hh:mm}
+  1,                                      !- Value Until Time 17
+  20:00,                                  !- Time 18 {hh:mm}
+  0.93,                                   !- Value Until Time 18
+  21:00,                                  !- Time 19 {hh:mm}
+  0.89,                                   !- Value Until Time 19
+  22:00,                                  !- Time 20 {hh:mm}
+  0.85,                                   !- Value Until Time 20
+  23:00,                                  !- Time 21 {hh:mm}
+  0.71,                                   !- Value Until Time 21
+  24:00,                                  !- Time 22 {hh:mm}
+  0.58;                                   !- Value Until Time 22
+
+Schedule:Day:Interval,
+  doe_midrise_apt_equipment_schedule_wdd,   !- Name
+  fractional,                             !- Schedule Type Limits Name
+  No,                                     !- Interpolate to Timestep
+  01:00,                                  !- Time 1 {hh:mm}
+  0.45,                                   !- Value Until Time 1
+  02:00,                                  !- Time 2 {hh:mm}
+  0.41,                                   !- Value Until Time 2
+  03:00,                                  !- Time 3 {hh:mm}
+  0.39,                                   !- Value Until Time 3
+  05:00,                                  !- Time 4 {hh:mm}
+  0.38,                                   !- Value Until Time 4
+  06:00,                                  !- Time 5 {hh:mm}
+  0.43,                                   !- Value Until Time 5
+  07:00,                                  !- Time 6 {hh:mm}
+  0.54,                                   !- Value Until Time 6
+  08:00,                                  !- Time 7 {hh:mm}
+  0.65,                                   !- Value Until Time 7
+  09:00,                                  !- Time 8 {hh:mm}
+  0.66,                                   !- Value Until Time 8
+  10:00,                                  !- Time 9 {hh:mm}
+  0.67,                                   !- Value Until Time 9
+  11:00,                                  !- Time 10 {hh:mm}
+  0.69,                                   !- Value Until Time 10
+  12:00,                                  !- Time 11 {hh:mm}
+  0.7,                                    !- Value Until Time 11
+  13:00,                                  !- Time 12 {hh:mm}
+  0.69,                                   !- Value Until Time 12
+  14:00,                                  !- Time 13 {hh:mm}
+  0.66,                                   !- Value Until Time 13
+  15:00,                                  !- Time 14 {hh:mm}
+  0.65,                                   !- Value Until Time 14
+  16:00,                                  !- Time 15 {hh:mm}
+  0.68,                                   !- Value Until Time 15
+  17:00,                                  !- Time 16 {hh:mm}
+  0.8,                                    !- Value Until Time 16
+  19:00,                                  !- Time 17 {hh:mm}
+  1,                                      !- Value Until Time 17
+  20:00,                                  !- Time 18 {hh:mm}
+  0.93,                                   !- Value Until Time 18
+  21:00,                                  !- Time 19 {hh:mm}
+  0.89,                                   !- Value Until Time 19
+  22:00,                                  !- Time 20 {hh:mm}
+  0.85,                                   !- Value Until Time 20
+  23:00,                                  !- Time 21 {hh:mm}
+  0.71,                                   !- Value Until Time 21
+  24:00,                                  !- Time 22 {hh:mm}
+  0.58;                                   !- Value Until Time 22
+
+Schedule:Day:Interval,
+  doe_midrise_apt_equipment_schedule_wdd1, !- Name
+  fractional,                             !- Schedule Type Limits Name
+  No,                                     !- Interpolate to Timestep
+  01:00,                                  !- Time 1 {hh:mm}
+  0.45,                                   !- Value Until Time 1
+  02:00,                                  !- Time 2 {hh:mm}
+  0.41,                                   !- Value Until Time 2
+  03:00,                                  !- Time 3 {hh:mm}
+  0.39,                                   !- Value Until Time 3
+  05:00,                                  !- Time 4 {hh:mm}
+  0.38,                                   !- Value Until Time 4
+  06:00,                                  !- Time 5 {hh:mm}
+  0.43,                                   !- Value Until Time 5
+  07:00,                                  !- Time 6 {hh:mm}
+  0.54,                                   !- Value Until Time 6
+  08:00,                                  !- Time 7 {hh:mm}
+  0.65,                                   !- Value Until Time 7
+  09:00,                                  !- Time 8 {hh:mm}
+  0.66,                                   !- Value Until Time 8
+  10:00,                                  !- Time 9 {hh:mm}
+  0.67,                                   !- Value Until Time 9
+  11:00,                                  !- Time 10 {hh:mm}
+  0.69,                                   !- Value Until Time 10
+  12:00,                                  !- Time 11 {hh:mm}
+  0.7,                                    !- Value Until Time 11
+  13:00,                                  !- Time 12 {hh:mm}
+  0.69,                                   !- Value Until Time 12
+  14:00,                                  !- Time 13 {hh:mm}
+  0.66,                                   !- Value Until Time 13
+  15:00,                                  !- Time 14 {hh:mm}
+  0.65,                                   !- Value Until Time 14
+  16:00,                                  !- Time 15 {hh:mm}
+  0.68,                                   !- Value Until Time 15
+  17:00,                                  !- Time 16 {hh:mm}
+  0.8,                                    !- Value Until Time 16
+  19:00,                                  !- Time 17 {hh:mm}
+  1,                                      !- Value Until Time 17
+  20:00,                                  !- Time 18 {hh:mm}
+  0.93,                                   !- Value Until Time 18
+  21:00,                                  !- Time 19 {hh:mm}
+  0.89,                                   !- Value Until Time 19
+  22:00,                                  !- Time 20 {hh:mm}
+  0.85,                                   !- Value Until Time 20
+  23:00,                                  !- Time 21 {hh:mm}
+  0.71,                                   !- Value Until Time 21
+  24:00,                                  !- Time 22 {hh:mm}
+  0.58;                                   !- Value Until Time 22
+
+Schedule:Day:Interval,
+  doe_midrise_apt_heating_schedule_sdd,             !- Name
+  Temperature,                                      !- Schedule Type Limits Name
+  No,                                               !- Interpolate to Timestep
+  24:00,                                            !- Time 1 {hh:mm}
+  21.7;                                             !- Value Until Time 1
+
+Schedule:Day:Interval,
+  doe_midrise_apt_heating_schedule_wdd,             !- Name
+  Temperature,                                      !- Schedule Type Limits Name
+  No,                                               !- Interpolate to Timestep
+  24:00,                                            !- Time 1 {hh:mm}
+  21.7;                                             !- Value Until Time 1
+
+Schedule:Day:Interval,
+  doe_midrise_apt_infiltration_schedule_default,    !- Name
+  fractional,                                       !- Schedule Type Limits Name
+  No,                                               !- Interpolate to Timestep
+  24:00,                                            !- Time 1 {hh:mm}
+  1;                                                !- Value Until Time 1
+
+Schedule:Day:Interval,
+  doe_midrise_apt_infiltration_schedule_sdd,        !- Name
+  ,                                                 !- Schedule Type Limits Name
+  No,                                               !- Interpolate to Timestep
+  24:00,                                            !- Time 1 {hh:mm}
+  1;                                                !- Value Until Time 1
+
+Schedule:Day:Interval,
+  doe_midrise_apt_infiltration_schedule_sdd1,       !- Name
+  fractional,                                       !- Schedule Type Limits Name
+  No,                                               !- Interpolate to Timestep
+  24:00,                                            !- Time 1 {hh:mm}
+  1;                                                !- Value Until Time 1
+
+Schedule:Day:Interval,
+  doe_midrise_apt_infiltration_schedule_wdd,        !- Name
+  ,                                                 !- Schedule Type Limits Name
+  No,                                               !- Interpolate to Timestep
+  24:00,                                            !- Time 1 {hh:mm}
+  1;                                                !- Value Until Time 1
+
+Schedule:Day:Interval,
+  doe_midrise_apt_infiltration_schedule_wdd1,       !- Name
+  fractional,                                       !- Schedule Type Limits Name
+  No,                                               !- Interpolate to Timestep
+  24:00,                                            !- Time 1 {hh:mm}
+  1;                                                !- Value Until Time 1
+
+Schedule:Day:Interval,
+  doe_midrise_apt_lighting_schedule_default,   !- Name
+  fractional,                             !- Schedule Type Limits Name
+  No,                                     !- Interpolate to Timestep
+  04:00,                                  !- Time 1 {hh:mm}
+  0.011316031,                            !- Value Until Time 1
+  05:00,                                  !- Time 2 {hh:mm}
+  0.033948092,                            !- Value Until Time 2
+  06:00,                                  !- Time 3 {hh:mm}
+  0.0735542,                              !- Value Until Time 3
+  07:00,                                  !- Time 4 {hh:mm}
+  0.079212215,                            !- Value Until Time 4
+  08:00,                                  !- Time 5 {hh:mm}
+  0.0735542,                              !- Value Until Time 5
+  09:00,                                  !- Time 6 {hh:mm}
+  0.033948092,                            !- Value Until Time 6
+  15:00,                                  !- Time 7 {hh:mm}
+  0.022632061,                            !- Value Until Time 7
+  16:00,                                  !- Time 8 {hh:mm}
+  0.039606108,                            !- Value Until Time 8
+  17:00,                                  !- Time 9 {hh:mm}
+  0.079212215,                            !- Value Until Time 9
+  18:00,                                  !- Time 10 {hh:mm}
+  0.113160307,                            !- Value Until Time 10
+  19:00,                                  !- Time 11 {hh:mm}
+  0.152766415,                            !- Value Until Time 11
+  21:00,                                  !- Time 12 {hh:mm}
+  0.181056492,                            !- Value Until Time 12
+  22:00,                                  !- Time 13 {hh:mm}
+  0.124476338,                            !- Value Until Time 13
+  23:00,                                  !- Time 14 {hh:mm}
+  0.067896184,                            !- Value Until Time 14
+  24:00,                                  !- Time 15 {hh:mm}
+  0.028290077;                            !- Value Until Time 15
+
+Schedule:Day:Interval,
+  doe_midrise_apt_lighting_schedule_sdd,    !- Name
+  ,                                       !- Schedule Type Limits Name
+  No,                                     !- Interpolate to Timestep
+  04:00,                                  !- Time 1 {hh:mm}
+  0.011316031,                            !- Value Until Time 1
+  05:00,                                  !- Time 2 {hh:mm}
+  0.033948092,                            !- Value Until Time 2
+  06:00,                                  !- Time 3 {hh:mm}
+  0.0735542,                              !- Value Until Time 3
+  07:00,                                  !- Time 4 {hh:mm}
+  0.079212215,                            !- Value Until Time 4
+  08:00,                                  !- Time 5 {hh:mm}
+  0.0735542,                              !- Value Until Time 5
+  09:00,                                  !- Time 6 {hh:mm}
+  0.033948092,                            !- Value Until Time 6
+  15:00,                                  !- Time 7 {hh:mm}
+  0.022632061,                            !- Value Until Time 7
+  16:00,                                  !- Time 8 {hh:mm}
+  0.039606108,                            !- Value Until Time 8
+  17:00,                                  !- Time 9 {hh:mm}
+  0.079212215,                            !- Value Until Time 9
+  18:00,                                  !- Time 10 {hh:mm}
+  0.113160307,                            !- Value Until Time 10
+  19:00,                                  !- Time 11 {hh:mm}
+  0.152766415,                            !- Value Until Time 11
+  21:00,                                  !- Time 12 {hh:mm}
+  0.181056492,                            !- Value Until Time 12
+  22:00,                                  !- Time 13 {hh:mm}
+  0.124476338,                            !- Value Until Time 13
+  23:00,                                  !- Time 14 {hh:mm}
+  0.067896184,                            !- Value Until Time 14
+  24:00,                                  !- Time 15 {hh:mm}
+  0.028290077;                            !- Value Until Time 15
+
+Schedule:Day:Interval,
+  doe_midrise_apt_lighting_schedule_sdd1,  !- Name
+  fractional,                             !- Schedule Type Limits Name
+  No,                                     !- Interpolate to Timestep
+  04:00,                                  !- Time 1 {hh:mm}
+  0.011316031,                            !- Value Until Time 1
+  05:00,                                  !- Time 2 {hh:mm}
+  0.033948092,                            !- Value Until Time 2
+  06:00,                                  !- Time 3 {hh:mm}
+  0.0735542,                              !- Value Until Time 3
+  07:00,                                  !- Time 4 {hh:mm}
+  0.079212215,                            !- Value Until Time 4
+  08:00,                                  !- Time 5 {hh:mm}
+  0.0735542,                              !- Value Until Time 5
+  09:00,                                  !- Time 6 {hh:mm}
+  0.033948092,                            !- Value Until Time 6
+  15:00,                                  !- Time 7 {hh:mm}
+  0.022632061,                            !- Value Until Time 7
+  16:00,                                  !- Time 8 {hh:mm}
+  0.039606108,                            !- Value Until Time 8
+  17:00,                                  !- Time 9 {hh:mm}
+  0.079212215,                            !- Value Until Time 9
+  18:00,                                  !- Time 10 {hh:mm}
+  0.113160307,                            !- Value Until Time 10
+  19:00,                                  !- Time 11 {hh:mm}
+  0.152766415,                            !- Value Until Time 11
+  21:00,                                  !- Time 12 {hh:mm}
+  0.181056492,                            !- Value Until Time 12
+  22:00,                                  !- Time 13 {hh:mm}
+  0.124476338,                            !- Value Until Time 13
+  23:00,                                  !- Time 14 {hh:mm}
+  0.067896184,                            !- Value Until Time 14
+  24:00,                                  !- Time 15 {hh:mm}
+  0.028290077;                            !- Value Until Time 15
+
+Schedule:Day:Interval,
+  doe_midrise_apt_lighting_schedule_wdd,   !- Name
+  ,                                       !- Schedule Type Limits Name
+  No,                                     !- Interpolate to Timestep
+  04:00,                                  !- Time 1 {hh:mm}
+  0.011316031,                            !- Value Until Time 1
+  05:00,                                  !- Time 2 {hh:mm}
+  0.033948092,                            !- Value Until Time 2
+  06:00,                                  !- Time 3 {hh:mm}
+  0.0735542,                              !- Value Until Time 3
+  07:00,                                  !- Time 4 {hh:mm}
+  0.079212215,                            !- Value Until Time 4
+  08:00,                                  !- Time 5 {hh:mm}
+  0.0735542,                              !- Value Until Time 5
+  09:00,                                  !- Time 6 {hh:mm}
+  0.033948092,                            !- Value Until Time 6
+  15:00,                                  !- Time 7 {hh:mm}
+  0.022632061,                            !- Value Until Time 7
+  16:00,                                  !- Time 8 {hh:mm}
+  0.039606108,                            !- Value Until Time 8
+  17:00,                                  !- Time 9 {hh:mm}
+  0.079212215,                            !- Value Until Time 9
+  18:00,                                  !- Time 10 {hh:mm}
+  0.113160307,                            !- Value Until Time 10
+  19:00,                                  !- Time 11 {hh:mm}
+  0.152766415,                            !- Value Until Time 11
+  21:00,                                  !- Time 12 {hh:mm}
+  0.181056492,                            !- Value Until Time 12
+  22:00,                                  !- Time 13 {hh:mm}
+  0.124476338,                            !- Value Until Time 13
+  23:00,                                  !- Time 14 {hh:mm}
+  0.067896184,                            !- Value Until Time 14
+  24:00,                                  !- Time 15 {hh:mm}
+  0.028290077;                            !- Value Until Time 15
+
+Schedule:Day:Interval,
+  doe_midrise_apt_lighting_schedule_wdd1, !- Name
+  fractional,                             !- Schedule Type Limits Name
+  No,                                     !- Interpolate to Timestep
+  04:00,                                  !- Time 1 {hh:mm}
+  0.011316031,                            !- Value Until Time 1
+  05:00,                                  !- Time 2 {hh:mm}
+  0.033948092,                            !- Value Until Time 2
+  06:00,                                  !- Time 3 {hh:mm}
+  0.0735542,                              !- Value Until Time 3
+  07:00,                                  !- Time 4 {hh:mm}
+  0.079212215,                            !- Value Until Time 4
+  08:00,                                  !- Time 5 {hh:mm}
+  0.0735542,                              !- Value Until Time 5
+  09:00,                                  !- Time 6 {hh:mm}
+  0.033948092,                            !- Value Until Time 6
+  15:00,                                  !- Time 7 {hh:mm}
+  0.022632061,                            !- Value Until Time 7
+  16:00,                                  !- Time 8 {hh:mm}
+  0.039606108,                            !- Value Until Time 8
+  17:00,                                  !- Time 9 {hh:mm}
+  0.079212215,                            !- Value Until Time 9
+  18:00,                                  !- Time 10 {hh:mm}
+  0.113160307,                            !- Value Until Time 10
+  19:00,                                  !- Time 11 {hh:mm}
+  0.152766415,                            !- Value Until Time 11
+  21:00,                                  !- Time 12 {hh:mm}
+  0.181056492,                            !- Value Until Time 12
+  22:00,                                  !- Time 13 {hh:mm}
+  0.124476338,                            !- Value Until Time 13
+  23:00,                                  !- Time 14 {hh:mm}
+  0.067896184,                            !- Value Until Time 14
+  24:00,                                  !- Time 15 {hh:mm}
+  0.028290077;                            !- Value Until Time 15
+
+Schedule:Day:Interval,
+  doe_midrise_apt_occupant_schedule_default,   !- Name
+  fractional,                             !- Schedule Type Limits Name
+  No,                                     !- Interpolate to Timestep
+  07:00,                                  !- Time 1 {hh:mm}
+  1,                                      !- Value Until Time 1
+  08:00,                                  !- Time 2 {hh:mm}
+  0.85,                                   !- Value Until Time 2
+  09:00,                                  !- Time 3 {hh:mm}
+  0.39,                                   !- Value Until Time 3
+  16:00,                                  !- Time 4 {hh:mm}
+  0.25,                                   !- Value Until Time 4
+  17:00,                                  !- Time 5 {hh:mm}
+  0.3,                                    !- Value Until Time 5
+  18:00,                                  !- Time 6 {hh:mm}
+  0.52,                                   !- Value Until Time 6
+  21:00,                                  !- Time 7 {hh:mm}
+  0.87,                                   !- Value Until Time 7
+  24:00,                                  !- Time 8 {hh:mm}
+  1;                                      !- Value Until Time 8
+
+Schedule:Day:Interval,
+  doe_midrise_apt_occupant_schedule_sdd,    !- Name
+  fractional,                             !- Schedule Type Limits Name
+  No,                                     !- Interpolate to Timestep
+  07:00,                                  !- Time 1 {hh:mm}
+  1,                                      !- Value Until Time 1
+  08:00,                                  !- Time 2 {hh:mm}
+  0.85,                                   !- Value Until Time 2
+  09:00,                                  !- Time 3 {hh:mm}
+  0.39,                                   !- Value Until Time 3
+  16:00,                                  !- Time 4 {hh:mm}
+  0.25,                                   !- Value Until Time 4
+  17:00,                                  !- Time 5 {hh:mm}
+  0.3,                                    !- Value Until Time 5
+  18:00,                                  !- Time 6 {hh:mm}
+  0.52,                                   !- Value Until Time 6
+  21:00,                                  !- Time 7 {hh:mm}
+  0.87,                                   !- Value Until Time 7
+  24:00,                                  !- Time 8 {hh:mm}
+  1;                                      !- Value Until Time 8
+
+Schedule:Day:Interval,
+  doe_midrise_apt_occupant_schedule_sdd1,  !- Name
+  fractional,                             !- Schedule Type Limits Name
+  No,                                     !- Interpolate to Timestep
+  07:00,                                  !- Time 1 {hh:mm}
+  1,                                      !- Value Until Time 1
+  08:00,                                  !- Time 2 {hh:mm}
+  0.85,                                   !- Value Until Time 2
+  09:00,                                  !- Time 3 {hh:mm}
+  0.39,                                   !- Value Until Time 3
+  16:00,                                  !- Time 4 {hh:mm}
+  0.25,                                   !- Value Until Time 4
+  17:00,                                  !- Time 5 {hh:mm}
+  0.3,                                    !- Value Until Time 5
+  18:00,                                  !- Time 6 {hh:mm}
+  0.52,                                   !- Value Until Time 6
+  21:00,                                  !- Time 7 {hh:mm}
+  0.87,                                   !- Value Until Time 7
+  24:00,                                  !- Time 8 {hh:mm}
+  1;                                      !- Value Until Time 8
+
+Schedule:Day:Interval,
+  doe_midrise_apt_occupant_schedule_wdd,   !- Name
+  fractional,                             !- Schedule Type Limits Name
+  No,                                     !- Interpolate to Timestep
+  07:00,                                  !- Time 1 {hh:mm}
+  1,                                      !- Value Until Time 1
+  08:00,                                  !- Time 2 {hh:mm}
+  0.85,                                   !- Value Until Time 2
+  09:00,                                  !- Time 3 {hh:mm}
+  0.39,                                   !- Value Until Time 3
+  16:00,                                  !- Time 4 {hh:mm}
+  0.25,                                   !- Value Until Time 4
+  17:00,                                  !- Time 5 {hh:mm}
+  0.3,                                    !- Value Until Time 5
+  18:00,                                  !- Time 6 {hh:mm}
+  0.52,                                   !- Value Until Time 6
+  21:00,                                  !- Time 7 {hh:mm}
+  0.87,                                   !- Value Until Time 7
+  24:00,                                  !- Time 8 {hh:mm}
+  1;                                      !- Value Until Time 8
+
+Schedule:Day:Interval,
+  doe_midrise_apt_occupant_schedule_wdd1, !- Name
+  fractional,                             !- Schedule Type Limits Name
+  No,                                     !- Interpolate to Timestep
+  07:00,                                  !- Time 1 {hh:mm}
+  1,                                      !- Value Until Time 1
+  08:00,                                  !- Time 2 {hh:mm}
+  0.85,                                   !- Value Until Time 2
+  09:00,                                  !- Time 3 {hh:mm}
+  0.39,                                   !- Value Until Time 3
+  16:00,                                  !- Time 4 {hh:mm}
+  0.25,                                   !- Value Until Time 4
+  17:00,                                  !- Time 5 {hh:mm}
+  0.3,                                    !- Value Until Time 5
+  18:00,                                  !- Time 6 {hh:mm}
+  0.52,                                   !- Value Until Time 6
+  21:00,                                  !- Time 7 {hh:mm}
+  0.87,                                   !- Value Until Time 7
+  24:00,                                  !- Time 8 {hh:mm}
+  1;                                      !- Value Until Time 8
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!! this has been done already!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+Schedule:Week:Daily,
+  Always On Week Rule - Jan1-Dec31,       !- Name
+  always_on_day_schedule,                 !- Sunday Schedule:Day Name
+  always_on_day_schedule,                 !- Monday Schedule:Day Name
+  always_on_day_schedule,                 !- Tuesday Schedule:Day Name
+  always_on_day_schedule,                 !- Wednesday Schedule:Day Name
+  always_on_day_schedule,                 !- Thursday Schedule:Day Name
+  always_on_day_schedule,                 !- Friday Schedule:Day Name
+  always_on_day_schedule,                 !- Saturday Schedule:Day Name
+  always_on_day_schedule,                 !- Holiday Schedule:Day Name
+  always_on_day_schedule,                 !- SummerDesignDay Schedule:Day Name
+  always_on_day_schedule,                 !- WinterDesignDay Schedule:Day Name
+  always_on_day_schedule,                 !- CustomDay1 Schedule:Day Name
+  always_on_day_schedule;                 !- CustomDay2 Schedule:Day Name
+
+Schedule:Year,
+  Always On,                              !- Name
+  fractional,                             !- Schedule Type Limits Name
+  Always On Week Rule - Jan1-Dec31,       !- Schedule:Week Name 1
+  1,                                      !- Start Month 1
+  1,                                      !- Start Day 1
+  12,                                     !- End Month 1
+  31;                                     !- End Day 1
+
+Schedule:Week:Daily,
+  ApartmentMidRise Activity Schedule Week Rule - Jan1-Dec31, !- Name
+  doe_midrise_apt_activity_schedule_default, !- Sunday Schedule:Day Name
+  doe_midrise_apt_activity_schedule_default, !- Monday Schedule:Day Name
+  doe_midrise_apt_activity_schedule_default, !- Tuesday Schedule:Day Name
+  doe_midrise_apt_activity_schedule_default, !- Wednesday Schedule:Day Name
+  doe_midrise_apt_activity_schedule_default, !- Thursday Schedule:Day Name
+  doe_midrise_apt_activity_schedule_default, !- Friday Schedule:Day Name
+  doe_midrise_apt_activity_schedule_default, !- Saturday Schedule:Day Name
+  doe_midrise_apt_activity_schedule_default, !- Holiday Schedule:Day Name
+  doe_midrise_apt_activity_schedule_sdd1, !- SummerDesignDay Schedule:Day Name
+  doe_midrise_apt_activity_schedule_wdd1, !- WinterDesignDay Schedule:Day Name
+  doe_midrise_apt_activity_schedule_default, !- CustomDay1 Schedule:Day Name
+  doe_midrise_apt_activity_schedule_default; !- CustomDay2 Schedule:Day Name
+
+Schedule:Year,
+  ApartmentMidRise Activity Schedule,     !- Name
+  activity_level,                         !- Schedule Type Limits Name
+  ApartmentMidRise Activity Schedule Week Rule - Jan1-Dec31, !- Schedule:Week Name 1
+  1,                                      !- Start Month 1
+  1,                                      !- Start Day 1
+  12,                                     !- End Month 1
+  31;                                     !- End Day 1
+
+
+Schedule:Week:Daily,
+  ApartmentMidRise EQP_APT_SCH Week Rule - Jan1-Dec31, !- Name
+  doe_midrise_apt_equipment_schedule_default,   !- Sunday Schedule:Day Name
+  doe_midrise_apt_equipment_schedule_default,   !- Monday Schedule:Day Name
+  doe_midrise_apt_equipment_schedule_default,   !- Tuesday Schedule:Day Name
+  doe_midrise_apt_equipment_schedule_default,   !- Wednesday Schedule:Day Name
+  doe_midrise_apt_equipment_schedule_default,   !- Thursday Schedule:Day Name
+  doe_midrise_apt_equipment_schedule_default,   !- Friday Schedule:Day Name
+  doe_midrise_apt_equipment_schedule_default,   !- Saturday Schedule:Day Name
+  doe_midrise_apt_equipment_schedule_default,   !- Holiday Schedule:Day Name
+  doe_midrise_apt_equipment_schedule_sdd1 ,  !- SummerDesignDay Schedule:Day Name
+  doe_midrise_apt_equipment_schedule_wdd1, !- WinterDesignDay Schedule:Day Name
+  doe_midrise_apt_equipment_schedule_default,   !- CustomDay1 Schedule:Day Name
+  doe_midrise_apt_equipment_schedule_default;   !- CustomDay2 Schedule:Day Name
+
+Schedule:Year,
+  ApartmentMidRise EQP_APT_SCH,           !- Name
+  fractional,                             !- Schedule Type Limits Name
+  ApartmentMidRise EQP_APT_SCH Week Rule - Jan1-Dec31, !- Schedule:Week Name 1
+  1,                                      !- Start Month 1
+  1,                                      !- Start Day 1
+  12,                                     !- End Month 1
+  31;                                     !- End Day 1
+
+Schedule:Week:Daily,
+  ApartmentMidRise INF_APT_SCH Week Rule - Jan1-Dec31, !- Name
+  doe_midrise_apt_infiltration_schedule_default,   !- Sunday Schedule:Day Name
+  doe_midrise_apt_infiltration_schedule_default,   !- Monday Schedule:Day Name
+  doe_midrise_apt_infiltration_schedule_default,   !- Tuesday Schedule:Day Name
+  doe_midrise_apt_infiltration_schedule_default,   !- Wednesday Schedule:Day Name
+  doe_midrise_apt_infiltration_schedule_default,   !- Thursday Schedule:Day Name
+  doe_midrise_apt_infiltration_schedule_default,   !- Friday Schedule:Day Name
+  doe_midrise_apt_infiltration_schedule_default,   !- Saturday Schedule:Day Name
+  doe_midrise_apt_infiltration_schedule_default,   !- Holiday Schedule:Day Name
+  doe_midrise_apt_infiltration_schedule_sdd1,  !- SummerDesignDay Schedule:Day Name
+  doe_midrise_apt_infiltration_schedule_wdd1, !- WinterDesignDay Schedule:Day Name
+  doe_midrise_apt_infiltration_schedule_default,   !- CustomDay1 Schedule:Day Name
+  doe_midrise_apt_infiltration_schedule_default;   !- CustomDay2 Schedule:Day Name
+
+Schedule:Year,
+  ApartmentMidRise INF_APT_SCH,           !- Name
+  fractional,                             !- Schedule Type Limits Name
+  ApartmentMidRise INF_APT_SCH Week Rule - Jan1-Dec31, !- Schedule:Week Name 1
+  1,                                      !- Start Month 1
+  1,                                      !- Start Day 1
+  12,                                     !- End Month 1
+  31;                                     !- End Day 1
+
+Schedule:Week:Daily,
+  ApartmentMidRise LTG_APT_SCH Week Rule - Jan1-Dec31, !- Name
+  doe_midrise_apt_lighting_schedule_default,   !- Sunday Schedule:Day Name
+  doe_midrise_apt_lighting_schedule_default,   !- Monday Schedule:Day Name
+  doe_midrise_apt_lighting_schedule_default,   !- Tuesday Schedule:Day Name
+  doe_midrise_apt_lighting_schedule_default,   !- Wednesday Schedule:Day Name
+  doe_midrise_apt_lighting_schedule_default,   !- Thursday Schedule:Day Name
+  doe_midrise_apt_lighting_schedule_default,   !- Friday Schedule:Day Name
+  doe_midrise_apt_lighting_schedule_default,   !- Saturday Schedule:Day Name
+  doe_midrise_apt_lighting_schedule_default,   !- Holiday Schedule:Day Name
+  doe_midrise_apt_lighting_schedule_sdd1,  !- SummerDesignDay Schedule:Day Name
+  doe_midrise_apt_lighting_schedule_wdd1, !- WinterDesignDay Schedule:Day Name
+  doe_midrise_apt_lighting_schedule_default,   !- CustomDay1 Schedule:Day Name
+  doe_midrise_apt_lighting_schedule_default;   !- CustomDay2 Schedule:Day Name
+
+Schedule:Year,
+  ApartmentMidRise LTG_APT_SCH,           !- Name
+  fractional,                             !- Schedule Type Limits Name
+  ApartmentMidRise LTG_APT_SCH Week Rule - Jan1-Dec31, !- Schedule:Week Name 1
+  1,                                      !- Start Month 1
+  1,                                      !- Start Day 1
+  12,                                     !- End Month 1
+  31;                                     !- End Day 1
+
+Schedule:Week:Daily,
+  ApartmentMidRise OCC_APT_SCH Week Rule - Jan1-Dec31, !- Name
+  doe_midrise_apt_occupant_schedule_default,   !- Sunday Schedule:Day Name
+  doe_midrise_apt_occupant_schedule_default,   !- Monday Schedule:Day Name
+  doe_midrise_apt_occupant_schedule_default,   !- Tuesday Schedule:Day Name
+  doe_midrise_apt_occupant_schedule_default,   !- Wednesday Schedule:Day Name
+  doe_midrise_apt_occupant_schedule_default,   !- Thursday Schedule:Day Name
+  doe_midrise_apt_occupant_schedule_default,   !- Friday Schedule:Day Name
+  doe_midrise_apt_occupant_schedule_default,   !- Saturday Schedule:Day Name
+  doe_midrise_apt_occupant_schedule_default,   !- Holiday Schedule:Day Name
+  doe_midrise_apt_occupant_schedule_sdd1,  !- SummerDesignDay Schedule:Day Name
+  doe_midrise_apt_occupant_schedule_wdd1, !- WinterDesignDay Schedule:Day Name
+  doe_midrise_apt_occupant_schedule_default,   !- CustomDay1 Schedule:Day Name
+  doe_midrise_apt_occupant_schedule_default;   !- CustomDay2 Schedule:Day Name
+
+Schedule:Year,
+  ApartmentMidRise OCC_APT_SCH,           !- Name
+  fractional,                             !- Schedule Type Limits Name
+  ApartmentMidRise OCC_APT_SCH Week Rule - Jan1-Dec31, !- Schedule:Week Name 1
+  1,                                      !- Start Month 1
+  1,                                      !- Start Day 1
+  12,                                     !- End Month 1
+  31;                                     !- End Day 1
+
+Schedule:Constant,
+  Always Off Discrete,                    !- Name
+  ,                                       !- Schedule Type Limits Name
+  0;                                      !- Hourly Value
+
+Schedule:Constant,
+  Always On Continuous,                   !- Name
+  ,                                       !- Schedule Type Limits Name
+  1;                                      !- Hourly Value
+
+OutdoorAir:Node,
+  Model Outdoor Air Node;                 !- Name
+
+
+
+
+
+Lights,
+  2019::MidriseApartment::Apartment_Lighting, !- Name
+  2019::MidriseApartment::Apartment,      !- Zone or ZoneList or Space or SpaceList Name
+  ApartmentMidRise LTG_APT_SCH,           !- Schedule Name
+  Watts/Area,                             !- Design Level Calculation Method
+  ,                                       !- Lighting Level {W}
+  6.45834,                                !- Watts per Zone Floor Area {W/m2}
+  ,                                       !- Watts per Person {W/person}
+  0,                                      !- Return Air Fraction
+  0.6,                                    !- Fraction Radiant
+  0.2,                                    !- Fraction Visible
+  1,                                      !- Fraction Replaceable
+  General;                                !- End-Use Subcategory
+
+People,
+  2019::MidriseApartment::Apartment_People, !- Name
+  2019::MidriseApartment::Apartment,      !- Zone or ZoneList or Space or SpaceList Name
+  ApartmentMidRise OCC_APT_SCH,           !- Number of People Schedule Name
+  People/Area,                            !- Number of People Calculation Method
+  ,                                       !- Number of People
+  0.0283090965846098,                     !- People per Floor Area {person/m2}
+  ,                                       !- Floor Area per Person {m2/person}
+  0.3,                                    !- Fraction Radiant
+  ,                                       !- Sensible Heat Fraction
+  ApartmentMidRise Activity Schedule;     !- activity_level Schedule Name
+
+ElectricEquipment,
+  2019::MidriseApartment::Apartment_Electric, !- Name
+  2019::MidriseApartment::Apartment,      !- Zone or ZoneList or Space or SpaceList Name
+  ApartmentMidRise EQP_APT_SCH,           !- Schedule Name
+  Watts/Area,                             !- Design Level Calculation Method
+  ,                                       !- Design Level {W}
+  6.66999354514752,                       !- Watts per Zone Floor Area {W/m2}
+  ,                                       !- Watts per Person {W/person}
+  0,                                      !- Fraction Latent
+  0.5,                                    !- Fraction Radiant
+  0,                                      !- Fraction Lost
+  Electric Equipment;                     !- End-Use Subcategory
+
+ZoneInfiltration:DesignFlowRate,
+  2019::MidriseApartment::Apartment_Infiltration, !- Name
+  2019::MidriseApartment::Apartment,      !- Zone or ZoneList Name
+  ApartmentMidRise INF_APT_SCH,           !- Schedule Name
+  Flow/ExteriorArea,                      !- Design Flow Rate Calculation Method
+  ,                                       !- Design Flow Rate {m3/s}
+  ,                                       !- Flow per Zone Floor Area {m3/s-m2}
+  0.00056896,                             !- Flow per Exterior Surface Area {m3/s-m2}
+  ,                                       !- Air Changes per Hour {1/hr}
+  1,                                      !- Constant Term Coefficient
+  0,                                      !- Temperature Term Coefficient
+  0,                                      !- Velocity Term Coefficient
+  ;                                       !- Velocity Squared Term Coefficient

@@ -1101,11 +1101,18 @@ if __name__ == '__main__':
     #TODO: update to/from JSON eventually, or give a OBJ pickle option
 
 
-    b.write_idf()
-    b.analyze(exe='/Applications/EnergyPlus/energyplus')
-    b.load_results()
-    # v = BuildingViewer(b)
-    # v.show()
+    # print(b.zones)
+    for zk in b.zones:
+        print(b.zones[zk].name)
+        print(b.zones[zk].surfaces)
+        print('')
 
-    v = ResultsViewer(b)
-    v.show('total')
+
+    # b.write_idf()
+    # b.analyze(exe='/Applications/EnergyPlus/energyplus')
+    # b.load_results()
+    # # v = BuildingViewer(b)
+    # # v.show()
+
+    # v = ResultsViewer(b)
+    # v.show('total')

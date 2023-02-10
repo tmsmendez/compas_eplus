@@ -620,22 +620,6 @@ def write_shading(building, shading):
 def write_simulation_control(building):
 
     fh = open(building.idf_filepath, 'a')
-    # this version is from Eplus documentation
-
-    # fh.write('SimulationControl,\n')
-    # fh.write('  Yes,      !- Do Zone Sizing Calculation\n')
-    # fh.write('  No,       !- Do System Sizing Calculation\n')
-    # fh.write('  No,       !- Do Plant Sizing Calculation\n')
-    # fh.write('  Yes,      !- Run Simulation for Sizing Periods\n')
-    # fh.write('  Yes,      !- Run Simulation for Weather File Run Periods\n')
-    # fh.write('  No,       !- Do HVAC Sizing Simulation for Sizing Periods\n')
-    # fh.write('  2;        !- Maximum Number of HVAC Sizing Simulation Passes\n')
-    # fh.write('  \n')
-    # fh.write('  \n')
-    # fh.close()
-
-    # this version is from Teresa's E+ class
-
     fh.write('SimulationControl,\n')
     fh.write('  No,       !- Do Zone Sizing Calculation\n')
     fh.write('  No,       !- Do System Sizing Calculation\n')
@@ -1089,27 +1073,6 @@ def write_output_items(building):
     fh.write('  Zone Lights Electricity Energy,         !- Variable Name\n')
     fh.write('  Hourly;                                 !- Reporting Frequency\n')
     fh.write('\n')
-
-
-
-
-    # fh.write('Output:Variable,\n')
-    # fh.write('  ,                                       !- Key Value\n')
-    # fh.write('  Zone Electric Equipment Electricity Energy, !- Variable Name\n')
-    # fh.write('  Hourly;                                 !- Report\n')
-    # fh.write('\n')
-
-    # fh.write('Output:Variable,\n')
-    # fh.write('  ,                                       !- Key Value\n')
-    # fh.write('  Water Use Equipment Heating Energy,     !- Variable Name\n')
-    # fh.write('  Hourly;                                 !- Reporting Frequency\n')
-    # fh.write('\n')
-
-    # fh.write('Output:Variable,\n')
-    # fh.write('  ,                                       !- Key Value\n')
-    # fh.write('  Water Heater Electricity Energy,        !- Variable Name\n')
-    # fh.write('  Hourly;                                 !- Reporting Frequency\n')
-
     fh.write('\n')
     fh.write('\n')
 

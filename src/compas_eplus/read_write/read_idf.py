@@ -979,16 +979,16 @@ if __name__ == '__main__':
 
     for i in range(50): print('')
 
-    file = 'teresa_example_apt.idf'
+    file = 'doe_midrise_apt.idf'
     path = os.path.join(compas_eplus.DATA, 'idf_examples', file)
 
     data = get_idf_data(path)
-    # print(data.keys())
+    print(data.keys())
 
-    object = 'outdoor_air'
+    # object = 'outdoor_air'
 
-    for k in data[object]:
-        print(k)
-        for j in data[object][k]:
-            print(j)
-        print('')
+    # for k in data[object]:
+    #     print(k)
+    #     for j in data[object][k]:
+    #         print(j)
+    #     print('')
