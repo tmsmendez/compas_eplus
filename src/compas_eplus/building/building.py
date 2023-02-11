@@ -65,6 +65,9 @@ from compas.utilities import geometric_key
 from compas.datastructures import Mesh
 
 
+#TODO: update to/from JSON eventually, or give a OBJ pickle option
+
+
 
 class Building(object):
     """
@@ -317,9 +320,14 @@ class Building(object):
 
     @classmethod
     def from_idf(cls, filepath, path, wea):
-        building = cls(path, wea)
-
         data = get_idf_data(filepath)
+        building = cls(path, wea)
+        building.add_data_from_idf(data)
+        return building
+        
+
+
+    def add_data_from_idf(self, data):
         zones = data['zones']
         for zone in zones:
             zname = zones[zone]['name']
@@ -346,7 +354,7 @@ class Building(object):
                 z.surfaces.face_attribute(i, 'construction', srf['construction'])
                 z.surfaces.face_attribute(i, 'surface_type', srf['surface_type'])
                 z.surfaces.face_attribute(i, 'outside_boundary_condition', srf['outside_condition'])
-            building.add_zone(z)
+            self.add_zone(z)
         
         windows = data['windows']
         for win in windows:
@@ -355,10 +363,10 @@ class Building(object):
             w.nodes = windows[win]['nodes']
             w.building_surface = windows[win]['building_surface']
             w.construction =  windows[win]['construction']
-            building.add_window(w)
+            self.add_window(w)
 
         materials = data['materials']
-        building.add_materials_from_json_dict(None, materials)
+        self.add_materials_from_json_dict(None, materials)
 
         cons = data['constructions']
         for con in cons:
@@ -375,76 +383,73 @@ class Building(object):
                 layers_[lk] = {'name': mname, 'thickness': thick}
             con_ = {'name': name, 'layers': layers_}
             c = Construction.from_data(con_)
-            building.add_construction(c)
-        building.make_layers_dict()
+            self.add_construction(c)
+        self.make_layers_dict()
 
         schedules = data['schedules']
         for sk in schedules:
             s = Schedule.from_idf_data(schedules[sk])
-            building.add_schedule(s, sk)
+            self.add_schedule(s, sk)
         
         lights = data['lights']
         for lk in lights:
             l = Light.from_data(lights[lk])
-            building.add_light(l, lk)
+            self.add_light(l, lk)
 
         peoples = data['people']
         for pk in peoples:
             p = People.from_data(peoples[pk])
-            building.add_people(p, pk)
+            self.add_people(p, pk)
 
         eeq = data['electric_equipment']
         for ek in eeq:
             e = ElectricEquipment.from_data(eeq[ek])
-            building.add_electric_equipment(e, ek)
+            self.add_electric_equipment(e, ek)
 
         zct = data['zone_control_thermostat']
         for zk in zct:
             z = ZoneControlThermostat.from_data(zct[zk])
-            building.add_zone_control_thermostat(z, zk)
+            self.add_zone_control_thermostat(z, zk)
 
         spt = data['setpoint']
         for sk in spt:
             s = DualSetpoint.from_data(spt[sk])
-            building.add_setpoint(s, sk)
+            self.add_setpoint(s, sk)
 
         ial = data['ideal_air_load']
         for ik in ial:
             i = IdealAirLoad.from_data(ial[ik])
-            building.add_ideal_air_load(i, ik)
+            self.add_ideal_air_load(i, ik)
 
         infiltration = data['infiltration']
         for ik in infiltration:
             i = Infiltration.from_data(infiltration[ik])
-            building.add_infiltration(i, ik)
+            self.add_infiltration(i, ik)
 
         el = data['equipment_list']
         for ek in el:
             e = EquipmentList.from_data(el[ek])
-            building.add_equipment_list(e, ek)
+            self.add_equipment_list(e, ek)
 
         ec = data['equipment_connection']
         for ek in ec:
             e = EquipmentConnection.from_data(ec[ek])
-            building.add_equipment_connection(e, ek)
+            self.add_equipment_connection(e, ek)
 
         zl = data['zone_lists']
         for zlk in zl:
             zl_ = ZoneList.from_data(zl[zlk])
-            building.add_zone_list(zl_, zlk)
+            self.add_zone_list(zl_, zlk)
 
         nl = data['node_lists']
         for nlk in nl:
             nl_ = NodeList.from_data(nl[nlk])
-            building.add_node_list(nl_, nlk)
+            self.add_node_list(nl_, nlk)
 
         oa = data['outdoor_air']
         for oak in oa:
             oa = OutdoorAir.from_data(oa[oak])
-            building.add_outdoor_air(oa, oak)
-
-
-        return building
+            self.add_outdoor_air(oa, oak)
 
     def to_json(self, filepath):
         """
@@ -1096,23 +1101,12 @@ if __name__ == '__main__':
     path = compas_eplus.TEMP
     wea = compas_eplus.SEATTLE
     b = Building.from_idf(filepath, path, wea)
-    
-    #TODO: Decide to write all schedules or just needed ones. (I vote all for now)
-    #TODO: update to/from JSON eventually, or give a OBJ pickle option
 
+    b.write_idf()
+    b.analyze(exe='/Applications/EnergyPlus/energyplus')
+    b.load_results()
+    # v = BuildingViewer(b)
+    # v.show()
 
-    # print(b.zones)
-    for zk in b.zones:
-        print(b.zones[zk].name)
-        print(b.zones[zk].surfaces)
-        print('')
-
-
-    # b.write_idf()
-    # b.analyze(exe='/Applications/EnergyPlus/energyplus')
-    # b.load_results()
-    # # v = BuildingViewer(b)
-    # # v.show()
-
-    # v = ResultsViewer(b)
-    # v.show('total')
+    v = ResultsViewer(b)
+    v.show('total')

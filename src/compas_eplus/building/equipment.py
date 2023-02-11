@@ -26,7 +26,7 @@ class EquipmentList(object):
     zone_equipment_sequential_heating_fraction_schedule
     """
     def __init__(self):
-        self.__type__                                               = 'EquipmentList'
+        self.__type__                                              = 'EquipmentList'
         self.name                                                  = None
         self.load_distribution_scheme                              = None
         self.zone_equipment_object_type1                           = None
@@ -50,6 +50,19 @@ class EquipmentList(object):
         eql.zone_equipment_sequential_heating_fraction_schedule     = data['zone_equipment_sequential_heating_fraction_schedule']
         return eql
 
+    @property
+    def data(self):
+        data = {}
+        data['__type__'] = self.__type__                                            
+        data['name'] = self.name                                                
+        data['load_distribution_scheme'] = self.load_distribution_scheme                            
+        data['zone_equipment_object_type1'] = self.zone_equipment_object_type1                         
+        data['zone_equipment_name1'] = self.zone_equipment_name1                                
+        data['zone_equipment_cooling_sequence'] = self.zone_equipment_cooling_sequence                     
+        data['zone_equipment_heating_sequence'] = self.zone_equipment_heating_sequence                     
+        data['zone_equipment_sequenctial_cooling_fraction_schedule'] = self.zone_equipment_sequenctial_cooling_fraction_schedule
+        data['zone_equipment_sequential_heating_fraction_schedule'] = self.zone_equipment_sequential_heating_fraction_schedule 
+        return data
 
 class EquipmentConnection(object):
     """
@@ -79,6 +92,17 @@ class EquipmentConnection(object):
         eqc.zone_air_node                       = data['zone_air_node']
         return eqc
 
+    @property
+    def data(self):
+        data = {}
+        data['__type__'] = self.__type__                        
+        data['name'] = self.name                            
+        data['name'] = self.name                            
+        data['zone_conditioning_equipment_list'] = self.zone_conditioning_equipment_list
+        data['zone_air_inlet_node'] = self.zone_air_inlet_node             
+        data['zone_air_exhaust_node'] = self.zone_air_exhaust_node           
+        data['zone_air_node'] = self.zone_air_node                   
+        return data
 
 
 

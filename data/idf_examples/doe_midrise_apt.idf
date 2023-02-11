@@ -1,6 +1,6 @@
 ZoneControl:Thermostat,
   doe_midrise_apt_thermostat,                           !- Name
-  insert_zone_name_here,                                !- Zone or ZoneList Name
+  all_zones_list,                                !- Zone or ZoneList Name
   doe_midrise_apt_thermostat_schedule,                  !- Control Type Schedule Name
   ThermostatSetpoint:DualSetpoint,                      !- Control 1 Object Type
   doe_midrise_apt_thermostat_setpoint,                  !- Control 1 Name
@@ -130,7 +130,7 @@ Schedule:Day:Interval,
   24.4;                                                 !- Value Until Time 1
 
 ZoneHVAC:EquipmentConnections,
-  insert_zone_name_here,                                !- Zone Name
+  generic_zone,                                         !- Zone Name
   doe_midrise_apt_equipment_list,                       !- Zone Conditioning Equipment List Name
   doe_midrise_apt_inlet_node_list,                      !- Zone Air Inlet Node or NodeList Name
   doe_midrise_apt_exhaust_node_list,                    !- Zone Air Exhaust Node or NodeList Name
@@ -1549,7 +1549,7 @@ OutdoorAir:Node,
 
 Lights,
   doe_midrise_apt_lighting,               !- Name
-  insert_zone_list,                       !- Zone or ZoneList or Space or SpaceList Name
+  all_zones_list,                  !- Zone or ZoneList or Space or SpaceList Name
   doe_midrise_apt_lighting_schedule,      !- Schedule Name
   Watts/Area,                             !- Design Level Calculation Method
   ,                                       !- Lighting Level {W}
@@ -1563,7 +1563,7 @@ Lights,
 
 People,
   doe_midrise_apt_people,                 !- Name
-  insert_zone_here,                       !- Zone or ZoneList or Space or SpaceList Name
+  all_zones_list,                  !- Zone or ZoneList or Space or SpaceList Name
   doe_midrise_apt_occupant_schedule,      !- Number of People Schedule Name
   People/Area,                            !- Number of People Calculation Method
   ,                                       !- Number of People
@@ -1575,7 +1575,7 @@ People,
 
 ElectricEquipment,
   doe_midrise_apt_electric_equipment,     !- Name
-  insert_zone_here,                       !- Zone or ZoneList or Space or SpaceList Name
+  all_zones_list,                       !- Zone or ZoneList or Space or SpaceList Name
   doe_midrise_apt_equipment_schedule,     !- Schedule Name
   Watts/Area,                             !- Design Level Calculation Method
   ,                                       !- Design Level {W}
@@ -1588,7 +1588,7 @@ ElectricEquipment,
 
 ZoneInfiltration:DesignFlowRate,
   doe_midrise_apt_infiltration,           !- Name
-  insert_zone_here,                       !- Zone or ZoneList Name
+  all_zones_list,                       !- Zone or ZoneList Name
   doe_midrise_apt_infiltration_schedule,  !- Schedule Name
   Flow/ExteriorArea,                      !- Design Flow Rate Calculation Method
   ,                                       !- Design Flow Rate {m3/s}
