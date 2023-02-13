@@ -991,6 +991,10 @@ class Building(object):
                 name = mesh.face_attribute(sk, 'surface_type')
                 mesh.face_attribute(sk, 'construction', rules[name])
 
+        for wk in self.windows:
+            self.windows[wk].construction = rules['Window']
+        
+
     def make_layers_dict(self):
         """
         Makes a dictionary containing all unique layers, with names, materials and

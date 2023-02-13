@@ -52,8 +52,8 @@ b.assign_constructions_from_rules(rules)
 b.set_zone_systems()
 
 
-# v = BuildingViewer(b)
-# v.show()
+v = BuildingViewer(b)
+v.show()
 
 b.write_idf()
 b.analyze(exe='/Applications/EnergyPlus/energyplus')

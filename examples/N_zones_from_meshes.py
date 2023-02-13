@@ -46,12 +46,12 @@ vertices = [[0, 0, 0],
             [w, 0, h],
             [w, l, h],
             [0, l, h]]
-faces = [[0, 1, 2, 3],
-         [4, 7, 6, 5],
-         [0, 4, 5, 1],
-         [1, 5, 6, 2],
-         [2, 6, 7, 3],
-         [3, 7, 4, 0]]
+faces = [[0, 3, 2, 1],
+         [4, 5, 6, 7],
+         [0, 1, 5, 4],
+         [1, 2, 6, 5],
+         [2, 3, 7, 6],
+         [3, 0, 4, 7]]
 
 b = Building(path, wea)
 
@@ -68,9 +68,15 @@ for i, mesh in enumerate(meshes):
     z = Zone.from_mesh(mesh, 'zone_{}'.format(i))
     b.add_zone(z)
 
-# w = Window.from_wall_and_wwr()
+points = [[w / 4., 0, h / 4.],
+            [w / 2., 0, h / 4. ],
+            [w / 2., 0, h / 2.],
+            [w / 4., 0, h / 2.]
+            ]
 
-
+w = Window.from_points_and_zone(points, b.zones[0])
+w.construction = 'Generic Double Pane'
+b.add_window(w)
 
 data = get_idf_data(filepath)
 b.add_data_from_idf(data)
