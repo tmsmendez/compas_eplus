@@ -54,24 +54,24 @@ b.add_window(w2)
 s1 = Shading.from_json(os.path.join(compas_eplus.DATA, 'building_parts', 'shading1.json'))
 b.add_shading(s1)
 
-filepath = os.path.join(compas_eplus.DATA, 'materials', 'material_library_simple.json')
-with open(filepath, 'r') as fp:
-    lib = json.load(fp)
-b.add_materials_from_lib(lib)
+# filepath = os.path.join(compas_eplus.DATA, 'materials', 'material_library_simple.json')
+# with open(filepath, 'r') as fp:
+#     lib = json.load(fp)
+# b.add_materials_from_lib(lib)
 
-filepath = os.path.join(compas_eplus.DATA, 'constructions', 'construction_library_simple.json')
-with open(filepath, 'r') as fp:
-    lib = json.load(fp)
-b.add_constructions_from_lib(lib)
+# filepath = os.path.join(compas_eplus.DATA, 'constructions', 'construction_library_simple.json')
+# with open(filepath, 'r') as fp:
+#     lib = json.load(fp)
+# b.add_constructions_from_lib(lib)
 
-b.write_idf()
-b.analyze(exe='/Applications/EnergyPlus-9-6-0/energyplus')
+# b.write_idf()
+# b.analyze(exe='/Applications/EnergyPlus-9-6-0/energyplus')
 # b.analyze(exe='/Applications/EnergyPlus/energyplus')
 for i in range(50): print('')
-b.load_results()
-b.plot_mean_zone_temperatures(plot_type='scatter')
+# b.load_results()
+# b.plot_mean_zone_temperatures(plot_type='scatter')
 
 v = BuildingViewer(b)
 v.show()
 
-b.to_json(os.path.join(compas_eplus.DATA, 'buildings', '1zone_building.json'))
+# b.to_json(os.path.join(compas_eplus.DATA, 'buildings', '1zone_building.json'))
