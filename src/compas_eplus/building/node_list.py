@@ -31,3 +31,11 @@ class NodeList(object):
         zlst.name             = data['name']
         zlst.nodes            = data['nodes']
         return zlst
+
+    @property
+    def data(self):
+        data = {}
+        data['__type__'] = self.__type__
+        data['name']     = self.name    
+        data['nodes']    = self.nodes   
+        return data

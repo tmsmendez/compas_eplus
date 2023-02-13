@@ -28,8 +28,8 @@ ScheduleTypeLimits,
 
 ThermostatSetpoint:DualSetpoint,
   doe_midrise_apt_thermostat_setpoint,                  !- Name
-  doe_midrise_apt_heating_setpoint_schedule_name,       !- Heating Setpoint Temperature Schedule Name
-  doe_midrise_apt_cooling_setpoint_schedule_name;       !- Cooling Setpoint Temperature Schedule Name
+  doe_midrise_apt_cooling_setpoint_schedule,       !- Heating Setpoint Temperature Schedule Name
+  doe_midrise_apt_cooling_setpoint_schedule;       !- Cooling Setpoint Temperature Schedule Name
 
 ScheduleTypeLimits,
   Temperature,                                          !- Name
@@ -62,7 +62,7 @@ Schedule:Week:Daily,
   doe_midrise_apt_heating_setpoint_schedule_default;    !- CustomDay2 Schedule:Day Name
 
 Schedule:Year,
-  doe_midrise_apt_heating_schedule,                     !- Name
+  doe_midrise_apt_cooling_setpoint_schedule,                     !- Name
   Temperature,                                          !- Schedule Type Limits Name
   doe_midrise_apt_heating_setpoint_schedule_week,       !- Schedule:Week Name 1
   1,                                                    !- Start Month 1

@@ -59,28 +59,29 @@ def read_eso_preamble(building, filepath):
     del lines[:7]
     del lines[-2:]
 
-    zones = [building.zones[zk].name for zk in building.zones]
+    zones = [building.zones[zk].name.lower() for zk in building.zones]
 
     data = {}
     len_preamble = 0
     for line in lines:
+        line = line.lower()
         line = line.strip()
-        if line == 'End of Data Dictionary':
+        if line == 'end of data dictionary':
             break
         # print(line)
         len_preamble += 1
         stuff = line.split(',')
         key = stuff[0]
-        zone = stuff[2].split(' ')[0].lower()
+        zone = stuff[2].split(' ')[0]
         item = stuff[3]
         if zone in zones:
-            if 'Cooling' in item:
+            if 'cooling' in item:
                 item = 'cooling'
-            elif 'Heating' in item:
+            elif 'heating' in item:
                 item = 'heating'
-            elif 'Lights' in item:
+            elif 'lights' in item:
                 item = 'lighting'
-            elif 'Temperature' in item:
+            elif 'temperature' in item:
                 item = 'mean_air_temperature'
             
             data[key] = {'zone': zone, 'item': item}

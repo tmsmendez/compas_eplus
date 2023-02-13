@@ -84,9 +84,38 @@ class IdealAirLoad(object):
         inr.latent_heat_revovery_effectiveness      = data['latent_heat_revovery_effectiveness']        
         return inr
 
-
-
-
+    @property
+    def data(self):
+        data = {}
+        data['__type__'] =  self.__type__                             
+        data['name'] =  self.name                                 
+        data['availability_schedule_name'] =  self.availability_schedule_name           
+        data['zone_supply_air_node_name'] =  self.zone_supply_air_node_name            
+        data['zone_exhaust_air_node_name'] =  self.zone_exhaust_air_node_name           
+        data['system_inlet_air_node_name'] =  self.system_inlet_air_node_name           
+        data['max_heating_supply_temperature'] =  self.max_heating_supply_temperature       
+        data['min_cooling_supply_temperature'] =  self.min_cooling_supply_temperature       
+        data['max_heating_supply_humidity_ratio'] =  self.max_heating_supply_humidity_ratio    
+        data['min_cooling_supply_humidity_ratio'] =  self.min_cooling_supply_humidity_ratio    
+        data['heating_limit'] =  self.heating_limit                        
+        data['max_heating_air_flow_rate'] =  self.max_heating_air_flow_rate            
+        data['max_sensible_heating_capacity'] =  self.max_sensible_heating_capacity        
+        data['cooling_limit'] =  self.cooling_limit                        
+        data['maximum_cooling_air_flow_rate'] =  self.maximum_cooling_air_flow_rate        
+        data['maximum_total_cooling_capacity'] =  self.maximum_total_cooling_capacity       
+        data['heating_availability_schedule_name'] =  self.heating_availability_schedule_name   
+        data['cooling_availability_schedule_name'] =  self.cooling_availability_schedule_name   
+        data['dehimidification_control_type'] =  self.dehimidification_control_type        
+        data['cooling_sensible_heat_ratio'] =  self.cooling_sensible_heat_ratio          
+        data['humidification_control_type'] =  self.humidification_control_type          
+        data['desing_specification_outdoor_air_name'] =  self.desing_specification_outdoor_air_name
+        data['outdoor_inlet_node_name'] =  self.outdoor_inlet_node_name              
+        data['demand_controlled_ventilation_type'] =  self.demand_controlled_ventilation_type   
+        data['outdoor_air_economizer_type'] =  self.outdoor_air_economizer_type          
+        data['heat_recovery_type'] =  self.heat_recovery_type                   
+        data['sensible_heat_recovery_effectiveness'] =  self.sensible_heat_recovery_effectiveness 
+        data['latent_heat_revovery_effectiveness'] =  self.latent_heat_revovery_effectiveness   
+        return data
 
 
 

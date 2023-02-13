@@ -904,7 +904,7 @@ def write_thermostats(building):
         fh.write('  {},    !- Control 3 Name\n'.format(t.control3_object_name))
         fh.write('  {},    !- Control 4 Object Type\n'.format(t.control4_object_type))
         fh.write('  {},    !- Control 4 Name\n'.format(t.control4_object_name))
-        fh.write('  {};    !- Temperature Difference Between Cutout And Setpoint [deltaC]'.format(t.temperature_difference))
+        fh.write('  {};    !- Temperature Difference Between Cutout And Setpoint [deltaC]\n'.format(t.temperature_difference))
         fh.write('  \n')
 
     

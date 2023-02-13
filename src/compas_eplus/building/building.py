@@ -325,8 +325,6 @@ class Building(object):
         building.add_data_from_idf(data)
         return building
         
-
-
     def add_data_from_idf(self, data):
         zones = data['zones']
         for zone in zones:
