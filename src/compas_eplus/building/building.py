@@ -1086,6 +1086,59 @@ class Building(object):
                 tls.append(sk)
         self.set_schedules.update(tls)
 
+    def set_zone_systems(self):
+
+        from copy import deepcopy
+
+        eqc_key = list(self.equipment_connections.keys())[0]
+        eql_key = list(self.equipment_lists.keys())[0]
+        inl_key = list(self.node_lists.keys())[0]
+        enl_key = list(self.node_lists.keys())[1]
+        ial_key = list(self.ideal_air_loads.keys())[0]
+
+        eqc = self.equipment_connections[eqc_key]
+        eql = self.equipment_lists[eql_key]
+        inl = self.node_lists[inl_key]
+        enl = self.node_lists[enl_key]
+        ial = self.ideal_air_loads[ial_key]
+
+        for zk in self.zones:
+            zname = self.zones[zk].name
+
+            self.node_lists[zk] = NodeList.from_data(deepcopy(inl.data))
+            inlname = '{}_{}'.format(self.node_lists[zk].name, zname)
+            self.node_lists[zk].name = inlname
+            self.node_lists[zk].nodes['0'] = 'inlet_node_{}'.format(zname)
+
+            self.node_lists[zname] = NodeList.from_data(deepcopy(enl.data))
+            enlname = '{}_{}'.format(self.node_lists[zname].name, zname)
+            self.node_lists[zname].name = enlname
+            self.node_lists[zname].nodes['0'] = 'exhaust_node_{}'.format(zname)
+
+            self.ideal_air_loads[zk] = IdealAirLoad.from_data(deepcopy(ial.data))
+            ialname = '{} {}'.format(zname, self.ideal_air_loads[zk].name)
+            self.ideal_air_loads[zk].name = ialname
+            self.ideal_air_loads[zk].zone_supply_air_node_name = inlname
+            self.ideal_air_loads[zk].zone_exhaust_air_node_name = enlname
+
+            self.equipment_lists[zk] = EquipmentList.from_data(eql.data)
+            elname =  '{}_{}'.format(self.equipment_lists[zk].name, zname)
+            self.equipment_lists[zk].name = elname
+            self.equipment_lists[zk].zone_equipment_name1 = ialname
+
+            self.equipment_connections[zk] = EquipmentConnection.from_data(eqc.data)
+            self.equipment_connections[zk].name = zname
+            self.equipment_connections[zk].zone_conditioning_equipment_list = elname
+            self.equipment_connections[zk].zone_air_inlet_node = inlname
+            self.equipment_connections[zk].zone_air_exhaust_node = enlname
+            self.equipment_connections[zk].zone_air_node += '_{}'.format(zname)
+
+        del self.equipment_connections[eqc_key]
+        del self.equipment_lists[eql_key]
+        del self.node_lists[inl_key]
+        del self.node_lists[enl_key]
+        del self.ideal_air_loads[ial_key]
+
 
 if __name__ == '__main__':
 
