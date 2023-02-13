@@ -8,11 +8,7 @@ import compas_eplus
 from compas_eplus.building import Building
 from compas_eplus.building import Zone
 from compas_eplus.building import Window
-# from compas_eplus.building import Shading
-from compas_eplus.building import EquipmentList
-from compas_eplus.building import EquipmentConnection
-from compas_eplus.building import NodeList
-from compas_eplus.building import IdealAirLoad
+from compas_eplus.building import Shading
 
 from compas_eplus.viewers import BuildingViewer
 from compas_eplus.viewers import ResultsViewer
@@ -77,6 +73,9 @@ points = [[w / 4., 0, h / 4.],
 w = Window.from_points_and_zone(points, b.zones[0])
 w.construction = 'Generic Double Pane'
 b.add_window(w)
+
+sh = Shading.from_window(w, right=3)
+b.add_shading(sh)
 
 data = get_idf_data(filepath)
 b.add_data_from_idf(data)

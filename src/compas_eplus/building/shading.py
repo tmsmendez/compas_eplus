@@ -146,6 +146,9 @@ class Shading(object):
         
         """
         vertices = list(window.nodes)
+
+        
+
         v1 = subtract_vectors(vertices[3], vertices[2])
         v2 = subtract_vectors(vertices[3], vertices[0])
         n = normalize_vector(cross_vectors(v2, v1))
