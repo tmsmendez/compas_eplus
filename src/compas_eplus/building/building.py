@@ -149,6 +149,12 @@ class Building(object):
         self.srf_cpt_dict = {}
         self.material_key_dict = {}
 
+    @property
+    def area(self):
+        area = 0
+        for zk in self.zones:
+            area += self.zones[zk].area
+        return area
 
     @property
     def data(self):
@@ -700,7 +706,8 @@ class Building(object):
         None
         
         """
-        ck = len(self.constructions)
+        # ck = len(self.constructions)
+        ck = construction.name
         self.constructions[ck] = construction
         self.construction_key_dict[construction.name] = ck
 
@@ -994,7 +1001,6 @@ class Building(object):
         for wk in self.windows:
             self.windows[wk].construction = rules['Window']
         
-
     def make_layers_dict(self):
         """
         Makes a dictionary containing all unique layers, with names, materials and

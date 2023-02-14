@@ -7,12 +7,6 @@ from compas_eplus.building import Window
 from compas_eplus.read_write import get_idf_data
 
 
-from compas_eplus.building import EquipmentList
-from compas_eplus.building import EquipmentConnection
-from compas_eplus.building import NodeList
-from compas_eplus.building import IdealAirLoad
-
-
 for i in range(50): print('')
 
 file = 'doe_midrise_apt.idf'
@@ -61,5 +55,3 @@ b.load_results()
 
 v = ResultsViewer(b)
 v.show('total')
-
-#TODO: why is the deep copy needed!!!!
