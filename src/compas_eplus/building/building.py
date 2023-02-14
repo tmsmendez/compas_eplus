@@ -325,6 +325,15 @@ class Building(object):
         return building
 
     @classmethod
+    def from_quad_1zone(cls, path, wea, quad, height):
+        building = cls(path, wea)
+        mesh = make_box_from_quad(quad, height)
+        z = Zone.from_mesh(mesh, 'zone_0')
+        building.add_zone(z)
+        return building
+
+
+    @classmethod
     def from_idf(cls, filepath, path, wea):
         data = get_idf_data(filepath)
         building = cls(path, wea)
