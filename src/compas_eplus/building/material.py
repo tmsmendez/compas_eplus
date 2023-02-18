@@ -548,11 +548,11 @@ class WindowMaterialGlazingSimple(object):
 
     @property
     def data(self):
-        data = {'__type__                   ' : self.__type__,
-                'name                       ' : self.name,
-                'u_factor                   ' : self.u_factor,
-                'solar_heat_gain_coefficient' : self.solar_heat_gain_coefficient,
-                'visible_transmittance      ' : self.visible_transmittance,
+        data = {'__type__'                          : self.__type__,
+                'name'                              : self.name,
+                'u_factor'                          : self.u_factor,
+                'solar_heat_gain_coefficient'       : self.solar_heat_gain_coefficient,
+                'visible_transmittance'             : self.visible_transmittance,
                 }
         return data
     

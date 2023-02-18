@@ -11,6 +11,7 @@ import json
 import compas_eplus
 import subprocess
 import shutil
+import pickle
 
 from ast import literal_eval
 
@@ -142,12 +143,11 @@ class Building(object):
         self.zone_lists                 = {}
         self.node_lists                 = {}
         self.outdoor_airs               = {}
-        
-        self.set_schedules = set()
-
-        self.construction_key_dict = {}
-        self.srf_cpt_dict = {}
-        self.material_key_dict = {}
+        self.set_schedules              = set()
+        self.construction_key_dict      = {}
+        self.srf_cpt_dict               = {}
+        self.material_key_dict          = {}
+        self.results                    = {}
 
     @property
     def area(self):
@@ -178,6 +178,14 @@ class Building(object):
         for sk in self.shadings:
             shadings[sk] = self.shadings[sk].data
 
+        results = {}
+        for timek in self.results:
+            results[timek] = {}
+            for zk in self.results[timek]:
+                results[timek][zk] = {}
+                for rk in self.results[timek][zk]:
+                    results[timek][zk][rk] = self.results[timek][zk][rk]
+
 
         data = {'idf_filepath' : self.idf_filepath,
                 'path'         : self.path,
@@ -194,7 +202,7 @@ class Building(object):
                 'shadings': shadings,
                 'layers': self.layers,
                 'construction_key_dict': self.construction_key_dict, 
-                'mean_air_temperatures' : self.mean_air_temperatures,
+                'results' : results,
                 'material_key_dict': self.material_key_dict,
                 }
         return data
@@ -214,6 +222,7 @@ class Building(object):
         materials                  = data.get('materials') or {}
         constructions              = data.get('constructions') or {}
         shadings                   = data.get('shadings') or {}
+        results                    = data.get('results') or {}
         self.layers                = data.get('layers') or {}
         self.construction_key_dict = data.get('construction_key_dict') or {}
         self.mean_air_temperatures = data.get('mean_air_temperatures') or {}
@@ -228,6 +237,7 @@ class Building(object):
         mat_dict = {'Material': Material,
                     'MaterialNoMass': MaterialNoMass,
                     'WindowMaterialGlazing': WindowMaterialGlazing,
+                    'WindowMaterialGlazingSimple': WindowMaterialGlazingSimple,
                     'WindowMaterialGas': WindowMaterialGas, 
                     }
 
@@ -236,10 +246,18 @@ class Building(object):
             self.materials[literal_eval(mk)] = mat.from_data(materials[mk])
 
         for ck in constructions:
+            print(ck, type(ck))
             self.constructions[literal_eval(ck)] = Construction.from_data(constructions[ck])
 
         for sk in shadings:
             self.shadings[literal_eval(sk)] = Shading.from_data(shadings[sk])
+
+        for timek in results:
+            self.results[literal_eval(timek)] = {}
+            for zk in results[timek]:
+                self.results[literal_eval(timek)][literal_eval(zk)] = {}
+                for rk in results[timek][zk]:
+                    self.results[literal_eval(timek)][literal_eval(zk)][literal_eval(rk)] = results[timek][zk][rk]
 
     @classmethod
     def from_json(cls, filepath):
@@ -332,14 +350,66 @@ class Building(object):
         building.add_zone(z)
         return building
 
-
     @classmethod
     def from_idf(cls, filepath, path, wea):
         data = get_idf_data(filepath)
         building = cls(path, wea)
         building.add_data_from_idf(data)
         return building
-        
+
+    @staticmethod
+    def from_obj(filename, output=True):
+
+        """ Imports a Building object from an .obj file through Pickle.
+
+        Parameters
+        ----------
+        filename : str
+            Path to load the Building .obj from.
+        output : bool
+            Print terminal output.
+
+        Returns
+        -------
+        obj
+            Imported Building object.
+
+        """
+
+        with open(filename, 'rb') as f:
+            building = pickle.load(f)
+
+        if output:
+            print('***** Building loaded from: {0} *****'.format(filename))
+
+        return building
+
+    def to_obj(self, output=True, path=None, name=None):
+
+        """ Exports the Building object to an .obj file through Pickle.
+
+        Parameters
+        ----------
+        output : bool
+            Print terminal output.
+
+        Returns
+        -------
+        None
+
+        """
+        if not path:
+            path = self.path
+        if not name:
+            name = self.name
+        filename = os.path.join(path, name + '.obj')
+
+        with open(filename, 'wb') as f:
+            pickle.dump(self, f, protocol=2)
+
+        if output:
+            print('***** Building saved to: {0} *****\n'.format(filename))
+
     def add_data_from_idf(self, data):
         zones = data['zones']
         for zone in zones:
@@ -1178,5 +1248,5 @@ if __name__ == '__main__':
     # v = BuildingViewer(b)
     # v.show()
 
-    v = ResultsViewer(b)
-    v.show('total')
+    # v = ResultsViewer(b)
+    # v.show('total')
