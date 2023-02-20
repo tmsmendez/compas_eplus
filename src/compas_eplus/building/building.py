@@ -625,8 +625,9 @@ class Building(object):
         None
         
         """
-
-        self.windows[len(self.windows)] = window
+        wk = len(self.windows)
+        window.name = '{}_{}'.format(window.name, wk)
+        self.windows[wk] = window
 
     def add_material(self, material):
         """

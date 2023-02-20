@@ -177,9 +177,9 @@ class Window(object):
 
         
         window = cls()
-        window.name = f'win_{zone.name}_{wall_key}'
+        window.name = 'win_{}_{}'.format(zone.name, wall_key)
         window.nodes = points
-        window.building_surface = f'{zone.name}_wall_{wall_key}' 
+        window.building_surface = '{}_wall_{}'.format(zone.name, wall_key) 
         window.construction = None
         return window
 

@@ -64,18 +64,26 @@ for i, mesh in enumerate(meshes):
     z = Zone.from_mesh(mesh, 'zone_{}'.format(i))
     b.add_zone(z)
 
-points = [[w / 4., 0, h / 4.],
-            [w / 2., 0, h / 4. ],
-            [w / 2., 0, h / 2.],
-            [w / 4., 0, h / 2.]
-            ]
+points = [[w / 6., 0, h / 4.],
+          [w / 4., 0, h / 4. ],
+          [w / 4., 0, h / 2.],
+          [w / 6., 0, h / 2.]]
 
-w = Window.from_points_and_zone(points, b.zones[0])
-w.construction = 'Generic Double Pane'
-b.add_window(w)
+w1 = Window.from_points_and_zone(points, b.zones[0])
+w1.construction = 'Generic Double Pane'
+b.add_window(w1)
 
-sh = Shading.from_window(w, right=3)
+sh = Shading.from_window(w1, right=3)
 b.add_shading(sh)
+
+points = [[(w / 4.) * 2, 0, h / 4.],
+          [(w / 3.) * 2, 0, h / 4. ],
+          [(w / 3.) * 2, 0, h / 2.],
+          [(w / 4.) * 2, 0, h / 2.]]
+
+w2 = Window.from_points_and_zone(points, b.zones[0])
+w2.construction = 'Generic Double Pane'
+b.add_window(w2)
 
 data = get_idf_data(filepath)
 b.add_data_from_idf(data)
