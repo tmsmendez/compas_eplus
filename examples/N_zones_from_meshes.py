@@ -98,12 +98,25 @@ b.assign_constructions_from_rules(rules)
 
 b.set_zone_systems()
 
-v = BuildingViewer(b)
-v.show()
+# v = BuildingViewer(b)
+# v.show()
 
 b.write_idf()
 b.analyze(exe='/Applications/EnergyPlus/energyplus')
 b.load_results()
 
-v = ResultsViewer(b)
-v.show('total')
+tot_heat = 0
+tot_cool = 0
+tot_light = 0
+for key in b.results:
+    for zone in b.results[key]:
+        tot_heat += b.results[key][zone]['heating'] 
+        tot_cool += b.results[key][zone]['cooling']
+        tot_light += b.results[key][zone]['lighting']
+
+total = tot_heat + tot_cool + tot_light
+print(tot_heat, tot_cool, tot_light)
+
+
+# v = ResultsViewer(b)
+# v.show('total')

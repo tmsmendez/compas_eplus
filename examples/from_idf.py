@@ -15,8 +15,6 @@ b = Building.from_idf(filepath, path, wea)
 b.write_idf()
 b.analyze(exe='/Applications/EnergyPlus/energyplus')
 b.load_results()
-# v = BuildingViewer(b)
-# v.show()
 
 v = ResultsViewer(b)
 v.show('total')
