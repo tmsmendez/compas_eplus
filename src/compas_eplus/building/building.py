@@ -1037,7 +1037,7 @@ class Building(object):
         idf = self.idf_filepath
         if not exe:
             exe = 'energyplus'
-        out = os.path.join(compas_eplus.TEMP, 'eplus_output')
+        out = os.path.join(self.path, 'eplus_output')
 
         if delete:
             try:
