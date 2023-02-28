@@ -246,7 +246,7 @@ class Building(object):
             self.materials[literal_eval(mk)] = mat.from_data(materials[mk])
 
         for ck in constructions:
-            print(ck, type(ck))
+            # print(ck, type(ck))
             self.constructions[literal_eval(ck)] = Construction.from_data(constructions[ck])
 
         for sk in shadings:
@@ -1076,6 +1076,8 @@ class Building(object):
             sks = mesh.faces()
             for sk in sks:
                 name = mesh.face_attribute(sk, 'surface_type')
+                # print(name)
+                # print(rules[name])
                 mesh.face_attribute(sk, 'construction', rules[name])
 
         for wk in self.windows:
