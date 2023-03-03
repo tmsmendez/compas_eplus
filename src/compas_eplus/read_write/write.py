@@ -394,21 +394,22 @@ def write_material(building, mat, thickness, layer_name):
     -------
     None
     """
-    fh = open(building.idf_filepath, 'a')
-    fh.write('\n')
-    fh.write('Material,\n')
-    fh.write('  {},     !- Name\n'.format(layer_name))
-    fh.write('  {},     !- Roughness\n'.format(mat.roughness))
-    fh.write('  {},     !- Thickness (m)\n'.format(thickness))
-    fh.write('  {},     !- Conductivity (W/m-K)\n'.format(mat.conductivity))
-    fh.write('  {},     !- Density (kg/m3)\n'.format(mat.density))
-    fh.write('  {},     !- Specific Heat (J/kg-K)\n'.format(mat.specific_heat))    
-    fh.write('  {},     !- Thermal Absorptance\n'.format(mat.thermal_absorptance))
-    fh.write('  {},     !- Solar Absorptance\n'.format(mat.solar_absorptance))
-    fh.write('  {};     !- Visible Absorptance\n'.format(mat.visible_absorptance))
-    fh.write('\n')
-    fh.write('\n')
-    fh.close()
+    if thickness:
+        fh = open(building.idf_filepath, 'a')
+        fh.write('\n')
+        fh.write('Material,\n')
+        fh.write('  {},     !- Name\n'.format(layer_name))
+        fh.write('  {},     !- Roughness\n'.format(mat.roughness))
+        fh.write('  {},     !- Thickness (m)\n'.format(thickness))
+        fh.write('  {},     !- Conductivity (W/m-K)\n'.format(mat.conductivity))
+        fh.write('  {},     !- Density (kg/m3)\n'.format(mat.density))
+        fh.write('  {},     !- Specific Heat (J/kg-K)\n'.format(mat.specific_heat))    
+        fh.write('  {},     !- Thermal Absorptance\n'.format(mat.thermal_absorptance))
+        fh.write('  {},     !- Solar Absorptance\n'.format(mat.solar_absorptance))
+        fh.write('  {};     !- Visible Absorptance\n'.format(mat.visible_absorptance))
+        fh.write('\n')
+        fh.write('\n')
+        fh.close()
 
 
 def write_zone_surfaces(building, zone):
@@ -546,7 +547,8 @@ def write_constructions(building):
     fh.write('\n')
     for ck in building.constructions:
         name = building.constructions[ck].name
-        layers = [building.constructions[ck].layers[lk]['name'] for lk in building.constructions[ck].layers] 
+        layers = [building.constructions[ck].layers[lk]['name'] for lk in building.constructions[ck].layers]
+        types = [building.materials[building.material_key_dict[lname]].__type__ for lname in layers]
         thicks = [building.constructions[ck].layers[lk]['thickness'] for lk in building.constructions[ck].layers] 
         fh.write('Construction,\n')
         fh.write('  {},\t\t\t\t\t!- Name\n'.format(name))
@@ -557,6 +559,8 @@ def write_constructions(building):
                 sep = ','
             if thicks[i] > 0:
                 lname = '{} {}mm'.format(layer, round(thicks[i]*1000, 1))
+            elif thicks[i] <= 0 and types[i] == 'Material':
+                    continue
             else:
                 lname = '{}'.format(layer)
             fh.write('  {}{}\t\t\t\t\t!- Layer {}\n'.format(lname, sep, i))
