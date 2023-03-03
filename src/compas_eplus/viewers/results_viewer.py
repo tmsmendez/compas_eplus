@@ -84,8 +84,8 @@ class ResultsViewer(object):
         data = {}
         counter = 0
         for i, b in enumerate(buildings):
-            zks = [zk for zk in self.building.zones] 
-            zones = [self.building.zones[zk].name for zk in self.building.zones] 
+            zks = [zk for zk in b.zones] 
+            zones = [b.zones[zk].name for zk in b.zones] 
             if self.timeframe == 'daily':
                 results = {}
                 # day = 0
@@ -112,9 +112,9 @@ class ResultsViewer(object):
                     cool = results[key][zone]['cooling'] * self.multiplier[self.eui_units]
                     light = results[key][zone]['lighting'] * self.multiplier[self.eui_units]
                     if self.area_normalize:
-                        heat /= self.building.zones[zks[j]].area
-                        cool /= self.building.zones[zks[j]].area
-                        light /= self.building.zones[zks[j]].area
+                        heat /= b.zones[zks[j]].area
+                        cool /= b.zones[zks[j]].area
+                        light /= b.zones[zks[j]].area
 
                     data[counter] = {'zone': '{}_{}_{}'.format(zone, b.name, i),
                                      'mean_air_temperature': results[key][zone]['mean_air_temperature'],

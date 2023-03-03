@@ -28,20 +28,3 @@ v.compare('cooling')
 
 # v = BuildingViewer(b1)
 # v.show()
-
-
-
-"""
-Homework
---------
-
-Complex
-- Read and apply schedules from IDF
-- Make sure set-points are imported from IDF too
-- Try to implement model where zones have different programs
-
-Easy
-- Make the comparison tool plot the delta between two data sets
-- Make EUI map plot
-
-"""
