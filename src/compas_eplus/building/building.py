@@ -34,6 +34,8 @@ from compas_eplus.building.zone import ZoneSurfaces
 
 from compas_eplus.building.schedule import Schedule
 from compas_eplus.building.light import Light
+from compas_eplus.building.light import DaylightingReferencePoint
+from compas_eplus.building.light import DaylightingControls
 from compas_eplus.building.people import People
 from compas_eplus.building.electric_eq import ElectricEquipment
 from compas_eplus.building.zone_control_thermostat import ZoneControlThermostat
@@ -124,30 +126,34 @@ class Building(object):
         self.terrain = 'City'
         self.solar_distribution = 'FullExteriorWithReflections'
 
-        self.zones                      = {}
-        self.windows                    = {}
-        self.materials                  = {}
-        self.constructions              = {}
-        self.shadings                   = {}
-        self.layers                     = {}
-        self.schedules                  = {}
-        self.lights                     = {}
-        self.peoples                    = {}
-        self.electric_equipments        = {}
-        self.zone_control_thermostats   = {}
-        self.setpoints                  = {}
-        self.ideal_air_loads            = {}
-        self.infiltrations              = {}
-        self.equipment_lists            = {}
-        self.equipment_connections      = {}
-        self.zone_lists                 = {}
-        self.node_lists                 = {}
-        self.outdoor_airs               = {}
-        self.set_schedules              = set()
-        self.construction_key_dict      = {}
-        self.srf_cpt_dict               = {}
-        self.material_key_dict          = {}
-        self.results                    = {}
+        self.daylighting_controls_height = .8
+
+        self.zones                        = {}
+        self.windows                      = {}
+        self.materials                    = {}
+        self.constructions                = {}
+        self.shadings                     = {}
+        self.layers                       = {}
+        self.schedules                    = {}
+        self.lights                       = {}
+        self.daylighting_reference_points = {}
+        self.daylighting_controls         = {}
+        self.peoples                      = {}
+        self.electric_equipments          = {}
+        self.zone_control_thermostats     = {}
+        self.setpoints                    = {}
+        self.ideal_air_loads              = {}
+        self.infiltrations                = {}
+        self.equipment_lists              = {}
+        self.equipment_connections        = {}
+        self.zone_lists                   = {}
+        self.node_lists                   = {}
+        self.outdoor_airs                 = {}
+        self.set_schedules                = set()
+        self.construction_key_dict        = {}
+        self.srf_cpt_dict                 = {}
+        self.material_key_dict            = {}
+        self.results                      = {}
 
     @property
     def area(self):
@@ -534,6 +540,16 @@ class Building(object):
             oa = OutdoorAir.from_data(oa[oak])
             self.add_outdoor_air(oa, oak)
 
+        dp = data['daylighting:referencepoint']
+        for ptk in dp:
+            pt = DaylightingReferencePoint.from_data(dp[ptk])
+            self.add_daylighting_reference_point(pt, ptk)
+
+        dc = data['daylighting_controls']
+        for dck in dc:
+            d = DaylightingControls.from_data(dc[dck])
+            self.add_daylighting_controls(d, dck)
+
     def to_json(self, filepath):
         """
         Serialize the data representation of the building to a JSON file
@@ -710,14 +726,14 @@ class Building(object):
         
         """
 
-        layers = {}
-        count = 0
-        for lk in construction.layers:
-            th = construction.layers[lk]['thickness']
-            if th:
-                layers[count] = construction.layers[lk]
-                count += 1
-        construction.layers = layers
+        # layers = {}
+        # count = 0
+        # for lk in construction.layers:
+        #     th = construction.layers[lk]['thickness']
+        #     if th:
+        #         layers[count] = construction.layers[lk]
+        #         count += 1
+        # construction.layers = layers
         ck = construction.name
         self.constructions[ck] = construction
         self.construction_key_dict[construction.name] = ck
@@ -737,6 +753,38 @@ class Building(object):
         
         """
         self.schedules[sk] = schedule
+
+    def add_daylighting_reference_point(self, drpt, ptk):
+        """
+        Adds a daylight reference point object to the building datastructure.
+
+        Parameters
+        ----------
+        drpt: object
+            The daylight reference point object to be added
+        
+        Returns
+        -------
+        None
+        
+        """
+        self.daylighting_reference_points[ptk] = drpt
+
+    def add_daylighting_controls(self, dc, dck):
+        """
+        Adds a daylight controls object to the building datastructure.
+
+        Parameters
+        ----------
+        drpt: object
+            The daylight controls point object to be added
+        
+        Returns
+        -------
+        None
+        
+        """
+        self.daylighting_controls[dck] = dc
 
     def add_light(self, light, lk):
         """
@@ -1118,12 +1166,16 @@ class Building(object):
         inl_key = list(self.node_lists.keys())[0]
         enl_key = list(self.node_lists.keys())[1]
         ial_key = list(self.ideal_air_loads.keys())[0]
+        dlc_key = list(self.daylighting_controls.keys())[0]
+        dlr_key = list(self.daylighting_reference_points.keys())[0]
 
         eqc = self.equipment_connections[eqc_key]
         eql = self.equipment_lists[eql_key]
         inl = self.node_lists[inl_key]
         enl = self.node_lists[enl_key]
         ial = self.ideal_air_loads[ial_key]
+        dlc = self.daylighting_controls[dlc_key]
+        # dlr = self.daylighting_reference_points[dlr_key]
 
         for zk in self.zones:
             zname = self.zones[zk].name
@@ -1156,11 +1208,31 @@ class Building(object):
             self.equipment_connections[zk].zone_air_exhaust_node = enlname
             self.equipment_connections[zk].zone_air_node += '_{}'.format(zname)
 
+            self.daylighting_controls[zk] = DaylightingControls.from_data(deepcopy(dlc.data))
+            dc_name = 'daylighting_controls_{}'.format(zname)
+            dc_ref_pt_name = 'daylighting_ref_pt_{}'.format(zname)
+            x, y, _ = self.zones[zk].centroid_xy
+            self.daylighting_controls[zk].name = dc_name
+            self.daylighting_controls[zk].zone_name = zname
+            self.daylighting_controls[zk].glare_reference_point = dc_ref_pt_name
+            self.daylighting_controls[zk].reference_points = {0: self.daylighting_controls[zk].reference_points[0]}
+            self.daylighting_controls[zk].reference_points[0]['ref_pt_name'] = dc_ref_pt_name
+            dl_rpt = DaylightingReferencePoint.from_data({'name': dc_ref_pt_name,
+                                                                 'zone_name': zname,
+                                                                 'x': x,
+                                                                 'y': y,
+                                                                 'z': self.daylighting_controls_height,
+                                                                 })
+            self.daylighting_reference_points[dc_ref_pt_name] = dl_rpt
+
+
         del self.equipment_connections[eqc_key]
         del self.equipment_lists[eql_key]
         del self.node_lists[inl_key]
         del self.node_lists[enl_key]
         del self.ideal_air_loads[ial_key]
+        del self.daylighting_controls[dlc_key]
+        del self.daylighting_reference_points[dlr_key]
 
 
 if __name__ == '__main__':

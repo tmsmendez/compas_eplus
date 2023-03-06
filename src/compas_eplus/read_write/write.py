@@ -44,6 +44,7 @@ def write_idf_from_building(building):
     write_hvac(building)
     write_node_lists(building)
     write_outdoor_airs(building)
+    write_daylight(building)
 
     write_output_items(building)
 
@@ -1032,6 +1033,48 @@ def write_outdoor_airs(building):
         fh.write('  {},       !- Outdoor Air Flow per Zone Floor Area [m3/s-m2]\n'.format(oa.outdoor_air_flow_zone_area))
         fh.write('  {},       !- Outdoor Air Flow per Zone [m3/s]\n'.format(oa.outdoor_air_zone))
         fh.write('  {};       !- Outdoor Air Flow Air Changes per Hour [1/hr]\n'.format(oa.outdoor_air_flow_air_changes_per_hour))
+        fh.write('\n')
+    fh.close()
+
+
+def write_daylight(building):
+    fh = open(building.idf_filepath, 'a')
+    for dck in building.daylighting_controls:
+        dc = building.daylighting_controls[dck]
+        fh.write('Daylighting:Controls,\n')
+        fh.write('  {},     !- Name\n'.format(dc.name))
+        fh.write('  {},     !- Zone or Space Name\n'.format(dc.zone_name))
+        fh.write('  {},     !- Daylighting Method\n'.format(dc.daylighting_method))
+        fh.write('  {},     !- Availability Schedule Name\n'.format(dc.availability_schedule))
+        fh.write('  {},     !- Lighting Control Type\n'.format(dc.lighting_control_type))
+        fh.write('  {},     !- Minimum Input Power Fraction for Continuous or ContinuousOff Dimming Control\n'.format(dc.min_input_power_fraction))
+        fh.write('  {},     !- Minimum Light Output Fraction for Continuous or ContinuousOff Dimming Control\n'.format(dc.min_light_output_fraction))
+        fh.write('  {},     !- Number of Stepped Control Steps\n'.format(dc.num_stepped_control_steps))
+        fh.write('  {},     !- Probability Lighting will be Reset When Needed in Manual Stepped Control\n'.format(dc.probability_lighting_reset))
+        fh.write('  {},     !- Glare Calculation Daylighting Reference Point Name\n'.format(dc.glare_reference_point))
+        fh.write('  {},     !- Glare Calculation Azimuth Angle of View Direction Clockwise from Zone y-Axis [deg]\n'.format(dc.glare_azimut_angle))
+        fh.write('  {},     !- Maximum Allowable Discomfort Glare Index\n'.format(dc.max_allowable_discomfort_glare_index))
+        fh.write('  {},     !- DElight Gridding Resolution [m2]\n'.format(dc.delight_gridding_resolution))
+        for rpk in building.daylighting_controls[dck].reference_points:
+            rpt = building.daylighting_controls[dck].reference_points[rpk]
+            rpt_name = rpt['ref_pt_name']
+            rpt_frac = rpt['ref_pt_fraction']
+            rpt_illm = rpt['illuminance_setpt']
+            sep = ';'
+            # print(rpt_name)
+            fh.write('  {}, !- Daylighting Reference Point Name {}\n'.format(rpt_name, rpk + 1))
+            fh.write('  {},  !- Fraction of Lights Controlled by Reference Point {}\n'.format(rpt_frac, rpk + 1))
+            fh.write('  {}{}  !- Illuminance Setpoint at Reference Point {} [lux]\n'.format(rpt_illm, sep, rpk + 1))
+        fh.write('\n')
+
+    for drpk in building.daylighting_reference_points:
+        rpt = building.daylighting_reference_points[drpk]
+        fh.write('Daylighting:ReferencePoint,\n')
+        fh.write('  {},           !- Name\n'.format(rpt.name))
+        fh.write('  {},           !- Zone or Space Name\n'.format(rpt.zone_name))
+        fh.write('  {},           !- X-Coordinate of Reference Point [m]\n'.format(rpt.x))
+        fh.write('  {},           !- Y-Coordinate of Reference Point [m]\n'.format(rpt.y))
+        fh.write('  {};           !- Z-Coordinate of Reference Point [m]\n'.format(rpt.z))
         fh.write('\n')
     fh.close()
 

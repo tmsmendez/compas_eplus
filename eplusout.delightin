@@ -1,0 +1,345 @@
+Version EPlus : DElight input generated from EnergyPlus processed input  YMD=2023.03.06 14:16
+
+Building_Name Building
+Site_Latitude       47.4700
+Site_Longitude    -122.3200
+Site_Altitude      400.2625
+Bldg_Azimuth         0.0000
+Site_Time_Zone      -8.0000
+Atm_Moisture  0.07 0.07 0.07 0.07 0.07 0.07 0.07 0.07 0.07 0.07 0.07 0.07
+Atm_Turbidity 0.12 0.12 0.12 0.12 0.12 0.12 0.12 0.12 0.12 0.12 0.12 0.12
+
+ZONES
+N_Zones    2
+
+ZONE DATA
+Zone ZONE_0
+BldgSystem_Zone_Origin       0.0000      0.0000      0.0000
+Zone_Azimuth          0.0000
+Zone_Multiplier     1
+Zone_Floor_Area    1076.3910
+Zone_Volume       10594.4100
+Zone_Installed_Lighting       0.6000
+Min_Input_Power          0.3000
+Min_Light_Fraction       0.2000
+Light_Ctrl_Steps     1
+Light_Ctrl_Prob          1.0000
+View_Azimuth  0.0
+Max_Grid_Node_Area       1.0764
+
+ZONE LIGHTING SCHEDULES
+N_Lt_Scheds 0
+
+ZONE SURFACES
+N_Surfaces    6
+
+ZONE SURFACE DATA
+Surface ZONE_0_WALL_2
+WCS_Azimuth     180.0000
+WCS_Tilt         90.0000
+Vis_Refl          0.3000
+Ext_Refl          0.3000
+Gnd_Refl     0.2
+N_WCS_Vertices      4
+Vertex       0.0000      0.0000      0.0000
+Vertex      32.8084      0.0000      0.0000
+Vertex      32.8084      0.0000      9.8425
+Vertex       0.0000      0.0000      9.8425
+
+SURFACE WINDOWS
+N_Windows      1
+
+SURFACE WINDOW DATA
+Window     WIN_ZONE_0_2_0
+Glass_Type    10003
+Shade_Flag   0
+Overhang_Fin_Depth    0.0 0.0 0.0
+Overhang_Fin_Distance 0.0 0.0 0.0
+N_WCS_Vertices    4
+Vertex      32.6444      0.0000      7.9035
+Vertex       0.1640      0.0000      7.9035
+Vertex       0.1640      0.0000      1.9390
+Vertex      32.6444      0.0000      1.9390
+
+SURFACE CFS
+N_CFS      0
+
+ZONE SURFACE DATA
+Surface ZONE_0_WALL_3
+WCS_Azimuth      90.0000
+WCS_Tilt         90.0000
+Vis_Refl          0.3000
+Ext_Refl          0.0000
+Gnd_Refl     0.2
+N_WCS_Vertices      4
+Vertex      32.8084      0.0000      0.0000
+Vertex      32.8084     32.8084      0.0000
+Vertex      32.8084     32.8084      9.8425
+Vertex      32.8084      0.0000      9.8425
+
+SURFACE WINDOWS
+N_Windows      0
+
+SURFACE CFS
+N_CFS      0
+
+ZONE SURFACE DATA
+Surface ZONE_0_WALL_4
+WCS_Azimuth       0.0000
+WCS_Tilt         90.0000
+Vis_Refl          0.3000
+Ext_Refl          0.3000
+Gnd_Refl     0.2
+N_WCS_Vertices      4
+Vertex      32.8084     32.8084      0.0000
+Vertex       0.0000     32.8084      0.0000
+Vertex       0.0000     32.8084      9.8425
+Vertex      32.8084     32.8084      9.8425
+
+SURFACE WINDOWS
+N_Windows      0
+
+SURFACE CFS
+N_CFS      0
+
+ZONE SURFACE DATA
+Surface ZONE_0_WALL_5
+WCS_Azimuth     270.0000
+WCS_Tilt         90.0000
+Vis_Refl          0.3000
+Ext_Refl          0.3000
+Gnd_Refl     0.2
+N_WCS_Vertices      4
+Vertex       0.0000     32.8084      0.0000
+Vertex       0.0000      0.0000      0.0000
+Vertex       0.0000      0.0000      9.8425
+Vertex       0.0000     32.8084      9.8425
+
+SURFACE WINDOWS
+N_Windows      0
+
+SURFACE CFS
+N_CFS      0
+
+ZONE SURFACE DATA
+Surface ZONE_0_FLOOR
+WCS_Azimuth     180.0000
+WCS_Tilt        180.0000
+Vis_Refl          0.2000
+Ext_Refl          0.8000
+Gnd_Refl     0.2
+N_WCS_Vertices      4
+Vertex       0.0000      0.0000      0.0000
+Vertex       0.0000     32.8084      0.0000
+Vertex      32.8084     32.8084      0.0000
+Vertex      32.8084      0.0000      0.0000
+
+SURFACE WINDOWS
+N_Windows      0
+
+SURFACE CFS
+N_CFS      0
+
+ZONE SURFACE DATA
+Surface ZONE_0_CEILING
+WCS_Azimuth      90.0000
+WCS_Tilt          0.0000
+Vis_Refl          0.8000
+Ext_Refl          0.3500
+Gnd_Refl     0.2
+N_WCS_Vertices      4
+Vertex       0.0000      0.0000      9.8425
+Vertex      32.8084      0.0000      9.8425
+Vertex      32.8084     32.8084      9.8425
+Vertex       0.0000     32.8084      9.8425
+
+SURFACE WINDOWS
+N_Windows      0
+
+SURFACE CFS
+N_CFS      0
+
+ZONE REFERENCE POINTS
+N_Ref_Pts    1
+
+ZONE REFERENCE POINT DATA
+Reference_Point DAYLIGHTING_REF_PT_ZONE_0
+RefPt_WCS_Coords      16.4042     16.4042      2.6247
+Zone_Fraction       1.0000
+Light_Set_Pt      46.4515
+Light_Ctrl_Type    1
+
+ZONE DATA
+Zone ZONE_1
+BldgSystem_Zone_Origin       0.0000      0.0000      0.0000
+Zone_Azimuth          0.0000
+Zone_Multiplier     1
+Zone_Floor_Area    1076.3910
+Zone_Volume       10594.4100
+Zone_Installed_Lighting       0.6000
+Min_Input_Power          0.3000
+Min_Light_Fraction       0.2000
+Light_Ctrl_Steps     1
+Light_Ctrl_Prob          1.0000
+View_Azimuth  0.0
+Max_Grid_Node_Area       1.0764
+
+ZONE LIGHTING SCHEDULES
+N_Lt_Scheds 0
+
+ZONE SURFACES
+N_Surfaces    6
+
+ZONE SURFACE DATA
+Surface ZONE_1_WALL_2
+WCS_Azimuth     180.0000
+WCS_Tilt         90.0000
+Vis_Refl          0.3000
+Ext_Refl          0.3000
+Gnd_Refl     0.2
+N_WCS_Vertices      4
+Vertex      32.8084      0.0000      0.0000
+Vertex      65.6168      0.0000      0.0000
+Vertex      65.6168      0.0000      9.8425
+Vertex      32.8084      0.0000      9.8425
+
+SURFACE WINDOWS
+N_Windows      1
+
+SURFACE WINDOW DATA
+Window     WIN_ZONE_1_2_1
+Glass_Type    10003
+Shade_Flag   0
+Overhang_Fin_Depth    0.0 0.0 0.0
+Overhang_Fin_Distance 0.0 0.0 0.0
+N_WCS_Vertices    4
+Vertex      65.4528      0.0000      5.9154
+Vertex      32.9724      0.0000      5.9154
+Vertex      32.9724      0.0000      3.9272
+Vertex      65.4528      0.0000      3.9272
+
+SURFACE CFS
+N_CFS      0
+
+ZONE SURFACE DATA
+Surface ZONE_1_WALL_3
+WCS_Azimuth      90.0000
+WCS_Tilt         90.0000
+Vis_Refl          0.3000
+Ext_Refl          0.3000
+Gnd_Refl     0.2
+N_WCS_Vertices      4
+Vertex      65.6168      0.0000      0.0000
+Vertex      65.6168     32.8084      0.0000
+Vertex      65.6168     32.8084      9.8425
+Vertex      65.6168      0.0000      9.8425
+
+SURFACE WINDOWS
+N_Windows      0
+
+SURFACE CFS
+N_CFS      0
+
+ZONE SURFACE DATA
+Surface ZONE_1_WALL_4
+WCS_Azimuth       0.0000
+WCS_Tilt         90.0000
+Vis_Refl          0.3000
+Ext_Refl          0.3000
+Gnd_Refl     0.2
+N_WCS_Vertices      4
+Vertex      65.6168     32.8084      0.0000
+Vertex      32.8084     32.8084      0.0000
+Vertex      32.8084     32.8084      9.8425
+Vertex      65.6168     32.8084      9.8425
+
+SURFACE WINDOWS
+N_Windows      0
+
+SURFACE CFS
+N_CFS      0
+
+ZONE SURFACE DATA
+Surface ZONE_1_WALL_5
+WCS_Azimuth     270.0000
+WCS_Tilt         90.0000
+Vis_Refl          0.3000
+Ext_Refl          0.0000
+Gnd_Refl     0.2
+N_WCS_Vertices      4
+Vertex      32.8084     32.8084      0.0000
+Vertex      32.8084      0.0000      0.0000
+Vertex      32.8084      0.0000      9.8425
+Vertex      32.8084     32.8084      9.8425
+
+SURFACE WINDOWS
+N_Windows      0
+
+SURFACE CFS
+N_CFS      0
+
+ZONE SURFACE DATA
+Surface ZONE_1_FLOOR
+WCS_Azimuth     180.0000
+WCS_Tilt        180.0000
+Vis_Refl          0.2000
+Ext_Refl          0.8000
+Gnd_Refl     0.2
+N_WCS_Vertices      4
+Vertex      32.8084      0.0000      0.0000
+Vertex      32.8084     32.8084      0.0000
+Vertex      65.6168     32.8084      0.0000
+Vertex      65.6168      0.0000      0.0000
+
+SURFACE WINDOWS
+N_Windows      0
+
+SURFACE CFS
+N_CFS      0
+
+ZONE SURFACE DATA
+Surface ZONE_1_CEILING
+WCS_Azimuth      90.0000
+WCS_Tilt          0.0000
+Vis_Refl          0.8000
+Ext_Refl          0.3500
+Gnd_Refl     0.2
+N_WCS_Vertices      4
+Vertex      32.8084      0.0000      9.8425
+Vertex      65.6168      0.0000      9.8425
+Vertex      65.6168     32.8084      9.8425
+Vertex      32.8084     32.8084      9.8425
+
+SURFACE WINDOWS
+N_Windows      0
+
+SURFACE CFS
+N_CFS      0
+
+ZONE REFERENCE POINTS
+N_Ref_Pts    1
+
+ZONE REFERENCE POINT DATA
+Reference_Point DAYLIGHTING_REF_PT_ZONE_1
+RefPt_WCS_Coords      49.2126     16.4042      2.6247
+Zone_Fraction       1.0000
+Light_Set_Pt      46.4515
+Light_Ctrl_Type    1
+
+BUILDING SHADES
+N_BShades 0
+
+LIBRARY DATA
+GLASS TYPES
+N_Glass_Types    1
+
+GLASS TYPE DATA
+Name  10003
+EPlusDiffuse_Transmittance         0.5622
+EPlusDiffuse_Int_Reflectance       0.3037
+EPlus_Vis_Trans_Coeff_1       0.697348901
+EPlus_Vis_Trans_Coeff_2       6.888756497
+EPlus_Vis_Trans_Coeff_3     -24.122610827
+EPlus_Vis_Trans_Coeff_4      33.750261040
+EPlus_Vis_Trans_Coeff_5     -22.412368079
+EPlus_Vis_Trans_Coeff_6       5.834273843

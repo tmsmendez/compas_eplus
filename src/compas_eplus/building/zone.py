@@ -52,6 +52,13 @@ class Zone(object):
                 return self.surfaces.face_area(fk)
 
     @property
+    def centroid_xy(self):
+        for fk in self.surfaces.faces():
+            st = self.surfaces.face_attribute(fk, 'surface_type')
+            if st == 'Floor':
+                return self.surfaces.face_centroid(fk)
+
+    @property
     def data(self):
         data = {'name'                  : self.name,
                 'surfaces'              : self.surfaces.to_data(),

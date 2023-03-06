@@ -21,6 +21,8 @@ def get_idf_data(filepath):
     find_glazing_material_simple(filepath, data)
     find_constructions(filepath, data)
     
+    find_daylight_controls(filepath, data)
+    find_daylight_reference_points(filepath, data)
     find_lights(filepath, data)
     find_people(filepath, data)
     find_electric_equipment(filepath, data)
@@ -512,6 +514,93 @@ def find_schedule_year(filepath, data):
                                   }
 
 
+def find_daylight_controls(filepath, data):
+    fh = open(filepath, 'r')
+    lines = fh.readlines()
+    fh.close()
+
+    i_lines = []
+    for i, line in enumerate(lines):
+        line = line.split(',')
+        if line[0].lower() == 'daylighting:controls':
+            i_lines.append(i)
+    
+    data['daylighting_controls'] = {}
+
+    for i in i_lines:
+        name = lines[i + 1].split(',')[0].strip()
+        znam = lines[i + 2].split(',')[0].strip()
+        daym = lines[i + 3].split(',')[0].strip()
+        avsn = lines[i + 4].split(',')[0].strip()
+        lcty = lines[i + 5].split(',')[0].strip()
+        mipf = lines[i + 6].split(',')[0].strip()
+        mlof = lines[i + 7].split(',')[0].strip()
+        nscs = lines[i + 8].split(',')[0].strip()
+        plrw = lines[i + 9].split(',')[0].strip()
+        gcpt = lines[i + 10].split(',')[0].strip()
+        gcaa = lines[i + 11].split(',')[0].strip()
+        madg = lines[i + 12].split(',')[0].strip()
+        dgre = lines[i + 13].split(',')[0].strip()
+
+        ref_pts = {}
+        for j in range(100):
+            line = lines[i + 16 + j]
+            if ';' in line: 
+                dcpt = lines[i + 14 + j].split(',')[0].strip()
+                frpt = lines[i + 15 + j].split(',')[0].strip()
+                ispt = lines[i + 16 + j].split(';')[0].strip()
+                ref_pts[j] = {'ref_pt_name': dcpt, 'ref_pt_fraction': frpt, 'illuminance_setpt': ispt}
+                break
+            else:
+                dcpt = lines[i + 14 + j].split(',')[0].strip()
+                frpt = lines[i + 15 + j].split(',')[0].strip()
+                ispt = lines[i + 16 + j].split(',')[0].strip()
+                ref_pts[j] = {'ref_pt_name': dcpt, 'ref_pt_fraction': frpt, 'illuminance_setpt': ispt}
+
+        data['daylighting_controls'][name] = {'name':name,
+                                              'zone_name': znam,
+                                              'daylighting_method':daym,
+                                              'availability_schedule': avsn,
+                                              'lighting_control_type': lcty,
+                                              'min_input_power_fraction': mipf,
+                                              'min_light_output_fraction': mlof,
+                                              'num_stepped_control_steps': nscs,
+                                              'probability_lighting_reset': plrw,
+                                              'glare_reference_point': gcpt,
+                                              'glare_azimut_angle': gcaa,
+                                              'max_allowable_discomfort_glare_index': madg,
+                                              'delight_gridding_resolution': dgre,
+                                              'reference_points': ref_pts}
+
+
+def find_daylight_reference_points(filepath, data):
+
+    fh = open(filepath, 'r')
+    lines = fh.readlines()
+    fh.close()
+
+    i_lines = []
+    for i, line in enumerate(lines):
+        line = line.split(',')
+        if line[0].lower() == 'daylighting:referencepoint':
+            i_lines.append(i)
+    
+    data['daylighting:referencepoint'] = {}
+
+    for i in i_lines:
+        name = lines[i + 1].split(',')[0].strip()
+        znam = lines[i + 2].split(',')[0].strip()
+        x = lines[i + 3].split(',')[0].strip()
+        y = lines[i + 4].split(',')[0].strip()
+        z = lines[i + 5].split(';')[0].strip()
+        data['daylighting:referencepoint'][name] = {'name': name,
+                                                    'zone_name': znam,
+                                                    'x':x,
+                                                    'y': y,
+                                                    'z': z,
+                                                    }
+
+
 def find_lights(filepath, data):
     fh = open(filepath, 'r')
     lines = fh.readlines()
@@ -985,10 +1074,10 @@ if __name__ == '__main__':
     data = get_idf_data(path)
     # print(data.keys())
 
-    object = 'materials'
+    object = 'daylighting:referencepoint'
 
     for k in data[object]:
         print(k)
-        # for j in data[object][k]:
-        #     print(j)
-        # print('')
+        for j in data[object][k]:
+            print(j)
+        print('')
