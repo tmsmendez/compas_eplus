@@ -15,6 +15,7 @@ from compas.geometry import normalize_vector
 from compas.geometry import distance_point_point
 from compas.geometry import centroid_points
 from compas.geometry import is_point_on_plane
+from compas.geometry import area_polygon
 
 class Window(object):
     """
@@ -112,6 +113,12 @@ class Window(object):
                 }
         return data
     
+
+    @property
+    def area(self):
+        pts = self.nodes
+        return area_polygon(pts)
+
     @data.setter
     def data(self, data):
         self.name               = data.get('name') or {}
