@@ -55,7 +55,7 @@ z = Zone.from_mesh(mesh, 'zone_0')
 b.add_zone(z)
 
 
-# adding window from points - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# adding window from points - - - - - - - - - - - - - - - - - - - - - - - - -
 
 points = [[w / 6., 0, h / 4.],
           [w / 4., 0, h / 4. ],
