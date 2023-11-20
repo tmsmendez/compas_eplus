@@ -12,6 +12,9 @@ path = compas_eplus.TEMP
 wea = compas_eplus.SEATTLE
 b = Building.from_idf(filepath, path, wea)
 
+v = BuildingViewer(b)
+v.show()
+
 b.write_idf()
 b.analyze(exe='/Applications/EnergyPlus/energyplus')
 b.load_results()
