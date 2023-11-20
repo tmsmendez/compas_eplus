@@ -59,9 +59,9 @@ def find_zones(filepath, data):
     data['zones'] = {}    
     for i in i_lines:
         name = lines[i + 1].split(',')[0].strip().lower()
-        x = float(lines[i + 2].split(',')[0].strip())
-        y = float(lines[i + 3].split(',')[0].strip())
-        z = float(lines[i + 4].split(',')[0].strip())
+        x = float(lines[i + 3].split(',')[0].strip())
+        y = float(lines[i + 4].split(',')[0].strip())
+        z = float(lines[i + 5].split(',')[0].strip())
         h = float(lines[i + 8].split(',')[0].strip())
         v = float(lines[i + 9].split(',')[0].strip())
         data['zones'][name] = {'name': name,
