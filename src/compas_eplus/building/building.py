@@ -450,6 +450,7 @@ class Building(object):
                 z.surfaces.face_attribute(i, 'construction', srf['construction'])
                 z.surfaces.face_attribute(i, 'surface_type', srf['surface_type'])
                 z.surfaces.face_attribute(i, 'outside_boundary_condition', srf['outside_condition'])
+                # print(srf['outside_condition'])
             self.add_zone(z)
         
         windows = data['windows']
@@ -637,13 +638,15 @@ class Building(object):
         for fk in mesh.faces():
             cpt =mesh.face_centroid(fk)
             gk = geometric_key(cpt)
-            if gk in self.srf_cpt_dict:
-                mesh.face_attribute(fk, 'outside_boundary_condition', 'Adiabatic')
-                zk_ = self.srf_cpt_dict[gk]['zone']
-                fk_ = self.srf_cpt_dict[gk]['surface']
-                self.zones[zk_].surfaces.face_attribute(fk_,'outside_boundary_condition', 'Adiabatic')  
-            else:
-                self.srf_cpt_dict[gk] = {'zone': zk, 'surface': fk}
+            out_cond = mesh.face_attribute(fk, 'outside_boundary_condition')
+            if out_cond == None:
+                if gk in self.srf_cpt_dict:
+                    mesh.face_attribute(fk, 'outside_boundary_condition', 'Surface')
+                    zk_ = self.srf_cpt_dict[gk]['zone']
+                    fk_ = self.srf_cpt_dict[gk]['surface']
+                    self.zones[zk_].surfaces.face_attribute(fk_,'outside_boundary_condition', 'Surface')  
+                else:
+                    self.srf_cpt_dict[gk] = {'zone': zk, 'surface': fk}
 
     def add_window(self, window):
         """

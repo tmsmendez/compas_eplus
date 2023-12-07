@@ -172,7 +172,7 @@ class ZoneSurfaces(Mesh):
         self.default_face_attributes.update({'name': None,
                                              'construction':None,
                                              'surface_type': None,
-                                             'outside_boundary_condition': 'Outdoors',
+                                             'outside_boundary_condition': None,
                                              })
     
     def __str__(self):
