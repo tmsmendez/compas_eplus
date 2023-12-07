@@ -6,7 +6,7 @@ from compas_eplus.viewers import ResultsViewer
 
 for i in range(50): print('')
 
-file = 'in.idf'
+file = 'honeybee_5zoneoffice.idf'
 filepath = os.path.join(compas_eplus.DATA, 'idf_examples', file)
 path = compas_eplus.TEMP
 wea = compas_eplus.SEATTLE

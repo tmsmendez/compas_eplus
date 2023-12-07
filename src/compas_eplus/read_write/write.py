@@ -454,14 +454,18 @@ def write_building_surface(building, zone, fk):
     st = zone.surfaces.face_attribute(fk, 'surface_type')
     ct = zone.surfaces.face_attribute(fk, 'construction')
     ob = zone.surfaces.face_attribute(fk, 'outside_boundary_condition')
+    obo = zone.surfaces.face_attribute(fk, 'outside_boundary_condition_object')
 
-    if ob =='Adiabatic':
+    if ob =='Adiabatic' or ob == 'Surface' or ob  == 'Ground':
         se = 'NoSun'
         we = 'NoWind'
     else:
         se = 'SunExposed'
         we = 'WindExposed'
-
+    
+    if not obo:
+        obo == ''
+    
     num_vert = len(zone.surfaces.face_vertices(fk))
 
     sname = zone.surfaces.face_attribute(fk, 'name')
@@ -476,7 +480,7 @@ def write_building_surface(building, zone, fk):
     fh.write('  {},                       !- Zone Name\n'.format(zone.name))
     fh.write('  ,                         !- Space Name\n')
     fh.write('  {},                       !- Outside Boundary Condition\n'.format(ob))
-    fh.write('  ,                         !- Outside Boundary Condition Object\n')
+    fh.write('  {},                         !- Outside Boundary Condition Object\n'.format(obo))
     fh.write('  {},                       !- Sun Exposure\n'.format(se))
     fh.write('  {},                       !- Wind Exposure\n'.format(we))
     fh.write('  0.0,                      !- View Factor to Ground\n')
@@ -488,7 +492,7 @@ def write_building_surface(building, zone, fk):
             sep = ';'
         else:
             sep = ','
-        fh.write('  {:.3f}, {:.3f}, {:.3f}{}\t\t\t\t\t!- X,Y,Z Vertex {}\n'.format(x, y, z, sep, i))
+        fh.write('  {:.3f}, {:.3f}, {:.3f}{}            !- X,Y,Z Vertex {}\n'.format(x, y, z, sep, i))
     fh.write('\n')
     fh.close()
 
@@ -528,7 +532,7 @@ def write_windows(building):
                 sep = ';'
             else:
                 sep = ','
-            fh.write('  {:.3f}, {:.3f}, {:.3f}{}\t\t\t\t\t!- X,Y,Z Vertex {} (m)\n'.format(x, y, z, sep, i))
+            fh.write('  {:.3f}, {:.3f}, {:.3f}{}            !- X,Y,Z Vertex {} (m)\n'.format(x, y, z, sep, i))
         fh.write('\n')
     fh.write('\n')
     fh.close()
@@ -1154,9 +1158,12 @@ def write_output_items(building):
     fh.write('  Zone Lights Electricity Energy,         !- Variable Name\n')
     fh.write('  Hourly;                                 !- Reporting Frequency\n')
     fh.write('\n')
-    fh.write('\n')
-    fh.write('\n')
 
+    fh.write('Output:SQLite,\n')
+    fh.write('  SimpleAndTabular;                       !- Option Type\n')
+    fh.write('\n')
+    fh.write('\n')
+    
     fh.close()
 
 

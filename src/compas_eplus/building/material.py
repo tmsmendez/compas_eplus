@@ -452,7 +452,7 @@ class WindowMaterialGlazing(object):
         self.visible_transmittance                   = data.get('visible_transmittance') or {}
         self.front_visible_reflectance               = data.get('front_visible_reflectance') or {}
         self.back_visible_reflectance                = data.get('back_visible_reflectance') or {}
-        self.infrared_transmittance                  = data.get('infrared_transmittance') or ''
+        self.infrared_transmittance                  = data.get('infrared_transmittance') or '0'
         self.front_infrared_hemispherical_emissivity = data.get('front_infrared_hemispherical_emissivity') or {}
         self.back_infrared_hemispherical_emissivity  = data.get('back_infrared_hemispherical_emissivity') or {}
         self.conductivity                            = data.get('conductivity') or {}

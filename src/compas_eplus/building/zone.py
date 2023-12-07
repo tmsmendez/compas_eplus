@@ -173,6 +173,7 @@ class ZoneSurfaces(Mesh):
                                              'construction':None,
                                              'surface_type': None,
                                              'outside_boundary_condition': None,
+                                             'outside_boundary_condition_object': None,
                                              })
     
     def __str__(self):

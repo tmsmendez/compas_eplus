@@ -618,7 +618,7 @@ class Building(object):
         else:
             raise('This Building program is not yet implemented')
 
-    def add_zone(self, zone):
+    def add_zone(self, zone, floor_cond='Ground', roof_cond='Outdoors', wall_cond='Outdoors'):
         """
         Adds a zone object to the building datastructure.
 
@@ -632,6 +632,8 @@ class Building(object):
         None
         
         """
+        out_dict = {'Wall': wall_cond, 'Roof': roof_cond, 'Floor': floor_cond}
+
         zk =  len(self.zones)
         self.zones[zk] = zone
         mesh = self.zones[zk].surfaces
@@ -639,15 +641,25 @@ class Building(object):
             cpt =mesh.face_centroid(fk)
             gk = geometric_key(cpt)
             out_cond = mesh.face_attribute(fk, 'outside_boundary_condition')
-            if out_cond == None:
+            srft = mesh.face_attribute(fk, 'surface_type')
+            fn = mesh.face_attribute(fk, 'name')
+            
+            if out_cond == None or out_cond == 'Surface':
+                out_cond = 'Surface'
                 if gk in self.srf_cpt_dict:
-                    mesh.face_attribute(fk, 'outside_boundary_condition', 'Surface')
+                    
                     zk_ = self.srf_cpt_dict[gk]['zone']
                     fk_ = self.srf_cpt_dict[gk]['surface']
-                    self.zones[zk_].surfaces.face_attribute(fk_,'outside_boundary_condition', 'Surface')  
-                else:
-                    self.srf_cpt_dict[gk] = {'zone': zk, 'surface': fk}
+                    fn_ = self.zones[zk_].surfaces.face_attribute(fk_, 'name')
+                    mesh.face_attribute(fk, 'outside_boundary_condition', out_cond)
+                    self.zones[zk_].surfaces.face_attribute(fk_,'outside_boundary_condition', out_cond)  
 
+                    mesh.face_attribute(fk, 'outside_boundary_condition_object', fn_)
+                    self.zones[zk_].surfaces.face_attribute(fk_,'outside_boundary_condition_object', fn)
+                else:
+                    mesh.face_attribute(fk, 'outside_boundary_condition', out_dict[srft])
+                    self.srf_cpt_dict[gk] = {'zone': zk, 'surface': fk}
+    
     def add_window(self, window):
         """
         Adds a windows object to the building datastructure.
