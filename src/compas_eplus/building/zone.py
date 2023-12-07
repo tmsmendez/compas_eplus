@@ -26,6 +26,9 @@ class Zone(object):
     def __init__(self):
         self.name =  ''
         self.surfaces = None
+        self.volume = 0.
+        self.origin = [0., 0., 0.]
+        self.height = 0
 
     def to_json(self, filepath):
         """

@@ -47,6 +47,8 @@ from compas_eplus.building.equipment import EquipmentConnection
 from compas_eplus.building.zone_list import ZoneList
 from compas_eplus.building.node_list import NodeList
 from compas_eplus.building.outdoor_air import OutdoorAir
+from compas_eplus.building.space import Space
+from compas_eplus.building.space import SpaceList
 
 from compas_eplus.read_write import write_idf_from_building
 from compas_eplus.read_write import read_results_file
@@ -154,6 +156,8 @@ class Building(object):
         self.srf_cpt_dict                 = {}
         self.material_key_dict            = {}
         self.results                      = {}
+        self.spaces                       = {}
+        self.space_lists                  = {}
 
     @property
     def area(self):
@@ -435,6 +439,9 @@ class Building(object):
                      ]
             mesh = Mesh.from_vertices_and_faces(vertices, faces)
             z = Zone.from_mesh(mesh, zname)
+            z.height = zones[zone]['height']
+            z.volume = zones[zone]['volume']
+            z.origin = zones[zone]['origin']
 
             for i, srf in enumerate(surfaces):
                 srf = zones[zone]['surfaces'][srf]
@@ -549,6 +556,17 @@ class Building(object):
         for dck in dc:
             d = DaylightingControls.from_data(dc[dck])
             self.add_daylighting_controls(d, dck)
+
+        sp = data['spaces']
+        for spk in sp:
+            s = Space.from_data(sp[spk])
+            self.add_space(s, spk)
+
+        sl = data['space_lists']
+        for slk in sl:
+            sl_ = SpaceList.from_data(sl[slk])
+            self.add_space_list(sl_, slk)
+
 
     def to_json(self, filepath):
         """
@@ -801,6 +819,38 @@ class Building(object):
         
         """
         self.lights[lk] = light
+
+    def add_space(self, space, sk):
+        """
+        Adds a space object to the building datastructure.
+
+        Parameters
+        ----------
+        space: object
+            The space object to be added
+        
+        Returns
+        -------
+        None
+        
+        """
+        self.spaces[sk] = space
+
+    def add_space_list(self, space_list, slk):
+        """
+        Adds a space list object to the building datastructure.
+
+        Parameters
+        ----------
+        space_list: object
+            The space list object to be added
+        
+        Returns
+        -------
+        None
+        
+        """
+        self.space_lists[slk] = space_list
 
     def add_people(self, people, pk):
         """

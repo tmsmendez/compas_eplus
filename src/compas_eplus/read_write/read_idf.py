@@ -41,6 +41,9 @@ def get_idf_data(filepath):
     find_schedule_day_interval(filepath, data)
     find_schedule_week_daily(filepath, data)
     find_schedule_year(filepath, data)
+
+    find_spaces(filepath, data)
+    find_space_lists(filepath, data)
     return data
 
 
@@ -1060,7 +1063,60 @@ def find_outdoor_air(filepath, data):
     #   0,                                      !- Outdoor Air Flow per Zone {m3/s}
     #   0.35;                                   !- Outdoor Air Flow Air Changes per Hour {1/hr}
 
+def find_spaces(filepath, data):
+    fh = open(filepath, 'r')
+    lines = fh.readlines()
+    fh.close()
 
+    i_lines = []
+    for i, line in enumerate(lines):
+        line = line.split(',')
+        if line[0].lower() == 'space':
+            i_lines.append(i)
+    
+    data['spaces'] = {}
+    for i in i_lines:
+        name = lines[i + 1].split(',')[0].strip().lower()
+        zname = lines[i + 2].split(',')[0].strip().lower()
+        ch = lines[i + 3].split(',')[0].strip()
+        v = lines[i + 4].split(',')[0].strip()
+        fa = lines[i + 5].split(',')[0].strip()
+        st = lines[i + 6].split(',')[0].strip().lower()
+        data['spaces'][name] = {'name': name,
+                                'zone_name': zname,
+                                'height': ch,
+                                'volume':v,
+                                'floor_area': fa,
+                                'space_type': st,
+                                }
+
+
+def find_space_lists(filepath, data):
+    fh = open(filepath, 'r')
+    lines = fh.readlines()
+    fh.close()
+
+    i_lines = []
+    for i, line in enumerate(lines):
+        line = line.split(',')
+        if line[0].lower() == 'spacelist':
+            i_lines.append(i)
+
+    data['space_lists'] = {}
+    for i in i_lines:
+        name = lines[i + 1].split(',')[0].strip()
+        spaces = {}
+        for j in range(100):
+            space = lines[i + 2 + j]
+            if ';' in space: 
+                space = space.split(';')[0].strip()
+                spaces[str(j)] = space
+                break
+            else:
+                space = space.split(',')[0].strip()
+                spaces[str(j)] = space
+        data['space_lists'][name] = {'name': name,
+                                     'spaces': spaces,}
 
 if __name__ == '__main__':
     import os

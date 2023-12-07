@@ -34,6 +34,8 @@ def write_idf_from_building(building):
     write_layers(building)
     write_constructions(building)
     write_shadings(building)
+    write_spaces(building)
+    write_space_lists(building)
 
     write_simulation_control(building)
     write_schedules(building)
@@ -223,13 +225,13 @@ def write_zone(building, zone):
     fh.write('Zone,\n')
     fh.write('  {},         !- Name\n'.format(zone.name))
     fh.write('  0,          !- Direction of Relative North (deg)\n')
-    fh.write('  0,          !- X Origin (m)\n')
-    fh.write('  0,          !- Y Origin (m)\n')
-    fh.write('  0,          !- Z Origin (m)\n')
+    fh.write('  {},          !- X Origin (m)\n'.format(zone.origin[0]))
+    fh.write('  {},          !- Y Origin (m)\n'.format(zone.origin[1]))
+    fh.write('  {},          !- Z Origin (m)\n'.format(zone.origin[2]))
     fh.write('  1,          !- Type\n')
     fh.write('  1,          !- Multiplier\n')
-    fh.write('  ,           !- Ceiling Height (m)\n')
-    fh.write('  ,           !- Volume (m3)\n')
+    fh.write('  {},           !- Ceiling Height (m)\n'.format(zone.height))
+    fh.write('  {},           !- Volume (m3)\n'.format(zone.volume))
     fh.write('  ,           !- Floor Area (m2)\n')
     fh.write('  ,           !- Zone Inside Convection Algorithm\n')
     fh.write('  ,           !- Zone Outside Convection Algorithm\n')
@@ -1077,6 +1079,38 @@ def write_daylight(building):
         fh.write('  {};           !- Z-Coordinate of Reference Point [m]\n'.format(rpt.z))
         fh.write('\n')
     fh.close()
+
+def write_spaces(building):
+    fh = open(building.idf_filepath, 'a')
+    for spk in building.spaces:
+        sp = building.spaces[spk]
+        fh.write('Space,\n')
+        fh.write('{},                               !- Name\n'.format(sp.name))
+        fh.write('{},                               !- Zone Name\n'.format(sp.zone_name))
+        fh.write('{},                               !- Ceiling Height [m]\n'.format(sp.height))
+        fh.write('{},                               !- Volume [m3]\n'.format(sp.volume))
+        fh.write('{},                               !- Floor Area [m2]\n'.format(sp.floor_area))
+        fh.write('{};                               !- Space Type\n'.format(sp.space_type))
+        fh.write('\n')
+    fh.write('\n')
+    fh.close()
+
+def write_space_lists(building):
+    fh = open(building.idf_filepath, 'a')
+
+    for slk in building.space_lists:
+        sl = building.space_lists[slk]
+        spaces = building.space_lists[slk].spaces
+        fh.write('SpaceList,\n')
+        fh.write('  {},     !- Name\n'.format(sl.name))
+        for i, sk in enumerate(spaces):
+            if i == len(spaces) - 1:
+                sep = ';'
+            else:
+                sep = ','
+            fh.write('  {}{}        !- Space Name {}\n'.format(spaces[sk], sep, i + 1))
+        fh.write('\n')
+        fh.close()
 
 
 def write_output_items(building):

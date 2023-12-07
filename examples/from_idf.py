@@ -6,18 +6,19 @@ from compas_eplus.viewers import ResultsViewer
 
 for i in range(50): print('')
 
-file = 'teresa_example_apt.idf'
+file = 'in.idf'
 filepath = os.path.join(compas_eplus.DATA, 'idf_examples', file)
 path = compas_eplus.TEMP
 wea = compas_eplus.SEATTLE
 b = Building.from_idf(filepath, path, wea)
 
-v = BuildingViewer(b)
-v.show()
+# v = BuildingViewer(b)
+# v.show()
+
 
 b.write_idf()
 b.analyze(exe='/Applications/EnergyPlus/energyplus')
 b.load_results()
 
 v = ResultsViewer(b)
-v.show('total')
+v.show('lighting')
