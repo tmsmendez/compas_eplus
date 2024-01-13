@@ -946,34 +946,47 @@ def write_hvac(building):
         fh.write('  {},     !- Minimum Cooling Supply Air Temperature [C]\n'.format(i.min_cooling_supply_temperature))
         fh.write('  {},     !- Maximum Heating Supply Air Humidity Ratio [kgWater/kgDryAir]\n'.format(i.max_heating_supply_humidity_ratio))
         fh.write('  {},     !- Minimum Cooling Supply Air Humidity Ratio [kgWater/kgDryAir]\n'.format(i.min_cooling_supply_humidity_ratio))
-        fh.write('  NoLimit,     !- Heating Limit\n')
-        # fh.write('  {},     !- Heating Limit\n'.format(i.heating_limit))
+        
+        # fh.write('  NoLimit,     !- Heating Limit\n')  # compas_eplus
+        fh.write('  LimitCapacity,     !- Heating Limit\n')  # Teresa HB
+        
         fh.write('  {},     !- Maximum Heating Air Flow Rate [m3/s]\n'.format(i.max_heating_air_flow_rate))
-        fh.write('  ,       !- Maximum Sensible Heating Capacity [W]\n')
-        # fh.write('  {},     !- Maximum Sensible Heating Capacity [W]\n'.format(i.max_sensible_heating_capacity))
-        fh.write('  LimitFlowRate,     !- Cooling Limit\n')
-        # fh.write('  {},     !- Cooling Limit\n'.format(i.cooling_limit))
-        fh.write('  ,       !- Maximum Cooling Air Flow Rate [m3/s]\n')
+        
+        fh.write('  ,       !- Maximum Sensible Heating Capacity [W]\n')  # compas_eplus
+        # fh.write('  Autosize,       !- Maximum Sensible Heating Capacity [W]\n')  # Teresa HB
+                
+        # fh.write('  LimitFlowRate,     !- Cooling Limit\n')  # compas_eplus
+        fh.write('  LimitFlowRateAndCapacity,     !- Cooling Limit\n')  # Teresa HB
+
+        fh.write('  ,       !- Maximum Cooling Air Flow Rate [m3/s]\n')  # compas_eplis
+        # fh.write('  Autosize,       !- Maximum Cooling Air Flow Rate [m3/s]\n')  # Teresa HB
+        
         fh.write('  ,       !- Maximum Total Cooling Capacity [W]\n')
-        # fh.write('  {},     !- Maximum Cooling Air Flow Rate [m3/s]\n'.format(i.maximum_cooling_air_flow_rate))
-        # fh.write('  {},     !- Maximum Total Cooling Capacity [W]\n'.format(i.maximum_total_cooling_capacity))
+        # fh.write('  Autosize,       !- Maximum Total Cooling Capacity [W]\n')
+
+
         fh.write('  {},     !- Heating Availability Schedule Name\n'.format(i.heating_availability_schedule_name))
         fh.write('  {},     !- Cooling Availability Schedule Name\n'.format(i.cooling_availability_schedule_name))
         fh.write('  {},     !- Dehumidification Control Type\n'.format(i.dehimidification_control_type))
         fh.write('  {},     !- Cooling Sensible Heat Ratio\n'.format(i.cooling_sensible_heat_ratio))
         fh.write('  {},     !- Humidification Control Type\n'.format(i.humidification_control_type))
-        # fh.write('  ,     !- Design Specification Outdoor Air Object Name\n')
         fh.write('  {},     !- Design Specification Outdoor Air Object Name\n'.format(i.desing_specification_outdoor_air_name))
         fh.write('  {},     !- Outdoor Air Inlet Node Name\n'.format(i.outdoor_inlet_node_name))
         fh.write('  {},     !- Demand Controlled Ventilation Type\n'.format(i.demand_controlled_ventilation_type))
-        fh.write('  NoEconomizer,     !- Outdoor Air Economizer Type\n'.format(i.outdoor_air_economizer_type))
-        # fh.write('  {},     !- Outdoor Air Economizer Type\n'.format(i.outdoor_air_economizer_type))
-        fh.write('  Enthalpy,     !- Heat Recovery Type\n'.format(i.heat_recovery_type))
-        # fh.write('  {},     !- Heat Recovery Type\n'.format(i.heat_recovery_type))
-        fh.write('  0.7,     !- Sensible Heat Recovery Effectiveness\n'.format(i.sensible_heat_recovery_effectiveness))
-        # fh.write('  {},     !- Sensible Heat Recovery Effectiveness\n'.format(i.sensible_heat_recovery_effectiveness))
-        fh.write('  0.7;     !- Latent Heat Recovery Effectiveness\n'.format(i.latent_heat_revovery_effectiveness))
-        # fh.write('  {};     !- Latent Heat Recovery Effectiveness\n'.format(i.latent_heat_revovery_effectiveness))
+        
+        # fh.write('  NoEconomizer,     !- Outdoor Air Economizer Type\n')
+        fh.write('  DifferentialDryBulb,     !- Outdoor Air Economizer Type\n')
+                
+        # fh.write('  Enthalpy,     !- Heat Recovery Type\n')  # compas_eplus
+        fh.write('  ,     !- Heat Recovery Type\n')  # Teresa HB
+
+        fh.write('  0.7,     !- Sensible Heat Recovery Effectiveness\n')  # compas_eplus
+        # fh.write('  0,     !- Sensible Heat Recovery Effectiveness\n')  # Teresa HB
+
+        fh.write('  0.7;     !- Latent Heat Recovery Effectiveness\n')  # compas_eplus
+        # fh.write('  0;     !- Latent Heat Recovery Effectiveness\n')  # Teresa HB
+        
+        
         fh.write('  \n')
         fh.write('  \n')
         fh.close()
