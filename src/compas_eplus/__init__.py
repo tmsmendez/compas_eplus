@@ -15,6 +15,7 @@ compas_eplus
 from __future__ import print_function
 
 import os
+import subprocess
 
 
 __author__ = ["Tomas Mendez Echenagucia"]
@@ -39,3 +40,18 @@ MILWAUKEE = os.path.abspath(os.path.join(root, 'data', 'weather_files', 'USA_WI_
 
 
 __all__ = ["HOME", "DATA", "DOCS", "TEMP"]
+
+
+def run_idf(idf, weather_file, output_path, exe=None, delete=True):
+    if not exe:
+        exe = 'energyplus'
+    out = os.path.join(output_path, 'eplus_output')
+
+    if delete:
+        try:
+            self.delete_result_files(out)
+        except:
+            pass
+
+    print(exe, '-w', weather_file,'--output-directory', out, idf)
+    subprocess.call([exe, '-w', weather_file,'--output-directory', out, idf])

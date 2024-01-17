@@ -158,6 +158,7 @@ class Building(object):
         self.results                      = {}
         self.spaces                       = {}
         self.space_lists                  = {}
+        self.totals                       = {}
 
     @property
     def area(self):
@@ -1111,6 +1112,18 @@ class Building(object):
         read_error_file(error_filepath, print_error=True)
         for i in range(5): print('')
         read_results_file(self, filepath)
+        zones = [self.zones[zk].name for zk in self.zones]
+        for zone in zones:
+            heat = [self.results[tk][zone]['heating'] for tk in self.results]
+            heat = sum(heat)
+            cool = [self.results[tk][zone]['cooling'] for tk in self.results]
+            cool = sum(cool)
+            light = [self.results[tk][zone]['lighting'] for tk in self.results]
+            light = sum(light)
+            self.totals[zone] = {'heating': heat,
+                                 'cooling': cool,
+                                 'lighting': light
+                                }
 
     def assign_constructions_from_rules(self, rules):
         """
