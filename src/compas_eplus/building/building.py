@@ -569,7 +569,6 @@ class Building(object):
             sl_ = SpaceList.from_data(sl[slk])
             self.add_space_list(sl_, slk)
 
-
     def to_json(self, filepath):
         """
         Serialize the data representation of the building to a JSON file
@@ -1113,17 +1112,26 @@ class Building(object):
         for i in range(5): print('')
         read_results_file(self, filepath)
         zones = [self.zones[zk].name for zk in self.zones]
+        totals = {'heating': 0, 'cooling':0, 'lighting': 0}
         for zone in zones:
             heat = [self.results[tk][zone]['heating'] for tk in self.results]
             heat = sum(heat)
+            totals['heating'] += heat
+
             cool = [self.results[tk][zone]['cooling'] for tk in self.results]
             cool = sum(cool)
+            totals['cooling'] += cool
+
             light = [self.results[tk][zone]['lighting'] for tk in self.results]
             light = sum(light)
+            totals['lighting'] += light
+            
             self.totals[zone] = {'heating': heat,
                                  'cooling': cool,
                                  'lighting': light
                                 }
+        totals['total'] = totals['heating'] + totals['cooling'] + totals['lighting']
+        self.totals['totals'] = totals
 
     def assign_constructions_from_rules(self, rules):
         """
