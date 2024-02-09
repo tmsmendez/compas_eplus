@@ -42,16 +42,55 @@ MILWAUKEE = os.path.abspath(os.path.join(root, 'data', 'weather_files', 'USA_WI_
 __all__ = ["HOME", "DATA", "DOCS", "TEMP"]
 
 
-def run_idf(idf, weather_file, output_path, exe=None, delete=True):
+def run_idf(idf, name, weather_file, output_path, exe=None, delete=True):
+    from compas_eplus.read_write import read_error_file
+    from compas_eplus.read_write import read_results_file
+    from compas_eplus.building import Building
     if not exe:
         exe = 'energyplus'
-    out = os.path.join(output_path, 'eplus_output')
+    out = os.path.join(output_path, '{}_eplus_out'.format(name))
 
     if delete:
         try:
-            self.delete_result_files(out)
+            shutil.rmtree(out)
         except:
             pass
 
     print(exe, '-w', weather_file,'--output-directory', out, idf)
     subprocess.call([exe, '-w', weather_file,'--output-directory', out, idf])
+
+
+    filepath = os.path.join(out, 'eplusout.eso')
+    error_filepath = os.path.join(out, 'eplusout.err')
+    read_error_file(error_filepath, print_error=True)
+    for i in range(5): print('')
+
+    path = os.path.dirname(idf)
+    building = Building(path, weather_file, name=name)
+    read_results_file(building, filepath)
+
+    tko = list(building.results.keys())[0]
+    zones = building.results[tko].keys()
+    print(zones)
+
+    # zones = [self.zones[zk].name for zk in self.zones]
+    # totals = {'heating': 0, 'cooling':0, 'lighting': 0}
+    # for zone in zones:
+    #     heat = [self.results[tk][zone]['heating'] for tk in self.results]
+    #     heat = sum(heat)
+    #     totals['heating'] += heat
+
+    #     cool = [self.results[tk][zone]['cooling'] for tk in self.results]
+    #     cool = sum(cool)
+    #     totals['cooling'] += cool
+
+    #     light = [self.results[tk][zone]['lighting'] for tk in self.results]
+    #     light = sum(light)
+    #     totals['lighting'] += light
+        
+    #     self.totals[zone] = {'heating': heat,
+    #                             'cooling': cool,
+    #                             'lighting': light
+    #                         }
+    # totals['total'] = totals['heating'] + totals['cooling'] + totals['lighting']
+    # self.totals['totals'] = totals

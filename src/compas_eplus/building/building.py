@@ -1081,7 +1081,7 @@ class Building(object):
         idf = self.idf_filepath
         if not exe:
             exe = 'energyplus'
-        out = os.path.join(self.path, 'eplus_output')
+        out = os.path.join(self.path, '{}_eplus_out'.format(self.name))
 
         if delete:
             try:
@@ -1106,8 +1106,8 @@ class Building(object):
         None
         
         """
-        filepath = os.path.join(self.path, 'eplus_output', 'eplusout.eso')
-        error_filepath = os.path.join(self.path, 'eplus_output', 'eplusout.err')
+        filepath = os.path.join(self.path, '{}_eplus_out'.format(self.name), 'eplusout.eso')
+        error_filepath = os.path.join(self.path, '{}_eplus_out'.format(self.name), 'eplusout.err')
         read_error_file(error_filepath, print_error=True)
         for i in range(5): print('')
         read_results_file(self, filepath)
