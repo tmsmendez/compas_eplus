@@ -148,52 +148,35 @@ class ResultsViewer(object):
             fig.update_yaxes(title='{} EUI ({})'.format(result_type, self.eui_units))
         fig.show()
 
+class HeatMapResultsViewer(object):
+    def __init__(self, building):
+        self.building = building
 
+    def plot(self):
 
-# def plot_eui_map(building):
-#     x = np.arange(0, 365, 1)
-#     y = np.arange(0, 24, 1)
-#     num_zones = len(building.eui_kwh_hourly)
-    
-    
-#     plt.rcParams['font.size'] = '8'
-#     cmap = plt.get_cmap('bwr')
-#     fig, axes = plt.subplots(num_zones, 1)
-    
-#     zkeys = [building.zones[i] for i in range(len(building.eui_kwh_hourly))]
-#     maxcool = [max(building.eui_kwh_hourly[zkey]['cooling']) for zkey in zkeys]
-#     maxheat = [max(building.eui_kwh_hourly[zkey]['heating']) for zkey in zkeys]
-#     vmax = max(max(maxcool), max(maxheat))
+        import plotly.graph_objects as go
+        import datetime
+        import numpy as np
+        np.random.seed(1)
 
-#     for i, zkey in enumerate(zkeys):
-#         ax = axes[i]
-#         data = building.eui_kwh_hourly[zkey]['heating']
-#         z = np.array(data)
-#         z = z.reshape(365, 24)
+        programmers = ['Alex','Nicole','Sara','Etienne','Chelsea','Jody','Marianne']
 
-#         data = building.eui_kwh_hourly[zkey]['cooling']
-#         z_ = np.array(data)
-#         z_ = z_.reshape(365, 24) * -1
-#         z += z_
-#         z = z.transpose()
+        base = datetime.datetime.today()
+        dates = base - np.arange(180) * datetime.timedelta(days=1)
+        z = np.random.poisson(size=(len(programmers), len(dates)))
 
-#         norm = None
-#         im = ax.pcolormesh(x, y, z, cmap=cmap, norm=norm, shading='auto', vmin=vmax * -1, vmax=vmax)
-#         ax.set_title('{}'.format(zkey), fontsize='medium')
+        fig = go.Figure(data=go.Heatmap(
+                z=z,
+                x=dates,
+                y=programmers,
+                colorscale='Viridis'))
 
-#     fig.suptitle('{} - {} EUI'.format(building.simulation_name, building.city), fontsize=16)
-#     fig.subplots_adjust(right=.86)
-#     cbar_ax = fig.add_axes([.9, .01, .01, .9])
-#     cbar = fig.colorbar(im, cax=cbar_ax)
-#     cbar.set_label('EUI (kWh)', rotation=0)
+        fig.update_layout(
+            title='GitHub commits per day',
+            xaxis_nticks=36)
 
-#     ticks = cbar.get_ticks().tolist()
-#     ticks = [abs(t) for t in ticks]
-#     ticks[0] = '{} Cooling'.format(str(ticks[0]))
-#     ticks[-1] = '{} Heating'.format(str(ticks[-1]))
-#     cbar.ax.set_yticklabels(ticks)
+        fig.show()
 
-#     plt.show()
 
 
 
@@ -203,18 +186,24 @@ if __name__ == '__main__':
     import compas_eplus
     from compas_eplus.read_write import read_results_file
     from compas_eplus.building import Building
+    from compas_eplus.viewers import BuildingViewer
 
     for i in range(50): print('')
 
+    # file = 'doe_midrise_apt.idf'
+    file = 'teresa_example.idf'
+    filepath = os.path.join(compas_eplus.DATA, 'idf_examples', file)
     path = compas_eplus.TEMP
     wea = compas_eplus.SEATTLE
-    b1 = Building.from_idf(os.path.join(compas_eplus.DATA, 'idf_examples', 'teresa_example.idf'), path, wea)
-    filepath = os.path.join(compas_eplus.DATA, 'results', 'teresa.eso')
-    read_results_file(b1, filepath)
+    b = Building.from_idf(filepath, path, wea)
 
-    b2 = Building.from_idf(os.path.join(compas_eplus.DATA, 'idf_examples', 'teresa_example.idf'), path, wea)
-    filepath = os.path.join(compas_eplus.DATA, 'results', 'counter_teresa.eso')
-    read_results_file(b2, filepath)
 
-    v = ResultsViewer(b1, b2, eui_units='kWh')
-    v.compare('total')
+    v = BuildingViewer(b)
+    v.show()
+
+    b.write_idf()
+    b.analyze(exe='/Applications/EnergyPlus/energyplus')
+    b.load_results()
+
+    v = ResultsViewer(b)
+    v.show('total')

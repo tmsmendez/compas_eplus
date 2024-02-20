@@ -546,8 +546,8 @@ class Building(object):
 
         oa = data['outdoor_air']
         for oak in oa:
-            oa = OutdoorAir.from_data(oa[oak])
-            self.add_outdoor_air(oa, oak)
+            oa_ = OutdoorAir.from_data(oa[oak])
+            self.add_outdoor_air(oa_, oak)
 
         dp = data['daylighting:referencepoint']
         for ptk in dp:
@@ -1092,7 +1092,7 @@ class Building(object):
         print(exe, '-w', self.weather,'--output-directory', out, idf)
         subprocess.call([exe, '-w', self.weather,'--output-directory', out, idf])
 
-    def load_results(self):
+    def load_results(self, print_error=True):
         """
         Loads Energy+ results from result text files
 
@@ -1108,7 +1108,7 @@ class Building(object):
         """
         filepath = os.path.join(self.path, '{}_eplus_out'.format(self.name), 'eplusout.eso')
         error_filepath = os.path.join(self.path, '{}_eplus_out'.format(self.name), 'eplusout.err')
-        read_error_file(error_filepath, print_error=True)
+        read_error_file(error_filepath, print_error=print_error)
         for i in range(5): print('')
         read_results_file(self, filepath)
         zones = [self.zones[zk].name for zk in self.zones]

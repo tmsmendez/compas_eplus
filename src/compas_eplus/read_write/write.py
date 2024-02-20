@@ -203,8 +203,8 @@ def write_zone_lists(building):
             else:
                 sep = ','
             fh.write('  {}{}        !- Zone Name {}\n'.format(zones[zk], sep, i + 1))
-        fh.write('\n')
-        fh.close()
+    fh.write('\n')
+    fh.close()
 
 
 def write_zone(building, zone):
@@ -870,8 +870,8 @@ def write_internal_gains(building):
         fh.write('  {},     !- Fraction Lost\n'.format(e.fraction_lost))   
         fh.write('  {};     !- End-Use Subcategory\n'.format(e.end_use_subcategory))
         fh.write('  \n')
-        fh.write('  \n')
-        fh.close()
+    fh.write('  \n')
+    fh.close()
 
 
 def write_infiltration_rates(building):
