@@ -148,34 +148,34 @@ class ResultsViewer(object):
             fig.update_yaxes(title='{} EUI ({})'.format(result_type, self.eui_units))
         fig.show()
 
-class HeatMapResultsViewer(object):
-    def __init__(self, building):
-        self.building = building
+# class HeatMapResultsViewer(object):
+#     def __init__(self, building):
+#         self.building = building
 
-    def plot(self):
+#     def plot(self):
 
-        import plotly.graph_objects as go
-        import datetime
-        import numpy as np
-        np.random.seed(1)
+#         import plotly.graph_objects as go
+#         import datetime
+#         import numpy as np
+#         np.random.seed(1)
 
-        programmers = ['Alex','Nicole','Sara','Etienne','Chelsea','Jody','Marianne']
+#         programmers = ['Alex','Nicole','Sara','Etienne','Chelsea','Jody','Marianne']
 
-        base = datetime.datetime.today()
-        dates = base - np.arange(180) * datetime.timedelta(days=1)
-        z = np.random.poisson(size=(len(programmers), len(dates)))
+#         base = datetime.datetime.today()
+#         dates = base - np.arange(180) * datetime.timedelta(days=1)
+#         z = np.random.poisson(size=(len(programmers), len(dates)))
 
-        fig = go.Figure(data=go.Heatmap(
-                z=z,
-                x=dates,
-                y=programmers,
-                colorscale='Viridis'))
+#         fig = go.Figure(data=go.Heatmap(
+#                 z=z,
+#                 x=dates,
+#                 y=programmers,
+#                 colorscale='Viridis'))
 
-        fig.update_layout(
-            title='GitHub commits per day',
-            xaxis_nticks=36)
+#         fig.update_layout(
+#             title='GitHub commits per day',
+#             xaxis_nticks=36)
 
-        fig.show()
+#         fig.show()
 
 
 
